@@ -87,26 +87,25 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="在win10上搭建博客的过程"><a href="#在win10上搭建博客的过程" class="headerlink" title="在win10上搭建博客的过程"></a>在win10上搭建博客的过程</h1><h2 id="1-对需要软件、组件进行安装"><a href="#1-对需要软件、组件进行安装" class="headerlink" title="1.对需要软件、组件进行安装"></a>1.对需要软件、组件进行安装</h2><p>选择对应的node.js版本下载后进行安装</p>
-<p>打开CMD, 输入命令用淘宝源替换镜像源后, 安装cnpm.<br>npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a><br>错误: 第一张图, 命令没输正确.</p>
+<p>打开CMD, 输入命令用淘宝源替换镜像源后, 安装cnpm.<br>npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
 <p>使用cnpm安装hexo框架<br>cnpm install -g hexo-cli</p>
 <p>要验证是否安装成功可以用命令显示一下hexo的版本<br>hexo -v</p>
 <h2 id="2-搭建博客环境"><a href="#2-搭建博客环境" class="headerlink" title="2.搭建博客环境"></a>2.搭建博客环境</h2><p>创建一个文件夹来存放生成的博客文件<br>例: D:\blog</p>
 <p>在GIT官网中或下面的链接里选择版本进行下载、安装GIT.<br><a href="https://npm.taobao.org/mirrors/git-for-windows/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/git-for-windows/</a></p>
-<p>在D:\blog目录下打开CMD, 执行命令自动下载文件进行博客搭建. 下载时间有点长, 耐心等待即可.<br>(如果想强行终止重来的话可以关掉CMD, 删除blog文件; 重新创建blog文件后, 继续在该文件下打开CMD执行命令.)<br>hexo init<br>安装完成: 第二张图</p>
+<p>在D:\blog目录下打开CMD, 执行命令自动下载文件进行博客搭建. 下载时间有点长, 耐心等待即可.<br>(如果想强行终止重来的话可以关掉CMD, 删除blog文件夹; 重新创建blog文件夹后, 继续在该文件下打开CMD执行命令.)<br>hexo init</p>
 <p>启动博客, 默认创建为4000端口. (即在网页中输入: localhost:4000)<br>hexo s</p>
-<h2 id="3-通过CMD进行博客操作"><a href="#3-通过CMD进行博客操作" class="headerlink" title="3.通过CMD进行博客操作"></a>3.通过CMD进行博客操作</h2><p>创建博客文章<br>hexo n<br>创建成功: 第三张图</p>
+<h2 id="3-通过CMD进行博客操作"><a href="#3-通过CMD进行博客操作" class="headerlink" title="3.通过CMD进行博客操作"></a>3.通过CMD进行博客操作</h2><p>创建博客文章<br>hexo n “文章名”</p>
 <p>根据文件路径找到文件后, 用编辑器对博客文章的内容进行书写.<br>D:\blog\source_posts\我的第一篇博客文章.md</p>
 <p>编辑完后回到CMD, 清除博客数据.<br>hexo clean</p>
 <p>清除数据后, 重新生成博客数据.<br>hexo g</p>
-<h2 id="4-将博客部署到GitHub上"><a href="#4-将博客部署到GitHub上" class="headerlink" title="4.将博客部署到GitHub上"></a>4.将博客部署到GitHub上</h2><p>安装deployer<br>cnpm install –save hexo-deployer-git<br>安装成功: 第五张图</p>
+<h2 id="4-将博客部署到GitHub上"><a href="#4-将博客部署到GitHub上" class="headerlink" title="4.将博客部署到GitHub上"></a>4.将博客部署到GitHub上</h2><p>安装deployer<br>cnpm install –save hexo-deployer-git</p>
 <p>对blog文件下的_config.yml文件最底部部分进行修改<br># Deployment<br>## Docs: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">https://hexo.io/docs/deployment.html</a><br>deploy:<br>  type: ‘git’<br>  repo: 输入GitHub的仓库地址<br>  branch: master</p>
-<p>执行命令, 输入账号和密码后部署到远端.<br>hexo d<br>错误: 第六张图 (重新安装deployer)<br>错误: 第七张图 (对git进行配置:<br>git config –global user.email “输入Git的邮箱地址”<br>git config –global user.name “输入Git的用户名”<br>)</p>
-<p><img src="/.com//1.png" alt="asdasdas"></p>
+<p>执行命令配置好git后, 输入账号和密码后部署到远端.<br>git config –global user.email “输入Git的邮箱地址”<br>git config –global user.name “输入Git的用户名”<br>hexo d</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/05/16/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="cka9esh7r0001nsv95nbzbuae" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/05/16/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="cka9fdr220001egv9dwek63ov" class="article-share-link">Share</a>
       
       
     </footer>
@@ -155,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/05/16/hello-world/" data-id="cka9esh7l0000nsv93d9m2lzz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/05/16/hello-world/" data-id="cka9fdr1n0000egv9370nekv3" class="article-share-link">Share</a>
       
       
     </footer>
