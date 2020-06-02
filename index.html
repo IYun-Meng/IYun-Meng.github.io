@@ -82,7 +82,7 @@
   <script type="text/javascript" src="/js/src/clickLove.js"></script>
   <script type="text/javascript" src="/js/src/clickSocialValue.js"></script>
   <script type="text/javascript"
-    color="199,211,254" opacity='0.7' zIndex="-1" count="50" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+    color="255,100,254" opacity='0.7' zIndex="-1" count="80" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
   </script>
 
   <div class="container use-motion">
@@ -128,7 +128,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">3</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">4</span></a>
 
   </li>
   </ul>
@@ -158,7 +158,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/18/Hexo%E6%9B%B4%E6%8D%A2%E4%B8%BB%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/02/Hexo%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96%E8%BF%87%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head_Picture/Yu_Me2.png">
@@ -172,7 +172,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/18/Hexo%E6%9B%B4%E6%8D%A2%E4%B8%BB%E9%A2%98/" class="post-title-link" itemprop="url">Hexo更换主题</a>
+            <a href="/2020/06/02/Hexo%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">Hexo博客美化过程</a>
         </h2>
 
         <div class="post-meta">
@@ -181,10 +181,132 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-05-18 01:01:51 / 修改时间：01:43:12" itemprop="dateCreated datePublished" datetime="2020-05-18T01:01:51+08:00">2020-05-18</time>
+              <time title="创建时间：2020-06-02 22:13:04" itemprop="dateCreated datePublished" datetime="2020-06-02T22:13:04+08:00">2020-06-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-03 00:16:12" itemprop="dateModified" datetime="2020-06-03T00:16:12+08:00">2020-06-03</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="为博客进行的一步步美化"><a href="#为博客进行的一步步美化" class="headerlink" title="为博客进行的一步步美化"></a>为博客进行的一步步美化</h1><h2 id="next主题"><a href="#next主题" class="headerlink" title="next主题"></a>next主题</h2><p><em>(1)</em>对next主题下的_config.yml文件进行部分项修改<br>注: 博客文件夹\themes\next\_config.yml</p>
+<p>设置在主题中显示的头像图片, 图片相对路径为next/source.<br><code>avatar:<br>  url: /images/head_Picture/Yu_Me2.png<br></code></p>
+<p>把前面#符号去掉即表示使用该风格<br><code># Schemes<br>  scheme: Muse<br>  #scheme: Mist<br>  #scheme: Pisces<br>  #scheme: Gemini<br></code></p>
+<p>显示分类/标签/归档页的内容量<br><code>menu_settings:<br>  icons: true<br>  badges: true<br></code></p>
+<h2 id="默认主题"><a href="#默认主题" class="headerlink" title="默认主题"></a>默认主题</h2><p><em>(1)</em>对默认主题下的_config.yml文件进行部分项修改<br>注: 博客文件夹\_config.yml</p>
+<p>设置主题的默认显示语言<br><code>language: zh-CN</code></p>
+<p>设置代码高亮—后面在hightlight.js中使用<br><code>highlight:<br>  enable: true<br>  line_number: true<br>  auto_detect: true<br>  tab_replace:<br>  wrap: true<br>  hljs: false<br></code></p>
+<h2 id="页面特效"><a href="#页面特效" class="headerlink" title="页面特效"></a>页面特效</h2><p><em>(1)</em>网页鼠标点击特效: 爱心<br>注: 由于博客使用的是next主题, 所以指定文件夹为: next/source/js/src</p>
+<p>新建文本文件并改名为clickLove.js, 打开文件将以下内容复制进去并保存后放入指定文件夹中.</p>
+<p style="font-size:1px">!function (e, t, a) {function r() {for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");requestAnimationFrame(r)}function n() {var t = "function" == typeof e.onclick && e.onclick;e.onclick = function (e) {t && t(), o(e)}}function o(e) {var a = t.createElement("div");a.className = "heart", s.push({el: a,x: e.clientX - 5,y: e.clientY - 5,scale: 1,alpha: 1,color: c()}), t.body.appendChild(a)}function i(e) {var a = t.createElement("style");a.type = "text/css";try {a.appendChild(t.createTextNode(e))} catch (t) {a.styleSheet.cssText = e}t.getElementsByTagName("head")[0].appendChild(a)}function c() {return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"}var s = [];e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {setTimeout(e, 1e3 / 60)}, i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), n(), r()}(window, document);</p>
+
+<p><em>(2)</em>网页鼠标点击特效: 文字<br>注: 同理</p>
+<p>新建文本文件并改名为clickSocialValue.js, 打开文件将以下内容复制进去并保存后放入指定文件夹中.</p>
+<p style="font-size:1px">
+var a_idx = 0;jQuery(document).ready(function($) {$("body").click(function(e) {var a = new Array("萝莉", "御姐", "粉毛", "黑长直", "双马尾", "呆毛", "异色瞳", "眼睛娘", "虎牙", "兽耳", "贫乳", "仆娘");var $i = $("&lt;span/>").text(a[a_idx]);
+a_idx = (a_idx + 1) % a.length;var x = e.pageX,y = e.pageY;$i.css({"z-index": 100000000,"top": y - 20,"left": x,"position": "absolute","font-weight": "bold","color": "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"});$("body").append($i);$i.animate({"top": y - 180,"opacity": 0},1500,function() {$i.remove();});});});</p>
+
+<p><em>(1+2)</em>在_layout.swig文件中的body标签内引入js文件<br>注: next/layout/_layout.swig<br><code>&lt;script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js">&lt;/script><br>  &lt;script type="text/javascript" src="/js/src/clicklove.js">&lt;/script><br>  &lt;script type="text/javascript" src="/js/src/clicksocialvalue.js">&lt;/script><br></code></p>
+<p><em>(3)</em>网页悬浮带色线条<br>在_layout.swig文件中的body标签内引入js文件<br><code>&lt;script type="text/javascript"<br>    color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"><br>&lt;/script><br></code></p>
+<p>注: color属性为线条颜色, opacity属性为线条透明度, count属性为线条的总数, zIndex属性为线条显示所在层.</p>
+<h2 id="aplayer播放器"><a href="#aplayer播放器" class="headerlink" title="aplayer播放器"></a>aplayer播放器</h2><p>aplayer是一个HTML5音乐播放器, 和dplayer师出同门.</p>
+<p><em>(1)</em>访问aplayer源码:<a href="https://github.com/MoePlayer/APlayer" target="_blank" rel="noopener">GitHub Aplayer</a>, 将文件下载到本地, 解压后将名为dist的文件夹复制到博客文件夹\themes\next\source文件夹下.</p>
+<p><em>(2)</em>在dist文件夹下新建music.js文件, 并在该文件里添加以下代码:<br>注: 文件存放相对路径是为博客文件夹\source\下</p>
+<pre>
+const ap = new APlayer({
+    container: document.getElementById('aplayer'),
+    autoplay: false,
+    loop: 'all',
+    volume: 0.7,
+    listFolded: true,
+    listMaxHeight: 60,
+    audio: [
+        {
+            name: 'name1',
+            artist: 'artist1',
+            url: 'url1.mp3',
+            cover: 'cover1.jpg',
+        },
+        {
+            name: 'name2',
+            artist: 'artist2',
+            url: 'url2.mp3',
+            cover: 'cover2.jpg',
+        },
+        ...
+    ]
+});
+</pre>
+
+<p>(3)根据参数修改成自己想要的样式, 参数参考:<a href="https://aplayer.js.org/#/zh-Hans/?id=%E5%8F%82%E6%95%B0" target="_blank" rel="noopener">官方中文文档</a>.</p>
+<p>(4)把aplayer播放器放置到自己想要的位置, 即在布局文件中插入代码段, 网站布局位置文件是在next\layout文件夹下.<br><code>&lt;link rel="stylesheet" href="/dist/APlayer.min.css"><br>&lt;div id="aplayer">&lt;/div><br>&lt;script type="text/javascript" src="/dist/APlayer.min.js">&lt;/script><br>&lt;script type="text/javascript" src="/dist/music.js">&lt;/script><br></code></p>
+<p>注: 博主放置的位置是在next\layout\_partials\sidebar\site-overview.swig文件中第61行</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/18/Hexo%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%8D%A2%E4%B8%BB%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_Picture/Yu_Me2.png">
+      <meta itemprop="name" content="宇">
+      <meta itemprop="description" content="一位正在成长中, 不断摸索着前进的方向, 不断努力着的新人. 期望着能被众人所需要, 期望着能为人解决烦恼.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱梦的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/18/Hexo%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%8D%A2%E4%B8%BB%E9%A2%98/" class="post-title-link" itemprop="url">Hexo博客更换主题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-18 01:01:51" itemprop="dateCreated datePublished" datetime="2020-05-18T01:01:51+08:00">2020-05-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-02 22:12:30" itemprop="dateModified" datetime="2020-06-02T22:12:30+08:00">2020-06-02</time>
+              </span>
 
           
 
@@ -451,7 +573,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
