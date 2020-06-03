@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>在Linux操作系统下用源码包安装Apache</title>
+      <link href="/2020/06/03/%E5%9C%A8Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%8B%E7%94%A8%E6%BA%90%E7%A0%81%E5%8C%85%E5%AE%89%E8%A3%85Apache/"/>
+      <url>/2020/06/03/%E5%9C%A8Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%8B%E7%94%A8%E6%BA%90%E7%A0%81%E5%8C%85%E5%AE%89%E8%A3%85Apache/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Apache的概述"><a href="#Apache的概述" class="headerlink" title="Apache的概述"></a>Apache的概述</h1><h2 id="什么是Apache"><a href="#什么是Apache" class="headerlink" title="什么是Apache"></a>什么是Apache</h2><p><em>(1)</em>Apache是世界第一并且开发源代码的Web服务器, 全称为Apache HTTP Server.<br>该服务器直接面向用户提供网站访问, 发送网页、图片等文件内容.</p><h1 id="Apache的安装与检测"><a href="#Apache的安装与检测" class="headerlink" title="Apache的安装与检测"></a>Apache的安装与检测</h1><h2 id="Apache的安装"><a href="#Apache的安装" class="headerlink" title="Apache的安装"></a>Apache的安装</h2><pre>系统环境: CentOs7.3.10源码包: httpd-2-4-38.tar.gz依赖项: apr-1.4.6.tar.gz、apr-util-1.5.1.tar.gz、pcre-8.32.tar.gz</pre><p><a href="http://archive.apache.org/dist/apr/?C=S;O=A" target="_blank" rel="noopener">apr、apr-util</a>和<a href="http://ftp.pcre.org/pub/pcre/" target="_blank" rel="noopener">pcre</a>下载</p><p><em>(1)</em> 查找之前是否已经安装过httpd, 如果有就删除.<br><code>rpm -qa | grep httpd<br>rpm -e --nodeps httpd包名<br></code></p><p><em>(2)</em> 安装编译apache所用到的包, 即安装编译源代码的开发环境.<br><code>yum -y install gcc gcc-c++ make expat-devel</code><br>注: gcc-c++编译prce, expat-devel不装会影响apr-util使用make.</p><p><em>(3)</em> 将apache源码包和依赖项包上传linux系统里的文件夹中<br>注: 博主存放在/usr/local/src文件目录下</p><p><em>(4)</em> 在依赖项的压缩包所在路径下, 安装httpd的依赖项.<br>1.安装apr<br><code> tar -zvxf apr-1.4.6.tar.gz<br> cd apr-1.4.6<br> ./configure --prefix=/usr/local/apr<br> make && make install<br></code></p><p><code>rm: cannot remove 'libtoolT': No such file or directory</code><br>注: 安装时如出现上方代码, 则直接用vi或vim打开apr-1.4.6目录下的configure文件, 把$RM “$cfgfile”那行删除掉后再次安装.<br><code> vi /usr/local/src/apr-1.4.6/configure<br> /$RM "$cfgfile"<br> dd<br> :wq!<br></code></p><p>2.安装apr-util<br><code> tar -zvxf apr-util-1.5.1.tar.gz<br> cd apr-util-1.5.1<br> ./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr<br> make && make install<br></code></p><p>3.安装pcre<br><code> tar -zvxf pcre-8.32.tar.gz<br> cd pcre-8.32<br> ./configure --prefix=/usr/local/pcre<br> make && make install<br></code></p><p><em>(5)</em> 安装httpd<br><code> tar zxvf httpd-2.4.38.tar.gz -C /usr/local/src/<br> cd httpd-2.4.38<br> ./configure --prefix=/usr/local/apache --with-apr=/usr/local/apr --with-apr-util=/usr/local/apr-util --with-pcre=/usr/local/pcre<br> make && make install<br></code></p><p>注: 配置文件需指定依赖项的路径</p><p><em>(6)</em> 虚拟机中执行命令<br>启动: <code>/usr/local/apache/bin/apachectl start</code><br>重启: <code>/usr/local/apache/bin/apachectl restart</code><br>停用: <code>/usr/local/apache/bin/apachectl stop</code></p><p>注: 修改配置文件/usr/local/apache/conf/httpd.conf中的ServerName为非注释后在启动<br><code> vi /usr/local/apache/conf/httpd.conf<br> /#ServerName<br> x<br> :wq!<br></code></p><h2 id="Apache的检测"><a href="#Apache的检测" class="headerlink" title="Apache的检测"></a>Apache的检测</h2><p><em>(1)</em>使用lyxn命令对本机进行访问<br>无lyxn命令时则安装: <code>yum install lynx</code><br>执行lyxn命令: <code>lynx 127.0.0.1</code></p><p>注: 如果屏幕中间上方显示It works!, 表示Apache已经正常工作.</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hexo博客美化过程</title>
       <link href="/2020/06/02/Hexo%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96%E8%BF%87%E7%A8%8B/"/>
       <url>/2020/06/02/Hexo%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96%E8%BF%87%E7%A8%8B/</url>
