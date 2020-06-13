@@ -189,7 +189,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-08 20:24:05" itemprop="dateModified" datetime="2020-06-08T20:24:05+08:00">2020-06-08</time>
+                <time title="修改时间：2020-06-14 01:46:30" itemprop="dateModified" datetime="2020-06-14T01:46:30+08:00">2020-06-14</time>
               </span>
 
           
@@ -205,15 +205,6 @@
       
           <p>注: 显示的选项不为全部, 外部命令使用:<code>外部命令 --help</code>查看帮助, 内部命令使用:<code>help 内部命令</code>查看帮助.</p>
 <h1 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h1><h2 id="hostname命令"><a href="#hostname命令" class="headerlink" title="hostname命令"></a>hostname命令</h2><p>hostname命令查看或修改当前主机的完整名称<br><code> hostname [填写表示修改主机名]</code></p>
-<h2 id="su命令"><a href="#su命令" class="headerlink" title="su命令"></a>su命令</h2><p>su命令用于切换至管理员模式<br><code>su</code></p>
-<h2 id="shutdown命令"><a href="#shutdown命令" class="headerlink" title="shutdown命令"></a>shutdown命令</h2><p>shutdown命令对主机进行关机或重启操作</p>
-<pre>
- shutdown [选项] [now]
- |__ -h --关机//等同poweroff
- |__ -r --重启//等同reboot
- |__ now --立即执行
-</pre>
-
 <h2 id="man命令"><a href="#man命令" class="headerlink" title="man命令"></a>man命令</h2><p>man命令查看指定命令的手册页<br><code>man 命令</code></p>
 <h1 id="Vi编辑命令"><a href="#Vi编辑命令" class="headerlink" title="Vi编辑命令"></a>Vi编辑命令</h1><h2 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h2><p>启动vi编辑器后默认进入命令模式</p>
 <h3 id="移动光标"><a href="#移动光标" class="headerlink" title="移动光标"></a>移动光标</h3><pre>
@@ -304,8 +295,144 @@
  |__ /c --对每个替换动作提示用户进行确认
 </pre>
 
+<h1 id="常用系统工作命令"><a href="#常用系统工作命令" class="headerlink" title="常用系统工作命令"></a>常用系统工作命令</h1><h2 id="echo命令"><a href="#echo命令" class="headerlink" title="echo命令"></a>echo命令</h2><p>echo命令用于在终端输出字符串或变量提取后的值</p>
+<pre>
+ echo [选项]
+ |__ 字符串
+ |__ $变量
+</pre>
 
-<h1 id="工作目录切换命令"><a href="#工作目录切换命令" class="headerlink" title="工作目录切换命令"></a>工作目录切换命令</h1><h2 id="pwd命令"><a href="#pwd命令" class="headerlink" title="pwd命令"></a>pwd命令</h2><p>pwd命令用于显示用户当前所处的工作目录<br><code>pwd</code></p>
+<h2 id="date命令"><a href="#date命令" class="headerlink" title="date命令"></a>date命令</h2><p>date命令用于显示及设置系统的时间或日期</p>
+<pre>
+ date [选项] "[+指定格式]"
+ |__ s "年月日 时:分:秒"--设置当前时间
+ |__ %Y 年
+ |__ %m 月
+ |__ %d 日
+ |__ %t 跳格[Tab键]
+ |__ %H 小时(00～23)
+ |__ %I 小时(00～12)
+ |__ %M 分钟(00～59)
+ |__ %S 秒(00～59)
+ |__ %j 今年中的第几天
+</pre>
+
+<h2 id="shutdown命令"><a href="#shutdown命令" class="headerlink" title="shutdown命令"></a>shutdown命令</h2><p>shutdown命令对主机进行关机或重启操作</p>
+<pre>
+ shutdown [选项] [now]
+ |__ -h --关机//等同poweroff
+ |__ -r --重启//等同reboot
+ |__ -c --取消操作
+ |__ now --立即执行
+    |__ +数字 --指定分钟后执行
+</pre>
+
+<h2 id="wget命令"><a href="#wget命令" class="headerlink" title="wget命令"></a>wget命令</h2><p>wget命令用于在终端中下载网络文件</p>
+<pre>
+ wget [选项] 下载地址
+ |__ -b --后台下载模式
+ |__ -P --下载到指定目录
+ |__ -t --最大尝试次数
+ |__ -c --断点续传
+ |__ -p --下载页面内所有资源, 包括图片、视频等.
+ |__ -r --递归下载
+</pre>
+
+<h2 id="ps命令"><a href="#ps命令" class="headerlink" title="ps命令"></a>ps命令</h2><p>ps命令用于查看进程信息(参数可允许不写-号, 即ps aux.)</p>
+<pre>
+ ps [选项]
+ |__ -a --显示所有进程
+ |__ -u --显示用户以及其他详细信息
+ |__ -x --显示没有控制终端的进程
+</pre>
+<table>
+ <tr><td>R(运行)</td><td>进程正在运行或在运行队列中等待</td></tr>
+ <tr><td>S(中断)</td><td>进程处于休眠中, 当某个条件形成后或者接收到信号时, 则脱离该状态.</td></tr>
+ <tr><td>D(不可中断)</td><td>进程不响应系统异步信号, 即便用kill命令也不能将其中断.</td></tr>
+ <tr><td>Z(僵死)</td><td>进程已经终止,但进程描述符依然存在, 直到父进程调用wait4()系统函数后将进程释放.</td></tr>
+ <tr><td>T(停止)</td><td>进程收到停止信号后停止运行</td></tr>
+</table>
+<table style="text-align:center; font-size:12px">
+ <tr><td>USER</td><td>PID</td><td>%CPU</td><td>%MEM</td><td>VSZ</td><td>RSS</td><td>TTY</td><td>STAT</td><td>START</td><td>TIME</td><td>COMMAND</td></tr>
+ <tr><td>进程的所有者</td><td>进程ID号</td><td>运算器占用率</td><td>内存占用率</td><td>虚拟内存使用量(单位是KB)</td><td>占用的固定内存量(单位是KB)</td><td>所在终端</td><td>进程状态</td><td>被启动的时间</td><td>实际使用CPU的时间</td><td>命令名称与参数</td></tr>
+</table>
+
+<h2 id="pstree命令"><a href="#pstree命令" class="headerlink" title="pstree命令"></a>pstree命令</h2><p>安装:<code> yum -y install psmisc</code><br>pstree命令用于以树状显示进程信息</p>
+<pre>
+ pstree [选项]
+ |__ -a --显示每个程序的完整指令, 包含路径, 参数或是常驻服务的标示.
+ |__ -c --不使用精简标示法
+ |__ -h --列出树状图时, 特别标明现在执行的程序.
+ |__ -u --显示用户名称
+</pre>
+
+<h2 id="top命令"><a href="#top命令" class="headerlink" title="top命令"></a>top命令</h2><p>top命令用于动态地监视进程活动与系统负载等信息, 其格式为:<code>top</code>.</p>
+<table style="text-align:center; font-size:12px">
+<tr><td>第1行</td><td>系统时间</td><td>运行时间</td><td>登录终端数</td><td>系统负载(三个数值分别为1分钟、5分钟、15分钟内的平均值,数值越小意味着负载越低).</td><td></td></tr>
+<tr><td>第2行</td><td>进程总数</td><td>运行中的进程数</td><td>睡眠中的进程数</td><td>停止的进程数</td><td>僵死的进程数.</td></tr>
+<tr><td>第3行</td><td>用户占用资源百分比</td><td>系统内核占用资源百分比</td><td>改变过优先级的进程资源百分比</td><td>空闲的资源百分比等.其中数据均为CPU数据并以百分比格式显示.</td><td></td></tr>
+<tr><td>第4行</td><td>物理内存总量</td><td>内存使用量</td><td>内存空闲量</td><td>作为内核缓存的内存量.</td><td></td></tr>
+<tr><td>第5行</td><td>虚拟内存总量</td><td>虚拟内存使用量</td><td>虚拟内存空闲量</td><td>已被提前加载的内存量.</td><td></td></tr>
+</table>
+
+<h2 id="pidof命令"><a href="#pidof命令" class="headerlink" title="pidof命令"></a>pidof命令</h2><p>pidof命令用于查询某个指定服务进程的PID值, 其格式为:<code>pidof 服务名称</code>.</p>
+<h2 id="kill命令"><a href="#kill命令" class="headerlink" title="kill命令"></a>kill命令</h2><p>kill命令用于终止某个指定PID的服务进程</p>
+<pre>
+ kill [选项]
+ |__ -9 --强制终止
+</pre>
+
+<h2 id="killall命令"><a href="#killall命令" class="headerlink" title="killall命令"></a>killall命令</h2><p>killall命令用于终止某个指定名称的服务所对应的全部进程</p>
+<pre>
+ killall [选项] 服务名称
+ |__ -9 --强制终止
+</pre>
+
+<h1 id="系统状态检测命令"><a href="#系统状态检测命令" class="headerlink" title="系统状态检测命令"></a>系统状态检测命令</h1><h2 id="ifconfig命令"><a href="#ifconfig命令" class="headerlink" title="ifconfig命令"></a>ifconfig命令</h2><p>ifconfig命令用于获取网卡配置与网络状态等信息<br>使用ifconfig命令来查看本机当前的网卡配置与网络状态等信息时，其实主要查看的就是网卡名称、IP地址、网卡物理地址(MAC地址), 以及RX、TX的接收数据包与发送数据包的个数及累计流量(即下面蓝色框内的信息内容):</p>
+<pre>
+[root@linuxprobe ~]# ifconfig
+<div style="border:1px solid #1ABAF5;border-radius:5px;display:initial;">eno16777728</div>: flags=4163  mtu 1500
+        <div style="border:1px solid #1ABAF5;border-radius:5px;display:initial;">inet 192.168.10.10</div>  netmask 255.255.255.0  broadcast 192.168.10.255
+        inet6 fe80::20c:29ff:fec4:a409  prefixlen 64  scopeid 0x20
+        <div style="border:1px solid #1ABAF5;border-radius:5px;display:initial;">ether 00:0c:29:c4:a4:09</div>  txqueuelen 1000  (Ethernet)
+        <div style="border:1px solid #1ABAF5;border-radius:5px;display:initial;">RX packets 36  bytes 3176 (3.1 KiB)</div>
+        RX errors 0  dropped 0  overruns 0  frame 0
+        <div style="border:1px solid #1ABAF5;border-radius:5px;display:initial;">TX packets 38  bytes 4757 (4.6 KiB)</div>
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10
+        loop  txqueuelen 0  (Local Loopback)
+        RX packets 386  bytes 32780 (32.0 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 386  bytes 32780 (32.0 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</pre>
+
+<h2 id="uname命令"><a href="#uname命令" class="headerlink" title="uname命令"></a>uname命令</h2><p>uname命令用于查看系统内核与系统版本等信息<br>在使用uname命令时, 一般会固定搭配上-a参数来完整地查看当前系统的内核名称、主机名、内核发行版本、节点名、系统时间、硬件名称、硬件平台、处理器类型以及操作系统名称等信息.</p>
+<pre>
+ uname [选项]
+ |__  -a --显示所有信息
+</pre>
+<p>如果要查看当前系统版本的详细信息, 则需要查看redhat-release文件:<code>cat /etc/redhat-release</code>.</p>
+<h2 id="uptime命令"><a href="#uptime命令" class="headerlink" title="uptime命令"></a>uptime命令</h2><p>uptime用于查看系统的负载信息, 其格式为:<code>uptime</code>.<br>负载值越低越好, 尽量不要长期超过1, 在生产环境中不要超过5.</p>
+<h2 id="free命令"><a href="#free命令" class="headerlink" title="free命令"></a>free命令</h2><p>free用于显示当前系统中内存的使用量信息</p>
+<pre>
+ free [选项]
+ |__ -h --人性化显示
+</pre>
+
+<h2 id="who命令"><a href="#who命令" class="headerlink" title="who命令"></a>who命令</h2><p>who用于查看当前登入主机的用户终端信息, 其格式为<code>who</code>.</p>
+<h2 id="last命令"><a href="#last命令" class="headerlink" title="last命令"></a>last命令</h2><p>last命令用于查看所有系统的登录记录, 其格式为<code>last</code>.<br>使用last命令可以查看本机的登录记录. 但是, 由于这些信息都是以日志文件的形式保存在系统中, 因此黑客可以很容易地对内容进行篡改. 千万不要单纯以该命令的输出信息而判断系统有无被恶意入侵!</p>
+<h2 id="history命令"><a href="#history命令" class="headerlink" title="history命令"></a>history命令</h2><p>history命令用于显示历史执行过的命令, 可以使用”!编码数字”的方式来重复执行某一次的命令.</p>
+<pre>
+ history [选项]
+ |__ -c --清空当前用户在本机上执行的Linux命令历史记录信息
+</pre>
+
+<h2 id="sosreport命令"><a href="#sosreport命令" class="headerlink" title="sosreport命令"></a>sosreport命令</h2><p>sosreport命令用于收集系统配置及架构信息并输出诊断文档, 其格式为<code>sosreport</code>.</p>
+<h1 id="工作目录切换命令"><a href="#工作目录切换命令" class="headerlink" title="工作目录切换命令"></a>工作目录切换命令</h1><h2 id="pwd命令"><a href="#pwd命令" class="headerlink" title="pwd命令"></a>pwd命令</h2><p>pwd命令用于显示用户当前所处的工作目录, 其格式为:<code>pwd</code>.</p>
 <h2 id="cd命令"><a href="#cd命令" class="headerlink" title="cd命令"></a>cd命令</h2><p>cd命令将用户的工作目录更改到其他位置</p>
 <pre>
  cd [选项]
@@ -329,19 +456,62 @@
  |__ -R --以递归的方式显示指定目录及其子目录中的所有内容
 </pre>
 
+<table>
+-:文件 l:链接 d:目录 | r:可读(4) w:可写(2) x:可执行(1)
+<tr>
+  <td>文件类型</td>
+  <td>属主权限</td>
+  <td>属组权限</td>
+  <td>其他任何用户权限</td>
+  <td>-</td>
+  <td>-</td>
+  <td>属主归属</td>
+  <td>属组归属</td>
+</tr>
+<tr>
+  <td>-</td>
+  <td>rwx</td>
+  <td>r-x</td>
+  <td>r-x</td>
+  <td>.</td>
+  <td>1</td>
+  <td>root</td>
+  <td>root</td>
+</tr>
+</table> 
+<pre>
+-rwxr-xr-x.   1  777 root 18519 6月   3 11:00 ss.sh
+lrwxrwxrwx.   1 root root     8 5月  26 15:25 sbin -> usr/sbin
+drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
+[root@localhost /]# 
+</pre>
 
-<h1 id="文本文件编辑命令"><a href="#文本文件编辑命令" class="headerlink" title="文本文件编辑命令"></a>文本文件编辑命令</h1><h2 id="cat命令"><a href="#cat命令" class="headerlink" title="cat命令"></a>cat命令</h2><p>cat命令用于连接多个文件的内容, 但在实际使用中更多地用于查看文件内容.</p>
+
+<h1 id="文本文件编辑命令"><a href="#文本文件编辑命令" class="headerlink" title="文本文件编辑命令"></a>文本文件编辑命令</h1><h2 id="nl命令"><a href="#nl命令" class="headerlink" title="nl命令"></a>nl命令</h2><p>nl命令查看文件内容并输出行号</p>
+<pre> 
+ nl [选项] 文件
+ |__ -b --指定行号指定的方式
+ |  |__ a --表示不论是否为空行, 也同样列出行号.
+ |  |__ t --如果有空行, 空的那一行不要列出行号.
+ | 
+ |__ -n --列出行号表示的方法
+ |  |__ ln --行号在萤幕的最左方显示
+ |  |__ rn --行号在自己栏位的最右方显示, 且不加 0.
+ |  |__ rz --行号在自己栏位的最右方显示, 且加 0.
+ |
+ |__ -w --行号栏位的占用的位数
+ |__ -p --在逻辑定界符处不重新开始计算
+</pre>
+
+<h2 id="cat命令"><a href="#cat命令" class="headerlink" title="cat命令"></a>cat命令</h2><p>cat命令用于连接多个文件的内容(顺序查看)</p>
 <pre>
  cat [选项] 文件
  |__ -n --显示行号
 </pre>
 <p><code> 查看系统信息: cat /proc/version<br> 查看CPU信息: cat /proc/cpuinfo<br> 查看内存信息: cat /proc/meinfo<br> 查看网卡配置信息: cat /etc/sysconfig/network-scripts/ifcfg-eno16777736<br></code></p>
-<h2 id="more命令"><a href="#more命令" class="headerlink" title="more命令"></a>more命令</h2><p>more命令查看超过一屏的文件内容时, 将进行分屏显示, 并在左下角显示当前内容在整个文件中的百分比.</p>
-<pre>
- more [选项] 文件 
-</pre>
-
-<h2 id="less命令"><a href="#less命令" class="headerlink" title="less命令"></a>less命令</h2><p>less命令较晚出现的分页显示命令, 查看超过一屏的文件内容时, 只显示被查看文件的文件名.</p>
+<h2 id="tac命令"><a href="#tac命令" class="headerlink" title="tac命令"></a>tac命令</h2><p>tac命令用于连接多个文件的内容(逆序查看), 其格式为:<code>tac 文件</code>.</p>
+<h2 id="more命令"><a href="#more命令" class="headerlink" title="more命令"></a>more命令</h2><p>more命令查看超过一屏的文件内容时, 将进行分屏显示, 并在左下角显示当前内容在整个文件中的百分比. 其格式为:<code>more 文件</code>.</p>
+<h2 id="less命令"><a href="#less命令" class="headerlink" title="less命令"></a>less命令</h2><p>less命令较晚出现的分页显示命令, 查看超过一屏的文件内容时, 只显示被查看文件的文件名, 能倒退查看.</p>
 <pre>
  less [选项] 文件
 </pre>
@@ -359,6 +529,7 @@
  |__ -f --可以跟踪文件尾部内容的动态更新, 便于实时监控文件内容的变化.
 </pre>
 
+<h2 id="tr命令"><a href="#tr命令" class="headerlink" title="tr命令"></a>tr命令</h2><p>tr命令用于替换文本文件中的字符, 其格式为:<code>tr 原始字符 目标字符</code>.</p>
 <h2 id="wc命令"><a href="#wc命令" class="headerlink" title="wc命令"></a>wc命令</h2><p>wc命令用于统计文件内容中包含的行数、单词数、字节数等信息.</p>
 <pre>
  wc [选项] 文件
@@ -366,6 +537,28 @@
  |__ -w --统计文件内容中的单词个数
  |__ -c --统计文件内容中的字节数
 </pre>
+
+<h2 id="stat命令"><a href="#stat命令" class="headerlink" title="stat命令"></a>stat命令</h2><p>stat命令用于查看文件的具体存储信息和时间等信息, 其格式为:<code>stat 文件名称</code>.</p>
+<table style="text-align:center;">
+ <tr><td>最后一次查看文件内容的时间</td><td>Access: 2020-06-13 11:14:23.943014190 +0800</td></tr>
+ <tr><td>最后一次修改文件内容的时间</td><td>Modify: 2014-04-15 21:54:24.000000000 +0800</td></tr>
+ <tr><td>最后一次修改文件属性的时间</td><td>Change: 2020-06-12 18:31:35.845997258 +0800</td></tr>
+</table>
+
+<h2 id="cut命令"><a href="#cut命令" class="headerlink" title="cut命令"></a>cut命令</h2><p>cut命令用于按”列”提取文本字符</p>
+<pre>
+ cut [选项] 文件
+ |__ -d --设置间隔符号
+ |__ -f --设置需要查看的列数
+</pre>
+
+<h2 id="diff命令"><a href="#diff命令" class="headerlink" title="diff命令"></a>diff命令</h2><p>diff命令用于比较多个文本文件的差异</p>
+<pre>
+ diff [选项] 文件1 文件2
+ |__ --brief --判断文件是否相同
+ |__ -c --描述文件内容具体的不同
+</pre>
+
 
 <h1 id="文本目录管理命令"><a href="#文本目录管理命令" class="headerlink" title="文本目录管理命令"></a>文本目录管理命令</h1><h2 id="touch命令"><a href="#touch命令" class="headerlink" title="touch命令"></a>touch命令</h2><p>touch命令用于创建空白文件或设置文件的时间</p>
 <pre>
@@ -380,6 +573,14 @@
  mkdir [选项] 目录
  |__ -p --创建多级目录
 </pre>
+
+<h2 id="rmdir命令"><a href="#rmdir命令" class="headerlink" title="rmdir命令"></a>rmdir命令</h2><p>rmdir命令用于删除空白的目录</p>
+<pre>
+ rmdir [选项] 目录
+ |__ -p --当子目录被删除后使父目录也成为空目录的话, 则顺便一并删除.
+
+</pre>
+
 
 <h2 id="cp命令"><a href="#cp命令" class="headerlink" title="cp命令"></a>cp命令</h2><p>cp命令用于复制文件或目录</p>
 <pre>
@@ -396,6 +597,8 @@
 <h2 id="mv命令"><a href="#mv命令" class="headerlink" title="mv命令"></a>mv命令</h2><p>mv命令用于剪切文件或将文件重命名</p>
 <pre>
  mv [选项] 源文件/目录 目标文件名/目录
+ |__ -f --直接覆盖现有的文件或目录
+ |__ -u --文件较新或者目标文件不存在时, 才执行移动操作.
 </pre>
 
 <h2 id="rm命令"><a href="#rm命令" class="headerlink" title="rm命令"></a>rm命令</h2><p>rm命令用于删除指定的文件或目录</p>
@@ -406,6 +609,8 @@
  |__ -r --删除目录时必须使用此选项, 表示递归删除整个目录树.
 </pre>
 
+<h2 id="dd命令"><a href="#dd命令" class="headerlink" title="dd命令"></a>dd命令</h2><p>dd命令用于按照指定大小和个数的数据块来复制文件或转换文件<br><code>dd if=输入的文件名称 of=输出的文件名称 count=要复制"块"的个数 bs=每个"块"的大小</code></p>
+<h2 id="file命令"><a href="#file命令" class="headerlink" title="file命令"></a>file命令</h2><p>file命令用于查看文件的类型, 其格式为:<code>file 文件名</code>.<br>在Linux系统中, 由于文本、目录、设备等所有这些一切都统称为文件, 而我们又不能单凭后缀就知道具体的文件类型, 这时就需要使用file命令来查看文件类型了.</p>
 <h1 id="打包压缩与搜索命令"><a href="#打包压缩与搜索命令" class="headerlink" title="打包压缩与搜索命令"></a>打包压缩与搜索命令</h1><h2 id="压缩与解压缩命令"><a href="#压缩与解压缩命令" class="headerlink" title="压缩与解压缩命令"></a>压缩与解压缩命令</h2><p>gzip命令和bzip2命令</p>
 <pre>
  gzip [选项] 文件名
@@ -468,7 +673,7 @@
  |__ -prune --忽略某个目录
 </pre>
 <p>注: 管道符号<code>|</code>, 即前一个查询出来的结果可以再次用命令操作.</p>
-<h1 id="RPM软件包命令"><a href="#RPM软件包命令" class="headerlink" title="RPM软件包命令"></a>RPM软件包命令</h1><h2 id="rpm命令"><a href="#rpm命令" class="headerlink" title="rpm命令"></a>rpm命令</h2><p><code>man rpm: 获得关于rpm命令的详细帮助信息</code></p>
+<h1 id="软件包管理命令"><a href="#软件包管理命令" class="headerlink" title="软件包管理命令"></a>软件包管理命令</h1><h2 id="RPM-红帽软件包管理器"><a href="#RPM-红帽软件包管理器" class="headerlink" title="RPM(红帽软件包管理器)"></a>RPM(红帽软件包管理器)</h2><p><code>man rpm: 获得关于rpm命令的详细帮助信息</code></p>
 <pre>
  rpm [选项]
  |__ -q --查询当前系统中已经安装的软件包
@@ -495,6 +700,23 @@
  |__ --inidb --RPM数据库重建
 </pre>
 
+<h2 id="Yum软件仓库"><a href="#Yum软件仓库" class="headerlink" title="Yum软件仓库"></a>Yum软件仓库</h2><pre>
+ yum [选项]
+ |__ repolist all --列出所有仓库
+ |__ list all --列出仓库中所有软件包
+ |__ info 软件包名称 --查看软件包信息
+ |__ install 软件包名称 --安装软件包
+ |__ reinstall 软件包名称 --重新安装软件包
+ |__ update 软件包名称 --升级软件包
+ |__ remove 软件包名称 --移除软件包
+ |__ clean all --清除所有仓库缓存
+ |__ check-update --检查可更新的软件包
+ |__ grouplist --查看系统中已经安装的软件包组
+ |__ groupinstall 软件包组 --安装指定的软件包组
+ |__ groupremove 软件包组 --移除指定的软件包组
+ |__ groupinfo 软件包组 --查询指定的软件包组信息
+</pre>
+
 
 <h1 id="账号与权限管理命令"><a href="#账号与权限管理命令" class="headerlink" title="账号与权限管理命令"></a>账号与权限管理命令</h1><h2 id="useradd命令"><a href="#useradd命令" class="headerlink" title="useradd命令"></a>useradd命令</h2><p>useradd命令用于创建新的用户账号</p>
 <pre>
@@ -502,21 +724,20 @@
  |__ -u --指定用户的默认UID号
  |__ -d --指定用户的家目录(默认为/home/用户名)
  |__ -e --指定用户的账号失效时间, 可使用YYYY-MM-DD的日期格式.
+ |__ -m --自动建立用户的登入目录
  |__ -M --不建立宿主目录, 即使/etc/login.defs系统配置中已设定要建立宿主目录.
  |__ -g --指定一个初始的用户基本组(必须已存在)
  |__ -G --指定一个或多个扩展用户组
  |__ -s --指定该用户的登录Shell终端
 </pre>
 
-<h2 id="passwd命令"><a href="#passwd命令" class="headerlink" title="passwd命令"></a>passwd命令</h2><p>passwd命令用于设置/更改用户口令</p>
-<pre>
- passwd [选项] 用户名
- |__ -l --锁定用户账户
- |__ -u --解锁用户账户
- |__ -d --清空指定用户的密码, 仅使用用户名即可登录系统.
- |__ -S --查看用户账户的状态(是否被锁定)
+<h2 id="userdel命令"><a href="#userdel命令" class="headerlink" title="userdel命令"></a>userdel命令</h2><p>userdel命令用于删除用户账号</p>
+<pre> userdel [选项] 用户名
+ |__ -f --强制删除用户, 即使用户当前已登录.
+ |__ -r --删除用户的同时, 删除与用户相关的所有文件.
 </pre>
 
+<h2 id="su命令"><a href="#su命令" class="headerlink" title="su命令"></a>su命令</h2><p>su命令用于切换用户<br><code>su 用户名</code></p>
 <h2 id="usermod命令"><a href="#usermod命令" class="headerlink" title="usermod命令"></a>usermod命令</h2><p>usermod命令用于修改用户账号属性</p>
 <pre>
  usermod [选项] 用户名
@@ -531,13 +752,30 @@
  |__ -G --变更扩展用户组
 </pre>
 
-<h2 id="userdel命令"><a href="#userdel命令" class="headerlink" title="userdel命令"></a>userdel命令</h2><p>userdel命令用于删除用户账号<br><code> userdel -r 用户名</code></p>
+<h2 id="passwd命令"><a href="#passwd命令" class="headerlink" title="passwd命令"></a>passwd命令</h2><p>passwd命令用于设置/更改用户口令</p>
+<pre>
+ passwd [选项] 用户名
+ |__ -l --锁定用户账户
+ |__ -u --解锁用户账户
+ |__ -d --清空指定用户的密码, 仅使用用户名即可登录系统.
+ |__ -S --查看用户账户的状态(是否被锁定)
+</pre>
+
 <h2 id="groupadd命令"><a href="#groupadd命令" class="headerlink" title="groupadd命令"></a>groupadd命令</h2><p>groupadd命令用于创建新的组账号</p>
 <pre>
  groupadd 组名
  groupadd -g GID号 组名
 </pre>
 
+<h2 id="groupdel命令"><a href="#groupdel命令" class="headerlink" title="groupdel命令"></a>groupdel命令</h2><p>groupdel命令用于删除组账号<br><code>groupdel 组名</code></p>
+<h2 id="groupmod命令"><a href="#groupmod命令" class="headerlink" title="groupmod命令"></a>groupmod命令</h2><p>groupmod命令用于修改组名或GID号</p>
+<pre>
+ groupmod [选项] 组名
+ |__ -n --设置组名
+ |__ -g --设置组的GID号
+</pre>
+
+<h2 id="newgrp命令"><a href="#newgrp命令" class="headerlink" title="newgrp命令"></a>newgrp命令</h2><p>newgrp命令切换用户组<br><code> newgrp 组名</code></p>
 <h2 id="gpasswd命令"><a href="#gpasswd命令" class="headerlink" title="gpasswd命令"></a>gpasswd命令</h2><p>gpasswd命令用于添加、设置、删除组成员</p>
 <pre>
  gpasswd [选项] 成员用户 [root]
@@ -547,7 +785,6 @@
  |__ -M --同时指定所有成员用户
 </pre>
 
-<h2 id="groupdel命令"><a href="#groupdel命令" class="headerlink" title="groupdel命令"></a>groupdel命令</h2><p>groupdel命令用于删除组账号<br><code>groupdel 组名</code></p>
 <h2 id="groups命令"><a href="#groups命令" class="headerlink" title="groups命令"></a>groups命令</h2><p>groups命令可以查看指定的用户属于哪些组<br><code>groups [用户名]</code></p>
 <h2 id="finger命令"><a href="#finger命令" class="headerlink" title="finger命令"></a>finger命令</h2><p>finger命令可以查询指定的用户账号的登录属性等详细信息<br><code>finger [用户名]</code></p>
 <h2 id="w命令"><a href="#w命令" class="headerlink" title="w命令"></a>w命令</h2><p>w命令可以查询当前主机中的用户登录情况, 列出登录账号名称、所在终端、登录时间、来源地点等信息.<br><code>w</code></p>
@@ -679,7 +916,18 @@
 <h2 id="extend命令"><a href="#extend命令" class="headerlink" title="extend命令"></a>extend命令</h2><p>vgextend命令用于扩展卷组的磁盘空间<br><code>vgextend 卷组名 物理卷</code></p>
 <p>lvextend命令用于动态扩展逻辑卷的空间<br><code>lvextend +L 容量大小 逻辑卷</code></p>
 <p>注: 逻辑卷扩容后更新系统识别的文件系统大小<br>EXT4: <code>resize2f 逻辑卷</code><br>xfs: <code>xfs_growfs 逻辑卷</code></p>
-
+<h1 id="服务管理命令"><a href="#服务管理命令" class="headerlink" title="服务管理命令"></a>服务管理命令</h1><h2 id="systemctl命令"><a href="#systemctl命令" class="headerlink" title="systemctl命令"></a>systemctl命令</h2><pre>
+ systemctl [选项] 服务名称
+ |__ start --启动服务
+ |__ stop --停止服务
+ |__ restart --重启服务 
+ |__ reload --重新加载配置文件(不终止服务)
+ |__ status --查看服务状态
+ |__ enable --开机自动启动
+ |__ disable --开机不自动启动
+ |__ is-enabled --查看特定服务是否为开机自启动
+ |__ list-unit-files --type=service --查看各个级别下服务的启动与禁用情况  
+</pre>
       
     </div>
 

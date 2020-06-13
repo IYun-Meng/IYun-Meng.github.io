@@ -1,6 +1,6 @@
 const ap = new APlayer({
     container: document.getElementById('aplayer'),
-    autoplay: true,
+    autoplay: false,
     loop: 'all',
     preload: 'auto',
     volume: 0.7,
