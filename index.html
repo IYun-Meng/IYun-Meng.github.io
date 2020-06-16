@@ -128,7 +128,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">7</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">8</span></a>
 
   </li>
   </ul>
@@ -154,6 +154,127 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/16/Shell%E8%84%9A%E6%9C%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_Picture/Yu_Me2.png">
+      <meta itemprop="name" content="宇">
+      <meta itemprop="description" content="一位正在成长中, 不断摸索着前进的方向, 不断努力着的新人. 期望着能被众人所需要, 期望着能为人解决烦恼.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱梦的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/16/Shell%E8%84%9A%E6%9C%AC/" class="post-title-link" itemprop="url">Shell脚本</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-16 16:49:02 / 修改时间：23:31:32" itemprop="dateCreated datePublished" datetime="2020-06-16T16:49:02+08:00">2020-06-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Shell脚本的编写"><a href="#Shell脚本的编写" class="headerlink" title="Shell脚本的编写"></a>Shell脚本的编写</h1><p>注: 脚本文件名建议以.sh结尾</p>
+<h2 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h2><p>脚本声明:<code>#!/bin/bash</code><br>脚本注释:<code>#对该脚本的描述</code><br>脚本命令:<code>命令序列</code></p>
+<h2 id="接收用户参数"><a href="#接收用户参数" class="headerlink" title="接收用户参数"></a>接收用户参数</h2><p>在执行脚本文件后直接加上参数, 即<code>脚本文件 参数1 参数2 参数3,...</code></p>
+<table>
+<tr><td>$n</td><td>第n个用户参数</td></tr>
+<tr><td>$#</td><td>统计用户参数个数</td></tr>
+<tr><td>$*</td><td>所有用户参数</td></tr>
+</table>
+
+<h2 id="判断用户参数"><a href="#判断用户参数" class="headerlink" title="判断用户参数"></a>判断用户参数</h2><p>条件测试语句的执行格式:<code>[ 表达式 ]</code><br>检查语句执行结果:<code>echo $?</code><br>正确返回0, 错误返回非0.</p>
+<h3 id="文件测试语句"><a href="#文件测试语句" class="headerlink" title="文件测试语句"></a>文件测试语句</h3><table>
+<tr><td>-d</td><td>测试文件是否为目录类型</tr>
+<tr><td>-e</td><td>测试文件是否存在</tr>
+<tr><td>-f</td><td>判断是否为一般文件</tr>
+<tr><td>-r</td><td>测试当前用户是否有权限读取</tr>
+<tr><td>-w</td><td>测试当前用户是否有权限写入</tr>
+<tr><td>-x</td><td>测试当前用户是否有权限执行</tr>
+</table>
+
+<h3 id="逻辑测试语句"><a href="#逻辑测试语句" class="headerlink" title="逻辑测试语句"></a>逻辑测试语句</h3><table>
+<tr><td>&&</td><td>前面的命令执行成功后才会执行它后面的命令</td></tr>
+<tr><td>||</td><td>当前面的命令执行失败后才会执行它后面的命令</td></tr>
+<tr><td>!</td><td>把条件测试中的判断结果取相反值</td></tr>
+</table>
+
+<h3 id="整数值比较语句"><a href="#整数值比较语句" class="headerlink" title="整数值比较语句"></a>整数值比较语句</h3><table>
+<tr><td>-eq</td><td>是否等于</td></tr>
+<tr><td>-ne</td><td>是否不等于</td></tr>
+<tr><td>-gt</td><td>是否大于</td></tr>
+<tr><td>-lt</td><td>是否小于</td></tr>
+<tr><td>-le</td><td>是否等于或小于</td></tr>
+<tr><td>-ge</td><td>是否大于或等于</td></tr>
+</table>
+
+<h3 id="字符串比较语句"><a href="#字符串比较语句" class="headerlink" title="字符串比较语句"></a>字符串比较语句</h3><table>
+<tr><td>=</td><td>比较字符串内容是否相同</td></tr>
+<tr><td>!=</td><td>比较字符串内容是否不同</td></tr>
+<tr><td>-z</td><td>判断字符串内容是否为空</td></tr>
+</table>
+
+<h2 id="流程控制语句"><a href="#流程控制语句" class="headerlink" title="流程控制语句"></a>流程控制语句</h2><h3 id="if条件测试语句"><a href="#if条件测试语句" class="headerlink" title="if条件测试语句"></a>if条件测试语句</h3><p>read是用来读取用户输入信息的命令, 能够把接收到的用户输入信息赋值给后面的指定变量.<br>-p参数用于向用户显示一定的提示信息.<br><code>read -p "提示信息" 变量名</code></p>
+<blockquote>
+<p>单分支<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="comment">#条件测试操作</span></span><br><span class="line">  <span class="keyword">then</span></span><br><span class="line">   <span class="comment">#命令序列</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>双分支<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="comment">#条件测试操作</span></span><br><span class="line">  <span class="keyword">then</span> </span><br><span class="line">   <span class="comment">#命令序列1</span></span><br><span class="line">  <span class="keyword">else</span> </span><br><span class="line">   <span class="comment">#命令序列2</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>多分支<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="comment">#条件测试操作1</span></span><br><span class="line">  <span class="keyword">then</span></span><br><span class="line">   <span class="comment">#命令序列1</span></span><br><span class="line"><span class="keyword">elif</span> <span class="comment">#条件测试操作2</span></span><br><span class="line">  <span class="keyword">then</span></span><br><span class="line">   <span class="comment">#命令序列2</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"> <span class="comment">#命令序列3</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="for条件循环语句"><a href="#for条件循环语句" class="headerlink" title="for条件循环语句"></a>for条件循环语句</h3><p>/dev/null是一个被称作Linux黑洞的文件, 把输出信息重定向到这个文件等同于删除数据(类似于没有回收功能的垃圾箱), 可以让用户的屏幕窗口保持简洁.</p>
+<blockquote>
+<p>for循环<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> 变量名 <span class="keyword">in</span> <span class="comment">#取值列表</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"> <span class="comment">#命令序列</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="while条件循环语句"><a href="#while条件循环语句" class="headerlink" title="while条件循环语句"></a>while条件循环语句</h3><h3 id="case条件测试语句"><a href="#case条件测试语句" class="headerlink" title="case条件测试语句"></a>case条件测试语句</h3><h1 id="Shell脚本的运行"><a href="#Shell脚本的运行" class="headerlink" title="Shell脚本的运行"></a>Shell脚本的运行</h1><h2 id="bash命令"><a href="#bash命令" class="headerlink" title="bash命令"></a>bash命令</h2><p>bash是个shell脚本解释器</p>
+<pre>
+ bash [选项]
+ |__ -n --检测脚本是否正确, 并不执行脚本.
+ |__ -x --执行脚本, 输出执行过程.
+ |__ -c --bash从字符串中读入命令, 如果字符串后还有变量就被设定为从$0开始的位置参数.
+</pre>
+<p><code>bash 脚本文件</code></p>
+<h2 id="赋予脚本文件执行权限"><a href="#赋予脚本文件执行权限" class="headerlink" title="赋予脚本文件执行权限"></a>赋予脚本文件执行权限</h2><p><code>chmod u+x 脚本文件</code><br><code>./脚本文件</code></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -189,7 +310,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-14 01:46:30" itemprop="dateModified" datetime="2020-06-14T01:46:30+08:00">2020-06-14</time>
+                <time title="修改时间：2020-06-16 16:29:53" itemprop="dateModified" datetime="2020-06-16T16:29:53+08:00">2020-06-16</time>
               </span>
 
           
@@ -206,6 +327,52 @@
           <p>注: 显示的选项不为全部, 外部命令使用:<code>外部命令 --help</code>查看帮助, 内部命令使用:<code>help 内部命令</code>查看帮助.</p>
 <h1 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h1><h2 id="hostname命令"><a href="#hostname命令" class="headerlink" title="hostname命令"></a>hostname命令</h2><p>hostname命令查看或修改当前主机的完整名称<br><code> hostname [填写表示修改主机名]</code></p>
 <h2 id="man命令"><a href="#man命令" class="headerlink" title="man命令"></a>man命令</h2><p>man命令查看指定命令的手册页<br><code>man 命令</code></p>
+<h1 id="输入输出重定向"><a href="#输入输出重定向" class="headerlink" title="输入输出重定向"></a>输入输出重定向</h1><table>
+<tr><td>标准输入重定向(STDIN，文件描述符为0)</td><td>默认从键盘输入, 也可从其他文件或命令中输入.</td></tr>
+<tr><td>标准输出重定向(STDOUT，文件描述符为1)</td><td>默认输出到屏幕.</td></tr>
+<tr><td>错误输出重定向(STDERR，文件描述符为2)</td><td>默认输出到屏幕.</td></tr>
+</table>
+
+<h2 id="输入重定向"><a href="#输入重定向" class="headerlink" title="输入重定向"></a>输入重定向</h2><h3 id="lt-符号"><a href="#lt-符号" class="headerlink" title="&lt; 符号"></a>&lt; 符号</h3><p><code>命令 < 文件</code> 将文件作为命令的标准输入</p>
+<h3 id="lt-lt-符号"><a href="#lt-lt-符号" class="headerlink" title="&lt;&lt; 符号"></a>&lt;&lt; 符号</h3><p><code>命令 << 分界符</code> 从标准输入中读入, 直到遇见分界符才停止.</p>
+<h2 id="输出重定向"><a href="#输出重定向" class="headerlink" title="输出重定向"></a>输出重定向</h2><h3 id="gt-符号"><a href="#gt-符号" class="headerlink" title="&gt; 符号"></a>&gt; 符号</h3><p><code>命令 > 文件</code> 将标准输出重定向到一个文件中(清空原有文件的数据)<br><code>命令 2> 文件</code> 将错误输出重定向到一个文件中(清空原有文件的数据)</p>
+<h3 id="gt-gt-符号"><a href="#gt-gt-符号" class="headerlink" title="&gt;&gt; 符号"></a>&gt;&gt; 符号</h3><p><code>命令 >> 文件</code> 将标准输出重定向到一个文件中(追加到原有内容的后面)<br><code>命令 2>> 文件</code> 将错误输出重定向到一个文件中（追加到原有内容的后面）<br><code>命令 >> 文件 2>&1 | 命令 &>> 文件</code> 将标准输出与错误输出共同写入到文件中(追加到原有内容的后面)<br>注: &amp;指示不要把1当作普通文件, 而是fd=1即标准输出来处理.</p>
+<h2 id="管道命令符"><a href="#管道命令符" class="headerlink" title="管道命令符"></a>管道命令符</h2><p>符号<code>命令1 | 命令2</code>把前一个命令原本要输出到屏幕的标准正常数据当作是后一个命令的标准输入</p>
+<h2 id="命令行的通配符"><a href="#命令行的通配符" class="headerlink" title="命令行的通配符"></a>命令行的通配符</h2><table>
+<tr><td>*</td><td>匹配零个或多个字符</td></tr>
+<tr><td>?</td><td>匹配单个字符</td></tr>
+<tr><td>[字符,字符,...]</td><td>匹配括号中的任意一个字符</td></tr>
+</table>
+
+<h2 id="常见转义字符"><a href="#常见转义字符" class="headerlink" title="常见转义字符"></a>常见转义字符</h2><table>
+<tr><td>反斜杠(\)</td><td>使反斜杠后面的一个变量变为单纯的字符串</td></tr>
+<tr><td>单引号('')</td><td>转义其中所有的变量为单纯的字符串</td></tr>
+<tr><td>双引号("")</td><td>保留其中的变量属性, 不进行转义处理.</td></tr>
+<tr><td>反引号(``)</td><td>返回其中的命令执行后的结果</td></tr>
+</table>
+
+<h2 id="重要环境变量"><a href="#重要环境变量" class="headerlink" title="重要环境变量"></a>重要环境变量</h2><table>
+<tr><td>HOME</td><td>用户的主目录(即家目录)</td></tr>
+<tr><td>SHELL</td><td>用户在使用的Shell解释器名称</td></tr>
+<tr><td>HISTSIZE</td><td>输出的历史命令记录条数</td></tr>
+<tr><td>HISTFILESIZE</td><td>保存的历史命令记录条数</td></tr>
+<tr><td>MAIL</td><td>邮件保存路径</td></tr>
+<tr><td>LANG</td><td>系统语言、语系名称</td></tr>
+<tr><td>RANDOM</td><td>生成一个随机数字</td></tr>
+<tr><td>PS1</td><td>Bash解释器的提示符</td></tr>
+<tr><td>PATH</td><td>定义解释器搜索用户执行命令的路径</td></tr>
+<tr><td>EDITOR</td><td>用户默认的文本编辑器</td></tr>
+</table>
+
+<h3 id="alias命令"><a href="#alias命令" class="headerlink" title="alias命令"></a>alias命令</h3><p>alias命令用于给指定的命令起别名</p>
+<pre>
+ alias 别名=命令 --给指定命令起别名
+ alias --显示给所有命令起的别名
+</pre>
+
+<h3 id="unalias命令"><a href="#unalias命令" class="headerlink" title="unalias命令"></a>unalias命令</h3><p>unalias命令用于取消指定命令的别名, 其格式为:<code>unalias 别名</code>.</p>
+<h3 id="type命令"><a href="#type命令" class="headerlink" title="type命令"></a>type命令</h3><p>type命令用于判断输入的是内部命令还是外部命令, 其格式为:<code>type 命令</code>.</p>
+<h3 id="export命令"><a href="#export命令" class="headerlink" title="export命令"></a>export命令</h3><p>export命令用于将局部变量提升为全局变量, 其格式为:<code>export 变量名</code>.</p>
 <h1 id="Vi编辑命令"><a href="#Vi编辑命令" class="headerlink" title="Vi编辑命令"></a>Vi编辑命令</h1><h2 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h2><p>启动vi编辑器后默认进入命令模式</p>
 <h3 id="移动光标"><a href="#移动光标" class="headerlink" title="移动光标"></a>移动光标</h3><pre>
  行内快速跳转
@@ -288,11 +455,16 @@
 </pre>
 
 <h3 id="替换文件内容"><a href="#替换文件内容" class="headerlink" title="替换文件内容"></a>替换文件内容</h3><pre>
- :[选项] sub /旧内容/新内容[/g][/c]
- |__ % --在整个文件内容中进行查找并替换
- |__ n,m --在指定行数范围以内的文件内容中进行查找并替换
- |__ /g --表示对替换范围内每一行的所有匹配结果都进行替换, 不写则只替换每行中的第一个匹配结果.
- |__ /c --对每个替换动作提示用户进行确认
+ :[选项]
+ |__ s/旧内容/新内容[/g][/c] --将光标所在当前行的旧内容替换成新内容
+ |  |__ % --在整个文件内容中进行查找并替换
+ |  |__ n,m --在指定行数范围以内的文件内容中进行查找并替换
+ |  |__ /g --表示对替换范围内每一行的所有匹配结果都进行替换, 不写则只替换每行中的第一个匹配结果.
+ |  |__ /c --对每个替换动作提示用户进行确认
+ |__ 数字 --光标跳转到指定行
+ |__ 命令 --执行该命令
+ |__ ?字符串 --在文本中从下至上搜索该字符串
+ |__ /字符串 --在文本中从上至下搜索该字符串
 </pre>
 
 <h1 id="常用系统工作命令"><a href="#常用系统工作命令" class="headerlink" title="常用系统工作命令"></a>常用系统工作命令</h1><h2 id="echo命令"><a href="#echo命令" class="headerlink" title="echo命令"></a>echo命令</h2><p>echo命令用于在终端输出字符串或变量提取后的值</p>
@@ -388,7 +560,34 @@
  |__ -9 --强制终止
 </pre>
 
-<h1 id="系统状态检测命令"><a href="#系统状态检测命令" class="headerlink" title="系统状态检测命令"></a>系统状态检测命令</h1><h2 id="ifconfig命令"><a href="#ifconfig命令" class="headerlink" title="ifconfig命令"></a>ifconfig命令</h2><p>ifconfig命令用于获取网卡配置与网络状态等信息<br>使用ifconfig命令来查看本机当前的网卡配置与网络状态等信息时，其实主要查看的就是网卡名称、IP地址、网卡物理地址(MAC地址), 以及RX、TX的接收数据包与发送数据包的个数及累计流量(即下面蓝色框内的信息内容):</p>
+<h1 id="系统状态检测命令"><a href="#系统状态检测命令" class="headerlink" title="系统状态检测命令"></a>系统状态检测命令</h1><h2 id="ifconfig命令"><a href="#ifconfig命令" class="headerlink" title="ifconfig命令"></a>ifconfig命令</h2><p>ifconfig命令用于获取网卡配置与网络状态等信息</p>
+<pre>
+ ifconfig [选项]
+ |__ 不写 --显示当前主机中已启用的网络接口信息
+ |__ -a --显示所有网络接口信息
+ |__ 网络接口 --查看指定的网络接口信息
+</pre>
+
+<h2 id="route命令"><a href="#route命令" class="headerlink" title="route命令"></a>route命令</h2><p>route命令查看或设置主机中路由表信息</p>
+<pre>
+ route [选项]
+ |__ -n --将路由记录中的地址信息显示为数字形式
+</pre>
+
+<h2 id="netstat命令"><a href="#netstat命令" class="headerlink" title="netstat命令"></a>netstat命令</h2><p>netstat命令查看系统的网络连接状态、路由表、接口统计等信息</p>
+<pre>
+ netstat [选项]
+ |__ -a --显示当前主机中所有活动的网络连接信息(包括监听、非监听状态的服务端口)
+ |__ -n --以数字的形式显示相关的主机地址、端口等信息.
+ |__ -p --显示与网络连接相关联的进程号、进程名称信息(该选项需要root权限)
+ |__ -t --查看TCP协议相关的信息
+ |__ -u --显示UDP协议相关的信息
+ |__ -l --显示处于监听(Listening)状态的网络连接及端口信息
+ |__ -r --显示路由表信息
+</pre>
+
+
+<p>使用ifconfig命令来查看本机当前的网卡配置与网络状态等信息时，其实主要查看的就是网卡名称、IP地址、网卡物理地址(MAC地址), 以及RX、TX的接收数据包与发送数据包的个数及累计流量(即下面蓝色框内的信息内容):</p>
 <pre>
 [root@linuxprobe ~]# ifconfig
 <div style="border:1px solid #1ABAF5;border-radius:5px;display:initial;">eno16777728</div>: flags=4163  mtu 1500
@@ -447,7 +646,7 @@ lo: flags=73  mtu 65536
 <h2 id="ls命令"><a href="#ls命令" class="headerlink" title="ls命令"></a>ls命令</h2><p>ls命令用于显示目录或目录中的文件信息</p>
 <pre>
  ls [选项] [文件/目录]
- |__ -l --以长格式显示文件和目录的列表,包括权限、大小、最后更新时间等详细信息.
+ |__ -l --以长格式显示文件和目录的列表,包括权限、大小、最后更新时间等详细信息.(可简写为ll)
  |  |__ -h --将显示为KB、MB等单位, 需和-l一起使用.
  |
  |__ -a --显示所有子目录和文件的信息, 包括名称以点号开头的隐藏目录和隐藏文件.
@@ -657,7 +856,7 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
 
 <h2 id="find命令"><a href="#find命令" class="headerlink" title="find命令"></a>find命令</h2><p>find命令用于按照指定条件来查找文件</p>
 <pre>
- find [查找路径] 寻找条件 操作
+ find [查找路径] [选项] 文件名
  |__ -name --匹配名称
  |__ -perm --匹配权限(mode为完全匹配, -mode为包含即可.)
  |__ -user --匹配所有者
@@ -672,7 +871,8 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
  |__ -size --匹配文件的大小(+50KB为查找超过50KB的文件, 而-50KB为查找小于50KB的文件)
  |__ -prune --忽略某个目录
 </pre>
-<p>注: 管道符号<code>|</code>, 即前一个查询出来的结果可以再次用命令操作.</p>
+
+
 <h1 id="软件包管理命令"><a href="#软件包管理命令" class="headerlink" title="软件包管理命令"></a>软件包管理命令</h1><h2 id="RPM-红帽软件包管理器"><a href="#RPM-红帽软件包管理器" class="headerlink" title="RPM(红帽软件包管理器)"></a>RPM(红帽软件包管理器)</h2><p><code>man rpm: 获得关于rpm命令的详细帮助信息</code></p>
 <pre>
  rpm [选项]
@@ -1509,7 +1709,7 @@ const ap = new APlayer({
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
