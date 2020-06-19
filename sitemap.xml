@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/06/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
+    
+    <lastmod>2020-06-19T12:01:32.364Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/06/05/Linux%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2020-06-18T03:54:57.559Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/06/16/Shell%E8%84%9A%E6%9C%AC/</loc>
+    
+    <lastmod>2020-06-18T02:55:55.193Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/05/18/Hexo%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%8D%A2%E4%B8%BB%E9%A2%98/</loc>
     
     <lastmod>2020-06-17T06:26:22.166Z</lastmod>
@@ -12,13 +33,6 @@
     <loc>http://yoursite.com/2020/06/02/Hexo%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96%E8%BF%87%E7%A8%8B/</loc>
     
     <lastmod>2020-06-17T06:25:15.667Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/06/05/Linux%E5%91%BD%E4%BB%A4/</loc>
-    
-    <lastmod>2020-06-17T06:23:54.034Z</lastmod>
     
   </url>
   
@@ -40,13 +54,6 @@
     <loc>http://yoursite.com/2020/06/04/CentOS%E7%B3%BB%E7%BB%9F%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E7%BD%91%E7%AB%99/</loc>
     
     <lastmod>2020-06-17T06:19:51.689Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/06/16/Shell%E8%84%9A%E6%9C%AC/</loc>
-    
-    <lastmod>2020-06-17T06:14:53.960Z</lastmod>
     
   </url>
   

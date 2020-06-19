@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="计划任务服务程序一次性计划任务 at 时间设置一次性计划任务 atrm 任务序号根据任务序号删除一次性计划任务 at -l查看已设置好但还未执行的一次性计划任务 at -c 任务序号查看指定一次性计划任务的执行命令   周期性计划任务cronb:服务名称crontab:配置工具  crontab -e编辑计划任务 crontab -e -u 用户名编辑指定用户的计划任务 crontab -l查看当">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux基础知识">
+<meta property="og:url" content="http://yoursite.com/2020/06/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="爱梦的博客">
+<meta property="og:description" content="计划任务服务程序一次性计划任务 at 时间设置一次性计划任务 atrm 任务序号根据任务序号删除一次性计划任务 at -l查看已设置好但还未执行的一次性计划任务 at -c 任务序号查看指定一次性计划任务的执行命令   周期性计划任务cronb:服务名称crontab:配置工具  crontab -e编辑计划任务 crontab -e -u 用户名编辑指定用户的计划任务 crontab -l查看当">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-18T01:47:31.000Z">
+<meta property="article:modified_time" content="2020-06-19T12:01:32.364Z">
+<meta property="article:author" content="宇">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/06/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux基础知识 | 爱梦的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="爱梦的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/src/clickLove.js"></script>
+  <script type="text/javascript" src="/js/src/clickSocialValue.js"></script>
+  <script type="text/javascript"
+    color="255,100,254" opacity='0.7' zIndex="-1" count="80" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+  </script>
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">爱梦的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">常常与我陪伴的就是梦</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">8</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_Picture/Yu_Me2.png">
+      <meta itemprop="name" content="宇">
+      <meta itemprop="description" content="一位正在成长中, 不断摸索着前进的方向, 不断努力着的新人. 期望着能被众人所需要, 期望着能为人解决烦恼.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱梦的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux基础知识
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-18 09:47:31" itemprop="dateCreated datePublished" datetime="2020-06-18T09:47:31+08:00">2020-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-19 20:01:32" itemprop="dateModified" datetime="2020-06-19T20:01:32+08:00">2020-06-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="计划任务服务程序"><a href="#计划任务服务程序" class="headerlink" title="计划任务服务程序"></a>计划任务服务程序</h1><h2 id="一次性计划任务"><a href="#一次性计划任务" class="headerlink" title="一次性计划任务"></a>一次性计划任务</h2><table>
+<tr><td>at 时间</td><td>设置一次性计划任务</td></tr>
+<tr><td>atrm 任务序号</td><td>根据任务序号删除一次性计划任务</td></tr>
+<tr><td>at -l</td><td>查看已设置好但还未执行的一次性计划任务</td></tr>
+<tr><td>at -c 任务序号</td><td>查看指定一次性计划任务的执行命令</td></tr>
+</table>
+
+<h2 id="周期性计划任务"><a href="#周期性计划任务" class="headerlink" title="周期性计划任务"></a>周期性计划任务</h2><p>cronb:服务名称<br>crontab:配置工具</p>
+<table>
+<tr><td>crontab -e</td><td>编辑计划任务</td></tr>
+<tr><td>crontab -e -u 用户名</td><td>编辑指定用户的计划任务</td></tr>
+<tr><td>crontab -l</td><td>查看当前计划任务</td></tr>
+<tr><td>crontab -r 任务序号</td><td>删除某条计划任务</td></tr>
+</table>
+
+<pre>
+*  *  *  *  *  任务内容
+分 时 日 月 周  执行命令
+whereisot 命令 --查询命令的所在路径
+</pre>
+<a id="more"></a>
+
+<h1 id="用户身份与能力"><a href="#用户身份与能力" class="headerlink" title="用户身份与能力"></a>用户身份与能力</h1><table>
+<tr><td>管理员UID:0</td><td>系统的管理员用户</td></tr>
+<tr><td>系统用户UID:1-999</td><td>Linux系统为了避免因某个服务程序出现漏洞而被黑客提权至整台服务器, 默认服务程序会有独立的系统用户负责运行, 进而有效控制被破坏范围.</td></tr>
+<tr><td>普通用户UID:1000-</td><td>由管理员创建的用于日常工作的用户</td></tr>
+</table>
+
+<h2 id="id命令"><a href="#id命令" class="headerlink" title="id命令"></a>id命令</h2><p>id命令用于显示指定用户的用户ID和组ID, 其格式为:<code>id [选项] [用户名]</code>.</p>
+<h2 id="useradd命令"><a href="#useradd命令" class="headerlink" title="useradd命令"></a>useradd命令</h2><p>useradd命令用于创建新的用户, 格式为<code>useradd [选项] 用户名</code>.</p>
+<pre>
+使用该命令创建用户账户时, 默认的用户家目录会被存放在/home目录中, 默认的Shell解释器为/bin/bash.
+在Linux系统中创建每个用户时, 将自动创建一个与其同名的基本用户组, 而且这个基本用户组只有该用户一个人.
+</pre>
+
+<h2 id="groupadd命令"><a href="#groupadd命令" class="headerlink" title="groupadd命令"></a>groupadd命令</h2><p>groupadd命令用于创建用户组, 格式为<code>groupadd [选项] 群组名</code>.</p>
+<pre>
+如果该用户以后被归纳入其他用户组, 则这个其他用户组称之为扩展用户组.
+一个用户只有一个基本用户组, 但是可以有多个扩展用户组, 从而满足日常的工作需要.
+</pre>
+
+<h2 id="usermod命令"><a href="#usermod命令" class="headerlink" title="usermod命令"></a>usermod命令</h2><p>usermod命令用于修改用户的属性, 格式为<code>usermod [选项] 用户名</code>.</p>
+<pre>用户的信息保存在/etc/passwd文件中</pre>
+
+<h2 id="passwd命令"><a href="#passwd命令" class="headerlink" title="passwd命令"></a>passwd命令</h2><p>passwd命令用于修改用户密码、过期时间、认证信息等, 格式为<code>passwd [选项] [用户名]</code>.</p>
+<pre>
+普通用户只能使用passwd命令修改自身的系统密码, 而root管理员则有权限修改其他所有人的密码.
+root管理员在Linux系统中修改自己或他人的密码时不需要验证旧密码
+</pre>
+
+<h2 id="userdel命令"><a href="#userdel命令" class="headerlink" title="userdel命令"></a>userdel命令</h2><p>userdel命令用于删除用户, 格式为<code>userdel [选项] 用户名</code>.</p>
+<h1 id="文件权限与归属"><a href="#文件权限与归属" class="headerlink" title="文件权限与归属"></a>文件权限与归属</h1><table>
+<tr><td>-</td><td>普通文件</td></tr>
+<tr><td>d</td><td>目录文件</td></tr>
+<tr><td>l</td><td>链接文件</td></tr>
+<tr><td>b</td><td>块设备文件</td></tr>
+<tr><td>c</td><td>字符设备文件</td></tr>
+<tr><td>p</td><td>管道文件</td></tr>
+</table>
+
+<table style="text-align:center;">
+<tr><td>字符表示</td><td>r</td><td>w</td><td>x</td></tr>
+<tr><td>特殊字符表示</td><td>s</td><td>s</td><td>t</td></tr>
+<tr><td>数字表示</td><td>4</td><td>2</td><td>1</td></tr>
+<tr><td>权限分配</td><td>文件所有者</td><td>文件所属组</td><td>其他用户</td></tr>
+</table>
+
+<h2 id="文件的特殊权限"><a href="#文件的特殊权限" class="headerlink" title="文件的特殊权限"></a>文件的特殊权限</h2><table style="text-align:center;">
+<tr><td>SUID</td><td>执行者临时获取命令的所有者权限</td><td>??x/??s | ??-/??S</td><td>u+s</td></tr>
+<tr><td>SGID</td><td>在某个目录中创建的文件自动继承该目录的用户组(只可以对目录进行设置)</td><td>??x/??s | ??-/??S</td><td>g+s</td></tr>
+<tr><td>SBIT</td><td>确保用户只能删除自己的文件, 而不能删除其他用户的文件.</td><td>??x/??t | ??-/??T</td><td>o+t</td></tr>
+</table>
+
+<h2 id="文件的隐藏属性"><a href="#文件的隐藏属性" class="headerlink" title="文件的隐藏属性"></a>文件的隐藏属性</h2><h3 id="chattr命令"><a href="#chattr命令" class="headerlink" title="chattr命令"></a>chattr命令</h3><p>chattr命令用于设置文件的隐藏权限, 格式为<code>chattr [参数] 文件</code>.</p>
+<h3 id="lsattr命令"><a href="#lsattr命令" class="headerlink" title="lsattr命令"></a>lsattr命令</h3><p>lsattr命令用于显示文件的隐藏权限, 格式为<code>lsattr [参数] 文件</code>.</p>
+<h2 id="文件访问控制列表"><a href="#文件访问控制列表" class="headerlink" title="文件访问控制列表"></a>文件访问控制列表</h2><pre>
+对某个指定的用户进行单独的权限控制, 就需要用到文件的访问控制列表(ACL).
+通俗来讲, 基于普通文件或目录设置ACL其实就是针对指定的用户或用户组设置文件或目录的操作权限.
+另外, 如果针对某个目录设置了ACL, 则目录中的文件会继承其ACL; 若针对文件设置了ACL, 则文件不再继承其所在目录的ACL.
+</pre>
+
+<h3 id="setfacl命令"><a href="#setfacl命令" class="headerlink" title="setfacl命令"></a>setfacl命令</h3><p>setfacl命令用于管理文件的ACL规则</p>
+<pre>
+ setfacl 选项 用户:名:权限 文件名称/目录
+ |__ -m --更改文件的访问控制列表
+ |__ -M --从文件读取访问控制列表条目更改
+ |__ -x --根据文件中访问控制列表移除条目
+ |__ -X --从文件读取访问控制列表条目并删除
+ |__ -b --删除所有扩展访问控制列表条目
+ |__ -k --移除默认访问控制列表
+ |__ -d --应用到默认访问控制列表的操作
+ |__ -P --依照自然逻辑，不跟随符号链接
+ |__ -v --显示版本并退出
+ |__ -R --递归操作子目录
+</pre>
+
+<h3 id="getfacl命令"><a href="#getfacl命令" class="headerlink" title="getfacl命令"></a>getfacl命令</h3><p>getfacl命令用于显示文件上设置的ACL信息, 格式为<code>getfacl 文件名称</code>.</p>
+<h2 id="su命令和sudo服务"><a href="#su命令和sudo服务" class="headerlink" title="su命令和sudo服务"></a>su命令和sudo服务</h2><h3 id="su命令"><a href="#su命令" class="headerlink" title="su命令"></a>su命令</h3><p>su命令可以解决切换用户身份的需求, 使得当前用户在不退出登录的情况下, 顺畅地切换到其他用户.<br>格式:<code>su - 用户名</code>, -:表示完全切换, 环境变量信息也变更为新用户的相应信息.</p>
+<h3 id="sudo服务"><a href="#sudo服务" class="headerlink" title="sudo服务"></a>sudo服务</h3><p>sudo命令用于给普通用户提供额外的权限来完成原本root管理员才能完成的任务</p>
+<table>
+sudo命令功能:
+<tr><td>限制用户执行指定的命令</td></tr>
+<tr><td>记录用户执行的每一条命令</td></tr>
+<tr><td>配置文件(/etc/sudoers)提供集中的用户管理、权限与主机等参数</td></tr>
+<tr><td>验证密码的后5分钟内(默认值)无须再让用户再次验证密码</td></tr>
+</table>
+
+<pre>
+ sudo [选项] 命令名称
+ |__ -h --列出帮助信息
+ |__ -l --列出当前用户可执行的命令
+ |__ -u 用户名/UID值 --以指定的用户身份执行命令
+ |__ -k --清空密码的有效时间, 下次执行sudo时需要再次进行密码验证.
+ |__ -b --在后台执行指定的命令
+ |__ -p --更改询问密码的提示语
+</pre>
+
+<pre>
+root管理员进行授权:
+ visudo
+ 谁可以使用 允许使用的主机=(以谁的身份) 可执行命令的列表
+ root ALL=(ALL) ALL
+ ...
+ #xxx ALL=(ALL) NOPASSWD: xxx//普通用户执行命令时无需输入密码
+
+普通用户获取权限:
+ sudo 命令名称
+ 输入当前用户的密码后执行命令
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/16/Shell%E8%84%9A%E6%9C%AC/" rel="prev" title="Shell脚本">
+      <i class="fa fa-chevron-left"></i> Shell脚本
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#计划任务服务程序"><span class="nav-number">1.</span> <span class="nav-text">计划任务服务程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一次性计划任务"><span class="nav-number">1.1.</span> <span class="nav-text">一次性计划任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#周期性计划任务"><span class="nav-number">1.2.</span> <span class="nav-text">周期性计划任务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用户身份与能力"><span class="nav-number">2.</span> <span class="nav-text">用户身份与能力</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#id命令"><span class="nav-number">2.1.</span> <span class="nav-text">id命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useradd命令"><span class="nav-number">2.2.</span> <span class="nav-text">useradd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupadd命令"><span class="nav-number">2.3.</span> <span class="nav-text">groupadd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usermod命令"><span class="nav-number">2.4.</span> <span class="nav-text">usermod命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#passwd命令"><span class="nav-number">2.5.</span> <span class="nav-text">passwd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#userdel命令"><span class="nav-number">2.6.</span> <span class="nav-text">userdel命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件权限与归属"><span class="nav-number">3.</span> <span class="nav-text">文件权限与归属</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件的特殊权限"><span class="nav-number">3.1.</span> <span class="nav-text">文件的特殊权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件的隐藏属性"><span class="nav-number">3.2.</span> <span class="nav-text">文件的隐藏属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chattr命令"><span class="nav-number">3.2.1.</span> <span class="nav-text">chattr命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lsattr命令"><span class="nav-number">3.2.2.</span> <span class="nav-text">lsattr命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件访问控制列表"><span class="nav-number">3.3.</span> <span class="nav-text">文件访问控制列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setfacl命令"><span class="nav-number">3.3.1.</span> <span class="nav-text">setfacl命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getfacl命令"><span class="nav-number">3.3.2.</span> <span class="nav-text">getfacl命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#su命令和sudo服务"><span class="nav-number">3.4.</span> <span class="nav-text">su命令和sudo服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#su命令"><span class="nav-number">3.4.1.</span> <span class="nav-text">su命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sudo服务"><span class="nav-number">3.4.2.</span> <span class="nav-text">sudo服务</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="宇"
+      src="/images/head_Picture/Yu_Me2.png">
+  <p class="site-author-name" itemprop="name">宇</p>
+  <div class="site-description" itemprop="description">一位正在成长中, 不断摸索着前进的方向, 不断努力着的新人. 期望着能被众人所需要, 期望着能为人解决烦恼.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">宇</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+</body>
+</html>

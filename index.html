@@ -128,7 +128,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">7</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">8</span></a>
 
   </li>
   </ul>
@@ -154,6 +154,106 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_Picture/Yu_Me2.png">
+      <meta itemprop="name" content="宇">
+      <meta itemprop="description" content="一位正在成长中, 不断摸索着前进的方向, 不断努力着的新人. 期望着能被众人所需要, 期望着能为人解决烦恼.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱梦的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">Linux基础知识</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-18 09:47:31" itemprop="dateCreated datePublished" datetime="2020-06-18T09:47:31+08:00">2020-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-19 20:01:32" itemprop="dateModified" datetime="2020-06-19T20:01:32+08:00">2020-06-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="计划任务服务程序"><a href="#计划任务服务程序" class="headerlink" title="计划任务服务程序"></a>计划任务服务程序</h1><h2 id="一次性计划任务"><a href="#一次性计划任务" class="headerlink" title="一次性计划任务"></a>一次性计划任务</h2><table>
+<tr><td>at 时间</td><td>设置一次性计划任务</td></tr>
+<tr><td>atrm 任务序号</td><td>根据任务序号删除一次性计划任务</td></tr>
+<tr><td>at -l</td><td>查看已设置好但还未执行的一次性计划任务</td></tr>
+<tr><td>at -c 任务序号</td><td>查看指定一次性计划任务的执行命令</td></tr>
+</table>
+
+<h2 id="周期性计划任务"><a href="#周期性计划任务" class="headerlink" title="周期性计划任务"></a>周期性计划任务</h2><p>cronb:服务名称<br>crontab:配置工具</p>
+<table>
+<tr><td>crontab -e</td><td>编辑计划任务</td></tr>
+<tr><td>crontab -e -u 用户名</td><td>编辑指定用户的计划任务</td></tr>
+<tr><td>crontab -l</td><td>查看当前计划任务</td></tr>
+<tr><td>crontab -r 任务序号</td><td>删除某条计划任务</td></tr>
+</table>
+
+<pre>
+*  *  *  *  *  任务内容
+分 时 日 月 周  执行命令
+whereisot 命令 --查询命令的所在路径
+</pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -189,7 +289,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-17 14:14:53" itemprop="dateModified" datetime="2020-06-17T14:14:53+08:00">2020-06-17</time>
+                <time title="修改时间：2020-06-18 10:55:55" itemprop="dateModified" datetime="2020-06-18T10:55:55+08:00">2020-06-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -216,6 +316,7 @@
 <h2 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h2><p>脚本声明:<code>#!/bin/bash</code><br>脚本注释:<code>#对该脚本的描述</code><br>脚本命令:<code>命令序列</code></p>
 <h2 id="接收用户参数"><a href="#接收用户参数" class="headerlink" title="接收用户参数"></a>接收用户参数</h2><p>在执行脚本文件后直接加上参数, 即<code>脚本文件 参数1 参数2 参数3,...</code></p>
 <table>
+<tr><td>$0</td><td>脚本文件的名称</td></tr>
 <tr><td>$n</td><td>第n个用户参数</td></tr>
 <tr><td>$#</td><td>统计用户参数个数</td></tr>
 <tr><td>$*</td><td>所有用户参数</td></tr>
@@ -279,7 +380,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-17 14:23:54" itemprop="dateModified" datetime="2020-06-17T14:23:54+08:00">2020-06-17</time>
+                <time title="修改时间：2020-06-18 11:54:57" itemprop="dateModified" datetime="2020-06-18T11:54:57+08:00">2020-06-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -320,91 +421,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/06/05/Linux%E5%91%BD%E4%BB%A4/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/04/CentOS%E7%B3%BB%E7%BB%9F%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E7%BD%91%E7%AB%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_Picture/Yu_Me2.png">
-      <meta itemprop="name" content="宇">
-      <meta itemprop="description" content="一位正在成长中, 不断摸索着前进的方向, 不断努力着的新人. 期望着能被众人所需要, 期望着能为人解决烦恼.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="爱梦的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/04/CentOS%E7%B3%BB%E7%BB%9F%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E7%BD%91%E7%AB%99/" class="post-title-link" itemprop="url">CentOS系统简单配置网站</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-04 09:25:09" itemprop="dateCreated datePublished" datetime="2020-06-04T09:25:09+08:00">2020-06-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-17 14:19:51" itemprop="dateModified" datetime="2020-06-17T14:19:51+08:00">2020-06-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="在Apache上搭建网站"><a href="#在Apache上搭建网站" class="headerlink" title="在Apache上搭建网站"></a>在Apache上搭建网站</h1><h2 id="httpd的配置过程"><a href="#httpd的配置过程" class="headerlink" title="httpd的配置过程"></a>httpd的配置过程</h2><p><em>(1)</em> 安装httpd、官方文档、工具.<br><code> yum install -y httpd httpd-manual httpd-tools</code></p>
-<p><em>(2)</em> 确保SElinux和iptables防火墙不会干扰httpd服务的提供<br>SElinux:<br><code> getenforce</code><br><code> setenforce 0</code></p>
-<p>查看iptables防火墙<br><code> iptables -vnl</code></p>
-<p>如有防火墙规则, 需要进行如下处理<br>停止防火墙: <code> systemctl disable firewalld.service</code><br>禁用防火墙: <code> systemctl stop firewalld.service</code></p>
-<p>清除所有规则来暂时停止防火墙: <code>iptables -F</code><br>(只适合在没有配置防火墙的环境中, 如果已经配置过默认规则为deny的环境, 此步骤将使系统的所有网络访问中断.)</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/06/04/CentOS%E7%B3%BB%E7%BB%9F%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E7%BD%91%E7%AB%99/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -495,7 +511,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
