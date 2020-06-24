@@ -27,11 +27,16 @@
 <meta property="og:site_name" content="爱梦的博客">
 <meta property="og:description" content="计划任务服务程序一次性计划任务 at 时间设置一次性计划任务 atrm 任务序号根据任务序号删除一次性计划任务 at -l查看已设置好但还未执行的一次性计划任务 at -c 任务序号查看指定一次性计划任务的执行命令   周期性计划任务cronb:服务名称crontab:配置工具  crontab -e编辑计划任务 crontab -e -u 用户名编辑指定用户的计划任务 crontab -l查看当">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/RAID0.png">
+<meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/RAID1.jpg">
+<meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/RAID5.gif">
+<meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/RAID10.png">
 <meta property="article:published_time" content="2020-06-18T01:47:31.000Z">
-<meta property="article:modified_time" content="2020-06-22T11:01:02.818Z">
+<meta property="article:modified_time" content="2020-06-24T03:20:23.473Z">
 <meta property="article:author" content="宇">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/RAID0.png">
 
 <link rel="canonical" href="http://yoursite.com/2020/06/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
 
@@ -192,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-22 19:01:02" itemprop="dateModified" datetime="2020-06-22T19:01:02+08:00">2020-06-22</time>
+                <time title="修改时间：2020-06-24 11:20:23" itemprop="dateModified" datetime="2020-06-24T11:20:23+08:00">2020-06-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -510,7 +515,86 @@ xfs_quota -x -c 'limit bsoft=3m bhard=6m isoft=3 ihard=6 tom' /boot
 </pre>
 
 
-<h1 id="使用RAID与LVM磁盘阵列技术"><a href="#使用RAID与LVM磁盘阵列技术" class="headerlink" title="使用RAID与LVM磁盘阵列技术"></a>使用RAID与LVM磁盘阵列技术</h1><h2 id="RAID磁盘冗余阵列"><a href="#RAID磁盘冗余阵列" class="headerlink" title="RAID磁盘冗余阵列"></a>RAID磁盘冗余阵列</h2>
+<h1 id="使用RAID与LVM磁盘阵列技术"><a href="#使用RAID与LVM磁盘阵列技术" class="headerlink" title="使用RAID与LVM磁盘阵列技术"></a>使用RAID与LVM磁盘阵列技术</h1><h2 id="RAID磁盘冗余阵列"><a href="#RAID磁盘冗余阵列" class="headerlink" title="RAID磁盘冗余阵列"></a>RAID磁盘冗余阵列</h2><p>RAID技术通过把多个硬盘设备组合成一个容量更大、安全性更好的磁盘阵列, 并把数据切割成多个区段后分别存放在各个不同的物理硬盘设备上, 然后利用分散读写技术来提升磁盘阵列整体的性能, 同时把多个重要数据的副本同步到不同的物理硬盘设备上, 从而起到了非常好的数据冗余备份效果.<br>也就是说, RAID不仅降低了硬盘设备损坏后丢失数据的几率, 还提升了硬盘设备的读写速度.</p>
+<h3 id="RAID-0"><a href="#RAID-0" class="headerlink" title="RAID 0"></a>RAID 0</h3><p>RAID0技术能够有效地提升硬盘数据的吞吐速度, 但是不具备数据备份和错误修复能力.<br><img src="/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/RAID0.png" alt="RAID0"></p>
+<h3 id="RAID-1"><a href="#RAID-1" class="headerlink" title="RAID 1"></a>RAID 1</h3><p>如果生产环境对硬盘设备的读写速度没有要求, 而是希望增加数据的安全性时, 就需要用到RAID1技术了.<br><img src="/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/RAID1.jpg" alt="RAID1"></p>
+<h3 id="RAID-5"><a href="#RAID-5" class="headerlink" title="RAID 5"></a>RAID 5</h3><p>RAID5技术是把硬盘设备的数据奇偶校验信息保存到其他硬盘设备中. RAID5磁盘阵列组中数据的奇偶校验信息并不是单独保存到某一块硬盘设备中, 而是存储到除自身以外的其他每一块硬盘设备上, 这样的好处是其中任何一设备损坏后不至于出现致命缺陷.<br><img src="/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/RAID5.gif" alt="RAID5"></p>
+<h3 id="RAID-10"><a href="#RAID-10" class="headerlink" title="RAID 10"></a>RAID 10</h3><p>大部分企业更在乎的是数据本身的价值而非硬盘价格, 因此生产环境中主要使用RAID10技术.<br>顾名思义, RAID10技术是RAID1+RAID0技术的一个”组合体”. RAID10技术需要至少4块硬盘来组建, 其中先分别两两制作成RAID1磁盘阵列, 以保证数据的安全性; 然后再对两个RAID1磁盘阵列实施RAID0技术, 进一步提高硬盘设备的读写速度.<br><img src="/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/RAID10.png" alt="RAID10"></p>
+<h2 id="部署磁盘阵列"><a href="#部署磁盘阵列" class="headerlink" title="部署磁盘阵列"></a>部署磁盘阵列</h2><p>mdadm命令用于管理Linux系统中的软件RAID硬盘阵列,<br>格式为<code>mdadm [模式] &lt;RAID设备名称&gt; [选项] [成员设备名称]</code>.</p>
+<pre>
+ mdadm [模式] &lt;RAID设备名称&gt; [选项] [成员设备名称]
+ |__ -a --向RAID设备中添加一个成员
+ |__ -n --指定设备数量
+ |__ -l --指定RAID级别
+ |__ -C --创建
+ |__ -v --显示过程
+ |__ -f --模拟设备损坏
+ |__ -r --移除设备
+ |__ -Q --查看摘要信息
+ |__ -D --查看详细信息
+ |__ -S --停止RAID磁盘阵列
+ |__ -x --指定初始RAID设备的备用成员的数量
+</pre>
+
+<p>在虚拟机中添加4块硬盘设备来制作一个RAID 10磁盘阵列<br>第一步: <code>mdadm -Cv /dev/md0 -a yes -n 4 -l 10 /dev/sdb /dev/sdc /dev/sdd /dev/sde</code><br>第二步: <code>mkfs.ext4 /dev/md0</code><br>第三步: <code>mkdir /RAID</code>&nbsp;&nbsp;<code>mount /dev/md0 /RAID</code><br>第四步: <code>echo "/dev/md0 /RAID ext4 defaults 0 0" >> /etc/fstab</code></p>
+<h2 id="损坏磁盘阵列及修复"><a href="#损坏磁盘阵列及修复" class="headerlink" title="损坏磁盘阵列及修复"></a>损坏磁盘阵列及修复</h2><p>在确认有一块物理硬盘设备出现损坏而不能继续正常使用后, 应该使用mdadm命令将其移除, 然后查看RAID磁盘阵列的状态, 可以发现状态已经改变.<br>在RAID 10级别的磁盘阵列中, 当RAID 1磁盘阵列中存在一个故障盘时并不影响RAID 10磁盘阵列的使用. 当购买了新的硬盘设备后再使用mdadm命令来予以替换即可, 在此期间我们可以在/RAID目录中正常地创建或删除文件.</p>
+<pre>
+ mdadm /dev/md0 -f /dev/sdb
+
+ umount /RAID
+ mdadm /dev/md0 -a /dev/sdb
+</pre>
+
+<h2 id="磁盘阵列-备份盘"><a href="#磁盘阵列-备份盘" class="headerlink" title="磁盘阵列 + 备份盘"></a>磁盘阵列 + 备份盘</h2><p>RAID备份盘技术核心理念就是准备一块足够大的硬盘, 这块硬盘平时处于闲置状态, 一旦RAID磁盘阵列中有硬盘出现故障后则会马上自动顶替上去.</p>
+<pre>
+ mdadm -Cv /dev/md0 -n 3 -l 5 -x 1 /dev/sdb /dev/sdc /dev/sdd /dev/sde
+ mkfs.ext4 /dev/md0
+ echo "/dev/md0 /RAID ext4 defaults 0 0" >> /etc/fstab
+ mkdir /RAID
+ mount -a
+</pre>
+
+<h1 id="LVM逻辑卷管理器"><a href="#LVM逻辑卷管理器" class="headerlink" title="LVM逻辑卷管理器"></a>LVM逻辑卷管理器</h1><p>逻辑卷管理器是Linux系统用于对硬盘分区进行管理的一种机制<br>LVM的核心理念:物理卷处于LVM中的最底层, 可以将其理解为物理硬盘、硬盘分区或者RAID磁盘阵列, 这都可以. 卷组建立在物理卷之上, 一个卷组可以包含多个物理卷, 而且在卷组创建之后也可以继续向其中添加新的物理卷. 逻辑卷是用卷组中空闲的资源建立的, 并且逻辑卷在建立后可以动态地扩展或缩小空间.</p>
+<h2 id="部署逻辑卷"><a href="#部署逻辑卷" class="headerlink" title="部署逻辑卷"></a>部署逻辑卷</h2><table style="text-align:center;">
+<tr><td>功能/命令</td><td>物理卷管理</td><td>卷组管理</td><td>逻辑卷管理</td></tr>
+<tr><td>扫描</td><td>pvscan</td><td>vgscan</td><td>lvscan</td></tr>
+<tr><td>建立</td><td>pvcreate</td><td>vgcreate</td><td>lvcreate</td></tr>
+<tr><td>显示</td><td>pvdisplay</td><td>vgdisplay</td><td>lvdisplay</td></tr>
+<tr><td>删除</td><td>pvremove</td><td>vgremove</td><td>lvremove</td></tr>
+<tr><td>扩展</td><td><td>vgextend</td><td>lvextend</td></tr>
+<tr><td>缩小</td><td><td>vgreduce</td><td>lvreduce</td></tr>
+</table>
+
+<p>让新添加的两块硬盘设备支持LVM技<br>第一步:<code>pvcreate /dev/sdb /dev/sdc</code></p>
+<p>把两块硬盘设备加入到storage卷组中, 然后查看卷组的状态.<br>第二步:<code>vgcreate storage /dev/sdb /dev/sdc</code>&nbsp;&nbsp;<code>vgdisplay</code></p>
+<p>切割出一个约为150MB的逻辑卷设备, 以容量为单位，所使用的参数为-l.<br>第三步:<code>lvcreate -n vo -l 37 storage</code>&nbsp;&nbsp;<code>lvdisplay</code></p>
+<p>把生成好的逻辑卷进行格式化, 然后挂载使用.<br>第四步:<code>mkfs.ext4 /dev/storage/vo</code>&nbsp;&nbsp;<code>mkdir /linuxprobe</code><br><code>mount /dev/storage/vo /linuxprobe</code></p>
+<p>查看挂载状态, 并写入到配置文件, 使其永久生效.<br>第五步:<code>df -h</code>&nbsp;&nbsp;<code>echo "/dev/storage/vo /linuxprobe ext4 defaults 0 0" >> /etc/fstab</code></p>
+<h2 id="扩容逻辑卷"><a href="#扩容逻辑卷" class="headerlink" title="扩容逻辑卷"></a>扩容逻辑卷</h2><p>扩展前要先卸载设备和挂载点的关联<br><code>umount /linuxprobe</code></p>
+<p>把逻辑卷vo扩展至290MB<br>第一步:<code>lvextend -L 290M /dev/storage/vo</code></p>
+<p>检查硬盘完整性, 并重置硬盘容量.<br>第二步:<code>e2fsck -f /dev/storage/vo</code>&nbsp;&nbsp;<code>resize2fs /dev/storage/vo</code></p>
+<p>重新挂载硬盘设备并查看挂载状态<br>第三步:<code>mount -a</code>&nbsp;&nbsp;<code>df -h</code></p>
+<h2 id="缩小逻辑卷"><a href="#缩小逻辑卷" class="headerlink" title="缩小逻辑卷"></a>缩小逻辑卷</h2><p>一定要提前备份好数据. 另外Linux系统规定, 在对LVM逻辑卷进行缩容操作之前, 要先检查文件系统的完整性. 在执行缩容操作前记得先把文件系统卸载掉.<br><code>umount /linuxprobe</code></p>
+<p>检查文件系统的完整性<br>第一步:<code>e2fsck -f /dev/storage/vo</code></p>
+<p>把逻辑卷vo的容量减小到120MB.<br>第二步:<code>resize2fs /dev/storage/vo 120M</code>&nbsp;&nbsp;<code>lvreduce -L 120M /dev/storage/vo</code></p>
+<p>重新挂载文件系统并查看系统状态<br>第三步:<code>mount -a</code>&nbsp;&nbsp;<code>df -h</code></p>
+<h2 id="逻辑卷快照"><a href="#逻辑卷快照" class="headerlink" title="逻辑卷快照"></a>逻辑卷快照</h2><p>LVM还具备有”快照卷”功能, 该功能类似于虚拟机软件的还原时间点功能.<br>LVM的快照卷功能有两个特点:</p>
+<pre>
+快照卷的容量必须等同于逻辑卷的容量
+快照卷仅一次有效, 一旦执行还原操作后则会被立即自动删除.
+</pre>
+
+<p>首先查看卷组的信息, 用重定向往逻辑卷设备所挂载的目录中写入一个文件.<br><code>vgdisplay</code><br><code>echo "Welcome to Linuxprobe.com" > /linuxprobe/readme.txt</code></p>
+<p>使用-s参数生成一个快照卷, 使用-L参数指定切割的大小.<br>第一步:<code>lvcreate -L 120M -s -n SNAP /dev/storage/vo</code>&nbsp;&nbsp;<code>lvdisplay</code></p>
+<p>在逻辑卷所挂载的目录中创建一个100MB的垃圾文件, 然后再查看快照卷的状态.<br>第二步:<code>dd if=/dev/zero of=/linuxprobe/files count=1 bs=100M</code>&nbsp;&nbsp;<code>lvdisplay</code></p>
+<p>对逻辑卷进行快照还原操作, 在此之前先卸载掉逻辑卷设备与目录的挂载.<br>第三步:<code>umount /linuxprobe</code>&nbsp;&nbsp;<code>lvconvert --merge /dev/storage/SNAP</code></p>
+<p>进行挂载和查看当前的状态<br>第四步:<code>mount -a</code>&nbsp;&nbsp;<code>ls /linuxprobe/</code></p>
+<h2 id="删除逻辑卷"><a href="#删除逻辑卷" class="headerlink" title="删除逻辑卷"></a>删除逻辑卷</h2><p>当生产环境中想要重新部署LVM或者不再需要使用LVM时, 则需要执行LVM的删除操作.<br>依次删除逻辑卷、卷组、物理卷设备，这个顺序不可颠倒.</p>
+<p>取消逻辑卷与目录的挂载关联, 删除配置文件中永久生效的设备参数.<br>第一步:<code>umount /linuxprobe</code>&nbsp;&nbsp;<code>vim /etc/fstab</code></p>
+<p>删除逻辑卷设备, 需要输入y来确认操作.<br>第二步:<code>lvremove /dev/storage/vo</code></p>
+<p>删除卷组, 此处只写卷组名称即可, 不需要设备的绝对路径.<br>第三步:<code>vgremove storage</code></p>
+<p>删除物理卷设备<br>第四步:<code>pvremove /dev/sdb /dev/sdc</code></p>
+
     </div>
 
     
@@ -590,7 +674,7 @@ xfs_quota -x -c 'limit bsoft=3m bhard=6m isoft=3 ihard=6 tom' /boot
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#计划任务服务程序"><span class="nav-number">1.</span> <span class="nav-text">计划任务服务程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一次性计划任务"><span class="nav-number">1.1.</span> <span class="nav-text">一次性计划任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#周期性计划任务"><span class="nav-number">1.2.</span> <span class="nav-text">周期性计划任务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用户身份与能力"><span class="nav-number">2.</span> <span class="nav-text">用户身份与能力</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#id命令"><span class="nav-number">2.1.</span> <span class="nav-text">id命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useradd命令"><span class="nav-number">2.2.</span> <span class="nav-text">useradd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupadd命令"><span class="nav-number">2.3.</span> <span class="nav-text">groupadd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usermod命令"><span class="nav-number">2.4.</span> <span class="nav-text">usermod命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#passwd命令"><span class="nav-number">2.5.</span> <span class="nav-text">passwd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#userdel命令"><span class="nav-number">2.6.</span> <span class="nav-text">userdel命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件权限与归属"><span class="nav-number">3.</span> <span class="nav-text">文件权限与归属</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件的特殊权限"><span class="nav-number">3.1.</span> <span class="nav-text">文件的特殊权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件的隐藏属性"><span class="nav-number">3.2.</span> <span class="nav-text">文件的隐藏属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chattr命令"><span class="nav-number">3.2.1.</span> <span class="nav-text">chattr命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lsattr命令"><span class="nav-number">3.2.2.</span> <span class="nav-text">lsattr命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件访问控制列表"><span class="nav-number">3.3.</span> <span class="nav-text">文件访问控制列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setfacl命令"><span class="nav-number">3.3.1.</span> <span class="nav-text">setfacl命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getfacl命令"><span class="nav-number">3.3.2.</span> <span class="nav-text">getfacl命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#su命令和sudo服务"><span class="nav-number">3.4.</span> <span class="nav-text">su命令和sudo服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#su命令"><span class="nav-number">3.4.1.</span> <span class="nav-text">su命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sudo服务"><span class="nav-number">3.4.2.</span> <span class="nav-text">sudo服务</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储结构与磁盘划分"><span class="nav-number">4.</span> <span class="nav-text">存储结构与磁盘划分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一切从”-“开始"><span class="nav-number">4.1.</span> <span class="nav-text">一切从”&#x2F;“开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#物理设备的命令规则"><span class="nav-number">4.2.</span> <span class="nav-text">物理设备的命令规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统与数据资料"><span class="nav-number">4.3.</span> <span class="nav-text">文件系统与数据资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载硬件设备"><span class="nav-number">4.4.</span> <span class="nav-text">挂载硬件设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加硬盘设备"><span class="nav-number">4.5.</span> <span class="nav-text">添加硬盘设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加交换分区"><span class="nav-number">4.6.</span> <span class="nav-text">添加交换分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘容量配额"><span class="nav-number">4.7.</span> <span class="nav-text">磁盘容量配额</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xfs-quota命令"><span class="nav-number">4.7.1.</span> <span class="nav-text">xfs_quota命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#edquota命令"><span class="nav-number">4.7.2.</span> <span class="nav-text">edquota命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软硬方式链接"><span class="nav-number">4.8.</span> <span class="nav-text">软硬方式链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ln命令"><span class="nav-number">4.8.1.</span> <span class="nav-text">ln命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用RAID与LVM磁盘阵列技术"><span class="nav-number">5.</span> <span class="nav-text">使用RAID与LVM磁盘阵列技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RAID磁盘冗余阵列"><span class="nav-number">5.1.</span> <span class="nav-text">RAID磁盘冗余阵列</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#计划任务服务程序"><span class="nav-number">1.</span> <span class="nav-text">计划任务服务程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一次性计划任务"><span class="nav-number">1.1.</span> <span class="nav-text">一次性计划任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#周期性计划任务"><span class="nav-number">1.2.</span> <span class="nav-text">周期性计划任务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用户身份与能力"><span class="nav-number">2.</span> <span class="nav-text">用户身份与能力</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#id命令"><span class="nav-number">2.1.</span> <span class="nav-text">id命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useradd命令"><span class="nav-number">2.2.</span> <span class="nav-text">useradd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupadd命令"><span class="nav-number">2.3.</span> <span class="nav-text">groupadd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usermod命令"><span class="nav-number">2.4.</span> <span class="nav-text">usermod命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#passwd命令"><span class="nav-number">2.5.</span> <span class="nav-text">passwd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#userdel命令"><span class="nav-number">2.6.</span> <span class="nav-text">userdel命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件权限与归属"><span class="nav-number">3.</span> <span class="nav-text">文件权限与归属</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件的特殊权限"><span class="nav-number">3.1.</span> <span class="nav-text">文件的特殊权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件的隐藏属性"><span class="nav-number">3.2.</span> <span class="nav-text">文件的隐藏属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chattr命令"><span class="nav-number">3.2.1.</span> <span class="nav-text">chattr命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lsattr命令"><span class="nav-number">3.2.2.</span> <span class="nav-text">lsattr命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件访问控制列表"><span class="nav-number">3.3.</span> <span class="nav-text">文件访问控制列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setfacl命令"><span class="nav-number">3.3.1.</span> <span class="nav-text">setfacl命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getfacl命令"><span class="nav-number">3.3.2.</span> <span class="nav-text">getfacl命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#su命令和sudo服务"><span class="nav-number">3.4.</span> <span class="nav-text">su命令和sudo服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#su命令"><span class="nav-number">3.4.1.</span> <span class="nav-text">su命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sudo服务"><span class="nav-number">3.4.2.</span> <span class="nav-text">sudo服务</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储结构与磁盘划分"><span class="nav-number">4.</span> <span class="nav-text">存储结构与磁盘划分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一切从”-“开始"><span class="nav-number">4.1.</span> <span class="nav-text">一切从”&#x2F;“开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#物理设备的命令规则"><span class="nav-number">4.2.</span> <span class="nav-text">物理设备的命令规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统与数据资料"><span class="nav-number">4.3.</span> <span class="nav-text">文件系统与数据资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载硬件设备"><span class="nav-number">4.4.</span> <span class="nav-text">挂载硬件设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加硬盘设备"><span class="nav-number">4.5.</span> <span class="nav-text">添加硬盘设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加交换分区"><span class="nav-number">4.6.</span> <span class="nav-text">添加交换分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘容量配额"><span class="nav-number">4.7.</span> <span class="nav-text">磁盘容量配额</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xfs-quota命令"><span class="nav-number">4.7.1.</span> <span class="nav-text">xfs_quota命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#edquota命令"><span class="nav-number">4.7.2.</span> <span class="nav-text">edquota命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软硬方式链接"><span class="nav-number">4.8.</span> <span class="nav-text">软硬方式链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ln命令"><span class="nav-number">4.8.1.</span> <span class="nav-text">ln命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用RAID与LVM磁盘阵列技术"><span class="nav-number">5.</span> <span class="nav-text">使用RAID与LVM磁盘阵列技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RAID磁盘冗余阵列"><span class="nav-number">5.1.</span> <span class="nav-text">RAID磁盘冗余阵列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-0"><span class="nav-number">5.1.1.</span> <span class="nav-text">RAID 0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-1"><span class="nav-number">5.1.2.</span> <span class="nav-text">RAID 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-5"><span class="nav-number">5.1.3.</span> <span class="nav-text">RAID 5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-10"><span class="nav-number">5.1.4.</span> <span class="nav-text">RAID 10</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署磁盘阵列"><span class="nav-number">5.2.</span> <span class="nav-text">部署磁盘阵列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#损坏磁盘阵列及修复"><span class="nav-number">5.3.</span> <span class="nav-text">损坏磁盘阵列及修复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘阵列-备份盘"><span class="nav-number">5.4.</span> <span class="nav-text">磁盘阵列 + 备份盘</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LVM逻辑卷管理器"><span class="nav-number">6.</span> <span class="nav-text">LVM逻辑卷管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#部署逻辑卷"><span class="nav-number">6.1.</span> <span class="nav-text">部署逻辑卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩容逻辑卷"><span class="nav-number">6.2.</span> <span class="nav-text">扩容逻辑卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缩小逻辑卷"><span class="nav-number">6.3.</span> <span class="nav-text">缩小逻辑卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑卷快照"><span class="nav-number">6.4.</span> <span class="nav-text">逻辑卷快照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除逻辑卷"><span class="nav-number">6.5.</span> <span class="nav-text">删除逻辑卷</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
