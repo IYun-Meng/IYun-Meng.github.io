@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/RAID5.gif">
 <meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/RAID10.png">
 <meta property="article:published_time" content="2020-06-18T01:47:31.000Z">
-<meta property="article:modified_time" content="2020-06-24T03:20:23.473Z">
+<meta property="article:modified_time" content="2020-06-25T13:25:48.327Z">
 <meta property="article:author" content="宇">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -197,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-24 11:20:23" itemprop="dateModified" datetime="2020-06-24T11:20:23+08:00">2020-06-24</time>
+                <time title="修改时间：2020-06-25 21:25:48" itemprop="dateModified" datetime="2020-06-25T21:25:48+08:00">2020-06-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -565,9 +565,9 @@ xfs_quota -x -c 'limit bsoft=3m bhard=6m isoft=3 ihard=6 tom' /boot
 <tr><td>缩小</td><td><td>vgreduce</td><td>lvreduce</td></tr>
 </table>
 
-<p>让新添加的两块硬盘设备支持LVM技<br>第一步:<code>pvcreate /dev/sdb /dev/sdc</code></p>
+<p>让新添加的两块硬盘设备支持LVM技术<br>第一步:<code>pvcreate /dev/sdb /dev/sdc</code></p>
 <p>把两块硬盘设备加入到storage卷组中, 然后查看卷组的状态.<br>第二步:<code>vgcreate storage /dev/sdb /dev/sdc</code>&nbsp;&nbsp;<code>vgdisplay</code></p>
-<p>切割出一个约为150MB的逻辑卷设备, 以容量为单位，所使用的参数为-l.<br>第三步:<code>lvcreate -n vo -l 37 storage</code>&nbsp;&nbsp;<code>lvdisplay</code></p>
+<p>切割出一个约为150MB的逻辑卷设备, 以容量为单位, 所使用的参数为-l.<br>第三步:<code>lvcreate -n vo -l 37 storage</code>&nbsp;&nbsp;<code>lvdisplay</code></p>
 <p>把生成好的逻辑卷进行格式化, 然后挂载使用.<br>第四步:<code>mkfs.ext4 /dev/storage/vo</code>&nbsp;&nbsp;<code>mkdir /linuxprobe</code><br><code>mount /dev/storage/vo /linuxprobe</code></p>
 <p>查看挂载状态, 并写入到配置文件, 使其永久生效.<br>第五步:<code>df -h</code>&nbsp;&nbsp;<code>echo "/dev/storage/vo /linuxprobe ext4 defaults 0 0" >> /etc/fstab</code></p>
 <h2 id="扩容逻辑卷"><a href="#扩容逻辑卷" class="headerlink" title="扩容逻辑卷"></a>扩容逻辑卷</h2><p>扩展前要先卸载设备和挂载点的关联<br><code>umount /linuxprobe</code></p>
@@ -589,12 +589,107 @@ xfs_quota -x -c 'limit bsoft=3m bhard=6m isoft=3 ihard=6 tom' /boot
 <p>在逻辑卷所挂载的目录中创建一个100MB的垃圾文件, 然后再查看快照卷的状态.<br>第二步:<code>dd if=/dev/zero of=/linuxprobe/files count=1 bs=100M</code>&nbsp;&nbsp;<code>lvdisplay</code></p>
 <p>对逻辑卷进行快照还原操作, 在此之前先卸载掉逻辑卷设备与目录的挂载.<br>第三步:<code>umount /linuxprobe</code>&nbsp;&nbsp;<code>lvconvert --merge /dev/storage/SNAP</code></p>
 <p>进行挂载和查看当前的状态<br>第四步:<code>mount -a</code>&nbsp;&nbsp;<code>ls /linuxprobe/</code></p>
-<h2 id="删除逻辑卷"><a href="#删除逻辑卷" class="headerlink" title="删除逻辑卷"></a>删除逻辑卷</h2><p>当生产环境中想要重新部署LVM或者不再需要使用LVM时, 则需要执行LVM的删除操作.<br>依次删除逻辑卷、卷组、物理卷设备，这个顺序不可颠倒.</p>
+<h2 id="删除逻辑卷"><a href="#删除逻辑卷" class="headerlink" title="删除逻辑卷"></a>删除逻辑卷</h2><p>当生产环境中想要重新部署LVM或者不再需要使用LVM时, 则需要执行LVM的删除操作.<br>依次删除逻辑卷、卷组、物理卷设备, 这个顺序不可颠倒.</p>
 <p>取消逻辑卷与目录的挂载关联, 删除配置文件中永久生效的设备参数.<br>第一步:<code>umount /linuxprobe</code>&nbsp;&nbsp;<code>vim /etc/fstab</code></p>
 <p>删除逻辑卷设备, 需要输入y来确认操作.<br>第二步:<code>lvremove /dev/storage/vo</code></p>
 <p>删除卷组, 此处只写卷组名称即可, 不需要设备的绝对路径.<br>第三步:<code>vgremove storage</code></p>
 <p>删除物理卷设备<br>第四步:<code>pvremove /dev/sdb /dev/sdc</code></p>
+<h1 id="Iptables与Firewalld防火墙"><a href="#Iptables与Firewalld防火墙" class="headerlink" title="Iptables与Firewalld防火墙"></a>Iptables与Firewalld防火墙</h1><p>保障数据的安全性是继保障数据的可用性之后最为重要的一项工作. 防火墙作为公网与内网之间的保护屏障, 在保障数据的安全性方面起着至关重要的作用.</p>
+<h2 id="防火墙管理工具"><a href="#防火墙管理工具" class="headerlink" title="防火墙管理工具"></a>防火墙管理工具</h2><p>主要功能都是依据策略对穿越防火墙自身的流量进行过滤. 防火墙策略可以基于流量的源目地址、端口号、协议、应用等信息来定制, 然后防火墙使用预先定制的策略规则监控出入的流量, 若流量与某一条策略规则相匹配, 则执行相应的处理, 反之则丢弃.</p>
+<p>iptables与firewalld都不是真正的防火墙, 它们都只是用来定义防火墙策略的防火墙管理工具而已, 或者说, 它们只是一种服务. iptables服务会把配置好的防火墙策略交由内核层面的netfilter网络过滤器来处理, 而firewalld服务则是把配置好的防火墙策略交由内核层面的nftables包过滤框架来处理.</p>
+<h2 id="Iptables"><a href="#Iptables" class="headerlink" title="Iptables"></a>Iptables</h2><p>在早期的Linux系统中, 默认使用的是iptables防火墙管理服务来配置防火墙. 尽管新型的firewalld防火墙管理服务已经被投入使用多年, 但是大量的企业在生产环境中依然出于各种原因而继续使用iptables.</p>
+<h3 id="策略与规则链"><a href="#策略与规则链" class="headerlink" title="策略与规则链"></a>策略与规则链</h3><p>防火墙会从上至下的顺序来读取配置的策略规则, 在找到匹配项后就立即结束匹配工作并去执行匹配项中定义的行为(即放行或阻止). 如果在读取完所有的策略规则之后没有匹配项, 就去执行默认的策略.</p>
+<p>一般而言, 防火墙策略规则的设置有两种:一种是”通”(即放行), 一种是”堵”(即阻止).</p>
+<p>iptables服务把用于处理或过滤流量的策略条目称之为规则, 多条规则可以组成一个规则链, 而规则链则依据数据包处理位置的不同进行分类:</p>
+<pre>
+ 在进行路由选择前处理数据包(PREROUTING)
+ 处理流入的数据包(INPUT)
+ 处理流出的数据包(OUTPUT)
+ 处理转发的数据包(FORWARD)
+ 在进行路由选择后处理数据包(POSTROUTING)
+</pre>
 
+<p>处理这些匹配流量的相应动作:</p>
+<pre>
+ ACCEPT(允许流量通过)
+ REJECT(拒绝流量通过并且响应)
+ LOG(记录日志文件)
+ DROP(拒绝流量通过, 但不会响应.)
+</pre>
+
+<h3 id="基本的命令参数"><a href="#基本的命令参数" class="headerlink" title="基本的命令参数"></a>基本的命令参数</h3><p>iptables是一款基于命令行的防火墙策略管理工具, iptables命令可以根据流量的源地址、目的地址、传输协议、服务类型等信息进行匹配, 一旦匹配成功, iptables就会根据策略规则所预设的动作来处理这些流量.</p>
+<pre>
+ iptables [选项]
+ |__ -P --设置默认策略
+ |__ -F --清空规则链
+ |__ -L --查看规则链
+ |__ -A --在规则链的末尾加入新规则
+ |__ -I num --在规则链的头部加入新规则
+ |__ -D num --删除某一条规则
+ |__ -s --匹配来源地址IP/MASK, 加叹号"!"表示除这个IP外.
+ |__ -d --匹配目标地址
+ |__ -i 网卡名称 --匹配从这块网卡流入的数据
+ |__ -o 网卡名称 --匹配从这块网卡流出的数据
+ |__ -p --匹配协议, 如TCP、UDP、ICMP.
+ |__ -j --处理动作
+ |__ --dport num --匹配目标端口号
+ |__ --sport num --匹配来源端口号
+</pre>
+
+<blockquote>
+<p>iptables命令实例<br> 查看已有的防火墙规则链:<br> <code>iptables -L</code><br/><br> 清空已有的防火墙规则链:<br> <code>iptables -F</code><br/><br> 设置INPUT规则链的默认策略为拒绝:<br> <code>iptables -P INPUT DROP</code><br/><br> 向INPUT规则链中添加允许ICMP流量进入的策略规则:<br> <code>iptables -I INPUT -p icmp -j ACCEPT</code><br/><br> 删除INPUT规则链中刚刚加入的那条策略, 并把默认策略设置为允许:<br> <code>iptables -D INPUT 1</code>&nbsp;&nbsp;<code>iptables -P INPUT ACCEPT</code><br/><br> 将INPUT规则链设置为只允许指定网段的主机访问本机的22端口, 拒绝来自其他所有主机的流量:<br> <code>iptables -I INPUT -s 192.168.10.0/24 -p tcp --dport 22 -j ACCEPT</code><br> <code>iptables -A INPUT -p tcp --dport 22 -j REJECT</code><br/><br> 向INPUT规则链中添加拒绝所有人访问本机12345端口的策略规则:<br> <code>iptables -I INPUT -p tcp --dport 12345 -j REJECT</code><br> <code>iptables -I INPUT -p udp --dport 12345 -j REJECT</code><br/><br> 向INPUT规则链中添加拒绝192.168.10.5主机访问本机80端口(Web服务)的策略规则:<br> <code>iptables -I INPUT -p tcp -s 192.168.10.5 --dport 80 -j REJECT</code><br/><br> 向INPUT规则链中添加拒绝所有主机访问本机1000～1024端口的策略规则:<br> <code>iptables -A INPUT -p tcp --dport 1000:1024 -j REJECT</code><br> <code>iptables -A INPUT -p udp --dport 1000:1024 -j REJECT</code><br/><br> 注:使用iptables命令配置的防火墙规则默认会在系统下一次重启时失效, 如果想让配置的防火墙策略永久生效, 需要执行保存命令:<br> <code>service iptables save</code></p>
+</blockquote>
+<h2 id="Firewalld"><a href="#Firewalld" class="headerlink" title="Firewalld"></a>Firewalld</h2><p>RHEL 7系统中集成了多款防火墙管理工具, 其中firewalld(Dynamic Firewall Manager of Linux systems, Linux系统的动态防火墙管理器)服务是默认的防火墙配置管理工具, 它拥有基于CLI(命令行界面)和基于GUI(图形用户界面)的两种管理方式.</p>
+<p>firewalld支持动态更新技术并加入了区域(zone)的概念. 简单来说, 区域就是firewalld预先准备了几套防火墙策略集合(策略模板), 用户可以根据生产场景的不同而选择合适的策略集合, 从而实现防火墙策略之间的快速切换.</p>
+<table style="text-align:center;">
+<tr><td>区域</td><td>默认规则策略</td></tr>
+<tr><td>trusted</td><td>允许所有的数据包</td></tr>
+<tr><td>home</td><td>拒绝流入的流量, 除非与流出的流量相关; 而如果流量与ssh、mdns、ipp-client、amba-client与dhcpv6-client服务相关, 则允许流量.</td></tr>
+<tr><td>internal</td><td>等同于home区域</td></tr>
+<tr><td>work</td><td>拒绝流入的流量, 除非与流出的流量相关; 而如果流量与ssh、ipp-client与dhcpv6-client服务相关, 则允许流量.</td></tr>
+<tr><td>public</td><td>拒绝流入的流量, 除非与流出的流量相关; 而如果流量与ssh、dhcpv6-client服务相关, 则允许流量.</td></tr>
+<tr><td>external</td><td>拒绝流入的流量, 除非与流出的流量相关; 而如果流量与ssh服务相关, 则允许流量.</td></tr>
+<tr><td>dmz</td><td>拒绝流入的流量, 除非与流出的流量相关; 而如果流量与ssh服务相关, 则允许流量.</td></tr>
+<tr><td>block</td><td>拒绝流入的流量, 除非与流出的流量相关.</td></tr>
+<tr><td>drop</td><td>拒绝流入的流量, 除非与流出的流量相关.</td></tr>
+</table>
+
+<h3 id="终端管理工具"><a href="#终端管理工具" class="headerlink" title="终端管理工具"></a>终端管理工具</h3><p>firewall-cmd是firewalld防火墙配置管理工具的CLI(命令行界面)版本, 它的参数一般都是以”长格式”来提供的.</p>
+<table>
+<tr><td>参数</td><td>作用</td></tr>
+<tr><td>--get-default-zone</td><td>查询默认的区域名称</td></tr>
+<tr><td>--set-default-zone=&lt;区域名称></td><td>设置默认的区域, 使其永久生效.</td></tr>
+<tr><td>--get-zones</td><td>显示可用的区域</td></tr>
+<tr><td>--get-services</td><td>显示预先定义的服务</td></tr>
+<tr><td>--get-active-zones</td><td>显示当前正在使用的区域与网卡名称</td></tr>
+<tr><td>--add-source=</td><td>将源自此IP或子网的流量导向指定的区域</td></tr>
+<tr><td>--remove-source=</td><td>不再将源自此IP或子网的流量导向某个指定区域</td></tr>
+<tr><td>--add-interface=&lt;网卡名称&gt;</td><td>将源自该网卡的所有流量都导向某个指定区域</td></tr>
+<tr><td>--change-interface=&lt;网卡名称&gt;</td><td>将某个网卡与区域进行关联</td></tr>
+<tr><td>--list-all</td><td>显示当前区域的网卡配置参数、资源、端口以及服务等信息</td></tr>
+<tr><td>--list-all-zones</td><td>显示所有区域的网卡配置参数、资源、端口以及服务等信息</td></tr>
+<tr><td>--add-service=&lt;服务名&gt;</td><td>设置默认区域允许该服务的流量</td></tr>
+<tr><td>--add-port=&lt;端口号/协议&gt;</td><td>设置默认区域允许该端口的流量</td></tr>
+<tr><td>--remove-service=&lt;服务名&gt;</td><td>设置默认区域不再允许该服务的流量</td></tr>
+<tr><td>--remove-port=&lt;端口号/协议&gt;</td><td>设置默认区域不再允许该端口的流量</td></tr>
+<tr><td>--reload</td><td>让"永久生效"的配置规则立即生效, 并覆盖当前的配置规则.</td></tr>
+<tr><td>--panic-on</td><td>开启应急状况模式</td></tr>
+<tr><td>--panic-off</td><td>关闭应急状况模式</td></tr>
+</table>
+<br/>
+
+<p>使用firewalld配置的防火墙策略默认为运行时(Runtime)模式, 又称为当前生效模式, 而且随着系统的重启会失效.<br>想让配置策略一直存在, 就需要使用永久(Permanent)模式, 方法就是在用firewall-cmd命令正常设置防火墙策略时添加–permanent参数, 但是使用永久生效模式设置的策略只有在系统重启之后才能自动生效. 如果想让配置的策略立即生效, 需要手动执行<code>firewall-cmd --reload</code>命令.</p>
+<blockquote>
+<p>firewalld命令实例<br> 查看firewalld服务当前所使用的区域:<br> <code>firewall-cmd --get-default-zone</code><br/><br> 查询eno16777728网卡在firewalld服务中的区域:<br> <code>firewall-cmd --get-zone-of-interface=eno16777728</code><br/><br> 把firewalld服务中eno16777728网卡的默认区域修改为external, 并在系统重启后生效. 分别查看当前与永久模式下的区域名称:<br> <code>firewall-cmd --permanent --zone=external --change-interface=eno16777728</code><br> <code>firewall-cmd --get-zone-of-interface=eno16777728</code><br> <code>firewall-cmd --permanent --get-zone-of-interface=eno16777728</code><br/><br> 把firwalld服务的当前默认区域设置为public:<br> <code>firewall-cmd --set-default-zone=public</code><br/><br> 启动/关闭firewalld防火墙服务的应急状况模式, 阻断一切网络连接(当远程控制服务器时请慎用):<br> <code>firewall-cmd --panic-on</code><br> <code>firewall-cmd --panic-off</code><br/><br> 查询public区域是否允许请求SSH和HTTPS协议的流量:<br> <code>firewall-cmd --zone=public --query-service=ssh</code><br> <code>firewall-cmd --zone=public --query-service=https</code><br/><br> 把firewalld服务中请求HTTPS协议的流量设置为永久允许, 并立即生效:<br> <code>firewall-cmd --zone=public --add-service=https</code><br> <code>firewall-cmd --permanent --zone=public --add-service=https</code><br> <code>firewall-cmd --reload</code><br/><br> 把firewalld服务中请求HTTP协议的流量设置为永久拒绝, 并立即生效:<br> <code>firewall-cmd --permanent --zone=public --remove-service=http</code><br> <code>firewall-cmd --reload</code><br/><br> 把在firewalld服务中访问8080和8081端口的流量策略设置为允许, 但仅限当前生效:<br> <code>firewall-cmd --zone=public --add-port=8080-8081/tcp</code><br/><br> 把原本访问本机888端口的流量转发到22端口, 要且求当前和长期均有效:<br> <pre>firewall-cmd --permanent --zone=public --add-forward-port=port=888:proto=tcp:toport=22:toaddr=192.168.10.10<br> 流量转发命令格式:<br>  firewall-cmd --permanent --zone=<区域><br>  --add-forward-port=<br>                     port=<源端口号>:<br>                     proto=<协议>:<br>                     toport=<目标端口号>:<br>                     toaddr=<目标IP地址><br> </pre><br> 在客户端使用ssh命令尝试访问192.168.10.10主机的888端口:<br> <code>ssh -p 888 192.168.10.10</code></p>
+</blockquote>
+<p>irewalld中的富规则表示更细致、更详细的防火墙策略配置, 它可以针对系统服务、端口号、源地址和目标地址等诸多信息进行更有针对性的策略配置. 它的优先级在所有的防火墙策略中也是最高的.<br>例:拒绝192.168.10.0/24网段的所有用户访问本机的ssh服务(22端口)</p>
+<pre>
+ firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4" source address="192.168.10.0/24" service name="ssh" reject"
+ firewall-cmd --reload
+ ssh 192.168.10.10
+</pre>
+
+<h3 id="图形管理工具"><a href="#图形管理工具" class="headerlink" title="图形管理工具"></a>图形管理工具</h3><h2 id="服务的访问控制列表"><a href="#服务的访问控制列表" class="headerlink" title="服务的访问控制列表"></a>服务的访问控制列表</h2>
     </div>
 
     
@@ -674,7 +769,7 @@ xfs_quota -x -c 'limit bsoft=3m bhard=6m isoft=3 ihard=6 tom' /boot
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#计划任务服务程序"><span class="nav-number">1.</span> <span class="nav-text">计划任务服务程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一次性计划任务"><span class="nav-number">1.1.</span> <span class="nav-text">一次性计划任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#周期性计划任务"><span class="nav-number">1.2.</span> <span class="nav-text">周期性计划任务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用户身份与能力"><span class="nav-number">2.</span> <span class="nav-text">用户身份与能力</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#id命令"><span class="nav-number">2.1.</span> <span class="nav-text">id命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useradd命令"><span class="nav-number">2.2.</span> <span class="nav-text">useradd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupadd命令"><span class="nav-number">2.3.</span> <span class="nav-text">groupadd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usermod命令"><span class="nav-number">2.4.</span> <span class="nav-text">usermod命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#passwd命令"><span class="nav-number">2.5.</span> <span class="nav-text">passwd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#userdel命令"><span class="nav-number">2.6.</span> <span class="nav-text">userdel命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件权限与归属"><span class="nav-number">3.</span> <span class="nav-text">文件权限与归属</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件的特殊权限"><span class="nav-number">3.1.</span> <span class="nav-text">文件的特殊权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件的隐藏属性"><span class="nav-number">3.2.</span> <span class="nav-text">文件的隐藏属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chattr命令"><span class="nav-number">3.2.1.</span> <span class="nav-text">chattr命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lsattr命令"><span class="nav-number">3.2.2.</span> <span class="nav-text">lsattr命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件访问控制列表"><span class="nav-number">3.3.</span> <span class="nav-text">文件访问控制列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setfacl命令"><span class="nav-number">3.3.1.</span> <span class="nav-text">setfacl命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getfacl命令"><span class="nav-number">3.3.2.</span> <span class="nav-text">getfacl命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#su命令和sudo服务"><span class="nav-number">3.4.</span> <span class="nav-text">su命令和sudo服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#su命令"><span class="nav-number">3.4.1.</span> <span class="nav-text">su命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sudo服务"><span class="nav-number">3.4.2.</span> <span class="nav-text">sudo服务</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储结构与磁盘划分"><span class="nav-number">4.</span> <span class="nav-text">存储结构与磁盘划分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一切从”-“开始"><span class="nav-number">4.1.</span> <span class="nav-text">一切从”&#x2F;“开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#物理设备的命令规则"><span class="nav-number">4.2.</span> <span class="nav-text">物理设备的命令规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统与数据资料"><span class="nav-number">4.3.</span> <span class="nav-text">文件系统与数据资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载硬件设备"><span class="nav-number">4.4.</span> <span class="nav-text">挂载硬件设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加硬盘设备"><span class="nav-number">4.5.</span> <span class="nav-text">添加硬盘设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加交换分区"><span class="nav-number">4.6.</span> <span class="nav-text">添加交换分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘容量配额"><span class="nav-number">4.7.</span> <span class="nav-text">磁盘容量配额</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xfs-quota命令"><span class="nav-number">4.7.1.</span> <span class="nav-text">xfs_quota命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#edquota命令"><span class="nav-number">4.7.2.</span> <span class="nav-text">edquota命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软硬方式链接"><span class="nav-number">4.8.</span> <span class="nav-text">软硬方式链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ln命令"><span class="nav-number">4.8.1.</span> <span class="nav-text">ln命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用RAID与LVM磁盘阵列技术"><span class="nav-number">5.</span> <span class="nav-text">使用RAID与LVM磁盘阵列技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RAID磁盘冗余阵列"><span class="nav-number">5.1.</span> <span class="nav-text">RAID磁盘冗余阵列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-0"><span class="nav-number">5.1.1.</span> <span class="nav-text">RAID 0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-1"><span class="nav-number">5.1.2.</span> <span class="nav-text">RAID 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-5"><span class="nav-number">5.1.3.</span> <span class="nav-text">RAID 5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-10"><span class="nav-number">5.1.4.</span> <span class="nav-text">RAID 10</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署磁盘阵列"><span class="nav-number">5.2.</span> <span class="nav-text">部署磁盘阵列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#损坏磁盘阵列及修复"><span class="nav-number">5.3.</span> <span class="nav-text">损坏磁盘阵列及修复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘阵列-备份盘"><span class="nav-number">5.4.</span> <span class="nav-text">磁盘阵列 + 备份盘</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LVM逻辑卷管理器"><span class="nav-number">6.</span> <span class="nav-text">LVM逻辑卷管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#部署逻辑卷"><span class="nav-number">6.1.</span> <span class="nav-text">部署逻辑卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩容逻辑卷"><span class="nav-number">6.2.</span> <span class="nav-text">扩容逻辑卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缩小逻辑卷"><span class="nav-number">6.3.</span> <span class="nav-text">缩小逻辑卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑卷快照"><span class="nav-number">6.4.</span> <span class="nav-text">逻辑卷快照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除逻辑卷"><span class="nav-number">6.5.</span> <span class="nav-text">删除逻辑卷</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#计划任务服务程序"><span class="nav-number">1.</span> <span class="nav-text">计划任务服务程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一次性计划任务"><span class="nav-number">1.1.</span> <span class="nav-text">一次性计划任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#周期性计划任务"><span class="nav-number">1.2.</span> <span class="nav-text">周期性计划任务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用户身份与能力"><span class="nav-number">2.</span> <span class="nav-text">用户身份与能力</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#id命令"><span class="nav-number">2.1.</span> <span class="nav-text">id命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useradd命令"><span class="nav-number">2.2.</span> <span class="nav-text">useradd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupadd命令"><span class="nav-number">2.3.</span> <span class="nav-text">groupadd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usermod命令"><span class="nav-number">2.4.</span> <span class="nav-text">usermod命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#passwd命令"><span class="nav-number">2.5.</span> <span class="nav-text">passwd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#userdel命令"><span class="nav-number">2.6.</span> <span class="nav-text">userdel命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件权限与归属"><span class="nav-number">3.</span> <span class="nav-text">文件权限与归属</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件的特殊权限"><span class="nav-number">3.1.</span> <span class="nav-text">文件的特殊权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件的隐藏属性"><span class="nav-number">3.2.</span> <span class="nav-text">文件的隐藏属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chattr命令"><span class="nav-number">3.2.1.</span> <span class="nav-text">chattr命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lsattr命令"><span class="nav-number">3.2.2.</span> <span class="nav-text">lsattr命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件访问控制列表"><span class="nav-number">3.3.</span> <span class="nav-text">文件访问控制列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setfacl命令"><span class="nav-number">3.3.1.</span> <span class="nav-text">setfacl命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getfacl命令"><span class="nav-number">3.3.2.</span> <span class="nav-text">getfacl命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#su命令和sudo服务"><span class="nav-number">3.4.</span> <span class="nav-text">su命令和sudo服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#su命令"><span class="nav-number">3.4.1.</span> <span class="nav-text">su命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sudo服务"><span class="nav-number">3.4.2.</span> <span class="nav-text">sudo服务</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储结构与磁盘划分"><span class="nav-number">4.</span> <span class="nav-text">存储结构与磁盘划分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一切从”-“开始"><span class="nav-number">4.1.</span> <span class="nav-text">一切从”&#x2F;“开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#物理设备的命令规则"><span class="nav-number">4.2.</span> <span class="nav-text">物理设备的命令规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统与数据资料"><span class="nav-number">4.3.</span> <span class="nav-text">文件系统与数据资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载硬件设备"><span class="nav-number">4.4.</span> <span class="nav-text">挂载硬件设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加硬盘设备"><span class="nav-number">4.5.</span> <span class="nav-text">添加硬盘设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加交换分区"><span class="nav-number">4.6.</span> <span class="nav-text">添加交换分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘容量配额"><span class="nav-number">4.7.</span> <span class="nav-text">磁盘容量配额</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xfs-quota命令"><span class="nav-number">4.7.1.</span> <span class="nav-text">xfs_quota命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#edquota命令"><span class="nav-number">4.7.2.</span> <span class="nav-text">edquota命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软硬方式链接"><span class="nav-number">4.8.</span> <span class="nav-text">软硬方式链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ln命令"><span class="nav-number">4.8.1.</span> <span class="nav-text">ln命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用RAID与LVM磁盘阵列技术"><span class="nav-number">5.</span> <span class="nav-text">使用RAID与LVM磁盘阵列技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RAID磁盘冗余阵列"><span class="nav-number">5.1.</span> <span class="nav-text">RAID磁盘冗余阵列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-0"><span class="nav-number">5.1.1.</span> <span class="nav-text">RAID 0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-1"><span class="nav-number">5.1.2.</span> <span class="nav-text">RAID 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-5"><span class="nav-number">5.1.3.</span> <span class="nav-text">RAID 5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-10"><span class="nav-number">5.1.4.</span> <span class="nav-text">RAID 10</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署磁盘阵列"><span class="nav-number">5.2.</span> <span class="nav-text">部署磁盘阵列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#损坏磁盘阵列及修复"><span class="nav-number">5.3.</span> <span class="nav-text">损坏磁盘阵列及修复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘阵列-备份盘"><span class="nav-number">5.4.</span> <span class="nav-text">磁盘阵列 + 备份盘</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LVM逻辑卷管理器"><span class="nav-number">6.</span> <span class="nav-text">LVM逻辑卷管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#部署逻辑卷"><span class="nav-number">6.1.</span> <span class="nav-text">部署逻辑卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩容逻辑卷"><span class="nav-number">6.2.</span> <span class="nav-text">扩容逻辑卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缩小逻辑卷"><span class="nav-number">6.3.</span> <span class="nav-text">缩小逻辑卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑卷快照"><span class="nav-number">6.4.</span> <span class="nav-text">逻辑卷快照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除逻辑卷"><span class="nav-number">6.5.</span> <span class="nav-text">删除逻辑卷</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Iptables与Firewalld防火墙"><span class="nav-number">7.</span> <span class="nav-text">Iptables与Firewalld防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#防火墙管理工具"><span class="nav-number">7.1.</span> <span class="nav-text">防火墙管理工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iptables"><span class="nav-number">7.2.</span> <span class="nav-text">Iptables</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#策略与规则链"><span class="nav-number">7.2.1.</span> <span class="nav-text">策略与规则链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本的命令参数"><span class="nav-number">7.2.2.</span> <span class="nav-text">基本的命令参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Firewalld"><span class="nav-number">7.3.</span> <span class="nav-text">Firewalld</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#终端管理工具"><span class="nav-number">7.3.1.</span> <span class="nav-text">终端管理工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图形管理工具"><span class="nav-number">7.3.2.</span> <span class="nav-text">图形管理工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务的访问控制列表"><span class="nav-number">7.4.</span> <span class="nav-text">服务的访问控制列表</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
