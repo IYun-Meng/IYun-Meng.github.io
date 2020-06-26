@@ -31,8 +31,19 @@
 <meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/RAID1.jpg">
 <meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/RAID5.gif">
 <meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/RAID10.png">
+<meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/firewall-config%E7%95%8C%E9%9D%A2.png">
+<meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%85%81%E8%AE%B8%E5%85%B6%E4%BB%96%E4%B8%BB%E6%9C%BA%E8%AE%BF%E9%97%AEhttp%E6%9C%8D%E5%8A%A1.png">
+<meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%85%81%E8%AE%B8%E5%85%B6%E4%BB%96%E4%B8%BB%E6%9C%BA%E8%AE%BF%E9%97%AE8080-8088%E7%AB%AF%E5%8F%A3.png">
+<meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E9%87%8D%E5%90%AF%E5%90%8E%E4%BE%9D%E7%84%B6%E6%9C%89%E6%95%88.png">
+<meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E6%9C%AA%E7%94%A8SNAT1.png">
+<meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E4%BD%BF%E7%94%A8SNAT1.png">
+<meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%BC%80%E5%90%AF%E4%BC%AA%E8%A3%85%E5%8A%9F%E8%83%BD.png">
+<meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%B0%86%E5%90%91%E6%9C%AC%E6%9C%BA888%E7%AB%AF%E5%8F%A3%E7%9A%84%E8%AF%B7%E6%B1%82%E8%BD%AC%E5%8F%91%E8%87%B3%E6%9C%AC%E6%9C%BA%E7%9A%8422%E7%AB%AF%E5%8F%A3.png">
+<meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/reload%E7%AB%8B%E5%8D%B3%E7%94%9F%E6%95%88.png">
+<meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E4%BB%85%E5%85%81%E8%AE%B8192.168.10.20%E4%B8%BB%E6%9C%BA%E8%AE%BF%E9%97%AE%E6%9C%AC%E6%9C%BA%E7%9A%841234%E7%AB%AF%E5%8F%A3.png">
+<meta property="og:image" content="http://yoursite.com/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E6%9F%A5%E7%9C%8B%E7%BD%91%E5%8D%A1%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF.png">
 <meta property="article:published_time" content="2020-06-18T01:47:31.000Z">
-<meta property="article:modified_time" content="2020-06-25T13:25:48.327Z">
+<meta property="article:modified_time" content="2020-06-26T14:44:48.197Z">
 <meta property="article:author" content="宇">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -197,7 +208,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-25 21:25:48" itemprop="dateModified" datetime="2020-06-25T21:25:48+08:00">2020-06-25</time>
+                <time title="修改时间：2020-06-26 22:44:48" itemprop="dateModified" datetime="2020-06-26T22:44:48+08:00">2020-06-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -643,15 +654,15 @@ xfs_quota -x -c 'limit bsoft=3m bhard=6m isoft=3 ihard=6 tom' /boot
 <p>firewalld支持动态更新技术并加入了区域(zone)的概念. 简单来说, 区域就是firewalld预先准备了几套防火墙策略集合(策略模板), 用户可以根据生产场景的不同而选择合适的策略集合, 从而实现防火墙策略之间的快速切换.</p>
 <table style="text-align:center;">
 <tr><td>区域</td><td>默认规则策略</td></tr>
-<tr><td>trusted</td><td>允许所有的数据包</td></tr>
+<tr><td>*trusted</td><td>允许所有的数据包</td></tr>
 <tr><td>home</td><td>拒绝流入的流量, 除非与流出的流量相关; 而如果流量与ssh、mdns、ipp-client、amba-client与dhcpv6-client服务相关, 则允许流量.</td></tr>
 <tr><td>internal</td><td>等同于home区域</td></tr>
 <tr><td>work</td><td>拒绝流入的流量, 除非与流出的流量相关; 而如果流量与ssh、ipp-client与dhcpv6-client服务相关, 则允许流量.</td></tr>
-<tr><td>public</td><td>拒绝流入的流量, 除非与流出的流量相关; 而如果流量与ssh、dhcpv6-client服务相关, 则允许流量.</td></tr>
+<tr><td>*public</td><td>拒绝流入的流量, 除非与流出的流量相关; 而如果流量与ssh、dhcpv6-client服务相关, 则允许流量.</td></tr>
 <tr><td>external</td><td>拒绝流入的流量, 除非与流出的流量相关; 而如果流量与ssh服务相关, 则允许流量.</td></tr>
 <tr><td>dmz</td><td>拒绝流入的流量, 除非与流出的流量相关; 而如果流量与ssh服务相关, 则允许流量.</td></tr>
 <tr><td>block</td><td>拒绝流入的流量, 除非与流出的流量相关.</td></tr>
-<tr><td>drop</td><td>拒绝流入的流量, 除非与流出的流量相关.</td></tr>
+<tr><td>*drop</td><td>拒绝流入的流量, 除非与流出的流量相关.</td></tr>
 </table>
 
 <h3 id="终端管理工具"><a href="#终端管理工具" class="headerlink" title="终端管理工具"></a>终端管理工具</h3><p>firewall-cmd是firewalld防火墙配置管理工具的CLI(命令行界面)版本, 它的参数一般都是以”长格式”来提供的.</p>
@@ -689,7 +700,141 @@ xfs_quota -x -c 'limit bsoft=3m bhard=6m isoft=3 ihard=6 tom' /boot
  ssh 192.168.10.10
 </pre>
 
-<h3 id="图形管理工具"><a href="#图形管理工具" class="headerlink" title="图形管理工具"></a>图形管理工具</h3><h2 id="服务的访问控制列表"><a href="#服务的访问控制列表" class="headerlink" title="服务的访问控制列表"></a>服务的访问控制列表</h2>
+<h3 id="图形管理工具"><a href="#图形管理工具" class="headerlink" title="图形管理工具"></a>图形管理工具</h3><p>firewall-config是firewalld防火墙配置管理工具的GUI(图形用户界面)版本, 几乎可以实现所有以命令行来执行的操作. 打开firewall-config的命令:<code>firewall-config</code><br><img src="/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/firewall-config%E7%95%8C%E9%9D%A2.png" alt="firewall-config界面"></p>
+<table>
+<tr><td>1</td><td>选择运行时(Runtime)模式或永久(Permanent)模式的配置</td></tr>
+<tr><td>2</td><td>可选的策略集合区域列表</td></tr>
+<tr><td>3</td><td>常用的系统服务列表</td></tr>
+<tr><td>4</td><td>当前正在使用的区域</td></tr>
+<tr><td>5</td><td>管理当前被选中区域中的服务</td></tr>
+<tr><td>6</td><td>管理当前被选中区域中的端口</td></tr>
+<tr><td>7</td><td>开启或关闭SNAT(源地址转换协议)技术</td></tr>
+<tr><td>8</td><td>设置端口转发策略</td></tr>
+<tr><td>9</td><td>控制请求icmp服务的流量</td></tr>
+<tr><td>10</td><td>管理防火墙的富规则</td></tr>
+<tr><td>11</td><td>管理网卡设备</td></tr>
+<tr><td>12</td><td>被选中区域的服务, 若勾选了相应服务前面的复选框, 则表示允许与之相关的流量.</td></tr>
+<tr><td>13</td><td>firewall-config工具的运行状态</td></tr>
+</table>
+
+<p>将当前区域中请求http服务的流量设置为允许, 但仅限当前生效.<br><img src="/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%85%81%E8%AE%B8%E5%85%B6%E4%BB%96%E4%B8%BB%E6%9C%BA%E8%AE%BF%E9%97%AEhttp%E6%9C%8D%E5%8A%A1.png" alt="允许其他主机访问http服务"></p>
+<p>添加一条防火墙策略规则, 使其放行访问8080～8088端口(TCP协议)的流量, 并将其设置为永久生效, 以达到系统重启后防火墙策略依然生效的目的.<br><img src="/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%85%81%E8%AE%B8%E5%85%B6%E4%BB%96%E4%B8%BB%E6%9C%BA%E8%AE%BF%E9%97%AE8080-8088%E7%AB%AF%E5%8F%A3.png" alt="允许其他主机访问8080-8088端口"></p>
+<p>在Options菜单中单击Reload Firewalld命令, 让配置的防火墙策略立即生效. 这与在命令行中执行–reload参数的效果一样.<br><img src="/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E9%87%8D%E5%90%AF%E5%90%8E%E4%BE%9D%E7%84%B6%E6%9C%89%E6%95%88.png" alt="重启后依然有效"></p>
+<p>SNAT(Source Network Address Translation, 源网络地址转换)技术是一种为了解决IP地址匮乏而设计的技术, 它可以使得多个内网中的用户通过同一个外网IP接入Internet.<br>如果网关服务器没有应用SNAT技术, 则互联网中的网站服务器在收到PC的请求数据包, 并回送响应数据包时, 将无法在网络中找到这个私有网络的IP地址, 所以PC也就收不到响应数据包了.<br><img src="/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E6%9C%AA%E7%94%A8SNAT1.png" alt="未用SNAT1"></p>
+<p>由于网关服务器应用了SNAT技术, 所以互联网中的网站服务器会将响应数据包发给网关服务器, 再由后者转发给局域网中的PC.<br><img src="/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E4%BD%BF%E7%94%A8SNAT1.png" alt="使用SNAT1"></p>
+<p>选中Masquerade zone复选框, 就自动开启了SNAT技术.<br><img src="/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%BC%80%E5%90%AF%E4%BC%AA%E8%A3%85%E5%8A%9F%E8%83%BD.png" alt="开启伪装功能"></p>
+<p>使用firewall-cmd来配置防火墙策略规则, 将本机888端口的流量转发到22端口, 且要求当前和长期均有效.<br><img src="/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%B0%86%E5%90%91%E6%9C%AC%E6%9C%BA888%E7%AB%AF%E5%8F%A3%E7%9A%84%E8%AF%B7%E6%B1%82%E8%BD%AC%E5%8F%91%E8%87%B3%E6%9C%AC%E6%9C%BA%E7%9A%8422%E7%AB%AF%E5%8F%A3.png" alt="将向本机888端口的请求转发至本机的22端口"><br><img src="/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/reload%E7%AB%8B%E5%8D%B3%E7%94%9F%E6%95%88.png" alt="reload立即生效"></p>
+<p>配置富规则, 让192.168.10.20主机访问到本机的1234端口号.<br><img src="/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E4%BB%85%E5%85%81%E8%AE%B8192.168.10.20%E4%B8%BB%E6%9C%BA%E8%AE%BF%E9%97%AE%E6%9C%AC%E6%9C%BA%E7%9A%841234%E7%AB%AF%E5%8F%A3.png" alt="仅允许192.168.10.20主机访问本机的1234端口"></p>
+<p>如果生产环境中的服务器有多块网卡在同时提供服务(这种情况很常见), 则对内网和对外网提供服务的网卡要选择的防火墙策略区域也是不一样的. 也就是说, 可以把网卡与防火墙策略区域进行绑定. 配置防火墙策略的原则—只要能实现所需的功能, 用什么工具请随君便.<br><img src="/images/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E6%9F%A5%E7%9C%8B%E7%BD%91%E5%8D%A1%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF.png" alt="查看网卡设备信息"></p>
+<h2 id="服务的访问控制列表"><a href="#服务的访问控制列表" class="headerlink" title="服务的访问控制列表"></a>服务的访问控制列表</h2><p>TCP Wrappers是RHEL 7系统中默认启用的一款流量监控程序, 它能够根据来访主机的地址与本机的目标服务程序作出允许或拒绝的操作. 换句话说, Linux系统中其实有两个层面的防火墙:</p>
+<pre>
+ 第一种是前面讲到的基于TCP/IP协议的流量过滤工具;
+ 而TCP Wrappers服务则是能允许或禁止Linux系统提供服务的防火墙, 从而在更高层面保护了Linux系统的安全运行.
+</pre>
+
+<p>TCP Wrappers服务的防火墙策略由两个控制列表文件所控制, 用户可以编辑允许控制列表文件来放行对服务的请求流量, 也可以编辑拒绝控制列表文件来阻止对服务的请求流量. 控制列表文件修改后会立即生效:</p>
+<pre>
+ 系统将会先检查允许控制列表文件(/etc/hosts.allow), 如果匹配到相应的允许策略则放行流量; 
+ 如果没有匹配, 则去进一步匹配拒绝控制列表文件(/etc/hosts.deny), 若找到匹配项则拒绝该流量. 
+ 如果这两个文件全都没有匹配到, 则默认放行流量.
+</pre>
+<table>
+ <tr><td>客户端类型</td><td>示例</td><td>满足示例的客户端列表</td></tr>
+ <tr><td>单一主机</td><td>192.168.10.10</td><td>IP地址为192.168.10.10的主机</td></tr>
+ <tr><td>指定网段</td><td>192.168.10.</td><td>IP段为192.168.10.0/24的主机</td></tr>
+ <tr><td>指定网段</td><td>192.168.10.0/255.255.255.0</td><td>IP段为192.168.10.0/24的主机</td></tr>
+ <tr><td>指定DNS后缀</td><td>.linuxprobe.com</td><td>所有DNS后缀为.linuxprobe.com的主机</td></tr>
+ <tr><td>指定主机名称</td><td>www.linuxprobe.com</td><td>主机名称为www.linuxprobe.com的主机</td></tr>
+ <tr><td>指定所有客户端</td><td>ALL</td><td>所有主机全部包括在内</td></tr>
+</table>
+
+<p>在配置TCP Wrappers服务时需要遵循两个原则:</p>
+<pre>
+ 编写拒绝策略规则时, 填写的是服务名称, 而非协议名称;
+ 建议先编写拒绝策略规则, 再编写允许策略规则, 以便直观地看到相应的效果.
+</pre>
+
+<p>编写拒绝策略规则文件, 禁止访问本机sshd服务的所有流量:</p>
+<pre>
+ vim /etc/hosts.deny
+ sshd:*
+</pre>
+
+<p>在允许策略规则文件中添加一条规则, 使其放行源自192.168.10.0/24网段, 访问本机sshd服务的所有流量:</p>
+<pre>
+ vim /etc/hosts.allow
+ sshd:192.168.10.
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
 
     
