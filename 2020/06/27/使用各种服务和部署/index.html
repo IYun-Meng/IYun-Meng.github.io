@@ -41,11 +41,14 @@
 <meta property="og:image" content="http://yoursite.com/images/%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E6%9C%8D%E5%8A%A1%E5%92%8C%E9%83%A8%E7%BD%B2/%E9%87%8D%E5%90%AF%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1%E5%90%8E%E6%8F%90%E7%A4%BA.png">
 <meta property="og:image" content="http://yoursite.com/images/%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E6%9C%8D%E5%8A%A1%E5%92%8C%E9%83%A8%E7%BD%B2/%E7%A1%AE%E8%AE%A4%E5%85%89%E7%9B%98%E5%B7%B2%E8%A2%AB%E9%80%89%E4%B8%AD.png">
 <meta property="og:image" content="http://yoursite.com/images/%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E6%9C%8D%E5%8A%A1%E5%92%8C%E9%83%A8%E7%BD%B2/screen%E4%BC%9A%E8%AF%9D%E5%85%B1%E4%BA%AB.png">
+<meta property="og:image" content="http://yoursite.com/images/%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E6%9C%8D%E5%8A%A1%E5%92%8C%E9%83%A8%E7%BD%B2/%E9%A1%B5%E9%9D%A2%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B.png">
 <meta property="article:published_time" content="2020-06-27T03:44:05.000Z">
-<meta property="article:modified_time" content="2020-06-28T14:58:33.410Z">
+<meta property="article:modified_time" content="2020-06-29T11:33:47.167Z">
 <meta property="article:author" content="宇">
 <meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Apache">
 <meta property="article:tag" content="SSH">
+<meta property="article:tag" content="SELinux">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/images/%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E6%9C%8D%E5%8A%A1%E5%92%8C%E9%83%A8%E7%BD%B2/%E7%AC%AC1%E6%AD%A5%EF%BC%9A%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4%E2%80%9Cnmtui%E2%80%9D.png">
 
@@ -208,7 +211,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-28 22:58:33" itemprop="dateModified" datetime="2020-06-28T22:58:33+08:00">2020-06-28</time>
+                <time title="修改时间：2020-06-29 19:33:47" itemprop="dateModified" datetime="2020-06-29T19:33:47+08:00">2020-06-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -371,7 +374,7 @@ nmcli connection up house
  scp /root/readme.txt 192.168.10.20:/home
 </pre>
 
-<p>使用scp命令把远程主机上的文件下载到本地主机，其命令格式为<code>scp [参数] 远程用户@远程IP地址:远程文件 本地目录</code>。</p>
+<p>使用scp命令把远程主机上的文件下载到本地主机, 其命令格式为<code>scp [参数] 远程用户@远程IP地址:远程文件 本地目录</code>. </p>
 <pre>
  scp 192.168.10.20:/etc/redhat-release /root
 </pre>
@@ -432,30 +435,343 @@ nmcli connection up house
  screen -x
 </pre>
 
+<h1 id="使用Apache服务部署静态网站"><a href="#使用Apache服务部署静态网站" class="headerlink" title="使用Apache服务部署静态网站"></a>使用Apache服务部署静态网站</h1><h2 id="网站服务程序"><a href="#网站服务程序" class="headerlink" title="网站服务程序"></a>网站服务程序</h2><p>Web网络服务是一种被动访问的服务程序, 即只有接收到互联网中其他主机发出的请求后才会响应, 最终用于提供服务程序的Web服务器会通过HTTP(超文本传输协议)或HTTPS(安全超文本传输协议)把请求的内容传送给用户.<br><img src="/images/%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E6%9C%8D%E5%8A%A1%E5%92%8C%E9%83%A8%E7%BD%B2/%E9%A1%B5%E9%9D%A2%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B.png" alt="页面请求过程"></p>
+<p>第1步: 把光盘设备中的系统镜像挂载到/media/cdrom目录</p>
+<pre>
+ mkdir -p /media/cdrom
+ mount /dev/cdrom /media/cdrom
+</pre>
 
+<p>第2步: 使用Vim文本编辑器创建Yum仓库的配置文件</p>
+<pre>
+ vim /etc/yum.repos.d/rhel7.repo
+ [rhel7]
+ name=rhel7
+ baseurl=file:///media/cdrom
+ enabled=1
+ gpgcheck=0
+</pre>
 
+<p>第3步: 动手安装Apache服务程序, 注意: Apache服务的软件包名称为httpd.<br><code>yum install httpd</code></p>
+<p>第4步: 启用httpd服务程序并将其加入到开机启动项中, 使其能够随系统开机而运行, 从而持续为用户提供Web服务:</p>
+<pre>
+ systemctl start httpd
+ systemctl enable httpd
 
+ firefox
+ 输入网址: 127.0.0.1
+</pre>
 
+<h2 id="配置服务文件参数"><a href="#配置服务文件参数" class="headerlink" title="配置服务文件参数"></a>配置服务文件参数</h2><table>
+httpd服务程序的主要配置文件及存放位置
+<tr><td>服务目录</td><td>/etc/httpd</td></tr>
+<tr><td>主配置文件</td><td>/etc/httpd/conf/httpd.conf</td></tr>
+<tr><td>网站数据目录</td><td>/var/www/html</td></tr>
+<tr><td>访问日志</td><td>/var/log/httpd/access_log</td></tr>
+<tr><td>错误日志</td><td>/var/log/httpd/error_log</td></tr>
+</table>
 
+<p>httpd服务程序的主配置文件中, 存在三种类型的信息:注释行信息、全局配置、区域配置.</p>
+<pre>
+ 注释行信息
+ # ----------
 
+ 全局配置
+ ServerRoot "/etc/httpd"
+ ServerName www.linuxprobe.com
 
+ 区域配置
+ &lt;Directory /&gt;
+ &lt;/Directory&gt;
+</pre>
 
+<p>全局配置参数就是一种全局性的配置参数, 可作用于对所有的子站点, 既保证了子站点的正常访问, 也有效减少了频繁写入重复参数的工作量. 区域配置参数则是单独针对于每个独立的子站点进行设置的.</p>
+<table>
+在httpd服务程序主配置文件中, 最为常用的参数:
+<tr><td>ServerRoot</td><td>服务目录</td></tr>
+<tr><td>ServerAdmin</td><td>管理员邮箱</td></tr>
+<tr><td>User</td><td>运行服务的用户</td></tr>
+<tr><td>Group</td><td>运行服务的用户组</td></tr>
+<tr><td>ServerName</td><td>网站服务器的域名</td></tr>
+<tr><td>DocumentRoot</td><td>网站数据目录</td></tr>
+<tr><td>Listen</td><td>监听的IP地址与端口号</td></tr>
+<tr><td>DirectoryIndex</td><td>默认的索引页页面</td></tr>
+<tr><td>ErrorLog</td><td>错误日志文件</td></tr>
+<tr><td>CustomLog</td><td>访问日志文件</td></tr>
+<tr><td>Timeout</td><td>网页超时时间, 默认为300秒.</td></tr>
+</table>
 
+<p>在默认情况下, 网站数据是保存在/var/www/html目录中, 把保存网站数据的目录修改为/home/wwwroot目录:<br>第1步: 建立网站数据的保存目录, 并创建首页文件.</p>
+<pre>
+ mkdir /home/wwwroot
+ echo "The New Web Directory" > /home/wwwroot/index.html
+</pre>
 
+<p>第2步: 打开httpd服务程序的主配置文件, 将用于定义网站数据保存路径的参数DocumentRoot修改为/home/wwwroot, 同时还需要将用于定义目录权限的参数Directory后面的路径也修改为/home/wwwroot. 配置文件修改完毕后即可保存并退出.</p>
+<pre>
+ vim /etc/httpd/conf/httpd.conf
 
+ DocumentRoot "/home/wwwroot"
+ &lt;Directory "/home/wwwroot"&gt;
+</pre>
 
+<p>第3步: 重新启动httpd服务程序并验证效果</p>
+<pre>
+ systemctl restart httpd
 
+ firefox
+ 输入网址: 127.0.0.1
+</pre>
+<p>只有在网站的首页面文件不存在或者用户权限不足时, 才显示httpd服务程序的默认首页面. 这时则要配置SELinux安全子系统:<code>setenforce 0</code>.</p>
+<h2 id="SELinux安全子系统"><a href="#SELinux安全子系统" class="headerlink" title="SELinux安全子系统"></a>SELinux安全子系统</h2><p>SELinux(Security-Enhanced Linux)是美国国家安全局在Linux开源社区的帮助下开发的一个强制访问控制(MAC, Mandatory Access Control)的安全子系统. RHEL 7系统使用SELinux技术的目的是为了让各个服务进程都受到约束, 使其仅获取到本应获取的资源.</p>
+<table>
+SELinux服务有三种配置模式:
+<tr><td>enforcing</td><td>强制启用安全策略模式, 将拦截服务的不合法请求.</td></tr>
+<tr><td>permissive</td><td>遇到服务越权访问时, 只发出警告而不强制拦截.</td></tr>
+<tr><td>disabled</td><td>对于越权的行为不警告也不拦截</td></tr>
+</table>
 
+<p>在生产环境中相当不推荐, 查看SELinux服务主配置文件中定义的默认状态. 如果是permissive或disabled, 建议赶紧修改为enforcing.</p>
+<pre>
+ vim /etc/selinux/config
+ SELINUX=enforcing
+</pre>
 
+<p>SELinux服务的主配置文件中, 定义的是SELinux的默认运行状态, 可以将其理解为系统重启后的状态, 因此它不会在更改后立即生效. 可以用setenforce [0|1]命令修改SELinux当前的运行模式(0为禁用, 1为启用), 使用getenforce命令获得当前SELinux服务的运行模式. 注意, 这种修改只是临时的, 在系统重启后就会失效. </p>
+<pre>
+ setenforce 0
+ getenforce
+</pre>
 
+<p>把SELinux服务恢复到强制启用安全策略模式, 然后分别查看原始网站数据的保存目录与当前网站数据的保存目录是否拥有不同的SELinux安全上下文值:</p>
+<pre>
+ setenforce 1
+ ls -Zd /var/www/html
+ ls -Zd /home/wwwroot
 
+ drwxr-xr-x. root root <font color=#FF8C00>system_u</font>:<font color=#9932CC>object_r</font>:<font color=#8FBC8F    >httpd_sys_content_t</font>:s0 /var/www/html
+ drwxrwxrwx. root root unconfined_u:object_r:home_root_t:s0 /home/wwwroot
+</pre>
+<p>在文件上设置的SELinux安全上下文是由用户段、角色段以及类型段等多个信息项共同组成的. 其中,<br>用户段<font color=#FF8C00>system_u</font>代表系统进程的身份,<br>角色段<font color=#9932CC>object_r</font>代表文件目录的角色,<br>类型段<font color=#8FBC8F>httpd_sys_content_t</font>代表网站服务的系统文件.</p>
+<p>semanage命令用于管理SELinux的策略, 不仅能够像传统chcon命令那样—设置文件、目录的策略, 还可以管理网络端口、消息接口. 使用时, 经常用到的几个参数及其功能:</p>
+<pre>
+ semanage [选项] [文件]
+ |__ -l --用于查询
+ |__ -a --用于添加
+ |__ -m --用于修改
+ |__ -d --用于删除
+</pre>
 
+<p>例: 可以向新的网站数据目录中新添加一条SELinux安全上下文, 让这个目录以及里面的所有文件能够被httpd服务程序所访问到:</p>
+<pre>
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/*
+</pre>
 
+<p>使用restorecon命令将设置好的SELinux安全上下文立即生效. 在使用restorecon命令时, 可以加上-Rv参数对指定的目录进行递归操作, 以及显示SELinux安全上下文的修改过程.<br><code>restorecon -Rv /home/wwwroot/</code></p>
+<h2 id="个人用户主页功能"><a href="#个人用户主页功能" class="headerlink" title="个人用户主页功能"></a>个人用户主页功能</h2><p>该功能可以让系统内所有的用户在自己的家目录中管理个人的网站, 而且访问起来也非常容易.</p>
+<p>第1步: 在httpd服务程序中, 默认没有开启个人用户主页功能. 编辑配置文件, 然后在UserDir disabled参数前面加上井号(#), 表示让httpd服务程序开启个人用户主页功能; 同时再把UserDir public_html参数前面的井号(#)去掉. 最后, 在修改完毕后保存并退出.<br>(UserDir参数表示网站数据在用户家目录中的保存目录名称, 即public_html目录)</p>
+<pre>
+ vim /etc/httpd/conf.d/userdir.conf
 
+ # UserDir disabled
+ UserDir public_html
+</pre>
 
+<p>第2步: 在用户家目录中建立用于保存网站数据的目录及首页面文件. 另外, 还需要把家目录的权限修改为755, 保证其他人也有权限读取里面的内容.</p>
+<pre>
+ su - linuxprobe
+ mkdir public_html
+ echo "This is linuxprobe's website" > public_html/index.html
+ chmod -Rf 755 /home/linuxprobe
+</pre>
 
+<p>第3步: SELinux域确保服务程序不能执行违规的操作, 只能本本分分地为用户提供服务, 使用getsebool命令查询并过滤出所有与HTTP协议相关的安全策略. 其中, off为禁止状态, on为允许状态.</p>
+<pre>
+ getsebool -a | grep http
 
+ httpd_enable_homedirs --> off
+</pre>
 
+<p>使用setsebool命令来修改SELinux策略中各条规则的布尔值. 在setsebool命令后面加上-P参数, 让修改后的SELinux策略规则永久生效且立即生效.<br><code>setsebool -P httpd_enable_homedirs=on</code></p>
+<p>第4步: 重新启动httpd服务程序, 在浏览器的地址栏中输入网址, 其格式为”网址/~用户名”(其中的波浪号是必需的, 而且网址、波浪号、用户名之间没有空格)</p>
+<pre>
+ systemctl restart httpd
+
+ 左上角的Applications中打开firefox
+ 输入网址: 127.0.0.1/~用户名
+</pre>
+
+<p>在网站中添加口令功能, 使用户访客通过身份验证的方式查看网页里面的内容:</p>
+<p>第1步: 先使用htpasswd命令生成密码数据库. -c参数表示第一次生成; 后面再分别添加密码数据库的存放文件, 以及验证要用到的用户名称(该用户不必是系统中已有的本地账户).</p>
+<pre>
+ htpasswd -c /etc/httpd/passwd linuxprobe
+ 输入用于网页验证的密码
+ 再次输入密码进行确认
+</pre>
+
+<p>第2步: 编辑个人用户主页功能的配置文件. 把第31～35行的参数信息修改成下列内容, 随后保存并退出配置文件, 重启httpd服务程序即可生效.</p>
+<pre>
+ vim /etc/httpd/conf.d/userdir.conf
+ <figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">&lt;Directory "/home/*/public_html"&gt;</span></span><br><span class="line">   AllowOverride <span class="literal">all</span></span><br><span class="line">   authuserfile <span class="string">"/etc/httpd/passwd"</span> <span class="comment">#刚刚生成出来的密码验证文件保存路径</span></span><br><span class="line">   authname <span class="string">"My privately website"</span> <span class="comment">#当用户尝试访问个人用户网站时的提示信息</span></span><br><span class="line">   authtype <span class="keyword">basic</span></span><br><span class="line">   require <span class="keyword">user</span> linuxprobe <span class="comment">#用户进行账户密码登录时需要验证的用户名称</span></span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
+ systemctl restart httpd
+</pre>
+
+<h2 id="虚拟网站主机功能"><a href="#虚拟网站主机功能" class="headerlink" title="虚拟网站主机功能"></a>虚拟网站主机功能</h2><p>利用虚拟主机功能, 可以把一台处于运行状态的物理服务器分割成多个”虚拟的服务器”. 但是, 该技术无法实现目前云主机技术的硬件资源隔离, 让这些虚拟的服务器共同使用物理服务器的硬件资源, 供应商只能限制硬盘的使用空间大小. 出于各种考虑的因素(主要是价格低廉), 目前依然有很多企业或个人站长在使用虚拟主机的形式来部署网站.<br>Apache的虚拟主机功能是服务器基于用户请求的不同IP地址、主机域名或端口号, 实现提供多个网站同时为外部提供访问服务的技术.</p>
+<h3 id="基于IP地址"><a href="#基于IP地址" class="headerlink" title="基于IP地址"></a>基于IP地址</h3><p>如果一台服务器有多个IP地址, 而且每个IP地址与服务器上部署的每个网站一一对应, 这样当用户请求访问不同的IP地址时, 会访问到不同网站的页面资源. 而且, 每个网站都有一个独立的IP地址, 对搜索引擎优化也大有裨益.</p>
+<p>配置三个IP地址, 测试连通性.</p>
+<pre>
+ nmtui
+
+ 192.168.10.10./24
+ 192.168.10.20./24
+ 192.168.10.30./24
+
+ systemctl restart network
+</pre>
+
+<p>第1步: 分别在/home/wwwroot中创建用于保存不同网站数据的3个目录, 并向其中分别写入网站的首页文件. 每个首页文件中应有明确区分不同网站内容的信息, 方便我们稍后能更直观地检查效果.</p>
+<pre>
+ mkdir -p /home/wwwroot/10
+ mkdir -p /home/wwwroot/20
+ mkdir -p /home/wwwroot/30
+ echo "IP:192.168.10.10" > /home/wwwroot/10/index.html
+ echo "IP:192.168.10.20" > /home/wwwroot/20/index.html
+ echo "IP:192.168.10.30" > /home/wwwroot/30/index.html
+</pre>
+
+<p>第2步: 在httpd服务的配置文件中大约113行处开始, 分别追加写入三个基于IP地址的虚拟主机网站参数, 然后保存并退出, 重启httpd服务.</p>
+<pre>
+ vim /etc/httpd/conf/httpd.conf
+ <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;VirtualHost 192.168.10.10&gt;</span></span><br><span class="line">   <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> /home/wwwroot/10</span><br><span class="line">   <span class="attribute"><span class="nomarkup">ServerName</span></span> www.linuxprobe.com</span><br><span class="line">   <span class="section">&lt;Directory /home/wwwroot/10 &gt;</span></span><br><span class="line">   <span class="attribute">AllowOverride</span> None</span><br><span class="line">   <span class="attribute">Require</span> <span class="literal">all</span> granted</span><br><span class="line">   <span class="section">&lt;/Directory&gt;</span></span><br><span class="line"><span class="section">&lt;/VirtualHost&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="section">&lt;VirtualHost 192.168.10.20&gt;</span></span><br><span class="line">   <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> /home/wwwroot/20</span><br><span class="line">   <span class="attribute"><span class="nomarkup">ServerName</span></span> bbs.linuxprobe.com</span><br><span class="line">   <span class="section">&lt;Directory /home/wwwroot/20 &gt;</span></span><br><span class="line">   <span class="attribute">AllowOverride</span> None</span><br><span class="line">   <span class="attribute">Require</span> <span class="literal">all</span> granted</span><br><span class="line">   <span class="section">&lt;/Directory&gt;</span></span><br><span class="line"><span class="section">&lt;/VirtualHost&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="section">&lt;VirtualHost 192.168.10.30&gt;</span></span><br><span class="line">   <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> /home/wwwroot/30</span><br><span class="line">   <span class="attribute"><span class="nomarkup">ServerName</span></span> tech.linuxprobe.com</span><br><span class="line">   <span class="section">&lt;Directory /home/wwwroot/30 &gt;</span></span><br><span class="line">   <span class="attribute">AllowOverride</span> None</span><br><span class="line">   <span class="attribute">Require</span> <span class="literal">all</span> granted</span><br><span class="line">   <span class="section">&lt;/Directory&gt;</span></span><br><span class="line"><span class="section">&lt;/VirtualHost&gt;</span></span><br></pre></td></tr></table></figure>
+ systemctl restart httpd
+</pre>
+
+<p>第3步：向新的网站数据目录中新添加一条SELinux安全上下文, 让这个目录以及里面的所有文件能够被httpd服务程序所访问到, 并使用restorecon命令让新设置的SELinux安全上下文立即生效.</p>
+<pre>
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/10
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/10/*
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/20
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/20/*
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/30
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/30/*
+ restorecon -Rv /home/wwwroot
+
+ 左上角的Applications中打开firefox
+ 分别输入ip地址进行查看
+</pre>
+
+<h3 id="基于主机域名"><a href="#基于主机域名" class="headerlink" title="基于主机域名"></a>基于主机域名</h3><p>当服务器无法为每个网站都分配一个独立IP地址的时候, 可以尝试让Apache自动识别用户请求的域名, 从而根据不同的域名请求来传输不同的内容. 在这种情况下的配置更加简单, 只需要保证位于生产环境中的服务器上有一个可用的IP地址(这里以192.168.10.10为例)就可以了. </p>
+<p>由于当前还没有介绍如何配置DNS解析服务, 因此需要手工定义IP地址与域名之间的对应关系. /etc/hosts是Linux系统中用于强制把某个主机域名解析到指定IP地址的配置文件.</p>
+<p>第1步: 手工定义IP地址与域名之间对应关系的配置文件, 保存并退出后会立即生效. 可以通过分别ping这些域名来验证域名是否已经成功解析为IP地址.</p>
+<pre>
+ vim /etc/hosts
+ 192.168.10.10 www.linuxprobe.com bbs.linuxprobe.com tech.linuxprobe.com
+
+ ping -c 4 www.linuxprobe.com
+ ping -c 4 bbs.linuxprobe.com
+ ping -c 4 tech.linuxprobe.com
+</pre>
+
+<p>第2步: 分别在/home/wwwroot中创建用于保存不同网站数据的三个目录, 并向其中分别写入网站的首页文件. 每个首页文件中应有明确区分不同网站内容的信息, 方便我们稍后能更直观地检查效果.</p>
+<pre>
+mkdir -p /home/wwwroot/www
+mkdir -p /home/wwwroot/bbs
+mkdir -p /home/wwwroot/tech
+echo "WWW.linuxprobe.com" > /home/wwwroot/www/index.html
+echo "BBS.linuxprobe.com" > /home/wwwroot/bbs/index.html
+echo "TECH.linuxprobe.com" > /home/wwwroot/tech/index.html
+</pre>
+
+<p>第3步: 在httpd服务的配置文件中大约113行处开始, 分别追加写入三个基于主机名的虚拟主机网站参数, 然后保存并退出. 记得需要重启httpd服务, 这些配置才生效.</p>
+<pre>
+ vim /etc/httpd/conf/httpd.conf
+ <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;VirtualHost 192.168.10.10&gt;</span></span><br><span class="line">   <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/home/wwwroot/www"</span></span><br><span class="line">   <span class="attribute"><span class="nomarkup">ServerName</span></span> <span class="string">"www.linuxprobe.com"</span></span><br><span class="line">   <span class="section">&lt;Directory "/home/wwwroot/www"&gt;</span></span><br><span class="line">   <span class="attribute">AllowOverride</span> None</span><br><span class="line">   <span class="attribute">Require</span> <span class="literal">all</span> granted</span><br><span class="line">   <span class="section">&lt;/directory&gt;</span> </span><br><span class="line"><span class="section">&lt;/VirtualHost&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="section">&lt;VirtualHost 192.168.10.10&gt;</span></span><br><span class="line">   <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/home/wwwroot/bbs"</span></span><br><span class="line">   <span class="attribute"><span class="nomarkup">ServerName</span></span> <span class="string">"bbs.linuxprobe.com"</span></span><br><span class="line">   <span class="section">&lt;Directory "/home/wwwroot/bbs"&gt;</span></span><br><span class="line">   <span class="attribute">AllowOverride</span> None</span><br><span class="line">   <span class="attribute">Require</span> <span class="literal">all</span> granted</span><br><span class="line">   <span class="section">&lt;/Directory&gt;</span></span><br><span class="line"><span class="section">&lt;/VirtualHost&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="section">&lt;VirtualHost 192.168.10.10&gt;</span></span><br><span class="line">   <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/home/wwwroot/tech"</span></span><br><span class="line">   <span class="attribute"><span class="nomarkup">ServerName</span></span> <span class="string">"tech.linuxprobe.com"</span></span><br><span class="line">   <span class="section">&lt;Directory "/home/wwwroot/tech"&gt;</span></span><br><span class="line">   <span class="attribute">AllowOverride</span> None</span><br><span class="line">   <span class="attribute">Require</span> <span class="literal">all</span> granted</span><br><span class="line">   <span class="section">&lt;/directory&gt;</span></span><br><span class="line"><span class="section">&lt;/VirtualHost&gt;</span></span><br></pre></td></tr></table></figure>
+ systemctl restart httpd
+</pre>
+
+<p>第4步：向新的网站数据目录中新添加一条SELinux安全上下文, 让这个目录以及里面的所有文件能够被httpd服务程序所访问到, 并使用restorecon命令让新设置的SELinux安全上下文立即生效.</p>
+<pre>
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/www
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/www/*
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/bbs
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/bbs/*
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/tech
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/tech/*
+ restorecon -Rv /home/wwwroot
+
+ 左上角的Applications中打开firefox
+ 分别输入域名进行查看
+</pre>
+
+<h3 id="基于端口号"><a href="#基于端口号" class="headerlink" title="基于端口号"></a>基于端口号</h3><p>基于端口号的虚拟主机功能可以让用户通过指定的端口号来访问服务器上的网站资源. 在使用Apache配置虚拟网站主机功能时, 基于端口号的配置方式是最复杂的. 因此我们不仅要考虑httpd服务程序的配置因素, 还需要考虑到SELinux服务对新开设端口的监控. </p>
+<p>一般来说, 使用80、443、8080等端口号来提供网站访问服务是比较合理的, 如果使用其他端口号则会受到SELinux服务的限制.</p>
+<p>第1步: 分别在/home/wwwroot中创建用于保存不同网站数据的两个目录, 并向其中分别写入网站的首页文件. 每个首页文件中应有明确区分不同网站内容的信息, 方便我们稍后能更直观地检查效果.</p>
+<pre>
+ mkdir -p /home/wwwroot/6111
+ mkdir -p /home/wwwroot/6222
+ echo "port:6111" > /home/wwwroot/6111/index.html
+ echo "port:6222" > /home/wwwroot/6222/index.html
+</pre>
+
+<p>第2步: 在httpd服务配置文件的第43行和第44行分别添加用于监听6111和6222端口的参数</p>
+<pre>
+ vim /etc/httpd/conf/httpd.conf
+
+ Listen 80
+ Listen 6111
+ Listen 6222
+</pre>
+
+<p>第3步: 在httpd服务的配置文件中大约113行处开始, 分别追加写入两个基于端口号的虚拟主机网站参数, 然后保存并退出. 重启httpd服务.</p>
+<pre>
+ vim /etc/httpd/conf/httpd.conf
+ <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;VirtualHost 192.168.10.10:6111&gt;</span></span><br><span class="line">   <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/home/wwwroot/6111"</span></span><br><span class="line">   <span class="attribute"><span class="nomarkup">ServerName</span></span> www.linuxprobe.com</span><br><span class="line">   <span class="section">&lt;Directory "/home/wwwroot/6111"&gt;</span></span><br><span class="line">   <span class="attribute">AllowOverride</span> None</span><br><span class="line">   <span class="attribute">Require</span> <span class="literal">all</span> granted</span><br><span class="line">   <span class="section">&lt;/Directory&gt;</span> </span><br><span class="line"><span class="section">&lt;/VirtualHost&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="section">&lt;VirtualHost 192.168.10.10:6222&gt;</span></span><br><span class="line">   <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/home/wwwroot/6222"</span></span><br><span class="line">   <span class="attribute"><span class="nomarkup">ServerName</span></span> bbs.linuxprobe.com</span><br><span class="line">   <span class="section">&lt;Directory "/home/wwwroot/6222"&gt;</span></span><br><span class="line">   <span class="attribute">AllowOverride</span> None</span><br><span class="line">   <span class="attribute">Require</span> <span class="literal">all</span> granted</span><br><span class="line">   <span class="section">&lt;/Directory&gt;</span></span><br><span class="line"><span class="section">&lt;/VirtualHost&gt;</span></span><br></pre></td></tr></table></figure>
+</pre>
+
+<p>第4步: 向新的网站数据目录中新添加一条SELinux安全上下文, 让这个目录以及里面的所有文件能够被httpd服务程序所访问到, 并使用restorecon命令让新设置的SELinux安全上下文立即生效.</p>
+<pre>
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/6111
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/6111/*
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/6222
+ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/6222/*
+ restorecon -Rv /home/wwwroot/
+</pre>
+
+<p>使用semanage命令查询并过滤出所有与HTTP协议相关且SELinux服务允许的端口列表<br><code>semanage port -l | grep http</code></p>
+<p>第5步: SELinux允许的与HTTP协议相关的端口号中默认没有包含6111和6222, 因此需要将这两个端口号手动添加进去. 该操作会立即生效, 而且在系统重启过后依然有效. 设置好后再重启httpd服务程序.</p>
+<pre>
+ semanage port -a -t http_port_t -p tcp 6111
+ semanage port -a -t http_port_t -p tcp 6222
+ semanage port -l| grep http
+ systemctl restart httpd
+
+ 左上角的Applications中打开firefox
+ 分别输入ip地址:端口号进行查看
+</pre>
+
+<h2 id="Apache的访问控制"><a href="#Apache的访问控制" class="headerlink" title="Apache的访问控制"></a>Apache的访问控制</h2><p>Apache可以基于源主机名、源IP地址或源主机上的浏览器特征等信息对网站上的资源进行访问控制.</p>
+<p>它通过Allow指令允许某个主机访问服务器上的网站资源, 通过Deny指令实现禁止访问.</p>
+<p>在允许或禁止访问网站资源时, 还会用到Order指令, 这个指令用来定义Allow或Deny指令起作用的顺序, 其匹配原则是按照顺序进行匹配, 若匹配成功则执行后面的默认指令.</p>
+<p>第1步: 先在服务器上的网站数据目录中新建一个子目录, 并在这个子目录中创建一个包含Successful单词的首页文件.</p>
+<pre>
+ mkdir /var/www/html/server
+ echo "Successful" > /var/www/html/server/index.html
+</pre>
+
+<p>第2步: 打开httpd服务的配置文件, 在第129行后面添加下述规则来限制源主机的访问. 这段规则的含义是允许使用Firefox浏览器的主机访问服务器上的首页文件, 除此之外的所有请求都将被拒绝. 然后重启httpd服务.</p>
+<pre>
+ vim /etc/httpd/conf/httpd.conf
+ <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;Directory "/var/www/html/server"&gt;</span></span><br><span class="line">   <span class="attribute">SetEnvIf</span> User-Agent <span class="string">"Firefox"</span> ff=1</span><br><span class="line">   <span class="attribute"><span class="nomarkup">Order</span></span> allow,deny</span><br><span class="line">   <span class="attribute"><span class="nomarkup">Allow</span></span> from env=ff</span><br><span class="line"><span class="section">&lt;/Directory&gt;</span></span><br></pre></td></tr></table></figure>
+ systemctl restart httpd
+ 左上角的Applications中打开firefox
+ 输入ip地址/server/
+</pre>
+
+<p>只允许IP地址为192.168.10.20的主机访问网站资源, 可以在httpd服务配置文件的第129行后面添加下述规则.<br> <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory <span class="string">"/var/www/html/server"</span>&gt;</span><br><span class="line">   Order allow,deny </span><br><span class="line">   Allow <span class="keyword">from</span> <span class="number">192.168</span><span class="number">.10</span><span class="number">.20</span></span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure></p>
 
     </div>
 
@@ -466,7 +782,9 @@ nmcli connection up house
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Apache/" rel="tag"># Apache</a>
               <a href="/tags/SSH/" rel="tag"># SSH</a>
+              <a href="/tags/SELinux/" rel="tag"># SELinux</a>
           </div>
 
         
@@ -540,7 +858,7 @@ nmcli connection up house
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用ssh服务管理远程主机"><span class="nav-number">1.</span> <span class="nav-text">使用ssh服务管理远程主机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置网卡服务"><span class="nav-number">1.1.</span> <span class="nav-text">配置网卡服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置网卡参数"><span class="nav-number">1.1.1.</span> <span class="nav-text">配置网卡参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建网络会话"><span class="nav-number">1.1.2.</span> <span class="nav-text">创建网络会话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定两块网卡"><span class="nav-number">1.1.3.</span> <span class="nav-text">绑定两块网卡</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程控制服务"><span class="nav-number">1.2.</span> <span class="nav-text">远程控制服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置sshd服务"><span class="nav-number">1.2.1.</span> <span class="nav-text">配置sshd服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全密钥验证"><span class="nav-number">1.2.2.</span> <span class="nav-text">安全密钥验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程传输命令"><span class="nav-number">1.2.3.</span> <span class="nav-text">远程传输命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不间断会话服务"><span class="nav-number">1.3.</span> <span class="nav-text">不间断会话服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#管理远程会话"><span class="nav-number">1.3.1.</span> <span class="nav-text">管理远程会话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话共享功能"><span class="nav-number">1.3.2.</span> <span class="nav-text">会话共享功能</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用ssh服务管理远程主机"><span class="nav-number">1.</span> <span class="nav-text">使用ssh服务管理远程主机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置网卡服务"><span class="nav-number">1.1.</span> <span class="nav-text">配置网卡服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置网卡参数"><span class="nav-number">1.1.1.</span> <span class="nav-text">配置网卡参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建网络会话"><span class="nav-number">1.1.2.</span> <span class="nav-text">创建网络会话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定两块网卡"><span class="nav-number">1.1.3.</span> <span class="nav-text">绑定两块网卡</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程控制服务"><span class="nav-number">1.2.</span> <span class="nav-text">远程控制服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置sshd服务"><span class="nav-number">1.2.1.</span> <span class="nav-text">配置sshd服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全密钥验证"><span class="nav-number">1.2.2.</span> <span class="nav-text">安全密钥验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程传输命令"><span class="nav-number">1.2.3.</span> <span class="nav-text">远程传输命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不间断会话服务"><span class="nav-number">1.3.</span> <span class="nav-text">不间断会话服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#管理远程会话"><span class="nav-number">1.3.1.</span> <span class="nav-text">管理远程会话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话共享功能"><span class="nav-number">1.3.2.</span> <span class="nav-text">会话共享功能</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Apache服务部署静态网站"><span class="nav-number">2.</span> <span class="nav-text">使用Apache服务部署静态网站</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#网站服务程序"><span class="nav-number">2.1.</span> <span class="nav-text">网站服务程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置服务文件参数"><span class="nav-number">2.2.</span> <span class="nav-text">配置服务文件参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SELinux安全子系统"><span class="nav-number">2.3.</span> <span class="nav-text">SELinux安全子系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人用户主页功能"><span class="nav-number">2.4.</span> <span class="nav-text">个人用户主页功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟网站主机功能"><span class="nav-number">2.5.</span> <span class="nav-text">虚拟网站主机功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于IP地址"><span class="nav-number">2.5.1.</span> <span class="nav-text">基于IP地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于主机域名"><span class="nav-number">2.5.2.</span> <span class="nav-text">基于主机域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于端口号"><span class="nav-number">2.5.3.</span> <span class="nav-text">基于端口号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Apache的访问控制"><span class="nav-number">2.6.</span> <span class="nav-text">Apache的访问控制</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -567,7 +885,7 @@ nmcli connection up house
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
