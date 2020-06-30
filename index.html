@@ -128,7 +128,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">11</span></a>
 
   </li>
   </ul>
@@ -154,6 +154,77 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/29/Vmware%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E4%B8%89%E7%A7%8D%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_Picture/Yu_Me2.png">
+      <meta itemprop="name" content="宇">
+      <meta itemprop="description" content="一位正在成长中, 不断摸索着前进的方向, 不断努力着的新人. 期望着能被众人所需要, 期望着能为人解决烦恼.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱梦的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/29/Vmware%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E4%B8%89%E7%A7%8D%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">Vmware虚拟机的三种网络模式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-29 22:36:38" itemprop="dateCreated datePublished" datetime="2020-06-29T22:36:38+08:00">2020-06-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-30 20:01:53" itemprop="dateModified" datetime="2020-06-30T20:01:53+08:00">2020-06-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>vmware提供了三种网络工作模式:<br>Bridged(桥接模式)<br>NAT(网络地址转换模式)<br>Host-Only(仅主机模式)</p>
+<p>打开VMware虚拟机软件, 选择编辑按钮.<br><img align="left" src="/images/Vmware虚拟机的三种网络模式/查看虚拟机的三种网络模式(1).png" title="选择编辑按钮"><br><br/></p>
+<p>单击虚拟网络编辑器<br><img align="left" src="/images/Vmware虚拟机的三种网络模式/查看虚拟机的三种网络模式(2).png" title="单击虚拟网络编辑器"><br/><br/><br/><br/></p>
+<p>单击更改设置<br><img align="left" src="/images/Vmware虚拟机的三种网络模式/查看虚拟机的三种网络模式(3).png" title="单击更改设置"><br><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></p>
+<p>查看虚拟机上的网卡信息:<br>VMnet0表示的是用于桥接模式下的虚拟交换机<br>VMnet1表示的是用于仅主机模式下的虚拟交换机<br>VMnet8表示的是用于NAT模式下的虚拟交换机<br><img align="left" src="/images/Vmware虚拟机的三种网络模式/查看虚拟机的三种网络模式(4).png" title="查看虚拟机上的网卡信息"><br><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></p>
+<p>查看本机上的网卡信息:<br><code>Win + R</code>快捷键打开运行, 里面输入<code>ncpa.cpl</code>.<br><img align="left" src="/images/Vmware虚拟机的三种网络模式/查看虚拟机的三种网络模式(5).png" title="查看本机上的网卡信息"></p>
+<p>在主机上的VMware Network Adapter VMnet1和VMware Network Adapter VMnet8两块虚拟网卡, 它们也作用于仅主机模式与NAT模式. 如果将这两块卸载了, 可以在Vmware的”编辑”下的”虚拟网络编辑器”中点击”还原默认设置”, 可重新将虚拟网卡还原.</p>
+<h2 id="Bridged模式"><a href="#Bridged模式" class="headerlink" title="Bridged模式"></a>Bridged模式</h2><h2 id="NAT模式"><a href="#NAT模式" class="headerlink" title="NAT模式"></a>NAT模式</h2><h2 id="Host-Only模式"><a href="#Host-Only模式" class="headerlink" title="Host-Only模式"></a>Host-Only模式</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -265,7 +336,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-29 19:33:47" itemprop="dateModified" datetime="2020-06-29T19:33:47+08:00">2020-06-29</time>
+                <time title="修改时间：2020-06-30 19:58:19" itemprop="dateModified" datetime="2020-06-30T19:58:19+08:00">2020-06-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -288,98 +359,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="使用ssh服务管理远程主机"><a href="#使用ssh服务管理远程主机" class="headerlink" title="使用ssh服务管理远程主机"></a>使用ssh服务管理远程主机</h1><h2 id="配置网卡服务"><a href="#配置网卡服务" class="headerlink" title="配置网卡服务"></a>配置网卡服务</h2><h3 id="配置网卡参数"><a href="#配置网卡参数" class="headerlink" title="配置网卡参数"></a>配置网卡参数</h3><p>使用nmtui命令来配置网络, 执行nmtui命令运行网络配置工具.<br><img src="/images/%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E6%9C%8D%E5%8A%A1%E5%92%8C%E9%83%A8%E7%BD%B2/%E7%AC%AC1%E6%AD%A5%EF%BC%9A%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4%E2%80%9Cnmtui%E2%80%9D.png" alt="第1步：执行命令“nmtui”"></p>
+          <h1 id="使用ssh服务管理远程主机"><a href="#使用ssh服务管理远程主机" class="headerlink" title="使用ssh服务管理远程主机"></a>使用ssh服务管理远程主机</h1><h2 id="配置网卡服务"><a href="#配置网卡服务" class="headerlink" title="配置网卡服务"></a>配置网卡服务</h2><h3 id="配置网卡参数"><a href="#配置网卡参数" class="headerlink" title="配置网卡参数"></a>配置网卡参数</h3><p>使用nmtui命令来配置网络, 执行nmtui命令运行网络配置工具.<br><img src="/images/%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E6%9C%8D%E5%8A%A1%E5%92%8C%E9%83%A8%E7%BD%B2/%E7%AC%AC1%E6%AD%A5%EF%BC%9A%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4%E2%80%9Cnmtui%22.png" alt="第1步：执行命令“nmtui&quot;"></p>
 <p>选中Edit a connection并按下回车键<br><img src="/images/%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E6%9C%8D%E5%8A%A1%E5%92%8C%E9%83%A8%E7%BD%B2/%E7%AC%AC2%E6%AD%A5%EF%BC%9A%E9%80%89%E6%8B%A9%E8%A6%81%E7%BC%96%E8%BE%91%E7%9A%84%E7%BD%91%E5%8D%A1.png" alt="第2步：选择要编辑的网卡"></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/06/27/%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E6%9C%8D%E5%8A%A1%E5%92%8C%E9%83%A8%E7%BD%B2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_Picture/Yu_Me2.png">
-      <meta itemprop="name" content="宇">
-      <meta itemprop="description" content="一位正在成长中, 不断摸索着前进的方向, 不断努力着的新人. 期望着能被众人所需要, 期望着能为人解决烦恼.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="爱梦的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">Linux基础知识</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-18 09:47:31" itemprop="dateCreated datePublished" datetime="2020-06-18T09:47:31+08:00">2020-06-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-29 22:03:49" itemprop="dateModified" datetime="2020-06-29T22:03:49+08:00">2020-06-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="强大好用的SHELL"><a href="#强大好用的SHELL" class="headerlink" title="强大好用的SHELL"></a>强大好用的SHELL</h1><p>Shell是一个命令行工具. Shell(也称为终端或壳)充当的是人与内核(硬件)之间的翻译官, 用户把一些命令”告诉”终端, 它就会调用相应的程序服务去完成某些工作. 现在包括红帽系统在内的许多主流Linux系统默认使用的终端是Bash(Bourne-Again SHell)解释器. 主流Linux系统选择Bash解释器作为命令行终端主要有以下4项优势</p>
-<pre>
-1: 通过上下方向键来调取过往执行过的Linux命令
-2: 命令或参数仅需输入前几位就可以用Tab键补全
-3: 具有强大的批处理脚本
-4: 具有实用的环境变量功能
-</pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/06/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -470,7 +454,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -481,7 +465,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -598,77 +582,6 @@
   
 
   
-
-  
-  <style>
-    .copy-btn {
-      display: inline-block;
-      padding: 6px 12px;
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 20px;
-      color: #333;
-      white-space: nowrap;
-      vertical-align: middle;
-      cursor: pointer;
-      background-color: #eee;
-      background-image: linear-gradient(#fcfcfc, #eee);
-      border: 1px solid #d5d5d5;
-      border-radius: 3px;
-      user-select: none;
-      outline: 0;
-    }
-
-    .highlight-wrap .copy-btn {
-      transition: opacity .3s ease-in-out;
-      opacity: 0;
-      padding: 2px 6px;
-      position: absolute;
-      right: 4px;
-      top: 8px;
-    }
-
-    .highlight-wrap:hover .copy-btn,
-    .highlight-wrap .copy-btn:focus {
-      opacity: 1
-    }
-
-    .highlight-wrap {
-      position: relative;
-    }
-  </style>
-  
-  <script>
-    $('.highlight').each(function (i, e) {
-      var $wrap = $('<div>').addClass('highlight-wrap')
-      $(e).after($wrap)
-      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
-        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
-          return $(e).text()
-        }).toArray().join('\n')
-        var ta = document.createElement('textarea')
-        document.body.appendChild(ta)
-        ta.style.position = 'absolute'
-        ta.style.top = '0px'
-        ta.style.left = '0px'
-        ta.value = code
-        ta.select()
-        ta.focus()
-        var result = document.execCommand('copy')
-        document.body.removeChild(ta)
-        
-          if(result)$(this).text('复制成功')
-          else $(this).text('复制失败')
-        
-        $(this).blur()
-      })).on('mouseleave', function (e) {
-        var $b = $(this).find('.copy-btn')
-        setTimeout(function () {
-          $b.text('复制')
-        }, 300)
-      }).append(e)
-    })
-  </script>
 
   
 </body>
