@@ -92,6 +92,12 @@
             
             <tag> Dovecot </tag>
             
+            <tag> SYSLinux </tag>
+            
+            <tag> KickStart </tag>
+            
+            <tag> PXE </tag>
+            
         </tags>
       
     </entry>
