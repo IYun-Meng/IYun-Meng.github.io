@@ -189,7 +189,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-04 12:26:18" itemprop="dateModified" datetime="2020-07-04T12:26:18+08:00">2020-07-04</time>
+                <time title="修改时间：2020-07-12 21:26:45" itemprop="dateModified" datetime="2020-07-12T21:26:45+08:00">2020-07-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -290,7 +290,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-08 11:19:03" itemprop="dateModified" datetime="2020-07-08T11:19:03+08:00">2020-07-08</time>
+                <time title="修改时间：2020-07-11 21:45:11" itemprop="dateModified" datetime="2020-07-11T21:45:11+08:00">2020-07-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -328,7 +328,7 @@
 
       
           <h1 id="Shell脚本的编写"><a href="#Shell脚本的编写" class="headerlink" title="Shell脚本的编写"></a>Shell脚本的编写</h1><p>注: 脚本文件名建议以.sh结尾</p>
-<h2 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h2><p>脚本声明:<code>#!/bin/bash</code><br>脚本注释:<code>#对该脚本的描述</code><br>脚本命令:<code>命令序列</code></p>
+<h2 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h2><p>脚本声明(即使用指定解释器解释):<code>#!/bin/bash</code><br>脚本注释:<code>#对该脚本的描述</code><br>脚本命令:<code>命令序列</code></p>
 <h2 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型"></a>变量类型</h2><table>
 <tr><td>自定义变量</td><td>由用户自己定义、修改和使用</td></tr>
 <tr><td>环境变量</td><td>由系统维护, 用于设置工作环境.</td></tr>
@@ -352,10 +352,137 @@
 <tr><td>区分</td><td>${变量名}</td></tr>
 </table>
 
+<p>read是用来读取用户输入信息的命令, 能够把接收到的用户输入信息赋值给后面的指定变量.</p>
+<pre>
+ read [选项] 变量名1, 变量名2,...
+ |__ p --用于向用户显示一定的提示信息
+ |__ n --后跟一个数字, 定义输入文本的长度.
+ |__ t --后面跟秒数, 定义输入字符的等待时间.
+</pre>
+
+<pre>
+ # 查看变量的内容
+ echo ${变量名} 
+
+ # 查看该变量的长度
+ echo ${<font>#</font>变量名}
+
+ # 截取从指定索引开始后的所有字符
+ echo ${变量名:字符索引}
+
+ # 截取从指定索引开始后的指定数量的字符
+ echo ${变量名:字符索引:截取个数}
+</pre>
+
+<h3 id="变量删除"><a href="#变量删除" class="headerlink" title="变量删除"></a>变量删除</h3><pre>
+ # 删除变量里从左边开始匹配的字符串内容
+ echo ${变量名#字符串} 
+
+ # 删除第一次匹配的字符串所在处左边的内容
+ echo ${变量名#*字符串} 
+
+ # 删除最后一次匹配的字符串所在处左边的内容
+ echo ${变量名##*字符串} 
+
+ # 删除变量里从右边开始匹配的字符串内容
+ echo ${变量名%字符串}
+
+ # 删除第一次匹配的字符串所在处右边的内容
+ echo ${变量名%字符串*}
+
+ # 删除最后一次匹配的字符串所在处右边的内容
+ echo ${变量名%%字符串*}
+</pre>
+
+<h3 id="变量替换"><a href="#变量替换" class="headerlink" title="变量替换"></a>变量替换</h3><pre>
+ # 将源字符串替换成指定字符串
+ echo ${变量/源字符串/指定字符串} 
+
+ # 将源字符串替换成指定字符串(全部匹配)
+ echo ${变量//源字符串/指定字符串}
+</pre>
+
+<h3 id="变量替代"><a href="#变量替代" class="headerlink" title="变量替代"></a>变量替代</h3><pre>
+ unset var1
+ # 输出aaaa
+ echo ${var1-aaaa}
+
+ var2=
+ # 输出空值
+ echo ${var2-bbbb}
+
+ ${变量名-新的变量值}
+ |__ 变量没有被赋值: 会使用"新的变量值"替代
+ |__ 变量有被賦值(包括空值): 不会被替代
+
+ ${变量名:-新的变量值}
+ |__ 变量没有被赋值(包括空值): 会使用"新的变量值"替代
+ |__ 变量有被賦值: 不会被替代
+
+ ${变量名+新的变量值}
+ |__ 变量没有被赋值: 不会被替代
+ |__ 变量有被賦值(包括空值): 会使用"新的变量值"替代
+
+ ${变量名:+新的变量值}
+ |__ 变量没有被赋值(包括空值): 不会被替代
+ |__ 变量有被賦值: 会使用"新的变量值"替代
+
+ ${变量名=新的变量值}
+ |__ 变量没有被赋值: 原变量会被"新的变量值"赋值
+ |__ 变量有被賦值(包括空值): 原变量不会被赋值
+
+ ${变量名:=新的变量值}
+ |__ 变量没有被赋值(包括空值): 原变量会被"新的变量值"赋值
+ |__ 变量有被賦值: 原变量不会被赋值
+
+ ${变量名?新的变量值}
+ |__ 变量没有被赋值: 输出bash: 变量名: "新的变量值"
+ |__ 变量有被賦值(包括空值): 输出原变量值
+
+ ${变量名:?新的变量值}
+ |__ 变量没有被赋值(包括空值): 输出bash: 变量名: "新的变量值"
+ |__ 变量有被賦值: 输出原变量值
+</pre>
+
+<h2 id="整数运算"><a href="#整数运算" class="headerlink" title="整数运算"></a>整数运算</h2><p>$RANDOM是存放一个随机数的变量, $()同``.</p>
+<h3 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h3><p>expr命令是求表达式变量的值, 一般用于整数值, 也可用于字符串.</p>
+<pre>
+ expr $a + $b
+ expr $a \* $b
+</pre>
+
+<h3 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h3><p>** :表示求次方运算</p>
+<p>$((整数表达式))</p>
+<pre>
+ echo $(($a+$b))
+ echo $(($a*$b))
+ echo $(($a**$b))
+</pre>
+
+<h3 id="方式三"><a href="#方式三" class="headerlink" title="方式三"></a>方式三</h3><p>$[整数表达式]</p>
+<pre>
+ echo $[$a+$b]
+ echo $[$a*$b]
+ echo $[$a**$b]
+</pre>
+
+<h3 id="方式四"><a href="#方式四" class="headerlink" title="方式四"></a>方式四</h3><p>let命令是用于执行一个或多个表达式, 变量计算中不需要加上$来表示变量.</p>
+<pre>
+ let a=5+6 b=10*3 c=6-1,...
+ let a=b+c,...
+ echo $a $b $c
+</pre>
+
+<h2 id="小数运算"><a href="#小数运算" class="headerlink" title="小数运算"></a>小数运算</h2><pre>
+ echo "scale=保留位;1/3" | bc
+ echo "print 5.0/2" | python
+ awk 'BEGIN{print 1/3}' # 有效位为6位
+</pre>
+
 <h2 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h2><table>
 <tr><td>`</td><td>将执行某个命令的结果赋值给变量</td></tr>
-<tr><td>'</td><td>对所有字符进行转义</td></tr>
-<tr><td>"</td><td>对字符串进行边界划分</td></tr>
+<tr><td>'(强引用)</td><td>对所有字符进行转义</td></tr>
+<tr><td>"(弱引用)</td><td>对字符串进行边界划分</td></tr>
 </table>
 
 <h2 id="接收用户参数"><a href="#接收用户参数" class="headerlink" title="接收用户参数"></a>接收用户参数</h2><p>在执行脚本文件后直接加上参数, 即<code>脚本文件 参数1 参数2 参数3,...</code></p>
@@ -364,6 +491,9 @@
 <tr><td>$n</td><td>第n个用户参数</td></tr>
 <tr><td>$#</td><td>命令行中位置变量的个数</td></tr>
 <tr><td>$*</td><td>所有用户参数</td></tr>
+<tr><td>$@</td><td>所有用户参数</td></td></tr>
+<tr><td>$$</td><td>当前进程的PID</td></td></tr>
+<tr><td>$!</td><td>上一个后台进程的PID</td></td></tr>
 </table>
 
 <h2 id="判断用户参数"><a href="#判断用户参数" class="headerlink" title="判断用户参数"></a>判断用户参数</h2><p>条件测试语句的执行格式:<code>[ 条件表达式 ] / test 条件表达式</code><br>将<code>[ 条件表达式 ]</code>作为一个条件测试语句:<code>[[ 条件表达式 ]]</code></p>
@@ -437,7 +567,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-05 20:45:32" itemprop="dateModified" datetime="2020-07-05T20:45:32+08:00">2020-07-05</time>
+                <time title="修改时间：2020-07-11 14:44:16" itemprop="dateModified" datetime="2020-07-11T14:44:16+08:00">2020-07-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -726,7 +856,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       notify     : false,
       appId      : 'DwxHAwgNYxksU0xPI7iG0Tsk-gzGzoHsz',
       appKey     : '1H0n5siFfkcCxRLSgffi47pa',
-      placeholder: "请输入你想要评论的内容... 邮箱完全保密! 请不用担心~(OVO)b",
+      placeholder: "请输入你想要评论的内容...(支持MarkDown语法哦~) 邮箱完全保密! 请不用担心~(OVO)b~",
       avatar     : 'mp',
       meta       : guest,
       pageSize   : '10' || 10,
