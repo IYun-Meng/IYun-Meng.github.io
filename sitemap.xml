@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/08/05/Tomcat%E4%B8%8E%E5%9B%9B%E5%B1%82%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/</loc>
+    
+    <lastmod>2020-08-06T16:25:55.930Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/06/16/Shell%E8%84%9A%E6%9C%AC/</loc>
+    
+    <lastmod>2020-07-28T08:02:48.753Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/06/27/%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E6%9C%8D%E5%8A%A1%E5%92%8C%E9%83%A8%E7%BD%B2/</loc>
     
     <lastmod>2020-07-25T09:07:56.415Z</lastmod>
@@ -19,13 +33,6 @@
     <loc>http://yoursite.com/2020/06/05/Linux%E5%91%BD%E4%BB%A4/</loc>
     
     <lastmod>2020-07-21T10:36:00.260Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/06/16/Shell%E8%84%9A%E6%9C%AC/</loc>
-    
-    <lastmod>2020-07-21T09:23:11.156Z</lastmod>
     
   </url>
   
