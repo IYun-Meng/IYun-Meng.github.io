@@ -20,34 +20,41 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="一位正在成长中, 不断摸索着前进的方向, 不断努力着的新人. 期望着能被众人所需要, 期望着能为人解决烦恼.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="爱梦的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="群集技术概述群集类型负载均衡群集(Load Balance Cluster)高可用群集(High Availability Cluster)高性能运算群集(High Performance Computer Cluster) 负载均衡的分层结构     第一层负载调度器:访问整个群集系统的唯一入口, 对外使用群集IP地址.所有服务器共有的VIP(Virtual IP)虚拟IP地址 第二层服务器池:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LVS负载均衡群集">
+<meta property="og:url" content="http://yoursite.com/2020/08/11/LVS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%BE%A4%E9%9B%86/index.html">
 <meta property="og:site_name" content="爱梦的博客">
-<meta property="og:description" content="一位正在成长中, 不断摸索着前进的方向, 不断努力着的新人. 期望着能被众人所需要, 期望着能为人解决烦恼.">
+<meta property="og:description" content="群集技术概述群集类型负载均衡群集(Load Balance Cluster)高可用群集(High Availability Cluster)高性能运算群集(High Performance Computer Cluster) 负载均衡的分层结构     第一层负载调度器:访问整个群集系统的唯一入口, 对外使用群集IP地址.所有服务器共有的VIP(Virtual IP)虚拟IP地址 第二层服务器池:">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/LVS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%BE%A4%E9%9B%86/%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%E5%9B%BE.jpg">
+<meta property="og:image" content="http://yoursite.com/images/LVS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%BE%A4%E9%9B%86/LVS-NAT.png">
+<meta property="og:image" content="http://yoursite.com/images/LVS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%BE%A4%E9%9B%86/LVS-TUN.png">
+<meta property="og:image" content="http://yoursite.com/images/LVS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%BE%A4%E9%9B%86/LVS-DR.png">
+<meta property="article:published_time" content="2020-08-11T06:12:14.000Z">
+<meta property="article:modified_time" content="2020-08-11T13:42:15.309Z">
 <meta property="article:author" content="宇">
 <meta property="article:tag" content="爱">
 <meta property="article:tag" content="梦">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/LVS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%BE%A4%E9%9B%86/%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%E5%9B%BE.jpg">
 
-<link rel="canonical" href="http://yoursite.com/">
+<link rel="canonical" href="http://yoursite.com/2020/08/11/LVS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%BE%A4%E9%9B%86/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>爱梦的博客</title>
+  <title>LVS负载均衡群集 | 爱梦的博客</title>
   
 
 
@@ -156,9 +163,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -174,10 +182,9 @@
       <meta itemprop="name" content="爱梦的博客">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/11/LVS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%BE%A4%E9%9B%86/" class="post-title-link" itemprop="url">LVS负载均衡群集</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          LVS负载均衡群集
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -200,6 +207,13 @@
             </span>
 
           
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
   
   <span class="post-meta-item">
     
@@ -224,7 +238,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="群集技术概述"><a href="#群集技术概述" class="headerlink" title="群集技术概述"></a>群集技术概述</h1><h2 id="群集类型"><a href="#群集类型" class="headerlink" title="群集类型"></a>群集类型</h2><p>负载均衡群集(Load Balance Cluster)<br>高可用群集(High Availability Cluster)<br>高性能运算群集(High Performance Computer Cluster)</p>
+        <h1 id="群集技术概述"><a href="#群集技术概述" class="headerlink" title="群集技术概述"></a>群集技术概述</h1><h2 id="群集类型"><a href="#群集类型" class="headerlink" title="群集类型"></a>群集类型</h2><p>负载均衡群集(Load Balance Cluster)<br>高可用群集(High Availability Cluster)<br>高性能运算群集(High Performance Computer Cluster)</p>
 <h2 id="负载均衡的分层结构"><a href="#负载均衡的分层结构" class="headerlink" title="负载均衡的分层结构"></a>负载均衡的分层结构</h2><table>
 <tr><td><img src="/images/LVS负载均衡群集/分层结构图.jpg"></td></tr>
 </table>
@@ -428,224 +442,37 @@ service ipvsadm start
 
 
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/05/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_Picture/Yu_Me3.png">
-      <meta itemprop="name" content="宇">
-      <meta itemprop="description" content="一位正在成长中, 不断摸索着前进的方向, 不断努力着的新人. 期望着能被众人所需要, 期望着能为人解决烦恼.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="爱梦的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/05/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="post-title-link" itemprop="url">Tomcat服务器</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-05 22:00:33" itemprop="dateCreated datePublished" datetime="2020-08-05T22:00:33+08:00">2020-08-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-11 14:13:50" itemprop="dateModified" datetime="2020-08-11T14:13:50+08:00">2020-08-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/08/05/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/05/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Tomcat服务器是一个免费的开放源代码的web应用服务器, 属于轻量级应用级服务器, 在中小型系统和并发访问用户不是很多的场合下被普遍使用, 是开放和调试JSP程序的首先.</p>
-<p>Tomcat和Nginx、Apache(httpd)、lighttpd等Web服务器一样, 具有处理HTML页面的功能, 另外它还是一个Servlet和JSP容器, 独立的Servlet容器是Tomcat的默认模式. 但Tomcat处理静态HTML的能力不如Nginx/Apache服务器.</p>
-<p><strong>Servlet</strong>:Server Applet是Java Servlet的简称, 称为小服务程序或服务连接器, 用Java编写的服务器端程序, 具有独立于平台和协议的特性, 主要功能在于交互式地浏览和生成数据, 生成动态Web内容.<br><strong>JSP</strong>:全称Java Server Pages, 是一种动态网页开发技术, 主要用于实现Java web应用程序的用户界面部分.</p>
-<p><a href="http://tomcat.apache.org" target="_blank" rel="noopener">Tomcat官网地址</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/05/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/28/linux%E7%B3%BB%E7%BB%9F%E9%87%8D%E7%BD%AEroot%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_Picture/Yu_Me3.png">
-      <meta itemprop="name" content="宇">
-      <meta itemprop="description" content="一位正在成长中, 不断摸索着前进的方向, 不断努力着的新人. 期望着能被众人所需要, 期望着能为人解决烦恼.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="爱梦的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/28/linux%E7%B3%BB%E7%BB%9F%E9%87%8D%E7%BD%AEroot%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81/" class="post-title-link" itemprop="url">linux系统重置root用户密码</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-28 21:58:42" itemprop="dateCreated datePublished" datetime="2020-06-28T21:58:42+08:00">2020-06-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-09 20:01:44" itemprop="dateModified" datetime="2020-07-09T20:01:44+08:00">2020-07-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/06/28/linux%E7%B3%BB%E7%BB%9F%E9%87%8D%E7%BD%AEroot%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/28/linux%E7%B3%BB%E7%BB%9F%E9%87%8D%E7%BD%AEroot%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="重置root用户密码"><a href="#重置root用户密码" class="headerlink" title="重置root用户密码"></a>重置root用户密码</h1><p>重启Linux系统主机并出现引导界面时, 按下键盘上的e键进入内核编辑界面.<br><img src="/images/linux系统重置root用户密码/第1步：开机后在内核上敲击“e”.png"></p>
-<p>在linux16参数这行的最后面追加” \rd.break”参数, 然后按下Ctrl + X组合键来运行修改过的内核程序.<img src="/images/linux系统重置root用户密码/第2步：在linux16这行的后面输入“rd.break”并敲击“ctrl-x“.png"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/06/28/linux%E7%B3%BB%E7%BB%9F%E9%87%8D%E7%BD%AEroot%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/05/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="prev" title="Tomcat服务器">
+      <i class="fa fa-chevron-left"></i> Tomcat服务器
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
   
-
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -692,6 +519,7 @@ service ipvsadm start
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#群集技术概述"><span class="nav-number">1.</span> <span class="nav-text">群集技术概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#群集类型"><span class="nav-number">1.1.</span> <span class="nav-text">群集类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负载均衡的分层结构"><span class="nav-number">1.2.</span> <span class="nav-text">负载均衡的分层结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负载均衡的工作模式"><span class="nav-number">1.3.</span> <span class="nav-text">负载均衡的工作模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LVS虚拟服务器"><span class="nav-number">2.</span> <span class="nav-text">LVS虚拟服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LVS的负载调度算法"><span class="nav-number">2.1.</span> <span class="nav-text">LVS的负载调度算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用ipvsadm管理工具"><span class="nav-number">2.2.</span> <span class="nav-text">使用ipvsadm管理工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建虚拟服务器"><span class="nav-number">2.2.1.</span> <span class="nav-text">创建虚拟服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加服务器节点"><span class="nav-number">2.2.2.</span> <span class="nav-text">添加服务器节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看群集节点状态"><span class="nav-number">2.2.3.</span> <span class="nav-text">查看群集节点状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除服务器节点"><span class="nav-number">2.2.4.</span> <span class="nav-text">删除服务器节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保存负载分配策略"><span class="nav-number">2.2.5.</span> <span class="nav-text">保存负载分配策略</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建LVS负载均衡群集"><span class="nav-number">3.</span> <span class="nav-text">构建LVS负载均衡群集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LVS-NAT"><span class="nav-number">3.1.</span> <span class="nav-text">LVS-NAT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置负载调度器"><span class="nav-number">3.1.1.</span> <span class="nav-text">配置负载调度器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置NSF服务器"><span class="nav-number">3.1.2.</span> <span class="nav-text">配置NSF服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置节点服务器"><span class="nav-number">3.1.3.</span> <span class="nav-text">配置节点服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LVS-DR"><span class="nav-number">3.2.</span> <span class="nav-text">LVS-DR</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置负载调动器"><span class="nav-number">3.2.1.</span> <span class="nav-text">配置负载调动器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置NFS服务器"><span class="nav-number">3.2.2.</span> <span class="nav-text">配置NFS服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置节点服务器-1"><span class="nav-number">3.2.3.</span> <span class="nav-text">配置节点服务器</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
