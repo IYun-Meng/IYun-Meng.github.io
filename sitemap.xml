@@ -2,23 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2020/08/14/Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%8E%E7%88%AC%E8%99%AB%E6%8A%80%E6%9C%AF/</loc>
+    <loc>http://yoursite.com/2020/08/13/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/</loc>
     
-    <lastmod>2020-08-16T14:59:15.508Z</lastmod>
+    <lastmod>2020-08-20T06:25:07.286Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2020/08/13/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/</loc>
+    <loc>http://yoursite.com/2020/06/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
     
-    <lastmod>2020-08-16T14:50:16.765Z</lastmod>
+    <lastmod>2020-08-19T02:34:28.049Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/06/05/Linux%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2020-08-19T01:49:26.822Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/08/14/Python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%8E%E7%88%AC%E8%99%AB%E6%8A%80%E6%9C%AF/</loc>
+    
+    <lastmod>2020-08-18T01:37:40.185Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2020/08/14/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0/</loc>
     
-    <lastmod>2020-08-16T14:49:38.302Z</lastmod>
+    <lastmod>2020-08-17T03:31:30.856Z</lastmod>
     
   </url>
   
@@ -44,13 +58,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2020/06/05/Linux%E5%91%BD%E4%BB%A4/</loc>
-    
-    <lastmod>2020-08-13T03:54:18.404Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2020/08/05/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
     
     <lastmod>2020-08-11T06:13:50.793Z</lastmod>
@@ -68,13 +75,6 @@
     <loc>http://yoursite.com/2020/05/16/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</loc>
     
     <lastmod>2020-07-25T09:07:54.262Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/06/18/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
-    
-    <lastmod>2020-07-16T07:23:04.817Z</lastmod>
     
   </url>
   

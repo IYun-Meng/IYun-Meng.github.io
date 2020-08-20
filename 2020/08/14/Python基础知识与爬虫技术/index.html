@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://yoursite.com/images/Python%E7%88%AC%E8%99%AB%E6%8A%80%E6%9C%AF/Python%E5%AE%89%E8%A3%852.png">
 <meta property="og:image" content="http://yoursite.com/images/Python%E7%88%AC%E8%99%AB%E6%8A%80%E6%9C%AF/PyCharm%E5%AE%89%E8%A3%85.png">
 <meta property="article:published_time" content="2020-08-14T12:23:21.000Z">
-<meta property="article:modified_time" content="2020-08-16T14:59:15.508Z">
+<meta property="article:modified_time" content="2020-08-18T01:37:40.185Z">
 <meta property="article:author" content="宇">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Pycharm">
@@ -197,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-16 22:59:15" itemprop="dateModified" datetime="2020-08-16T22:59:15+08:00">2020-08-16</time>
+                <time title="修改时间：2020-08-18 09:37:40" itemprop="dateModified" datetime="2020-08-18T09:37:40+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,7 +255,19 @@
 <a id="more"></a>
 
 <h1 id="Python基础知识"><a href="#Python基础知识" class="headerlink" title="Python基础知识"></a>Python基础知识</h1><h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p><code>#</code>:单行注释<br><code>&#39;&#39;&#39;</code><br>多行注释<br><code>&#39;&#39;&#39;</code></p>
-<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>变量可以是任意的数据类型, 在程序中用一个变量名表示.<br>变量名必须是大小写英文、数字和下划线(-)的组合, 且不能以<font color="red">数字</font>开头.</p>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>变量可以是任意的数据类型, 在程序中用一个变量名表示.<br>变量名必须是大小写英文、数字和下划线(-)的组合, 且不能以<font color="red">数字</font>开头.</p>
+<h2 id="核心数据类型"><a href="#核心数据类型" class="headerlink" title="核心数据类型"></a>核心数据类型</h2><h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>多行字符串</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"""</span></span><br><span class="line"><span class="string">-"""</span> * <span class="number">60</span>)</span><br></pre></td></tr></table></figure>
+
+<p>字符串截取</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">str = <span class="string">"1234567890"</span></span><br><span class="line">print(str[下标])</span><br><span class="line">print(str[:终止位置])</span><br><span class="line">print(str[起始位置:终止位置])</span><br><span class="line">print(str[起始位置:])</span><br><span class="line">print(str[起始位置:终止位置:步进值])</span><br></pre></td></tr></table></figure>
+
+<p>全部转义</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">r"\t\b\n\a"</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="列表-List"><a href="#列表-List" class="headerlink" title="列表(List)"></a>列表(List)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="number">0</span>, <span class="number">0.0</span>, <span class="string">'1'</span>, <span class="string">"2s"</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> values <span class="keyword">in</span> list:</span><br><span class="line">    print(values)</span><br></pre></td></tr></table></figure>
+
+
 <h2 id="标识符和关键字"><a href="#标识符和关键字" class="headerlink" title="标识符和关键字"></a>标识符和关键字</h2><p>显示所有的关键字</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> keyword</span><br><span class="line">print(keyword.kwlist)</span><br></pre></td></tr></table></figure>
 
@@ -387,7 +399,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python环境安装"><span class="nav-number">1.</span> <span class="nav-text">Python环境安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pycharm集成开发环境安装"><span class="nav-number">2.</span> <span class="nav-text">Pycharm集成开发环境安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python基础知识"><span class="nav-number">3.</span> <span class="nav-text">Python基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注释"><span class="nav-number">3.1.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">3.2.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标识符和关键字"><span class="nav-number">3.3.</span> <span class="nav-text">标识符和关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化输出"><span class="nav-number">3.4.</span> <span class="nav-text">格式化输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化输入"><span class="nav-number">3.5.</span> <span class="nav-text">格式化输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算术、比较、赋值运算符"><span class="nav-number">3.6.</span> <span class="nav-text">算术、比较、赋值运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件语句"><span class="nav-number">3.7.</span> <span class="nav-text">条件语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环语句"><span class="nav-number">3.8.</span> <span class="nav-text">循环语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入库"><span class="nav-number">3.9.</span> <span class="nav-text">引入库</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python环境安装"><span class="nav-number">1.</span> <span class="nav-text">Python环境安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pycharm集成开发环境安装"><span class="nav-number">2.</span> <span class="nav-text">Pycharm集成开发环境安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python基础知识"><span class="nav-number">3.</span> <span class="nav-text">Python基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注释"><span class="nav-number">3.1.</span> <span class="nav-text">注释</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">3.1.1.</span> <span class="nav-text">变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心数据类型"><span class="nav-number">3.2.</span> <span class="nav-text">核心数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串"><span class="nav-number">3.2.1.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表-List"><span class="nav-number">3.2.2.</span> <span class="nav-text">列表(List)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标识符和关键字"><span class="nav-number">3.3.</span> <span class="nav-text">标识符和关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化输出"><span class="nav-number">3.4.</span> <span class="nav-text">格式化输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化输入"><span class="nav-number">3.5.</span> <span class="nav-text">格式化输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算术、比较、赋值运算符"><span class="nav-number">3.6.</span> <span class="nav-text">算术、比较、赋值运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件语句"><span class="nav-number">3.7.</span> <span class="nav-text">条件语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环语句"><span class="nav-number">3.8.</span> <span class="nav-text">循环语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入库"><span class="nav-number">3.9.</span> <span class="nav-text">引入库</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
