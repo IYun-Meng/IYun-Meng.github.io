@@ -10,7 +10,7 @@
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>宇</name>
+    <name>云</name>
     
   </author>
   
@@ -177,9 +177,9 @@
     
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
-      <category term="Apache" scheme="http://yoursite.com/tags/Apache/"/>
-    
       <category term="NFS" scheme="http://yoursite.com/tags/NFS/"/>
+    
+      <category term="Apache" scheme="http://yoursite.com/tags/Apache/"/>
     
       <category term="Keepalived" scheme="http://yoursite.com/tags/Keepalived/"/>
     
@@ -261,13 +261,13 @@
     
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
-      <category term="Apache" scheme="http://yoursite.com/tags/Apache/"/>
-    
       <category term="NFS" scheme="http://yoursite.com/tags/NFS/"/>
     
-      <category term="Nginx" scheme="http://yoursite.com/tags/Nginx/"/>
+      <category term="Apache" scheme="http://yoursite.com/tags/Apache/"/>
     
       <category term="MySQL" scheme="http://yoursite.com/tags/MySQL/"/>
+    
+      <category term="Nginx" scheme="http://yoursite.com/tags/Nginx/"/>
     
       <category term="SSH" scheme="http://yoursite.com/tags/SSH/"/>
     
@@ -606,9 +606,9 @@
     
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
-      <category term="CentOS" scheme="http://yoursite.com/tags/CentOS/"/>
-    
       <category term="Apache" scheme="http://yoursite.com/tags/Apache/"/>
+    
+      <category term="CentOS" scheme="http://yoursite.com/tags/CentOS/"/>
     
   </entry>
   
