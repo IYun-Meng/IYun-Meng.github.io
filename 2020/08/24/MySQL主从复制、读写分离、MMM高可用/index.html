@@ -30,7 +30,7 @@
 <meta property="og:image" content="http://yoursite.com/images/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/MySQL%E5%A4%8D%E5%88%B6%E7%9A%84%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B.png">
 <meta property="og:image" content="http://yoursite.com/images/MySQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E3%80%81%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E3%80%81MMM%E9%AB%98%E5%8F%AF%E7%94%A8/MMM%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg">
 <meta property="article:published_time" content="2020-08-24T08:53:48.000Z">
-<meta property="article:modified_time" content="2020-08-25T11:25:03.497Z">
+<meta property="article:modified_time" content="2020-08-27T11:06:40.239Z">
 <meta property="article:author" content="云">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="MySQL">
@@ -198,7 +198,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-25 19:25:03" itemprop="dateModified" datetime="2020-08-25T19:25:03+08:00">2020-08-25</time>
+                <time title="修改时间：2020-08-27 19:06:40" itemprop="dateModified" datetime="2020-08-27T19:06:40+08:00">2020-08-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,6 +255,8 @@ SQL thread:SQL语句线程, 状态同样必须为开启状态(YES).
 <p>2.Slave将Master的二进制日志复制到其中继日志. 首先, Slave开始一个工作线程-I/O线程, I/O线程在Master上打开一个普通的连接, 然后开始Binlog dump process. Binlog dump process从Master的二进制日志中读取事件, 如果已经跟上Master, 它会睡眠并等待Master产生新的事件. I/O线程将这些事件写入中继日志.</p>
 <p>3.SQL slave thread(SQL从线程)处理该过程的最后一步. SQL线程从中继日志读取事件, 并重放其中的事件而更新Slave的数据, 使其与Master中的数据一致. 只要该线程与I/O线程保持一致, 中继日志通常会位于Os的缓存中, 所以中继日志的开销很小.</p>
 <p>注:复制过程有一个很重要的限制, 即复制在Slave上是串行化的, 也就是说Master上的并行更新操作不能在Slave上并行操作.</p>
+<a id="more"></a>
+
 <p>MySQL支持的复制类型<br>1.基于语句的复制<br>在主服务器上执行的SQL语句, 在从服务器上执行同样的语句, MySQL默认采用基于语句的复制, 效率比较高.</p>
 <p>2.基于行的复制<br>把改变的内容复制过去, 而不是把命令在从服务器上执行一遍.</p>
 <p>3.混合类型的复制<br>默认采用基于语句的复制, 一旦发现基于语句无法精确复制时, 就会采用基于行的复制.</p>
