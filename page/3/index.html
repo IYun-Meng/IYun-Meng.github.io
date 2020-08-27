@@ -132,7 +132,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">18</span></a>
 
   </li>
   </ul>
@@ -158,6 +158,110 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/11/LVS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%BE%A4%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_Picture/Yu_Me4.png">
+      <meta itemprop="name" content="云">
+      <meta itemprop="description" content="我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱梦的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/11/LVS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%BE%A4%E9%9B%86/" class="post-title-link" itemprop="url">LVS负载均衡群集</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-11 14:12:14" itemprop="dateCreated datePublished" datetime="2020-08-11T14:12:14+08:00">2020-08-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-13 15:06:14" itemprop="dateModified" datetime="2020-08-13T15:06:14+08:00">2020-08-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/08/11/LVS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%BE%A4%E9%9B%86/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/11/LVS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%BE%A4%E9%9B%86/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="群集技术概述"><a href="#群集技术概述" class="headerlink" title="群集技术概述"></a>群集技术概述</h1><h2 id="群集类型"><a href="#群集类型" class="headerlink" title="群集类型"></a>群集类型</h2><p>负载均衡群集(Load Balance Cluster)<br>高可用群集(High Availability Cluster)<br>高性能运算群集(High Performance Computer Cluster)</p>
+<h2 id="负载均衡的分层结构"><a href="#负载均衡的分层结构" class="headerlink" title="负载均衡的分层结构"></a>负载均衡的分层结构</h2><table>
+<tr><td><img src="/images/LVS负载均衡群集/分层结构图.jpg"></td></tr>
+</table>
+
+<table>
+<tr><td>第一层</td><td>负载调度器:访问整个群集系统的唯一入口, 对外使用群集IP地址.所有服务器共有的VIP(Virtual IP)虚拟IP地址</td></tr>
+<tr><td>第二层</td><td>服务器池:群集所提供的应用服务由服务器池承担, 其中的每个节点具有独立的RIP(Real IP, 真实IP)地址, 只处理调度器分发过来的客户机请求.当某个节点暂时失效时, 负载调度器的容错机制会将其隔离, 等待错误排除以后再重新纳入服务器池.</td></tr>
+<tr><td>第三层</td><td>共享存储:为服务器池中的所有节点提供稳定、一致的文件存取服务, 确保整个群集的统一性.</td></tr>
+</table>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/11/LVS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%BE%A4%E9%9B%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -352,102 +456,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E6%9C%8D%E5%8A%A1%E5%92%8C%E9%83%A8%E7%BD%B2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_Picture/Yu_Me4.png">
-      <meta itemprop="name" content="云">
-      <meta itemprop="description" content="我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="爱梦的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/27/%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E6%9C%8D%E5%8A%A1%E5%92%8C%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">使用各种服务和部署</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-27 11:44:05" itemprop="dateCreated datePublished" datetime="2020-06-27T11:44:05+08:00">2020-06-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-13 15:07:58" itemprop="dateModified" datetime="2020-08-13T15:07:58+08:00">2020-08-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/06/27/%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E6%9C%8D%E5%8A%A1%E5%92%8C%E9%83%A8%E7%BD%B2/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/27/%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E6%9C%8D%E5%8A%A1%E5%92%8C%E9%83%A8%E7%BD%B2/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="使用ssh服务管理远程主机"><a href="#使用ssh服务管理远程主机" class="headerlink" title="使用ssh服务管理远程主机"></a>使用ssh服务管理远程主机</h1><h2 id="配置网卡服务"><a href="#配置网卡服务" class="headerlink" title="配置网卡服务"></a>配置网卡服务</h2><h3 id="配置网卡参数"><a href="#配置网卡参数" class="headerlink" title="配置网卡参数"></a>配置网卡参数</h3><p>使用nmtui命令来配置网络, 执行nmtui命令运行网络配置工具.<br><img src="/images/%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E6%9C%8D%E5%8A%A1%E5%92%8C%E9%83%A8%E7%BD%B2/%E7%AC%AC1%E6%AD%A5-%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4%E2%80%9Cnmtui%E2%80%9D.png" alt="第1步:执行命令“nmtui&quot;"></p>
-<p>选中Edit a connection并按下回车键<br><img src="/images/%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E6%9C%8D%E5%8A%A1%E5%92%8C%E9%83%A8%E7%BD%B2/%E7%AC%AC2%E6%AD%A5-%E9%80%89%E6%8B%A9%E8%A6%81%E7%BC%96%E8%BE%91%E7%9A%84%E7%BD%91%E5%8D%A1.png" alt="第2步:选择要编辑的网卡"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/06/27/%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E6%9C%8D%E5%8A%A1%E5%92%8C%E9%83%A8%E7%BD%B2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -519,7 +527,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -530,7 +538,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -132,7 +132,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">18</span></a>
 
   </li>
   </ul>
@@ -158,6 +158,106 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/14/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_Picture/Yu_Me4.png">
+      <meta itemprop="name" content="云">
+      <meta itemprop="description" content="我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱梦的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/14/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0/" class="post-title-link" itemprop="url">KVM虚拟化平台</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-14 15:11:21" itemprop="dateCreated datePublished" datetime="2020-08-14T15:11:21+08:00">2020-08-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-17 11:31:30" itemprop="dateModified" datetime="2020-08-17T11:31:30+08:00">2020-08-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/08/14/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/14/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="KVM概述"><a href="#KVM概述" class="headerlink" title="KVM概述"></a>KVM概述</h1><h2 id="什么是虚拟化"><a href="#什么是虚拟化" class="headerlink" title="什么是虚拟化"></a>什么是虚拟化</h2><p>虚拟化就是把硬件资源从物理方式转变为逻辑方式, 打破原有物理结构, 使用户可以灵活管理这些资源, 并且允许1台物理机上同时运行多个操作系统, 以实现资源利用率最大化和灵活管理的一项技术.</p>
+<h2 id="虚拟化的优势"><a href="#虚拟化的优势" class="headerlink" title="虚拟化的优势"></a>虚拟化的优势</h2><p>1.减少服务器数量, 降低硬件采购成本.<br>2.资源利用率最大化<br>3.降低机房空间、散热、用电消耗的成本<br>4.硬件资源可动态调整, 提高企业IT业务灵活性.<br>5.高可用性<br>6.在不中断服务的情况下进行物理硬件调整<br>7.降低管理成本<br>8.具备更高效的灾备能力</p>
+<h2 id="KVM虚拟化"><a href="#KVM虚拟化" class="headerlink" title="KVM虚拟化"></a>KVM虚拟化</h2><p>KVM自Linux2.6.20版本后就直接整合到Linux内核中, 它依托CPU虚拟化指令集(如Inter-VT、AMD-V)实现高性能的虚拟化支持. 由于与Linux内核高度整合, 因此在性能、安全性、兼容性、稳定性上都有很好的表现.</p>
+<table>
+<tr><td><img src="/images/部署KVM虚拟化平台/KVM虚拟化架构.png"></td></tr>
+</table>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/14/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -367,110 +467,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/11/LVS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%BE%A4%E9%9B%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head_Picture/Yu_Me4.png">
-      <meta itemprop="name" content="云">
-      <meta itemprop="description" content="我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="爱梦的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/11/LVS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%BE%A4%E9%9B%86/" class="post-title-link" itemprop="url">LVS负载均衡群集</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-11 14:12:14" itemprop="dateCreated datePublished" datetime="2020-08-11T14:12:14+08:00">2020-08-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-13 15:06:14" itemprop="dateModified" datetime="2020-08-13T15:06:14+08:00">2020-08-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/08/11/LVS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%BE%A4%E9%9B%86/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/11/LVS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%BE%A4%E9%9B%86/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="群集技术概述"><a href="#群集技术概述" class="headerlink" title="群集技术概述"></a>群集技术概述</h1><h2 id="群集类型"><a href="#群集类型" class="headerlink" title="群集类型"></a>群集类型</h2><p>负载均衡群集(Load Balance Cluster)<br>高可用群集(High Availability Cluster)<br>高性能运算群集(High Performance Computer Cluster)</p>
-<h2 id="负载均衡的分层结构"><a href="#负载均衡的分层结构" class="headerlink" title="负载均衡的分层结构"></a>负载均衡的分层结构</h2><table>
-<tr><td><img src="/images/LVS负载均衡群集/分层结构图.jpg"></td></tr>
-</table>
-
-<table>
-<tr><td>第一层</td><td>负载调度器:访问整个群集系统的唯一入口, 对外使用群集IP地址.所有服务器共有的VIP(Virtual IP)虚拟IP地址</td></tr>
-<tr><td>第二层</td><td>服务器池:群集所提供的应用服务由服务器池承担, 其中的每个节点具有独立的RIP(Real IP, 真实IP)地址, 只处理调度器分发过来的客户机请求.当某个节点暂时失效时, 负载调度器的容错机制会将其隔离, 等待错误排除以后再重新纳入服务器池.</td></tr>
-<tr><td>第三层</td><td>共享存储:为服务器池中的所有节点提供稳定、一致的文件存取服务, 确保整个群集的统一性.</td></tr>
-</table>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/11/LVS%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%BE%A4%E9%9B%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -542,7 +538,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -553,7 +549,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
