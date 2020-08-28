@@ -276,9 +276,9 @@ SQL thread:SQL语句线程, 状态同样必须为开启状态(YES).
     
       <category term="Apache" scheme="http://yoursite.com/tags/Apache/"/>
     
-      <category term="Keepalived" scheme="http://yoursite.com/tags/Keepalived/"/>
-    
       <category term="NFS" scheme="http://yoursite.com/tags/NFS/"/>
+    
+      <category term="Keepalived" scheme="http://yoursite.com/tags/Keepalived/"/>
     
   </entry>
   
