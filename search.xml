@@ -209,11 +209,11 @@
             
             <tag> Linux </tag>
             
-            <tag> Apache </tag>
+            <tag> Keepalived </tag>
             
             <tag> NFS </tag>
             
-            <tag> Keepalived </tag>
+            <tag> Apache </tag>
             
         </tags>
       
@@ -294,9 +294,9 @@
             
             <tag> Linux </tag>
             
-            <tag> Apache </tag>
-            
             <tag> NFS </tag>
+            
+            <tag> Apache </tag>
             
             <tag> MySQL </tag>
             
@@ -432,9 +432,9 @@
             
             <tag> Linux </tag>
             
-            <tag> CentOS </tag>
-            
             <tag> Apache </tag>
+            
+            <tag> CentOS </tag>
             
         </tags>
       

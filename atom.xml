@@ -274,11 +274,11 @@ SQL thread:SQL语句线程, 状态同样必须为开启状态(YES).
     
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
-      <category term="Apache" scheme="http://yoursite.com/tags/Apache/"/>
+      <category term="Keepalived" scheme="http://yoursite.com/tags/Keepalived/"/>
     
       <category term="NFS" scheme="http://yoursite.com/tags/NFS/"/>
     
-      <category term="Keepalived" scheme="http://yoursite.com/tags/Keepalived/"/>
+      <category term="Apache" scheme="http://yoursite.com/tags/Apache/"/>
     
   </entry>
   
@@ -358,9 +358,9 @@ SQL thread:SQL语句线程, 状态同样必须为开启状态(YES).
     
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
-      <category term="Apache" scheme="http://yoursite.com/tags/Apache/"/>
-    
       <category term="NFS" scheme="http://yoursite.com/tags/NFS/"/>
+    
+      <category term="Apache" scheme="http://yoursite.com/tags/Apache/"/>
     
       <category term="MySQL" scheme="http://yoursite.com/tags/MySQL/"/>
     
@@ -703,9 +703,9 @@ SQL thread:SQL语句线程, 状态同样必须为开启状态(YES).
     
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
-      <category term="CentOS" scheme="http://yoursite.com/tags/CentOS/"/>
-    
       <category term="Apache" scheme="http://yoursite.com/tags/Apache/"/>
+    
+      <category term="CentOS" scheme="http://yoursite.com/tags/CentOS/"/>
     
   </entry>
   
