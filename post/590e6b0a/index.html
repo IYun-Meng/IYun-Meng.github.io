@@ -23,22 +23,21 @@
     var CONFIG = {"hostname":"www.mengyun.ink","root":"/","scheme":"Mist","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="爱梦的博客">
-<meta property="og:url" content="http://www.mengyun.ink/archives/2020/06/index.html">
+  <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB分片">
+<meta property="og:url" content="http://www.mengyun.ink/post/590e6b0a/index.html">
 <meta property="og:site_name" content="爱梦的博客">
-<meta property="og:description" content="我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...">
+<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-01T08:06:44.000Z">
+<meta property="article:modified_time" content="2020-09-01T09:24:30.584Z">
 <meta property="article:author" content="云">
-<meta property="article:tag" content="爱">
-<meta property="article:tag" content="梦">
-<meta property="article:tag" content="hexo">
-<meta property="article:tag" content="博客">
+<meta property="article:tag" content="MongoDB">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://www.mengyun.ink/archives/2020/06/">
+<link rel="canonical" href="http://www.mengyun.ink/post/590e6b0a/">
 
 
 <script class="page-configurations">
@@ -46,12 +45,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | 爱梦的博客</title>
+  <title>MongoDB分片 | 爱梦的博客</title>
   
 
 
@@ -315,192 +314,143 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
 </noscript>
 
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
       
 
       
 
+    
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.mengyun.ink/post/590e6b0a/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_Picture/Yu_Me4.png">
+      <meta itemprop="name" content="云">
+      <meta itemprop="description" content="我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱梦的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MongoDB分片
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-01 16:06:44 / 修改时间：17:24:30" itemprop="dateCreated datePublished" datetime="2020-09-01T16:06:44+08:00">2020-09-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 20 篇日志。 继续努力。</span>
       </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>419</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
-    </div>
+        </div>
+      </header>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-06-28T21:58:42+08:00"
-              content="2020-06-28">
-          06-28
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/post/d8982727/" itemprop="url">
-            <span itemprop="name">linux系统重置root用户密码</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-06-27T11:44:05+08:00"
-              content="2020-06-27">
-          06-27
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/post/cea46563/" itemprop="url">
-            <span itemprop="name">使用各种服务和部署</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-06-18T09:47:31+08:00"
-              content="2020-06-18">
-          06-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/post/df41aea9/" itemprop="url">
-            <span itemprop="name">Linux基础知识</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-06-16T16:49:02+08:00"
-              content="2020-06-16">
-          06-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/post/563a1179/" itemprop="url">
-            <span itemprop="name">Shell脚本</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-06-05T10:27:45+08:00"
-              content="2020-06-05">
-          06-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/post/82734d8/" itemprop="url">
-            <span itemprop="name">Linux命令</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-06-04T09:25:09+08:00"
-              content="2020-06-04">
-          06-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/post/294723c9/" itemprop="url">
-            <span itemprop="name">CentOS系统简单配置网站</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-06-03T19:15:14+08:00"
-              content="2020-06-03">
-          06-03
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/post/719db4d3/" itemprop="url">
-            <span itemprop="name">在Linux操作系统下用源码包安装Apache</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-06-02T22:13:04+08:00"
-              content="2020-06-02">
-          06-02
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/post/54d935ba/" itemprop="url">
-            <span itemprop="name">Hexo博客美化过程</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-
-    </div>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <div class="hbe-input-container">
+  <input type="password" id="hbePass" placeholder="" />
+    <label for="hbePass">Hey, password is required here.</label>
+    <div class="bottom-line"></div>
   </div>
-  
-  
-  
+  <script id="hbeData" type="hbeData" data-hmacdigest="633cb3b13e31d2a14556b993ebd1fc42b3f70892b9e82d4cd41a8799a48848fc">11b84d00246b6eb523c35bbdadbdb9f1a791aaf617d2ee254ca978bbec7dfe28fb883a492745465f39045e6f62d9b79e587fc213045fb69903f95177790848d969e2fe341619b4f0a956a1213cfc114d58a5ad9992fabf883c04be9834e888eda7c528727062f55f37e6bceec7beea4a7a7cb08221ebd99dc497c75f395864be8b3b45ee3a059107b85c3657c9632fdae6a3217ba62faa4ac1a6603bd56701c81bd21e961ea143a6d4e67e37997a9795e8f67894341c673afeb62a7921c5526f8b9b25ace210ef2c2c1b42039bfc064ca3d372075052409fea55bdbc5825837d5144c5414c0d9add2f979875139946388697a9910b2ff835300a7cf335918c044584e1d163a8db85c091df4fc88faae96b8fe86160620a4fad69f8a19c38c09975523fc7793b45ac33de993e1fa24f011b27e048ba001217b753ac6c40b89a59b15b4f5490592ce8830f6534e0ffbe0b129145ab22da0e04ec4da417e28a3c99403c875be4b145e5c7c071cf9ec784019d97231cba6552d2987530c7f4e4d37b141d968baaea02151c087ad36f26122c75f743fe9e17a350a3dd94b0c1e7d3a11d16671bd04ce698e6c9fbdbeb195cd36aed101bea58a415017a391260ae4da839389f7765d9b1575d5ab104ef928e94c84650fbc83de884215f508e923c8d5a8ee1ee9a95fb7f6aa390035b51616e361dbbfcb1a2717568e5033db2d95ee9c662960e8bc2fc4a87f53ec1ff9fd084adda8dc246c9c138883beaeecbb6b3713d42678ccfd2e994a610cc6497d89a639df92a0cc9f322bbf233493ad0649680743deadadeb623d36382817f1fdda19de55d2dcd4c0cfeda3efa4345521194c43853c2da8bdd973f7f74ea909169915bb2f131b54b2a1d7f88ac74aaff6b548a9d22621be9403808b4e502227e261e4ae84b9de419c5cc95f9242fbb6aef4f866855b4145b9511ac2c30910309f1ebb7a13846eff7d46c1916a542e2f671a965af46cfd931a9c33f3e5ff5ea89e9d22043e2bb5176e668f68afc795a62226dfa2ae27ac4332d49c23dccb90b32ad0e68c6039d46357015b91e676dc10781aeb8136d29929e53273f1ddd0f2e092ef8e145ea65d5f3d1e5005fa52f1a9999968d2dee2c513b58b28c54334e4dd5502f55e7b77b627e978d69195b289e00692e9d404e72f5622ad879d4e3ad7eed2477811bb2760db78bd8e75408f78b05703e13699f2f50aaf1ed3da101b43cd7be119f111199ae54a1552c5a84aac7f6237abf645c5c80974d7337fa6ea30a7c1a48b4945337d75af5549b1dcbb37d55447b96c0010de3a875199323f5f685a21cf5a4305efeb5358bb616c40cb56b9e1b7ec0d8c6898334a60398e4251c3cb398837214c840a86a237c8efe407f87ff81c516699ca30175df08bf15cfcf0d4fc087b74ac841d5430eb277ad536b68ee48aab32687c41bdab2c65a1fe1b46cd614601e1f2d2d9a2db668964a6a47176355b168238ae1352da3b6de6b65c0bf2f2e20980985d5937dfb640efe02a6c0398c304751ac25b7d152d5e8fb4537708d84097aa3dbc1298a5debf930607cff73a8e9a2a49226b792fd17ee20a1de57b71c7f9136133b8fb8ba6095e4c72e1cc03763b11ec14a2c3cacbd3d8614014fa8200cde8adf631788de6a11eff1a42623e435ffcb9e5a7506510009bffbfdc8ffcece11956b56d1db4922b5f90f3874256ed09429f22a685c6d74c26c46fdec58e5db2527256b7fc366837f1aa3b19de4545fa2d5660db6e028b008517a472b8318298b746a981036dfb1f4c7bfb2ed93e846b5a0183a4fb35a0f39a282ff929efe3b1f4bf61eb2cfcb9b72236e3c393e4680d44a8f79f6bd7a51ca2b42b57d576bfaf6060922aa2802a9e7f5ed5eddc632c257051a4dc0c1c9f32946bf53dda900b8ac6adf12f8a63bbec864360b1d42191a3acde881ed63a32d38b431257254369b82b76f4469ba185704914277ab7ac0feb6cb6d2070cca52a805e082ef85ab24b27adeb0245d1e188e0b9d2a41f09391a212a8ff1ab08bebcaa85f09255947be64dccc6dc73839db275434eb68b19c99acd9d18c1d791b2502f0bfd9758e229ff0bc5bb35db8b93498a7305a6d152bc0b1acaa3e7ac09ff717d6639d41f901e237910a62954079bc2eac4d56453db756802830357d6f24cfd70c80559513d38be00bd911c8430118148b829c1bd61330be28d768cb76b91ca918ce0b8ca9d2aa06592c104a9b64744dcdac5d6185aa9e02f36fbc6958ff36cc7b2a64a25fb1c0e84769945deebbb9b1a7434ae20a8fd79a58422aeb73c690f2063a2396d61a8b4f9bf081c251a1ee72db04b6bccd4d55ce67adf0d8858acb3abbb0b3cbd9f39ae34b3a6b6470160bf2e92aaa607cac93371cbb91ea822cf13a4de84cd7b9aa3b0cb8a938faa5514dcc93020d3d1202d361a97a96595e7b1172af101f7db215c6b946cc057292e7f22386061552792b87bfc4efa04798d82a57287386c551754da6c04b474449542a18107ee04a1dc856b66a63bdb367c54d4a243bcfeee30ff8b27730991895fbaae8db9dcce0f05f4e7293ac2c35dac6b57094298ad2c271c427e84c6940d8c7de5306d11a6147eb441c82063abad24275f5ad66031b21b50fca29ed2a06b85073ade5fab784dc36756ae9e47f20d06f03a509affeadcbf6195542c6b986c7f5107e3cc13f7150cdcd92689aa3f4855367b54b9b465a09447267fcab5720086ca812caf4eaedc3ea7fe7585be6e521f01d3abc3ee6b83f575a0720e8c85c84f6a87bb1c166432d14cf5b5c4b5e89c252dd3270052bd688111a9abedcadcd9253c9fa8da17335968e9d002cbaab5c905f553dbb764950d60f904b29abec4cc127b7531eb33fab8e013e0a430f35fb5b9bb1c83d796cee2ad7161ed7ffeb43383a6186909242ca0bbf2c2b98feaf8c868c480332212fb6fddd930ebf69ae067ccab2342d069375206ada635f24e35bbffb525692cd7a545172352d0f9ea7e795f94db653101da3ad2531bfed1376286aa547a19e763a6bb827c5da1fdc97ebe30a8be29b636f314a30a572bd8df670015fa19c467f9af8fcbb6746c056d584a6dd14ed6d246e532ab684d45301df63e2b8f8891b088f9f6ac1b4d2190bc6f39c5498c5b82ddf8f0004681ab8834374539f36bc852890dbe31e95e80dce5d86d251c9b4c46eaf5f4d1e7e91e394cbe5dfc66ee0fad076fdeef245da3a013be4adec76476a5ed83c9e4ae1160c0ef2bcd1e731e6eef5ff47cae6f76d1e94ac9561a2d4af252045431e863ec07d0a272c7d31c23c10040ba3bc09d9e1e1173f1a75adf49aaa9197230862d1c69692ab5b95e956a13eebf94a5c0c776c95441f805f5b69466d7c25600d5d4bfb4d95a9be67d2d90eac6b2099c309b742da427fa756f7a029219dd02a3bc25c5bdf6a804c013cf7af21df3cdefc7d18e44114eb5fcdac1084401bbd73960ecef907e836a10df8252725aa9cdf7937bd636141ccf372ca9842f994439a055fe29a18735538213f74092f5cb7505b0a22649195aa2f37486d4b09828417ce0c77278467e15444ce17fef6d6aa3f2ed31491c41f06965d51a783c0f1c3a57b821397d2bf85ba87451f4881dde89a3551fc41dd957d728b47e756e4193f911be0d6982bed1b0254fdecb77b6c0e1414805605afedde2caecc07b46cdfea72d93f95e84473411daebef2f4629e3d15fe7eb094561b29eb00b6ab6433d5c964bd63045592759a419a1aec25c0d11a5613070bf11f3e602b65be8bf75a287df0c3e7ca17e1058c0c1c9a13afd95ed42b5b5592b5b57178caf0e586dfb15079430a98565c34f2473c043e43eb4662c2e5d61ba6b93217c2fc492efc4bd0497a918ddb2908f9571da30718a3ff36851429c18d752a3fdc47897afa1e4d7961407c5bb115f683538dfeac6b305324d28aabfebe2785b91fa3e416f6a38f817f334928936ac661bcaa9d7c1698a96a01c2c39d7868e0724ec1b0774e45207752b554d1ec50c9b50dd738927260c20907acd2c4baedbe4d0b1c6f009e884b7c5fd9a0bc53a76b60e2f9237f5181c4d445ea7486cfdb919dccb5eb51be3d0b731d48d2acba66f9c037d090d625c1d80e08f38a4708c6fe31c2d2eaecadb490c4f6b26ded6aea13007d32a23b5dca3b6b88551e5a908d7d1b12131161f948c071c276fb8580238d768507f2b44172365548e2d4e2909e6c461be885d93a53af32c930397bdcfc073daaab86929b4c68edaa051f31bc4de5623bfdaeca9c3077f91c73aa89be4241f5cdeb69486dd0293dd10f515bce4ad7655f0efa282dc72177fd1e0cd84551982a2413cfc2c42af41a015b2f464ea4877224fa721f6f0b656d494c3044a8a83d96e4abe1ee6963ae548bcd74d98e7aa8eca52fc1ca0c45af6b5fe8e3b7335046701e15efb55db5b0dcb0e32066bfbe40d7dc8a7745ccf61228a1d463805e75a5b04e0791ffee64812f8cf1eaac2c6f2adbf0b3bb8125606c1785b1d86f0e353d00947c00c4e4a9e248f73e105b839aee0fa29acce8b5c6a9c5bce84e8d42e0e749b7119ea9da51a2b5f8a5442f39ec143281437f6a243488bc9f456e01c5d25bdf3228400b72cc756c96bfea97032a51c1256bed651ef43a6d5f4b549fd3deb67bec1a172085302a05a7e112ee08d897040c2de0d36be5e28ce0508906b60d7a91d6143b9d2bbc036b2d0d7786a2a05fbee85f07840071d4f87756d973b6e2a370f7f06ef2f8d2782f82158cf730e9bb8ac32e37f6b0a21f3541c8980c6c0f6d9f7156b6a3774c677fe3477999bfd2d4fcc6832df64a129488782583f7a8349b514a0de96a61100497db12dcd92a0feff04bf39f43276bb9f3ab56c045ec1e08bab29974700f14c82fa865dd4c7b64848a690eae89ddf0d319fe64fe9aa2ffb9de398adb6edf5d664160025be110e110ceaa5303ac0026f9778f77e58f4e869518a6c78da50fc52572b0c9316748086df8069510d50732e5d39a4344ed8f3eacdb4875205db2d836957655fac7594716d5724e9c4b0ad90de9739e0cfd3904c653596d8c4aa97bcd1fe961c827db39e1bb9e1a959c18278653f2edc667c52307313a9e2e7bb3634d7477a7579103130d2a34b76991ff9875e96dfa1c79ee594e01b79705fb98be83713ff4fdc5206f9c43c</script>
+</div>
+<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
+    </div>
 
+    
+    
+    
+
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color:white;font-size:14px;">-------------------本文结束 <i class="fa fa-heart"></i> 感谢阅读-------------------</div>
+    
+</div>
+	
+	</div>
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>云
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.mengyun.ink/post/590e6b0a/" title="MongoDB分片">http://www.mengyun.ink/post/590e6b0a/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/MongoDB/" rel="tag"><i class="fa fa-tag"></i> MongoDB</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/37db6981/" rel="prev" title="MongoDB复制集">
+                  <i class="fa fa-chevron-left"></i> MongoDB复制集
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
   
 
 
