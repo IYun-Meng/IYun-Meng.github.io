@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Grandstander:300,300italic,400,400italic,700,700italic|Noto+Serif+SC:300,300italic,400,400italic,700,700italic|Architects+Daughter:300,300italic,400,400italic,700,700italic|Dosis:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
@@ -30,14 +30,14 @@
 <meta property="og:site_name" content="爱梦的博客">
 <meta property="og:description" content="MongoDB复制集概述什么是复制集复制集(Replica Sets)是额外的数据副本, 是跨多个服务器同步数据的过程, 复制集提供了冗余并增加了数据可用性, 通过复制集可以对硬件故障和中断的服务进行恢复. 复制集的优势如下:1.让数据更安全2.高数据可用性(24*7)3.灾难恢复4.无停机维护(如备份、索引重建、故障转移)5.读缩放(额外的副本读取)6.副本集对应用程序是透明的 复制集工作原理">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.mengyun.ink/images/MongoDB%E5%A4%8D%E5%88%B6%E9%9B%86/MongoDB%E5%A4%8D%E5%88%B6%E7%BB%93%E6%9E%84%E5%9B%BE.png">
-<meta property="og:image" content="http://www.mengyun.ink/images/MongoDB%E5%A4%8D%E5%88%B6%E9%9B%86/MongoDB%E5%A4%8D%E5%88%B6%E9%9B%86%E8%8A%82%E7%82%B9%E9%97%B4%E9%80%89%E4%B8%BE.png">
+<meta property="og:image" content="http://www.mengyun.ink/post/37db6981/MongoDB%E5%A4%8D%E5%88%B6%E7%BB%93%E6%9E%84%E5%9B%BE.png">
+<meta property="og:image" content="http://www.mengyun.ink/post/37db6981/MongoDB%E5%A4%8D%E5%88%B6%E9%9B%86%E8%8A%82%E7%82%B9%E9%97%B4%E9%80%89%E4%B8%BE.png">
 <meta property="article:published_time" content="2020-08-27T11:27:15.000Z">
-<meta property="article:modified_time" content="2020-09-02T13:54:41.271Z">
+<meta property="article:modified_time" content="2020-09-18T01:28:36.915Z">
 <meta property="article:author" content="云">
 <meta property="article:tag" content="MongoDB">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.mengyun.ink/images/MongoDB%E5%A4%8D%E5%88%B6%E9%9B%86/MongoDB%E5%A4%8D%E5%88%B6%E7%BB%93%E6%9E%84%E5%9B%BE.png">
+<meta name="twitter:image" content="http://www.mengyun.ink/post/37db6981/MongoDB%E5%A4%8D%E5%88%B6%E7%BB%93%E6%9E%84%E5%9B%BE.png">
 
 
 <link rel="canonical" href="http://www.mengyun.ink/post/37db6981/">
@@ -104,7 +104,6 @@
 
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="/js/src/clicklove.js"></script>
-<script type="text/javascript" src="/js/src/clicksocialvalue.js"></script>
 <script type="text/javascript"
 color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
 </script>
@@ -210,8 +209,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
 
   <aside class="sidebar">
 
-
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">	
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -293,13 +291,14 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
     <h3 class="widget-title">标签云</h3>
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoFs/" rel="tag">AutoFs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bind/" rel="tag">Bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DHCP/" rel="tag">DHCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dovecot/" rel="tag">Dovecot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/" rel="tag">FTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KVM/" rel="tag">KVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keepalived/" rel="tag">Keepalived</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KickStart/" rel="tag">KickStart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/" rel="tag">NFS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTP/" rel="tag">NTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PXE/" rel="tag">PXE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postfix/" rel="tag">Postfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/" rel="tag">SELinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSLinux/" rel="tag">SYSLinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Samba/" rel="tag">Samba</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TFTP/" rel="tag">TFTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/" rel="tag">root</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoFs/" rel="tag">AutoFs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bind/" rel="tag">Bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DHCP/" rel="tag">DHCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dovecot/" rel="tag">Dovecot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/" rel="tag">FTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KVM/" rel="tag">KVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keepalived/" rel="tag">Keepalived</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KickStart/" rel="tag">KickStart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/" rel="tag">NFS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTP/" rel="tag">NTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PXE/" rel="tag">PXE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postfix/" rel="tag">Postfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/" rel="tag">SELinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSLinux/" rel="tag">SYSLinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Samba/" rel="tag">Samba</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TFTP/" rel="tag">TFTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/" rel="tag">root</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
 </div>
 
       </section>
-    </div>
+	  
+	</div>
   </aside>
   <div class="sidebar-dimmer"></div>
 
@@ -361,7 +360,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-02 21:54:41" itemprop="dateModified" datetime="2020-09-02T21:54:41+08:00">2020-09-02</time>
+        <time title="修改时间：2020-09-18 09:28:36" itemprop="dateModified" datetime="2020-09-18T09:28:36+08:00">2020-09-18</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -406,7 +405,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
 <p>复制集特点:<br>1.N个节点的群集<br>2.任何节点可作为主节点<br>3.所有写入操作都在主节点上<br>4.自动故障转移<br>5.自动恢复</p>
 <table>
 客户端在主节点写入数据, 在从节点读取数据, 主节点与从节点进行数据交互保障数据的一致性. 如果其中一个节点出现故障, 其他节点马上会将业务接过来而无需停机操作.
-<tr><td><img src="/images/MongoDB复制集/MongoDB复制结构图.png" title="复制集工作原理"></td></tr>
+<tr><td><img src="/post/37db6981/MongoDB复制结构图.png" title="复制集工作原理"></td></tr>
 </table>
 
 <a id="more"></a>
@@ -416,7 +415,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
 <h2 id="选举原理"><a href="#选举原理" class="headerlink" title="选举原理"></a>选举原理</h2><p>节点类型分为标准(host)节点、被动(passive)节点和仲裁(arbiter)节点.</p>
 <p>(1)只有标准节点可能被选举为活跃(primary)节点, 有选举权. 被动节点有完整副本, 不可能成为活跃节点, 有选举权. 仲裁节点不复制数据, 不可能成为活跃跃点只有选举权.<br>(2)标准节点与被动节点的区别: priority值高者是标准节点, 低者则为被动节点.<br>(3)选举规则是票数高者获胜, priority是优先权为0~1000的值, 相当于额外增加0~1000的票数.<br>选举结果:票数高者获胜; 若票数相同, 数据新者获胜.</p>
 <table>
-<tr><td><img src="/images/MongoDB复制集/MongoDB复制集节点间选举.png" title="复制集选举原理"></td></tr>
+<tr><td><img src="/post/37db6981/MongoDB复制集节点间选举.png" title="复制集选举原理"></td></tr>
 </table>
 
 <h1 id="MongoDB复制集部属"><a href="#MongoDB复制集部属" class="headerlink" title="MongoDB复制集部属"></a>MongoDB复制集部属</h1><h2 id="配置复制集"><a href="#配置复制集" class="headerlink" title="配置复制集"></a>配置复制集</h2><p>安装MongoDB后配置多实例</p>
@@ -675,8 +674,8 @@ now:                     Mon Aug 31 2020 22:10:41 GMT+0800 (CST)
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/post/590e6b0a/" rel="next" title="MongoDB分片">
-                  MongoDB分片 <i class="fa fa-chevron-right"></i>
+                <a href="/post/41804c37/" rel="next" title="Docker架构、镜像及容器">
+                  Docker架构、镜像及容器 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -741,14 +740,14 @@ now:                     Mon Aug 31 2020 22:10:41 GMT+0800 (CST)
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">223k</span>
+    <span title="站点总字数">224k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:22</span>
+    <span title="站点阅读时长">3:23</span>
   </span>
 </div>
 
