@@ -23,15 +23,15 @@
     var CONFIG = {"hostname":"www.mengyun.ink","root":"/","scheme":"Mist","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="Docker镜像的创建方法基于已有镜像创建把一个容器里面运行的程序以及该程序的运行环境打包起来生成新的镜像:docker commit [选项] 容器ID&#x2F;名称 仓库名称[:标签]   |__ -m --说明信息  |__ -a --作者信息  |__ -p --生成过程中停止容器的运行   基于本地模板创建通过导入操作系统模板文件可以生成镜像, 模板可以从OPENVZ开源项目下载, 下载地址c">
+  <meta name="description" content="Docker镜像的创建方法基于已有镜像创建12345把一个容器里面运行的程序以及该程序的运行环境打包起来生成新的镜像: docker commit [选项] 容器ID&#x2F;名称 仓库名称[:标签]  |__ -m --说明信息  |__ -a --作者信息  |__ -p --生成过程中停止容器的运行   把一个容器里面运行的程序以及该程序的运行环境打包起来生成新的镜像:  docker commi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker数据管理与网络通信">
 <meta property="og:url" content="http://www.mengyun.ink/post/6b6ee287/index.html">
 <meta property="og:site_name" content="爱梦的博客">
-<meta property="og:description" content="Docker镜像的创建方法基于已有镜像创建把一个容器里面运行的程序以及该程序的运行环境打包起来生成新的镜像:docker commit [选项] 容器ID&#x2F;名称 仓库名称[:标签]   |__ -m --说明信息  |__ -a --作者信息  |__ -p --生成过程中停止容器的运行   基于本地模板创建通过导入操作系统模板文件可以生成镜像, 模板可以从OPENVZ开源项目下载, 下载地址c">
+<meta property="og:description" content="Docker镜像的创建方法基于已有镜像创建12345把一个容器里面运行的程序以及该程序的运行环境打包起来生成新的镜像: docker commit [选项] 容器ID&#x2F;名称 仓库名称[:标签]  |__ -m --说明信息  |__ -a --作者信息  |__ -p --生成过程中停止容器的运行   把一个容器里面运行的程序以及该程序的运行环境打包起来生成新的镜像:  docker commi">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-04T10:37:34.000Z">
-<meta property="article:modified_time" content="2020-09-18T01:32:08.639Z">
+<meta property="article:modified_time" content="2020-09-19T15:10:48.140Z">
 <meta property="article:author" content="云">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
@@ -144,7 +144,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">32</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -154,7 +154,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">21</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">22</span></a>
 
   </li>
         <li class="menu-item menu-item-playlist">
@@ -218,7 +218,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker镜像的创建方法"><span class="nav-text">Docker镜像的创建方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于已有镜像创建"><span class="nav-text">基于已有镜像创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于本地模板创建"><span class="nav-text">基于本地模板创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于Dockerfile创建"><span class="nav-text">基于Dockerfile创建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker的数据管理"><span class="nav-text">Docker的数据管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据卷"><span class="nav-text">数据卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据卷容器"><span class="nav-text">数据卷容器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker网络通信"><span class="nav-text">Docker网络通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#端口映射"><span class="nav-text">端口映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器互联"><span class="nav-text">容器互联</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建源容器"><span class="nav-text">创建源容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建接收容器"><span class="nav-text">创建接收容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试容器互联"><span class="nav-text">测试容器互联</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker镜像的创建方法"><span class="nav-text">Docker镜像的创建方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于已有镜像创建"><span class="nav-text">基于已有镜像创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于本地模板创建"><span class="nav-text">基于本地模板创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于Dockerfile创建"><span class="nav-text">基于Dockerfile创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dockerfile案例"><span class="nav-text">Dockerfile案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vim-net-tools"><span class="nav-text">vim+net-tools</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker的数据管理"><span class="nav-text">Docker的数据管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据卷"><span class="nav-text">数据卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据卷容器"><span class="nav-text">数据卷容器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker网络通信"><span class="nav-text">Docker网络通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#端口映射"><span class="nav-text">端口映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器互联"><span class="nav-text">容器互联</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建源容器"><span class="nav-text">创建源容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建接收容器"><span class="nav-text">创建接收容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试容器互联"><span class="nav-text">测试容器互联</span></a></li></ol></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -234,7 +234,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -247,7 +247,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -288,7 +288,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
     <h3 class="widget-title">标签云</h3>
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoFs/" rel="tag">AutoFs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bind/" rel="tag">Bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DHCP/" rel="tag">DHCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dovecot/" rel="tag">Dovecot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/" rel="tag">FTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KVM/" rel="tag">KVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keepalived/" rel="tag">Keepalived</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KickStart/" rel="tag">KickStart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/" rel="tag">NFS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTP/" rel="tag">NTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PXE/" rel="tag">PXE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postfix/" rel="tag">Postfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/" rel="tag">SELinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSLinux/" rel="tag">SYSLinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Samba/" rel="tag">Samba</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TFTP/" rel="tag">TFTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/" rel="tag">root</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoFs/" rel="tag">AutoFs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bind/" rel="tag">Bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DHCP/" rel="tag">DHCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dovecot/" rel="tag">Dovecot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/" rel="tag">FTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KVM/" rel="tag">KVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keepalived/" rel="tag">Keepalived</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KickStart/" rel="tag">KickStart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/" rel="tag">NFS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTP/" rel="tag">NTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nagios/" rel="tag">Nagios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PXE/" rel="tag">PXE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postfix/" rel="tag">Postfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/" rel="tag">SELinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSLinux/" rel="tag">SYSLinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Samba/" rel="tag">Samba</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TFTP/" rel="tag">TFTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/" rel="tag">root</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
 </div>
@@ -357,7 +357,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-18 09:32:08" itemprop="dateModified" datetime="2020-09-18T09:32:08+08:00">2020-09-18</time>
+        <time title="修改时间：2020-09-19 23:10:48" itemprop="dateModified" datetime="2020-09-19T23:10:48+08:00">2020-09-19</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -377,7 +377,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.7k</span>
+      <span>2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -396,19 +396,32 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
     
     <div class="post-body" itemprop="articleBody">
         <hr>
-<h1 id="Docker镜像的创建方法"><a href="#Docker镜像的创建方法" class="headerlink" title="Docker镜像的创建方法"></a>Docker镜像的创建方法</h1><h2 id="基于已有镜像创建"><a href="#基于已有镜像创建" class="headerlink" title="基于已有镜像创建"></a>基于已有镜像创建</h2><p>把一个容器里面运行的程序以及该程序的运行环境打包起来生成新的镜像:<br><code>docker commit [选项] 容器ID/名称 仓库名称[:标签]</code></p>
+<h1 id="Docker镜像的创建方法"><a href="#Docker镜像的创建方法" class="headerlink" title="Docker镜像的创建方法"></a>Docker镜像的创建方法</h1><h2 id="基于已有镜像创建"><a href="#基于已有镜像创建" class="headerlink" title="基于已有镜像创建"></a>基于已有镜像创建</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">把一个容器里面运行的程序以及该程序的运行环境打包起来生成新的镜像: </span><br><span class="line">docker <span class="keyword">commit</span> [选项] 容器<span class="keyword">ID</span>/名称 仓库名称[:标签]</span><br><span class="line">  |__ -m <span class="comment">--说明信息</span></span><br><span class="line">  |__ -a <span class="comment">--作者信息</span></span><br><span class="line">  |__ -p <span class="comment">--生成过程中停止容器的运行</span></span><br></pre></td></tr></table></figure>
+
 <pre>
- |__ -m --说明信息
- |__ -a --作者信息
- |__ -p --生成过程中停止容器的运行
+把一个容器里面运行的程序以及该程序的运行环境打包起来生成新的镜像: 
+docker commit [选项] 容器ID/名称 仓库名称[:标签]
+  |__ -m --说明信息
+  |__ -a --作者信息
+  |__ -p --生成过程中停止容器的运行
 </pre>
 
-<h2 id="基于本地模板创建"><a href="#基于本地模板创建" class="headerlink" title="基于本地模板创建"></a>基于本地模板创建</h2><p>通过导入操作系统模板文件可以生成镜像, 模板可以从OPENVZ开源项目下载, <a href="http://openvz.org/Download/template/precreated" target="_blank" rel="noopener">下载地址</a><br><code>cat 文件名 | docker import - 生成的镜像名称:标签</code></p>
-<h2 id="基于Dockerfile创建"><a href="#基于Dockerfile创建" class="headerlink" title="基于Dockerfile创建"></a>基于Dockerfile创建</h2><p>Dockerfile是由一组指令组成的文件, 其中每条指令对应Linux中的一条命令, Docker程序将读取Dockerfile中的指令生成指定镜像.</p>
-<p>Dockerfile结构大致分为四个部分: 基础镜像信息、维护者信息、镜像操作指令和容器启动时执行指令.</p>
-<p>Dockerfile每行支持一条指令, 每条指令可携带多个参数, 支持使用以”#”号开头的注释.</p>
-<p>在编写Dockerfile时, 有严格的格式需要遵循:<br>1.第一行必须使用FROM指令指取所基于的镜像名称;<br>2.之后使用MAINTAINER指令说明维护该镜像的用户信息;<br>3.然后是镜像操作相关指令, 每运行一条指令, 都会给基础镜像添加新的一层.<br>4.最后使用CMD指令, 来指定启动容器时要运行的命令操作.</p>
-<p><a href="https://docs.docker.com/engine/reference/builder/#from" target="_blank" rel="noopener">官方文档</a></p>
+<a id="more"></a>
+
+<h2 id="基于本地模板创建"><a href="#基于本地模板创建" class="headerlink" title="基于本地模板创建"></a>基于本地模板创建</h2><pre>
+通过导入操作系统模板文件可以生成镜像, 模板可以从OPENVZ开源项目下载, <a class="post-pre-a" href="http://openvz.org/Download/template/precreated" target="_blank" rel="noopener">下载地址</a>.
+cat 文件名 | docker import - 生成的仓库名称:标签
+</pre>
+
+<h2 id="基于Dockerfile创建"><a href="#基于Dockerfile创建" class="headerlink" title="基于Dockerfile创建"></a>基于Dockerfile创建</h2><p>Dockerfile是由一组指令组成的文件, 其中每条指令对应Linux中的一条命令, Docker程序将读取Dockerfile中的指令生成指定镜像.<br>Dockerfile结构大致分为四个部分: 基础镜像信息、维护者信息、镜像操作指令和容器启动时执行指令.<br>Dockerfile每行支持一条指令, 每条指令可携带多个参数, 支持使用以”#”号开头的注释.</p>
+<pre>
+在编写Dockerfile时, 有严格的格式需要遵循: <a class="post-pre-a" href="https://docs.docker.com/engine/reference/builder/#from" target="_blank" rel="noopener">官方文档</a>
+1.第一行必须使用FROM指令指取所基于的镜像名称;
+2.之后使用MAINTAINER指令说明维护该镜像的用户信息;
+3.然后是镜像操作相关指令, 每运行一条指令, 都会给基础镜像添加新的一层.
+4.最后使用CMD指令, 来指定启动容器时要运行的命令操作.
+</pre>
+
 <table>
 Dockerfile操作指令
 <tr><td>指令</td><td>含义</td></tr>
@@ -419,7 +432,7 @@ Dockerfile操作指令
 有一条CMD命令, 如果指定多条则只有最后一条被执行.</td></tr>
 <tr><td>ENTRYPOINT 命令</td><td>指定启动容器时要运行的命令或者脚本</td></tr>
 <tr><td>EXPOSE 端口号</td><td>指定新镜像加载到Docker时要开启的端口</td></tr>
-<tr><td>ENV 环境变量 变量值</td><td>设置一个环境变量的值, 会被后面的RUN使用.</td></tr>
+<tr><td>ENV 环境变量 变量值</td><td>设置一个环境变量的值</td></tr>
 <tr><td>ADD 源文件 目标目录</td><td>将源文件复制到目标目录中, 源文件要与Dockerfile位于相同目录中, 或者是一个URL.</td></tr>
 <tr><td>COPY 源文件/目录 目标文件/目录</td><td>将本地主机上的源文件/目录复制到目标地点, 源文件/目录要与Dockerfile在相同的目录中.</td></tr>
 <tr><td>VOLUME ["目录"]</td><td>在容器中创建一个挂载点</td></tr>
@@ -428,22 +441,52 @@ Dockerfile操作指令
 <tr><td>ONBUILD 命令</td><td>指定所生成的镜像作为一个基础镜像时所要运行的命令</td></tr>
 </table>
 
-<div class="note info"><p>使用Dockerfile生成镜像: <code>docker build [选项] 镜像[:标签] 路径</code><br> |__ -t 指定镜像的标签信息</p>
-</div>
-
-<h1 id="Docker的数据管理"><a href="#Docker的数据管理" class="headerlink" title="Docker的数据管理"></a>Docker的数据管理</h1><p>管理Docker容器中数据主要有两种方式: 数据卷(Data Volumes)和数据卷容器<br>(Data Volumes Containers)</p>
-<h2 id="数据卷"><a href="#数据卷" class="headerlink" title="数据卷"></a>数据卷</h2><p>1.创建数据卷<br><code>docker run --name 自定义容器名 -v 目录 -v 目录2... -dit 镜像[:标签]</code></p>
-<p>2.挂载主机目录作为数据卷<br><code>docker run --name 自定义容器名 -v 绝对路径的本地目录:目录1 -v 绝对路径的本地目录:目录2,... -dit 镜像[:标签]</code></p>
-<h2 id="数据卷容器"><a href="#数据卷容器" class="headerlink" title="数据卷容器"></a>数据卷容器</h2><p><code>docker run --name 自定义容器名 --volumes-from 已挂载数据卷的容器 -it 镜像[:标签]</code></p>
-<h1 id="Docker网络通信"><a href="#Docker网络通信" class="headerlink" title="Docker网络通信"></a>Docker网络通信</h1><h2 id="端口映射"><a href="#端口映射" class="headerlink" title="端口映射"></a>端口映射</h2><p>将宿主机的端口映射到容器中, 使得外部网络访问宿主机的端口便可访问容器的服务.<br><code>docker run [选项] -d 镜像[:标签]</code></p>
 <pre>
+使用Dockerfile生成镜像:
+docker build [选项] 路径
+  |__ -t 仓库名称[:标签] --指定镜像的标签信息
+</pre>
+
+<h3 id="Dockerfile案例"><a href="#Dockerfile案例" class="headerlink" title="Dockerfile案例"></a>Dockerfile案例</h3><h4 id="vim-net-tools"><a href="#vim-net-tools" class="headerlink" title="vim+net-tools"></a>vim+net-tools</h4><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> centos:<span class="number">7</span></span><br><span class="line"><span class="comment"># maintainer 镜像维护者的信息</span></span><br><span class="line"><span class="keyword">MAINTAINER</span> yun&lt;email&gt; </span><br><span class="line"><span class="keyword">ENV</span> MYPATH /usr/local/</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> <span class="variable">$MYPATH</span></span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> yum -y install vim net-tools</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> /bin/bash</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Docker的数据管理"><a href="#Docker的数据管理" class="headerlink" title="Docker的数据管理"></a>Docker的数据管理</h1><pre>
+管理Docker容器中数据主要有两种方式: 数据卷(Data Volumes)和数据卷容器(Data Volumes Containers)
+</pre>
+
+<h2 id="数据卷"><a href="#数据卷" class="headerlink" title="数据卷"></a>数据卷</h2><p>1.创建数据卷</p>
+<pre>
+docker run --name 自定义容器名 -v 目录 -v 目录2... -dit 仓库名称[:标签]
+</pre>
+
+<p>2.挂载主机目录作为数据卷</p>
+<pre>
+docker run --name 自定义容器名 -v 绝对路径的本地目录:目录1 -v 绝对路径的本地目录:目录2,... -dit 仓库名称[:标签]
+</pre>
+
+<h2 id="数据卷容器"><a href="#数据卷容器" class="headerlink" title="数据卷容器"></a>数据卷容器</h2><pre>
+docker run --name 自定义容器名 --volumes-from 已挂载数据卷的容器 -it 仓库名称[:标签]
+</pre>
+
+<h1 id="Docker网络通信"><a href="#Docker网络通信" class="headerlink" title="Docker网络通信"></a>Docker网络通信</h1><h2 id="端口映射"><a href="#端口映射" class="headerlink" title="端口映射"></a>端口映射</h2><pre>
+将宿主机的端口映射到容器中, 使得外部网络访问宿主机的端口便可访问容器的服务:
+docker run [选项] -d 仓库名称[:标签]
  |__ -P --实现随机映射
  |__ -p 主机端口:容器端口 --指定要映射胡端口 
 </pre>
 
-<h2 id="容器互联"><a href="#容器互联" class="headerlink" title="容器互联"></a>容器互联</h2><h3 id="创建源容器"><a href="#创建源容器" class="headerlink" title="创建源容器"></a>创建源容器</h3><p><code>docker run --name 自定义容器名1 -dit 镜像[:标签]</code></p>
-<h3 id="创建接收容器"><a href="#创建接收容器" class="headerlink" title="创建接收容器"></a>创建接收容器</h3><p><code>docker run --name 自定义容器名2 --link 连接容器名:连接别名 -dit 镜像[:标签]</code></p>
-<h3 id="测试容器互联"><a href="#测试容器互联" class="headerlink" title="测试容器互联"></a>测试容器互联</h3><p><code>docker exec -it 自定义容器名2 /bin/bash</code><br><code>ping 连接别名</code></p>
+<h2 id="容器互联"><a href="#容器互联" class="headerlink" title="容器互联"></a>容器互联</h2><h3 id="创建源容器"><a href="#创建源容器" class="headerlink" title="创建源容器"></a>创建源容器</h3><pre>
+docker run --name 自定义容器名1 -dit 仓库名称[:标签]
+</pre>
+
+<h3 id="创建接收容器"><a href="#创建接收容器" class="headerlink" title="创建接收容器"></a>创建接收容器</h3><pre>
+docker run --name 自定义容器名2 --link 连接容器名:连接别名 -dit 仓库名称[:标签]
+</pre>
+
+<h3 id="测试容器互联"><a href="#测试容器互联" class="headerlink" title="测试容器互联"></a>测试容器互联</h3><pre>
+docker exec -it 自定义容器名2 /bin/bash
+ping 连接别名
+</pre>
+
 <div class="note info"><p>使用link建立的连接通道只是单向的.<br>即容器2可以ping通容器1, 而容器1无法ping通容器2.</p>
 </div>
     </div>
@@ -493,6 +536,9 @@ Dockerfile操作指令
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/post/25c16f2d/" rel="next" title="Nagios监控系统">
+                  Nagios监控系统 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -556,14 +602,14 @@ Dockerfile操作指令
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">224k</span>
+    <span title="站点总字数">228k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:23</span>
+    <span title="站点阅读时长">3:27</span>
   </span>
 </div>
 
