@@ -3060,7 +3060,7 @@ hr {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ffa720;
+  background: #ffff5b;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3203,6 +3203,8 @@ table {
 .page-number,
 .post-nav-item a,
 .tag-cloud-tags a,
+.post-comments-count,
+.valine-comment-count,
 .posts-expand .post-title-link,
 .post-meta-item > span:nth-of-type(3) a,
 .posts-collapse .post-content .post-title a,
@@ -3249,4 +3251,12 @@ table {
 }
 .aplayer-list-title {
   color: #000;
+}
+.vcard {
+  background: rgba(150,150,150,0.6);
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+}
+.vwrap {
+  background: rgba(212,251,255,0.651);
 }

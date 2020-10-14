@@ -23,15 +23,15 @@
     var CONFIG = {"hostname":"www.mengyun.ink","root":"/","scheme":"Mist","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="注: 显示的选项不为全部, 外部命令使用:外部命令 --help查看帮助, 内部命令使用:help 内部命令查看帮助. 其他命令hostname命令hostname命令查看或修改当前主机的完整名称(重启后失效, 需修改etc目录下的hostname文件, 重启生效.) hostname [填写表示修改主机名] man命令man命令查看指定命令的手册页man 命令 输入输出重定向 标准输入重定向(">
+  <meta name="description" content="注: 显示的选项不为全部,外部命令使用:外部命令 --help查看帮助;内部命令使用:help 内部命令查看帮助.   帮助命令type命令显示指定命令的类型, 本身也是个内部命令.   type [选项] name [name2,...]  |__ -a --根据name类型:  |      1.在环境变量(PATH)中查找并显示所有包含name这个可执行文件的路径  |      2.如果">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux命令">
 <meta property="og:url" content="http://www.mengyun.ink/post/82734d8/index.html">
 <meta property="og:site_name" content="爱梦的博客">
-<meta property="og:description" content="注: 显示的选项不为全部, 外部命令使用:外部命令 --help查看帮助, 内部命令使用:help 内部命令查看帮助. 其他命令hostname命令hostname命令查看或修改当前主机的完整名称(重启后失效, 需修改etc目录下的hostname文件, 重启生效.) hostname [填写表示修改主机名] man命令man命令查看指定命令的手册页man 命令 输入输出重定向 标准输入重定向(">
+<meta property="og:description" content="注: 显示的选项不为全部,外部命令使用:外部命令 --help查看帮助;内部命令使用:help 内部命令查看帮助.   帮助命令type命令显示指定命令的类型, 本身也是个内部命令.   type [选项] name [name2,...]  |__ -a --根据name类型:  |      1.在环境变量(PATH)中查找并显示所有包含name这个可执行文件的路径  |      2.如果">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-06-05T02:27:45.000Z">
-<meta property="article:modified_time" content="2020-09-19T10:17:24.488Z">
+<meta property="article:modified_time" content="2020-10-10T06:05:13.730Z">
 <meta property="article:author" content="云">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -144,7 +144,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">34</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -154,7 +154,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">22</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">24</span></a>
 
   </li>
         <li class="menu-item menu-item-playlist">
@@ -218,7 +218,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#其他命令"><span class="nav-text">其他命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hostname命令"><span class="nav-text">hostname命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#man命令"><span class="nav-text">man命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#输入输出重定向"><span class="nav-text">输入输出重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#输入重定向"><span class="nav-text">输入重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-符号"><span class="nav-text">&lt; 符号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-lt-符号"><span class="nav-text">&lt;&lt; 符号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出重定向"><span class="nav-text">输出重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gt-符号"><span class="nav-text">&gt; 符号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gt-gt-符号"><span class="nav-text">&gt;&gt; 符号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管道命令符"><span class="nav-text">管道命令符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行的通配符"><span class="nav-text">命令行的通配符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见转义字符"><span class="nav-text">常见转义字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重要环境变量"><span class="nav-text">重要环境变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#alias命令"><span class="nav-text">alias命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unalias命令"><span class="nav-text">unalias命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#type命令"><span class="nav-text">type命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#export命令"><span class="nav-text">export命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vi编辑命令"><span class="nav-text">Vi编辑命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令模式"><span class="nav-text">命令模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#移动光标"><span class="nav-text">移动光标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制、粘贴和剪切"><span class="nav-text">复制、粘贴和剪切</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查找文件内容"><span class="nav-text">查找文件内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#撤销编辑及保存和退出"><span class="nav-text">撤销编辑及保存和退出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入模式"><span class="nav-text">输入模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#末行模式-ex转义模式"><span class="nav-text">末行模式(ex转义模式)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#保存及退出"><span class="nav-text">保存及退出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打开新文件或读入其他文件内容"><span class="nav-text">打开新文件或读入其他文件内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换文件内容"><span class="nav-text">替换文件内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可视模式"><span class="nav-text">可视模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用系统工作命令"><span class="nav-text">常用系统工作命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#echo命令"><span class="nav-text">echo命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#date命令"><span class="nav-text">date命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shutdown命令"><span class="nav-text">shutdown命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wget命令"><span class="nav-text">wget命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ps命令"><span class="nav-text">ps命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pstree命令"><span class="nav-text">pstree命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#top命令"><span class="nav-text">top命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pidof命令"><span class="nav-text">pidof命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kill命令"><span class="nav-text">kill命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#killall命令"><span class="nav-text">killall命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#command命令"><span class="nav-text">command命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系统状态检测命令"><span class="nav-text">系统状态检测命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ifconfig命令"><span class="nav-text">ifconfig命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#route命令"><span class="nav-text">route命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#netstat命令"><span class="nav-text">netstat命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uname命令"><span class="nav-text">uname命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uptime命令"><span class="nav-text">uptime命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#free命令"><span class="nav-text">free命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#who命令"><span class="nav-text">who命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#last命令"><span class="nav-text">last命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#history命令"><span class="nav-text">history命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sosreport命令"><span class="nav-text">sosreport命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工作目录切换命令"><span class="nav-text">工作目录切换命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pwd命令"><span class="nav-text">pwd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cd命令"><span class="nav-text">cd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ls命令"><span class="nav-text">ls命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文本文件编辑命令"><span class="nav-text">文本文件编辑命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#xargs命令"><span class="nav-text">xargs命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#seq命令"><span class="nav-text">seq命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nl命令"><span class="nav-text">nl命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cat命令"><span class="nav-text">cat命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tac命令"><span class="nav-text">tac命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#more命令"><span class="nav-text">more命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less命令"><span class="nav-text">less命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#head命令"><span class="nav-text">head命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tail命令"><span class="nav-text">tail命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tr命令"><span class="nav-text">tr命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wc命令"><span class="nav-text">wc命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stat命令"><span class="nav-text">stat命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cut命令"><span class="nav-text">cut命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#diff命令"><span class="nav-text">diff命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#basename命令"><span class="nav-text">basename命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文本目录管理命令"><span class="nav-text">文本目录管理命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#touch命令"><span class="nav-text">touch命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mkdir命令"><span class="nav-text">mkdir命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rmdir命令"><span class="nav-text">rmdir命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cp命令"><span class="nav-text">cp命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mv命令"><span class="nav-text">mv命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rm命令"><span class="nav-text">rm命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dd命令"><span class="nav-text">dd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#file命令"><span class="nav-text">file命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dirname命令"><span class="nav-text">dirname命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打包压缩与搜索命令"><span class="nav-text">打包压缩与搜索命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩与解压缩命令"><span class="nav-text">压缩与解压缩命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tar命令"><span class="nav-text">tar命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grep命令"><span class="nav-text">grep命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find命令"><span class="nav-text">find命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软件包管理命令"><span class="nav-text">软件包管理命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RPM-红帽软件包管理器"><span class="nav-text">RPM(红帽软件包管理器)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Yum软件仓库"><span class="nav-text">Yum软件仓库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#账号与权限管理命令"><span class="nav-text">账号与权限管理命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#id命令"><span class="nav-text">id命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useradd命令"><span class="nav-text">useradd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#userdel命令"><span class="nav-text">userdel命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#su命令"><span class="nav-text">su命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usermod命令"><span class="nav-text">usermod命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#passwd命令"><span class="nav-text">passwd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupadd命令"><span class="nav-text">groupadd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupdel命令"><span class="nav-text">groupdel命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupmod命令"><span class="nav-text">groupmod命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#newgrp命令"><span class="nav-text">newgrp命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gpasswd命令"><span class="nav-text">gpasswd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groups命令"><span class="nav-text">groups命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#finger命令"><span class="nav-text">finger命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#w命令"><span class="nav-text">w命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件权限及归属"><span class="nav-text">文件权限及归属</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#chmod命令"><span class="nav-text">chmod命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chown命令"><span class="nav-text">chown命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目录权限及归属"><span class="nav-text">目录权限及归属</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#chmod命令-1"><span class="nav-text">chmod命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chown命令-1"><span class="nav-text">chown命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#umask命令"><span class="nav-text">umask命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chattr命令"><span class="nav-text">chattr命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lsattr命令"><span class="nav-text">lsattr命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#硬盘管理命令"><span class="nav-text">硬盘管理命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fdisk命令"><span class="nav-text">fdisk命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#partprobe命令"><span class="nav-text">partprobe命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mkfs命令"><span class="nav-text">mkfs命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mkswap命令"><span class="nav-text">mkswap命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mount命令"><span class="nav-text">mount命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#umount命令"><span class="nav-text">umount命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#df-hT命令"><span class="nav-text">df-hT命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#du命令"><span class="nav-text">du命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scan命令"><span class="nav-text">scan命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#create命令"><span class="nav-text">create命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#display命令"><span class="nav-text">display命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove命令"><span class="nav-text">remove命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#extend命令"><span class="nav-text">extend命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务管理命令"><span class="nav-text">服务管理命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#systemctl命令"><span class="nav-text">systemctl命令</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#帮助命令"><span class="nav-text">帮助命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#type命令"><span class="nav-text">type命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#man命令"><span class="nav-text">man命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#输入输出重定向"><span class="nav-text">输入输出重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#输入重定向"><span class="nav-text">输入重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出重定向"><span class="nav-text">输出重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管道命令符"><span class="nav-text">管道命令符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行的通配符"><span class="nav-text">命令行的通配符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见转义字符"><span class="nav-text">常见转义字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重要环境变量"><span class="nav-text">重要环境变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#alias命令"><span class="nav-text">alias命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unalias命令"><span class="nav-text">unalias命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#export命令"><span class="nav-text">export命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vi编辑命令"><span class="nav-text">Vi编辑命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令模式"><span class="nav-text">命令模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#移动光标"><span class="nav-text">移动光标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制、粘贴和剪切"><span class="nav-text">复制、粘贴和剪切</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查找文件内容"><span class="nav-text">查找文件内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#撤销编辑及保存和退出"><span class="nav-text">撤销编辑及保存和退出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入模式"><span class="nav-text">输入模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#末行模式-ex转义模式"><span class="nav-text">末行模式(ex转义模式)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#保存及退出"><span class="nav-text">保存及退出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打开新文件或读入其他文件内容"><span class="nav-text">打开新文件或读入其他文件内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换文件内容"><span class="nav-text">替换文件内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可视模式"><span class="nav-text">可视模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用系统工作命令"><span class="nav-text">常用系统工作命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hostname命令"><span class="nav-text">hostname命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#echo命令"><span class="nav-text">echo命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#date命令"><span class="nav-text">date命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shutdown命令"><span class="nav-text">shutdown命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wget命令"><span class="nav-text">wget命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ps命令"><span class="nav-text">ps命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pstree命令"><span class="nav-text">pstree命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#top命令"><span class="nav-text">top命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pidof命令"><span class="nav-text">pidof命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kill命令"><span class="nav-text">kill命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#killall命令"><span class="nav-text">killall命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#command命令"><span class="nav-text">command命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系统状态检测命令"><span class="nav-text">系统状态检测命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ifconfig命令"><span class="nav-text">ifconfig命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#route命令"><span class="nav-text">route命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#netstat命令"><span class="nav-text">netstat命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uname命令"><span class="nav-text">uname命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uptime命令"><span class="nav-text">uptime命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#free命令"><span class="nav-text">free命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#who命令"><span class="nav-text">who命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#last命令"><span class="nav-text">last命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#history命令"><span class="nav-text">history命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sosreport命令"><span class="nav-text">sosreport命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目录操作命令"><span class="nav-text">目录操作命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pwd命令"><span class="nav-text">pwd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ls命令"><span class="nav-text">ls命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cd命令"><span class="nav-text">cd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mkdir命令"><span class="nav-text">mkdir命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rmdir命令"><span class="nav-text">rmdir命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件操作命令"><span class="nav-text">文件操作命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#touch命令"><span class="nav-text">touch命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cat命令"><span class="nav-text">cat命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tac命令"><span class="nav-text">tac命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#more命令"><span class="nav-text">more命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less命令"><span class="nav-text">less命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#head命令"><span class="nav-text">head命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tail命令"><span class="nav-text">tail命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ln命令"><span class="nav-text">ln命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rm命令"><span class="nav-text">rm命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cp命令"><span class="nav-text">cp命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mv命令"><span class="nav-text">mv命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dd命令"><span class="nav-text">dd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#file命令"><span class="nav-text">file命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dirname命令"><span class="nav-text">dirname命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xargs命令"><span class="nav-text">xargs命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#seq命令"><span class="nav-text">seq命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nl命令"><span class="nav-text">nl命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tr命令"><span class="nav-text">tr命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wc命令"><span class="nav-text">wc命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stat命令"><span class="nav-text">stat命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cut命令"><span class="nav-text">cut命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#diff命令"><span class="nav-text">diff命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#basename命令"><span class="nav-text">basename命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打包压缩与搜索命令"><span class="nav-text">打包压缩与搜索命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩与解压缩命令"><span class="nav-text">压缩与解压缩命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tar命令"><span class="nav-text">tar命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grep命令"><span class="nav-text">grep命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find命令"><span class="nav-text">find命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软件包管理命令"><span class="nav-text">软件包管理命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RPM-红帽软件包管理器"><span class="nav-text">RPM(红帽软件包管理器)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Yum软件仓库"><span class="nav-text">Yum软件仓库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#账号与权限管理命令"><span class="nav-text">账号与权限管理命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#id命令"><span class="nav-text">id命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useradd命令"><span class="nav-text">useradd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#userdel命令"><span class="nav-text">userdel命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#su命令"><span class="nav-text">su命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usermod命令"><span class="nav-text">usermod命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#passwd命令"><span class="nav-text">passwd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupadd命令"><span class="nav-text">groupadd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupdel命令"><span class="nav-text">groupdel命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupmod命令"><span class="nav-text">groupmod命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#newgrp命令"><span class="nav-text">newgrp命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gpasswd命令"><span class="nav-text">gpasswd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groups命令"><span class="nav-text">groups命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#finger命令"><span class="nav-text">finger命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#w命令"><span class="nav-text">w命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件或目录权限及归属"><span class="nav-text">文件或目录权限及归属</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#chmod命令"><span class="nav-text">chmod命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chown命令"><span class="nav-text">chown命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#umask命令"><span class="nav-text">umask命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chattr命令"><span class="nav-text">chattr命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lsattr命令"><span class="nav-text">lsattr命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#硬盘管理命令"><span class="nav-text">硬盘管理命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fdisk命令"><span class="nav-text">fdisk命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#partprobe命令"><span class="nav-text">partprobe命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mkfs命令"><span class="nav-text">mkfs命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mkswap命令"><span class="nav-text">mkswap命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mount命令"><span class="nav-text">mount命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#umount命令"><span class="nav-text">umount命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#df-hT命令"><span class="nav-text">df-hT命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#du命令"><span class="nav-text">du命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scan命令"><span class="nav-text">scan命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#create命令"><span class="nav-text">create命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#display命令"><span class="nav-text">display命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove命令"><span class="nav-text">remove命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#extend命令"><span class="nav-text">extend命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务管理命令"><span class="nav-text">服务管理命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#systemctl命令"><span class="nav-text">systemctl命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#脚本命令"><span class="nav-text">脚本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sh命令"><span class="nav-text">sh命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bash命令"><span class="nav-text">bash命令</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -234,7 +234,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -247,7 +247,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -288,7 +288,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
     <h3 class="widget-title">标签云</h3>
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoFs/" rel="tag">AutoFs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bind/" rel="tag">Bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DHCP/" rel="tag">DHCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dovecot/" rel="tag">Dovecot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/" rel="tag">FTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KVM/" rel="tag">KVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keepalived/" rel="tag">Keepalived</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KickStart/" rel="tag">KickStart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/" rel="tag">NFS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTP/" rel="tag">NTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nagios/" rel="tag">Nagios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PXE/" rel="tag">PXE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postfix/" rel="tag">Postfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/" rel="tag">SELinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSLinux/" rel="tag">SYSLinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Samba/" rel="tag">Samba</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TFTP/" rel="tag">TFTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/" rel="tag">root</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoFs/" rel="tag">AutoFs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bind/" rel="tag">Bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DHCP/" rel="tag">DHCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dovecot/" rel="tag">Dovecot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/" rel="tag">FTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KVM/" rel="tag">KVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keepalived/" rel="tag">Keepalived</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KickStart/" rel="tag">KickStart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/" rel="tag">NFS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTP/" rel="tag">NTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nagios/" rel="tag">Nagios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PXE/" rel="tag">PXE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postfix/" rel="tag">Postfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/" rel="tag">SELinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSLinux/" rel="tag">SYSLinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Samba/" rel="tag">Samba</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TFTP/" rel="tag">TFTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zabbix/" rel="tag">Zabbix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/" rel="tag">root</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
 </div>
@@ -357,7 +357,7 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-19 18:17:24" itemprop="dateModified" datetime="2020-09-19T18:17:24+08:00">2020-09-19</time>
+        <time title="修改时间：2020-10-10 14:05:13" itemprop="dateModified" datetime="2020-10-10T14:05:13+08:00">2020-10-10</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -370,6 +370,27 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
     </span>
 
   
+    <span id="/post/82734d8/" class="post-meta-item leancloud_visitors" data-flag-title="Linux命令" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/post/82734d8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/post/82734d8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
       </div>
       <div class="post-meta">
     <span class="post-meta-item" title="本文字数">
@@ -377,14 +398,14 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>16k</span>
+      <span>18k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>15 分钟</span>
+      <span>16 分钟</span>
     </span>
 </div>
 
@@ -396,21 +417,54 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
     
     <div class="post-body" itemprop="articleBody">
         <hr>
-<p>注: 显示的选项不为全部, 外部命令使用:<code>外部命令 --help</code>查看帮助, 内部命令使用:<code>help 内部命令</code>查看帮助.</p>
-<h1 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h1><h2 id="hostname命令"><a href="#hostname命令" class="headerlink" title="hostname命令"></a>hostname命令</h2><p>hostname命令查看或修改当前主机的完整名称<br>(重启后失效, 需修改etc目录下的hostname文件, 重启生效.)</p>
-<p><code>hostname [填写表示修改主机名]</code></p>
-<h2 id="man命令"><a href="#man命令" class="headerlink" title="man命令"></a>man命令</h2><p>man命令查看指定命令的手册页<br><code>man 命令</code></p>
+<div class="note info"><p>注: 显示的选项不为全部,<br>外部命令使用:<code>外部命令 --help</code>查看帮助;<br>内部命令使用:<code>help 内部命令</code>查看帮助. </p>
+</div>
+<h1 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h1><h2 id="type命令"><a href="#type命令" class="headerlink" title="type命令"></a>type命令</h2><p>显示指定命令的类型, 本身也是个内部命令.</p>
+<pre>
+ type [选项] name [name2,...]
+ |__ -a --根据name类型:
+ |      1.在环境变量(PATH)中查找并显示所有包含name这个可执行文件的路径
+ |      2.如果在别名、关键字, 函数, 内建的信息中存在name, 则一并显示.
+ |
+ |__ -f --不对shell函数进行查找
+ |__ -p --如果name在执行'type -t name'返回的不是'file', 那么什么也不返回; 否则会在环境变量(PATH)中查找并返回可执行文件路径.
+ |__ -P --无论要查找name是什么, 只要是可执行文件就会在环境变量(PATH)中查找并返回可执行文件路径.
+ |__ -t --根据name的类型来返回一个单词来对应这个类型, 如果没有单词相对应则返回空值.
+</pre>
+
+<h2 id="man命令"><a href="#man命令" class="headerlink" title="man命令"></a>man命令</h2><p>man命令查看指定命令的手册页</p>
+<pre>man 命令</pre>
+
 <h1 id="输入输出重定向"><a href="#输入输出重定向" class="headerlink" title="输入输出重定向"></a>输入输出重定向</h1><table>
 <tr><td>标准输入重定向(STDIN，文件描述符为0)</td><td>默认从键盘输入, 也可从其他文件或命令中输入.</td></tr>
 <tr><td>标准输出重定向(STDOUT，文件描述符为1)</td><td>默认输出到屏幕.</td></tr>
 <tr><td>错误输出重定向(STDERR，文件描述符为2)</td><td>默认输出到屏幕.</td></tr>
 </table>
 
-<h2 id="输入重定向"><a href="#输入重定向" class="headerlink" title="输入重定向"></a>输入重定向</h2><h3 id="lt-符号"><a href="#lt-符号" class="headerlink" title="&lt; 符号"></a>&lt; 符号</h3><p><code>命令 < 文件</code> 将文件作为命令的标准输入</p>
-<h3 id="lt-lt-符号"><a href="#lt-lt-符号" class="headerlink" title="&lt;&lt; 符号"></a>&lt;&lt; 符号</h3><p><code>命令 << 分界符</code> 从标准输入中读入, 直到遇见分界符才停止.</p>
-<h2 id="输出重定向"><a href="#输出重定向" class="headerlink" title="输出重定向"></a>输出重定向</h2><h3 id="gt-符号"><a href="#gt-符号" class="headerlink" title="&gt; 符号"></a>&gt; 符号</h3><p><code>命令 > 文件</code> 将标准输出重定向到一个文件中(清空原有文件的数据)<br><code>命令 2> 文件</code> 将错误输出重定向到一个文件中(清空原有文件的数据)</p>
-<h3 id="gt-gt-符号"><a href="#gt-gt-符号" class="headerlink" title="&gt;&gt; 符号"></a>&gt;&gt; 符号</h3><p><code>命令 >> 文件</code> 将标准输出重定向到一个文件中(追加到原有内容的后面)<br><code>命令 2>> 文件</code> 将错误输出重定向到一个文件中（追加到原有内容的后面）<br><code>命令 >> 文件 2>&1 | 命令 &>> 文件</code> 将标准输出与错误输出共同写入到文件中(追加到原有内容的后面)<br>注: &amp;指示不要把1当作普通文件, 而是fd=1即标准输出来处理.</p>
-<h2 id="管道命令符"><a href="#管道命令符" class="headerlink" title="管道命令符"></a>管道命令符</h2><p>符号<code>命令1 | 命令2</code>把前一个命令原本要输出到屏幕的标准正常数据当作是后一个命令的标准输入</p>
+<h2 id="输入重定向"><a href="#输入重定向" class="headerlink" title="输入重定向"></a>输入重定向</h2><pre>
+< 符号
+命令 < 文件 --将文件作为命令的标准输入
+
+<< 符号
+命令 << 分界符 --从标准输入中读入, 直到遇见分界符才停止.
+</pre>
+
+<h2 id="输出重定向"><a href="#输出重定向" class="headerlink" title="输出重定向"></a>输出重定向</h2><pre>
+> 符号
+命令 > 文件 --将标准输出重定向到一个文件中(清空原有文件的数据)
+命令 2> 文件 --将错误输出重定向到一个文件中(清空原有文件的数据)
+
+>> 符号
+命令 >> 文件 --将标准输出重定向到一个文件中(追加到原有内容的后面)
+命令 2>> 文件 --将错误输出重定向到一个文件中(追加到原有内容的后面)
+
+命令 >> 文件 2><font color="red">&1</font> --将标准输出与错误输出共同写入到文件中(追加到原有内容的后面)
+注: &指示不要把1当作普通文件, 而是fd=1即标准输出来处理, 即追加到文件中而不显示到屏幕上.
+</pre>
+
+<h2 id="管道命令符"><a href="#管道命令符" class="headerlink" title="管道命令符"></a>管道命令符</h2><pre>
+ 命令1 | 命令2 --把前一个命令原本要输出到屏幕的标准正常数据当作是后一个命令的标准输入
+</pre>
 <a id="more"></a>
 
 <h2 id="命令行的通配符"><a href="#命令行的通配符" class="headerlink" title="命令行的通配符"></a>命令行的通配符</h2><table>
@@ -439,15 +493,14 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
 <tr><td>EDITOR</td><td>用户默认的文本编辑器</td></tr>
 </table>
 
-<h3 id="alias命令"><a href="#alias命令" class="headerlink" title="alias命令"></a>alias命令</h3><p>alias命令用于给指定的命令起别名, 配置文件为:<code>~username/.bashrc</code>.</p>
+<h3 id="alias命令"><a href="#alias命令" class="headerlink" title="alias命令"></a>alias命令</h3><p>alias命令用于给指定的命令起别名, 配置文件为:<pre>~username/.bashrc</pre>.</p>
 <pre>
  alias 别名=命令 --给指定命令起别名
  alias --显示给所有命令起的别名
 </pre>
 
-<h3 id="unalias命令"><a href="#unalias命令" class="headerlink" title="unalias命令"></a>unalias命令</h3><p>unalias命令用于取消指定命令的别名, 其格式为:<code>unalias 别名</code>.</p>
-<h3 id="type命令"><a href="#type命令" class="headerlink" title="type命令"></a>type命令</h3><p>type命令用于判断输入的是内部命令还是外部命令, 其格式为:<code>type 命令</code>.</p>
-<h3 id="export命令"><a href="#export命令" class="headerlink" title="export命令"></a>export命令</h3><p>export命令用于将局部变量提升为全局变量, 其格式为:<code>export 变量名</code>.</p>
+<h3 id="unalias命令"><a href="#unalias命令" class="headerlink" title="unalias命令"></a>unalias命令</h3><p>unalias命令用于取消指定命令的别名, 其格式为:<pre>unalias 别名</pre>.</p>
+<h3 id="export命令"><a href="#export命令" class="headerlink" title="export命令"></a>export命令</h3><p>export命令用于将局部变量提升为全局变量, 其格式为:<pre>export 变量名</pre>.</p>
 <h1 id="Vi编辑命令"><a href="#Vi编辑命令" class="headerlink" title="Vi编辑命令"></a>Vi编辑命令</h1><h2 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h2><p>启动vi编辑器后默认进入命令模式</p>
 <h3 id="移动光标"><a href="#移动光标" class="headerlink" title="移动光标"></a>移动光标</h3><pre>
  行内快速跳转
@@ -555,7 +608,13 @@ color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/c
 </pre>
 
 <h2 id="可视模式"><a href="#可视模式" class="headerlink" title="可视模式"></a>可视模式</h2><p>在命令模式下按下v键进入普通可视模式;<br>按下Ctrl+v键进入块可视模式;<br>按下Shift+v键进入行可视模式.<br>注: 可以与命令模式和末行模式的命令结合使用</p>
-<h1 id="常用系统工作命令"><a href="#常用系统工作命令" class="headerlink" title="常用系统工作命令"></a>常用系统工作命令</h1><h2 id="echo命令"><a href="#echo命令" class="headerlink" title="echo命令"></a>echo命令</h2><p>echo命令用于在终端输出字符串或变量提取后的值</p>
+<h1 id="常用系统工作命令"><a href="#常用系统工作命令" class="headerlink" title="常用系统工作命令"></a>常用系统工作命令</h1><h2 id="hostname命令"><a href="#hostname命令" class="headerlink" title="hostname命令"></a>hostname命令</h2><p>hostname命令查看或修改当前主机的完整名称, 后面带主机名就代表修改, 没有则是查看,</p>
+<pre>
+ hostname [填写表示修改主机名]
+ 重启后失效, 需修改<font color="red">/etc/hostname</font>文件, 重启生效.
+</pre>
+
+<h2 id="echo命令"><a href="#echo命令" class="headerlink" title="echo命令"></a>echo命令</h2><p>echo命令用于在终端输出字符串或变量提取后的值</p>
 <pre>
  echo [选项]
  |__ -e 允许反斜杠转义
@@ -639,7 +698,7 @@ echo -e "\033[字背景颜色;文字颜色m 字符串 \033[0m"
  <tr><td>进程的所有者</td><td>进程ID号</td><td>运算器占用率</td><td>内存占用率</td><td>虚拟内存使用量(单位是KB)</td><td>占用的固定内存量(单位是KB)</td><td>所在终端</td><td>进程状态</td><td>被启动的时间</td><td>实际使用CPU的时间</td><td>命令名称与参数</td></tr>
 </table>
 
-<h2 id="pstree命令"><a href="#pstree命令" class="headerlink" title="pstree命令"></a>pstree命令</h2><p>安装:<code>yum -y install psmisc</code><br>pstree命令用于以树状显示进程信息</p>
+<h2 id="pstree命令"><a href="#pstree命令" class="headerlink" title="pstree命令"></a>pstree命令</h2><p>安装:<pre>yum -y install psmisc</pre><br>pstree命令用于以树状显示进程信息</p>
 <pre>
  pstree [选项]
  |__ -a --显示每个程序的完整指令, 包含路径, 参数或是常驻服务的标示.
@@ -648,7 +707,7 @@ echo -e "\033[字背景颜色;文字颜色m 字符串 \033[0m"
  |__ -u --显示用户名称
 </pre>
 
-<h2 id="top命令"><a href="#top命令" class="headerlink" title="top命令"></a>top命令</h2><p>top命令用于动态地监视进程活动与系统负载等信息, 其格式为:<code>top</code>.</p>
+<h2 id="top命令"><a href="#top命令" class="headerlink" title="top命令"></a>top命令</h2><p>top命令用于动态地监视进程活动与系统负载等信息, 其格式为:<pre>top</pre>.</p>
 <table style="text-align:center; font-size:12px">
 <tr><td>第1行</td><td>系统时间</td><td>运行时间</td><td>登录终端数</td><td>系统负载(三个数值分别为1分钟、5分钟、15分钟内的平均值,数值越小意味着负载越低).</td><td></td></tr>
 <tr><td>第2行</td><td>进程总数</td><td>运行中的进程数</td><td>睡眠中的进程数</td><td>停止的进程数</td><td>僵死的进程数.</td></tr>
@@ -657,7 +716,7 @@ echo -e "\033[字背景颜色;文字颜色m 字符串 \033[0m"
 <tr><td>第5行</td><td>虚拟内存总量</td><td>虚拟内存使用量</td><td>虚拟内存空闲量</td><td>已被提前加载的内存量.</td><td></td></tr>
 </table>
 
-<h2 id="pidof命令"><a href="#pidof命令" class="headerlink" title="pidof命令"></a>pidof命令</h2><p>pidof命令用于查询某个指定服务进程的PID值, 其格式为:<code>pidof 服务名称</code>.</p>
+<h2 id="pidof命令"><a href="#pidof命令" class="headerlink" title="pidof命令"></a>pidof命令</h2><p>pidof命令用于查询某个指定服务进程的PID值, 其格式为:<pre>pidof 服务名称</pre>.</p>
 <h2 id="kill命令"><a href="#kill命令" class="headerlink" title="kill命令"></a>kill命令</h2><p>kill命令用于终止某个指定PID的服务进程</p>
 <pre>
  kill [选项]
@@ -732,33 +791,26 @@ lo: flags=73  mtu 65536
  uname [选项]
  |__  -a --显示所有信息
 </pre>
-<p>如果要查看当前系统版本的详细信息, 则需要查看redhat-release文件:<code>cat /etc/redhat-release</code>.</p>
-<h2 id="uptime命令"><a href="#uptime命令" class="headerlink" title="uptime命令"></a>uptime命令</h2><p>uptime用于查看系统的负载信息, 其格式为:<code>uptime</code>.<br>负载值越低越好, 尽量不要长期超过1, 在生产环境中不要超过5.</p>
+<p>如果要查看当前系统版本的详细信息, 则需要查看redhat-release文件:<pre>cat /etc/redhat-release</pre>.</p>
+<h2 id="uptime命令"><a href="#uptime命令" class="headerlink" title="uptime命令"></a>uptime命令</h2><p>uptime用于查看系统的负载信息, 其格式为:<pre>uptime</pre>.<br>负载值越低越好, 尽量不要长期超过1, 在生产环境中不要超过5.</p>
 <h2 id="free命令"><a href="#free命令" class="headerlink" title="free命令"></a>free命令</h2><p>free用于显示当前系统中内存的使用量信息</p>
 <pre>
  free [选项]
  |__ -h --人性化显示
 </pre>
 
-<h2 id="who命令"><a href="#who命令" class="headerlink" title="who命令"></a>who命令</h2><p>who用于查看当前登入主机的用户终端信息, 其格式为<code>who</code>.</p>
-<h2 id="last命令"><a href="#last命令" class="headerlink" title="last命令"></a>last命令</h2><p>last命令用于查看所有系统的登录记录, 其格式为<code>last</code>.<br>使用last命令可以查看本机的登录记录. 但是, 由于这些信息都是以日志文件的形式保存在系统中, 因此黑客可以很容易地对内容进行篡改. 千万不要单纯以该命令的输出信息而判断系统有无被恶意入侵!</p>
+<h2 id="who命令"><a href="#who命令" class="headerlink" title="who命令"></a>who命令</h2><p>who用于查看当前登入主机的用户终端信息, 其格式为<pre>who</pre>.</p>
+<h2 id="last命令"><a href="#last命令" class="headerlink" title="last命令"></a>last命令</h2><p>last命令用于查看所有系统的登录记录, 其格式为<pre>last</pre>.<br>使用last命令可以查看本机的登录记录. 但是, 由于这些信息都是以日志文件的形式保存在系统中, 因此黑客可以很容易地对内容进行篡改. 千万不要单纯以该命令的输出信息而判断系统有无被恶意入侵!</p>
 <h2 id="history命令"><a href="#history命令" class="headerlink" title="history命令"></a>history命令</h2><p>history命令用于显示历史执行过的命令, 可以使用”!编码数字”的方式来重复执行某一次的命令.</p>
 <pre>
  history [选项]
  |__ -c --清空当前用户在本机上执行的Linux命令历史记录信息
 </pre>
 
-<h2 id="sosreport命令"><a href="#sosreport命令" class="headerlink" title="sosreport命令"></a>sosreport命令</h2><p>sosreport命令用于收集系统配置及架构信息并输出诊断文档, 其格式为<code>sosreport</code>.</p>
-<h1 id="工作目录切换命令"><a href="#工作目录切换命令" class="headerlink" title="工作目录切换命令"></a>工作目录切换命令</h1><h2 id="pwd命令"><a href="#pwd命令" class="headerlink" title="pwd命令"></a>pwd命令</h2><p>pwd命令用于显示用户当前所处的工作目录, 其格式为:<code>pwd</code>.</p>
-<h2 id="cd命令"><a href="#cd命令" class="headerlink" title="cd命令"></a>cd命令</h2><p>cd命令将用户的工作目录更改到其他位置</p>
+<h2 id="sosreport命令"><a href="#sosreport命令" class="headerlink" title="sosreport命令"></a>sosreport命令</h2><p>sosreport命令用于收集系统配置及架构信息并输出诊断文档, 其格式为<pre>sosreport</pre>.</p>
+<h1 id="目录操作命令"><a href="#目录操作命令" class="headerlink" title="目录操作命令"></a>目录操作命令</h1><h2 id="pwd命令"><a href="#pwd命令" class="headerlink" title="pwd命令"></a>pwd命令</h2><p>pwd命令用于显示用户当前所处的工作目录</p>
 <pre>
- cd [选项]
- |__ - --用于表示上一个执行cd命令之前所处的目录
- |__ / --根目录
- |__ ~ --家目录
- |__ ~[username] --指定用户家目录
- |__ . --当前目录
- |__ .. --上级目录
+ pwd
 </pre>
 
 <h2 id="ls命令"><a href="#ls命令" class="headerlink" title="ls命令"></a>ls命令</h2><p>ls命令用于显示目录或目录中的文件信息</p>
@@ -769,41 +821,193 @@ lo: flags=73  mtu 65536
  |
  |__ -a --显示所有子目录和文件的信息, 包括名称以点号开头的隐藏目录和隐藏文件.
  |__ -A --与-a不同之处是不会显示当前目录和父目录
- |__ -d --显示目录本身的属性, 而不是显示目录中的内容.
+ |__ -d --显示目录本身的属性, 而不是显示目录下的文件.
  |__ -R --以递归的方式显示指定目录及其子目录中的所有内容
+ |__ -i --显示文件的i节点号
+
+ alias l.='<font color="red">ls -d .* --color=auto</font>'
+ alias ll='<font color="red">ls -l --color=auto</font>'
+
+ <font color="#AEEEEE">-rw-------.</font> <font color="#CD8C95">1</font> <font color="#9B30FF">root</font> <font color="#D15FEE">root</font> <font color="#FF3030">1285</font> <font color="#9AFF9A">9月  12 19:06</font> <font color="#FF00FF">anaconda-ks.cfg</font>
+ 第一列:权限
+ 第二列:引用计数
+ 第三列:所有者
+ 第四列:所属组
+ 第五列:大小, 默认为字节(byte).
+ 第六列:文件修改时间
+ 第七列:文件名 
+ r:可读(4) w:可写(2) x:可执行(1)
 </pre>
 
-<table>
--:文件 l:链接 d:目录 | r:可读(4) w:可写(2) x:可执行(1)
-<tr>
-  <td>文件类型</td>
-  <td>属主权限</td>
-  <td>属组权限</td>
-  <td>其他任何用户权限</td>
-  <td>-</td>
-  <td>-</td>
-  <td>属主归属</td>
-  <td>属组归属</td>
-</tr>
-<tr>
-  <td>-</td>
-  <td>rwx</td>
-  <td>r-x</td>
-  <td>r-x</td>
-  <td>.</td>
-  <td>1</td>
-  <td>root</td>
-  <td>root</td>
-</tr>
-</table> 
+<h2 id="cd命令"><a href="#cd命令" class="headerlink" title="cd命令"></a>cd命令</h2><p>cd命令将用户的工作目录更改到其他位置</p>
 <pre>
--rwxr-xr-x.   1  777 root 18519 6月   3 11:00 ss.sh
-lrwxrwxrwx.   1 root root     8 5月  26 15:25 sbin -> usr/sbin
-drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
-[root@localhost /]# 
+ cd [选项]
+ |__ - --上次所在目录
+ |__ / --根目录
+ |__ ~ --用户家目录
+ |__ ~[username] --指定用户家目录
+ |__ . --当前目录
+ |__ .. --上级目录
 </pre>
 
-<h1 id="文本文件编辑命令"><a href="#文本文件编辑命令" class="headerlink" title="文本文件编辑命令"></a>文本文件编辑命令</h1><h2 id="xargs命令"><a href="#xargs命令" class="headerlink" title="xargs命令"></a>xargs命令</h2><p>xargs命令是给命令传递参数的一个过滤器, 也是组合多个命令的一个工具.</p>
+<h2 id="mkdir命令"><a href="#mkdir命令" class="headerlink" title="mkdir命令"></a>mkdir命令</h2><p>mkdir命令用于创建空白的目录</p>
+<pre>
+ mkdir [选项] 目录
+ |__ -p --创建多级目录
+</pre>
+
+<h2 id="rmdir命令"><a href="#rmdir命令" class="headerlink" title="rmdir命令"></a>rmdir命令</h2><p>rmdir命令用于删除空白的目录</p>
+<pre>
+ rmdir [选项] 目录
+ |__ -p --删除多级目录, 如果其中有个目录不是空目录的话则无法继续删除.
+</pre>
+
+<h1 id="文件操作命令"><a href="#文件操作命令" class="headerlink" title="文件操作命令"></a>文件操作命令</h1><h2 id="touch命令"><a href="#touch命令" class="headerlink" title="touch命令"></a>touch命令</h2><p>touch命令用于创建空白文件或设置文件的时间</p>
+<pre>
+ touch [选项] 文件
+ |__ -a --仅修改"读取时间"(atime)
+ |__ -c --不建立任何文件, 配合其他选项来设置时间.
+ |__ -d &lt;时间日期> --使用指定的日期时间来设置时间, 而非现在的时间, 支持更多的时间格式.
+ |
+ |__ -m --仅修改"修改时间"(mtime)
+ |__ -r &lt;文件或目录> --根据指定文件或目录的时间进行设置
+ |__ -t &lt;[[CC]YY]MMDDhhmm[.ss]> --使用指定的日期时间来设置时间, 而非现在的时间.
+</pre>
+
+<h2 id="cat命令"><a href="#cat命令" class="headerlink" title="cat命令"></a>cat命令</h2><p>cat命令用于连接多个文件的内容(顺序查看)</p>
+<pre>
+ cat [选项] 文件
+ |__ -A --等于-vET选项
+ |__ -b --只对非空输出行编号
+ |__ -e --等于-vE选项
+ |__ -E --在每行结束处显示"$"
+ |__ -n --对输出的所有行编号
+ |__ -s --不输出多行空行, 每段之间只输出一行空行.
+ |__ -t --等于-vT选项
+ |__ -T --将跳格字符(TAB)显示为"^I"
+</pre>
+<pre>查看系统信息: cat /proc/version
+ 查看CPU信息: cat /proc/cpuinfo
+ 查看内存信息: cat /proc/meinfo
+ 查看网卡配置信息: cat /etc/sysconfig/network-scripts/ifcfg-eno16777736
+</pre>
+
+<h2 id="tac命令"><a href="#tac命令" class="headerlink" title="tac命令"></a>tac命令</h2><p>用于连接多个文件的内容(逆序查看)</p>
+<pre>
+ tac 文件
+</pre>
+
+<h2 id="more命令"><a href="#more命令" class="headerlink" title="more命令"></a>more命令</h2><p>查看超过一屏的文件内容时, 将进行分屏显示, 并在左下角显示当前内容在整个文件中的百分比.</p>
+<pre>
+ more [选项] 文件
+ |__ -d --在查看内容的同时显示帮助([Press space to continue, 'q' to quit.])
+ |__ -p --不滚屏, 先清屏后在显示文本
+ |__ -c --不滚屏, 显示文本后清理行尾
+ |__ -s --将多个空行压缩为一行
+ |__ -NUM --指定每屏显示的行数为NUM
+ |__ +NUM --从文件第NUM行开始显示
+ |__ +/STRING --在文件内容中从下至上输出后查找匹配字符串(STRING), 查找到后并输出前两行的内容.
+
+ h键: 查看帮助
+ b键: 显示上一屏的内容
+ Space(空格)键: 显示下一屏的内容
+ Enter(回车)键: 显示下一行的内容
+ q/Q键: 退出查看
+</pre>
+
+<h2 id="less命令"><a href="#less命令" class="headerlink" title="less命令"></a>less命令</h2><p>较晚出现的分页显示命令, 查看超过一屏的文件内容时, 只显示被查看文件的文件名, 能倒退查看.</p>
+<pre>
+ less [选项] 文件
+ |__ -N --每一行行首显示行号
+ |__ -s --连续多个空行压缩成一行显示
+ |__ -S --在单行显示较长的内容, 而不换行显示.
+</pre>
+
+<h2 id="head命令"><a href="#head命令" class="headerlink" title="head命令"></a>head命令</h2><p>用于显示文件开头的一部分内容</p>
+<pre>
+ head [选项] 文件
+ |__ -n NUM/-NUM --指定显示行数
+ |__ -v --显示文件名
+</pre>
+
+<h2 id="tail命令"><a href="#tail命令" class="headerlink" title="tail命令"></a>tail命令</h2><p>用于显示文件末尾的一部分内容或持续刷新内容</p>
+<pre>
+ tail [选项] 文件
+ |__ -n NUM/-NUM --指定显示行数
+ |__ -v --显示文件名
+ |__ -f --监听文件的新增内容
+</pre>
+
+<h2 id="ln命令"><a href="#ln命令" class="headerlink" title="ln命令"></a>ln命令</h2><p>用于为文件创建链接</p>
+<pre>
+ ln [选项] 源文件/目录 目标文件/目标目录
+ |__ -s --建立软链接文件, 默认是创建硬链接文件.
+ |__ -f --强制创建链接文件, 如果目标文件已经存在的话, 则删除目标文件后在建立链接文件.
+ |__ -i --覆盖既有文件之前先询问用户
+ |__ -v 显示创建链接的过程
+</pre>
+<pre>
+ 软链接/符合链接(symbolic link):
+   1.软链接和源文件拥有不同的Inode和Block
+   2.两个文件修改任意一个, 另一个都改变.
+   3.删除软链接, 源文件不受影响; 删除源文件, 软链接不能使用.
+   4.软链接没有实际数据, 只保存源文件的Inode, 不论源文件多大, 软链接大小不变.
+   5.软链接的权限是最大权限lrwxrwxrwx., 但是由于没有实际数据, 最终访问时需要参考源文件权限.
+   6.软链接可以链接目录
+   7.软链接可以跨分区
+   8.软链接特征明显, 建议使用软连接.
+ 注:路径一定要使用绝对路径
+
+ 硬链接(hard link):
+   1.源文件和硬链接文件拥有相同的Inode和Block
+   2.修改任意一个文件, 另一个都改变.
+   3.删除任意一个文件, 另一个都能使用.
+   4.硬链接标记不清, 很难确认硬链接文件位置, 不建议使用.
+   5.硬链接不能链接目录
+   6.硬链接不能跨分区
+</pre>
+
+<h2 id="rm命令"><a href="#rm命令" class="headerlink" title="rm命令"></a>rm命令</h2><p>用于删除指定的文件或目录</p>
+<pre>
+ rm [选项] 文件/目录
+ |__ -i --删除文件或目录时提醒用户确认
+ |__ -f --删除文件或目录时不进行提醒, 而直接强制删除. 
+ |__ -r --删除目录时必须使用此选项, 表示递归删除整个目录树.
+</pre>
+
+<h2 id="cp命令"><a href="#cp命令" class="headerlink" title="cp命令"></a>cp命令</h2><p>用于复制文件或目录</p>
+<pre>
+ cp [选项] 源文件/目录 目标文件/目录
+ |__ -a --相当于-pdr
+ |  |__ -p --复制时保持源文件的权限、属主及时间标记等属性不变.
+ |  |__ -d --若对象为"链接文件", 则保留该"链接文件"的属性.
+ |  |__ -r --复制目录时必须使用此选项, 表示递归复制所有文件及子目录.
+ |
+ |__ -f --覆盖目标同名文件或目录时不进行提醒, 而直接强制复制.
+ |__ -i --覆盖目标同名文件或目录时提醒用户确认
+</pre>
+
+<h2 id="mv命令"><a href="#mv命令" class="headerlink" title="mv命令"></a>mv命令</h2><p>用于剪切文件或将文件重命名</p>
+<pre>
+ mv [选项] 源文件/目录 目标文件名/目录
+ |__ -f --直接覆盖现有的文件或目录
+ |__ -i --覆盖目标同名文件或目录时提醒用户确认
+ |__ -n --不覆盖已经存在的同名文件
+ |__ -u --文件较新或者目标文件不存在时, 才执行移动操作.
+ |__ -v --显示详细信息
+</pre>
+
+<h2 id="dd命令"><a href="#dd命令" class="headerlink" title="dd命令"></a>dd命令</h2><p>用于按照指定大小和个数的数据块来复制文件或转换文件</p>
+<pre>dd if=输入的文件名称 of=输出的文件名称 count=要复制"块"的个数 bs=每个"块"的大小</pre>
+
+<h2 id="file命令"><a href="#file命令" class="headerlink" title="file命令"></a>file命令</h2><p>用于查看文件的类型, 其格式为:<pre>file 文件名</pre>.<br>在Linux系统中, 由于文本、目录、设备等所有这些一切都统称为文件, 而我们又不能单凭后缀就知道具体的文件类型, 这时就需要使用file命令来查看文件类型了.</p>
+<h2 id="dirname命令"><a href="#dirname命令" class="headerlink" title="dirname命令"></a>dirname命令</h2><p>去除文件名中的非目录部分, 仅显示与目录有关的内容. dirname命令读取指定路径名保留最后一个/及其后面的字符, 删除其他部分, 并写结果到标准输出. 如果最后一个/后无字符, dirname命令使用倒数第二个/, 并忽略其后的所有字符.</p>
+<pre>
+ dirname [参数]
+ <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 例:</span></span><br><span class="line">dirname <span class="string">//</span> <span class="comment"># /</span></span><br><span class="line">dirname <span class="string">/a/b/</span> <span class="comment"># /a</span></span><br><span class="line">dirname a <span class="comment"># .</span></span><br></pre></td></tr></table></figure>
+</pre>
+
+<h2 id="xargs命令"><a href="#xargs命令" class="headerlink" title="xargs命令"></a>xargs命令</h2><p>xargs命令是给命令传递参数的一个过滤器, 也是组合多个命令的一个工具.</p>
 <pre>
  xargs [选项] 执行命令
  |__ -0 --单行输出
@@ -842,34 +1046,8 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
  |__ -p --在逻辑定界符处不重新开始计算
 </pre>
 
-<h2 id="cat命令"><a href="#cat命令" class="headerlink" title="cat命令"></a>cat命令</h2><p>cat命令用于连接多个文件的内容(顺序查看)</p>
-<pre>
- cat [选项] 文件
- |__ -n --显示行号
-</pre>
-<p><code>查看系统信息: cat /proc/version<br> 查看CPU信息: cat /proc/cpuinfo<br> 查看内存信息: cat /proc/meinfo<br> 查看网卡配置信息: cat /etc/sysconfig/network-scripts/ifcfg-eno16777736<br></code></p>
-<h2 id="tac命令"><a href="#tac命令" class="headerlink" title="tac命令"></a>tac命令</h2><p>tac命令用于连接多个文件的内容(逆序查看), 其格式为:<code>tac 文件</code>.</p>
-<h2 id="more命令"><a href="#more命令" class="headerlink" title="more命令"></a>more命令</h2><p>more命令查看超过一屏的文件内容时, 将进行分屏显示, 并在左下角显示当前内容在整个文件中的百分比. 其格式为:<code>more 文件</code>.</p>
-<h2 id="less命令"><a href="#less命令" class="headerlink" title="less命令"></a>less命令</h2><p>less命令较晚出现的分页显示命令, 查看超过一屏的文件内容时, 只显示被查看文件的文件名, 能倒退查看.</p>
-<pre>
- less [选项] 文件
-</pre>
-
-<h2 id="head命令"><a href="#head命令" class="headerlink" title="head命令"></a>head命令</h2><p>head命令用于显示文件开头的一部分内容</p>
-<pre>
- head [选项] 文件
- |__ -n --指定行数
-</pre>
-
-<h2 id="tail命令"><a href="#tail命令" class="headerlink" title="tail命令"></a>tail命令</h2><p>tail用于显示文件末尾的一部分内容或持续刷新内容</p>
-<pre>
- tail [选项] 文件
- |__ -n --指定行数
- |__ -f --可以跟踪文件尾部内容的动态更新, 便于实时监控文件内容的变化.
-</pre>
-
-<h2 id="tr命令"><a href="#tr命令" class="headerlink" title="tr命令"></a>tr命令</h2><p>tr命令用于替换文本文件中的字符, 其格式为:<code>tr 原始字符 目标字符</code>.</p>
-<h2 id="wc命令"><a href="#wc命令" class="headerlink" title="wc命令"></a>wc命令</h2><p>wc命令用于统计文件内容中包含的行数、单词数、字节数等信息.</p>
+<h2 id="tr命令"><a href="#tr命令" class="headerlink" title="tr命令"></a>tr命令</h2><p>用于替换文本文件中的字符, 其格式为:<pre>tr 原始字符 目标字符</pre>.</p>
+<h2 id="wc命令"><a href="#wc命令" class="headerlink" title="wc命令"></a>wc命令</h2><p>用于统计文件内容中包含的行数、单词数、字节数等信息.</p>
 <pre>
  wc [选项] 文件
  |__ -l --统计文件内容中的行数
@@ -877,84 +1055,32 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
  |__ -c --统计文件内容中的字节数
 </pre>
 
-<h2 id="stat命令"><a href="#stat命令" class="headerlink" title="stat命令"></a>stat命令</h2><p>stat命令用于查看文件的具体存储信息和时间等信息, 其格式为:<code>stat 文件名称</code>.</p>
+<h2 id="stat命令"><a href="#stat命令" class="headerlink" title="stat命令"></a>stat命令</h2><p>用于查看文件的具体存储信息和时间等信息</p>
+<pre>
+ stat 文件名
+</pre>
 <table style="text-align:center;">
  <tr><td>最后一次查看文件内容的时间</td><td>Access: 2020-06-13 11:14:23.943014190 +0800</td></tr>
  <tr><td>最后一次修改文件内容的时间</td><td>Modify: 2014-04-15 21:54:24.000000000 +0800</td></tr>
  <tr><td>最后一次修改文件属性的时间</td><td>Change: 2020-06-12 18:31:35.845997258 +0800</td></tr>
 </table>
 
-<h2 id="cut命令"><a href="#cut命令" class="headerlink" title="cut命令"></a>cut命令</h2><p>cut命令用于按”列”提取文本字符</p>
+<h2 id="cut命令"><a href="#cut命令" class="headerlink" title="cut命令"></a>cut命令</h2><p>用于按”列”提取文本字符</p>
 <pre>
  cut [选项] 文件
  |__ -d --设置间隔符号
  |__ -f --设置需要查看的列数
 </pre>
 
-<h2 id="diff命令"><a href="#diff命令" class="headerlink" title="diff命令"></a>diff命令</h2><p>diff命令用于比较多个文本文件的差异</p>
+<h2 id="diff命令"><a href="#diff命令" class="headerlink" title="diff命令"></a>diff命令</h2><p>用于比较多个文本文件的差异</p>
 <pre>
  diff [选项] 文件1 文件2
  |__ --brief --判断文件是否相同
  |__ -c --描述文件内容具体的不同
 </pre>
 
-<h2 id="basename命令"><a href="#basename命令" class="headerlink" title="basename命令"></a>basename命令</h2><p>basename命令主要用于显示文件路径名剔除目录部分后的文件名<br><code>basename [参数]</code></p>
-<h1 id="文本目录管理命令"><a href="#文本目录管理命令" class="headerlink" title="文本目录管理命令"></a>文本目录管理命令</h1><h2 id="touch命令"><a href="#touch命令" class="headerlink" title="touch命令"></a>touch命令</h2><p>touch命令用于创建空白文件或设置文件的时间</p>
-<pre>
- touch [选项] 文件
- |__ -a --仅修改"读取时间"(atime)
- |__ -m --仅修改"修改时间"(mtime)
- |__ -d --同时修改atime与time
-</pre>
-
-<h2 id="mkdir命令"><a href="#mkdir命令" class="headerlink" title="mkdir命令"></a>mkdir命令</h2><p>mkdir命令用于创建空白的目录</p>
-<pre>
- mkdir [选项] 目录
- |__ -p --创建多级目录
-</pre>
-
-<h2 id="rmdir命令"><a href="#rmdir命令" class="headerlink" title="rmdir命令"></a>rmdir命令</h2><p>rmdir命令用于删除空白的目录</p>
-<pre>
- rmdir [选项] 目录
- |__ -p --当子目录被删除后使父目录也成为空目录的话, 则顺便一并删除.
-
-</pre>
-
-<h2 id="cp命令"><a href="#cp命令" class="headerlink" title="cp命令"></a>cp命令</h2><p>cp命令用于复制文件或目录</p>
-<pre>
- cp [选项] 源文件/目录 目标文件/目录
- |__ -a --相当于-pdr
- |  |__ -p --复制时保持源文件的权限、属主及时间标记等属性不变.
- |  |__ -d --若对象为"链接文件", 则保留该"链接文件"的属性.
- |  |__ -r --复制目录时必须使用此选项, 表示递归复制所有文件及子目录.
- |
- |__ -f --覆盖目标同名文件或目录时不进行提醒, 而直接强制复制.
- |__ -i --覆盖目标同名文件或目录时提醒用户确认
-</pre>
-
-<h2 id="mv命令"><a href="#mv命令" class="headerlink" title="mv命令"></a>mv命令</h2><p>mv命令用于剪切文件或将文件重命名</p>
-<pre>
- mv [选项] 源文件/目录 目标文件名/目录
- |__ -f --直接覆盖现有的文件或目录
- |__ -u --文件较新或者目标文件不存在时, 才执行移动操作.
-</pre>
-
-<h2 id="rm命令"><a href="#rm命令" class="headerlink" title="rm命令"></a>rm命令</h2><p>rm命令用于删除指定的文件或目录</p>
-<pre>
- rm [选项] 文件/目录
- |__ -i --删除文件或目录时提醒用户确认
- |__ -f --删除文件或目录时不进行提醒, 而直接强制删除. 
- |__ -r --删除目录时必须使用此选项, 表示递归删除整个目录树.
-</pre>
-
-<h2 id="dd命令"><a href="#dd命令" class="headerlink" title="dd命令"></a>dd命令</h2><p>dd命令用于按照指定大小和个数的数据块来复制文件或转换文件<br><code>dd if=输入的文件名称 of=输出的文件名称 count=要复制"块"的个数 bs=每个"块"的大小</code></p>
-<h2 id="file命令"><a href="#file命令" class="headerlink" title="file命令"></a>file命令</h2><p>file命令用于查看文件的类型, 其格式为:<code>file 文件名</code>.<br>在Linux系统中, 由于文本、目录、设备等所有这些一切都统称为文件, 而我们又不能单凭后缀就知道具体的文件类型, 这时就需要使用file命令来查看文件类型了.</p>
-<h2 id="dirname命令"><a href="#dirname命令" class="headerlink" title="dirname命令"></a>dirname命令</h2><p>dirname命令去除文件名中的非目录部分, 仅显示与目录有关的内容. dirname命令读取指定路径名保留最后一个/及其后面的字符, 删除其他部分, 并写结果到标准输出. 如果最后一个/后无字符, dirname命令使用倒数第二个/, 并忽略其后的所有字符.</p>
-<pre>
- dirname [参数]
- <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 例:</span></span><br><span class="line">dirname <span class="string">//</span> <span class="comment"># /</span></span><br><span class="line">dirname <span class="string">/a/b/</span> <span class="comment"># /a</span></span><br><span class="line">dirname a <span class="comment"># .</span></span><br></pre></td></tr></table></figure>
-</pre>
-
+<h2 id="basename命令"><a href="#basename命令" class="headerlink" title="basename命令"></a>basename命令</h2><p>basename命令主要用于显示文件路径名剔除目录部分后的文件名</p>
+<pre>basename [参数]</pre>
 
 <h1 id="打包压缩与搜索命令"><a href="#打包压缩与搜索命令" class="headerlink" title="打包压缩与搜索命令"></a>打包压缩与搜索命令</h1><h2 id="压缩与解压缩命令"><a href="#压缩与解压缩命令" class="headerlink" title="压缩与解压缩命令"></a>压缩与解压缩命令</h2><p>gzip命令和bzip2命令</p>
 <pre>
@@ -974,7 +1100,8 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
 
 <h2 id="tar命令"><a href="#tar命令" class="headerlink" title="tar命令"></a>tar命令</h2><p>tar命令主要用于对目录和文件进行归档</p>
 <pre>
- tar [选项] 文件
+解压: tar [选项] 压缩包
+压缩: tar [选项] 压缩包 文件或目录
  |__ -c --创建.tar格式的包文件
  |__ -x --解开.tar格式的包文件
  |__ -t --列表查看包内的文件
@@ -1002,6 +1129,7 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
  |__ -i --查找内容时忽略大小写
  |__ -n --显示行号
  |__ -v --反向查找
+ |__ -o --只输出文件中匹配到的部分
 </pre>
 
 <h2 id="find命令"><a href="#find命令" class="headerlink" title="find命令"></a>find命令</h2><p>find命令用于按照指定条件来查找文件</p>
@@ -1024,10 +1152,11 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
  |__ -mindepth --指定开始遍历搜索的最小深度
  |__ -amin --n分钟内被访问
  |__ -cmin --n分钟内被修改
+ |__ -exec &lt;执行指令> --假设find指令的回传值为True, 就执行该指令.
 </pre>
 
 
-<h1 id="软件包管理命令"><a href="#软件包管理命令" class="headerlink" title="软件包管理命令"></a>软件包管理命令</h1><h2 id="RPM-红帽软件包管理器"><a href="#RPM-红帽软件包管理器" class="headerlink" title="RPM(红帽软件包管理器)"></a>RPM(红帽软件包管理器)</h2><p><code>man rpm: 获得关于rpm命令的详细帮助信息</code></p>
+<h1 id="软件包管理命令"><a href="#软件包管理命令" class="headerlink" title="软件包管理命令"></a>软件包管理命令</h1><h2 id="RPM-红帽软件包管理器"><a href="#RPM-红帽软件包管理器" class="headerlink" title="RPM(红帽软件包管理器)"></a>RPM(红帽软件包管理器)</h2><pre>man rpm: 获得关于rpm命令的详细帮助信息</pre>
 <pre>
  rpm [选项]
  |__ -q --查询当前系统中已经安装的软件包
@@ -1101,7 +1230,9 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
  |__ -r --删除用户的同时, 删除与用户相关的所有文件.
 </pre>
 
-<h2 id="su命令"><a href="#su命令" class="headerlink" title="su命令"></a>su命令</h2><p>su命令用于切换用户<br><code>su 用户名</code></p>
+<h2 id="su命令"><a href="#su命令" class="headerlink" title="su命令"></a>su命令</h2><p>su命令用于切换用户</p>
+<pre>su 用户名</pre>
+
 <h2 id="usermod命令"><a href="#usermod命令" class="headerlink" title="usermod命令"></a>usermod命令</h2><p>usermod命令用于修改用户账号属性</p>
 <pre>
  usermod [选项] 用户名
@@ -1132,7 +1263,9 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
  groupadd -g GID号 组名
 </pre>
 
-<h2 id="groupdel命令"><a href="#groupdel命令" class="headerlink" title="groupdel命令"></a>groupdel命令</h2><p>groupdel命令用于删除组账号<br><code>groupdel 组名</code></p>
+<h2 id="groupdel命令"><a href="#groupdel命令" class="headerlink" title="groupdel命令"></a>groupdel命令</h2><p>groupdel命令用于删除组账号</p>
+<pre>groupdel 组名</pre>
+
 <h2 id="groupmod命令"><a href="#groupmod命令" class="headerlink" title="groupmod命令"></a>groupmod命令</h2><p>groupmod命令用于修改组名或GID号</p>
 <pre>
  groupmod [选项] 组名
@@ -1140,7 +1273,9 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
  |__ -g --设置组的GID号
 </pre>
 
-<h2 id="newgrp命令"><a href="#newgrp命令" class="headerlink" title="newgrp命令"></a>newgrp命令</h2><p>newgrp命令切换用户组<br><code>newgrp 组名</code></p>
+<h2 id="newgrp命令"><a href="#newgrp命令" class="headerlink" title="newgrp命令"></a>newgrp命令</h2><p>newgrp命令切换用户组</p>
+<pre>newgrp 组名</pre>
+
 <h2 id="gpasswd命令"><a href="#gpasswd命令" class="headerlink" title="gpasswd命令"></a>gpasswd命令</h2><p>gpasswd命令用于添加、设置、删除组成员</p>
 <pre>
  gpasswd [选项] 成员用户 [root]
@@ -1150,13 +1285,19 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
  |__ -M --同时指定所有成员用户
 </pre>
 
-<h2 id="groups命令"><a href="#groups命令" class="headerlink" title="groups命令"></a>groups命令</h2><p>groups命令可以查看指定的用户属于哪些组<br><code>groups [用户名]</code></p>
-<h2 id="finger命令"><a href="#finger命令" class="headerlink" title="finger命令"></a>finger命令</h2><p>finger命令可以查询指定的用户账号的登录属性等详细信息<br><code>finger [用户名]</code></p>
-<h2 id="w命令"><a href="#w命令" class="headerlink" title="w命令"></a>w命令</h2><p>w命令可以查询当前主机中的用户登录情况, 列出登录账号名称、所在终端、登录时间、来源地点等信息.<br><code>w</code></p>
-<h1 id="文件权限及归属"><a href="#文件权限及归属" class="headerlink" title="文件权限及归属"></a>文件权限及归属</h1><h2 id="chmod命令"><a href="#chmod命令" class="headerlink" title="chmod命令"></a>chmod命令</h2><p>chmod命令设置文件的权限</p>
+<h2 id="groups命令"><a href="#groups命令" class="headerlink" title="groups命令"></a>groups命令</h2><p>groups命令可以查看指定的用户属于哪些组</p>
+<pre>groups [用户名]</pre>
+
+<h2 id="finger命令"><a href="#finger命令" class="headerlink" title="finger命令"></a>finger命令</h2><p>finger命令可以查询指定的用户账号的登录属性等详细信息</p>
+<pre>finger [用户名]</pre>
+
+<h2 id="w命令"><a href="#w命令" class="headerlink" title="w命令"></a>w命令</h2><p>w命令可以查询当前主机中的用户登录情况, 列出登录账号名称、所在终端、登录时间、来源地点等信息.</p>
+<pre>w</pre>
+
+<h1 id="文件或目录权限及归属"><a href="#文件或目录权限及归属" class="headerlink" title="文件或目录权限及归属"></a>文件或目录权限及归属</h1><h2 id="chmod命令"><a href="#chmod命令" class="headerlink" title="chmod命令"></a>chmod命令</h2><p>chmod命令设置文件的权限</p>
 <pre>
- chmod [ugoa...][+-=][rwx] 文件...
- chmod nnn 文件...
+ chmod [ugoa...][+-=][rwx] 文件或目录...
+ chmod nnn 文件或目录...
  |__ ugoa --表示该权限设置所针对的用户类别
  |  |__ u --代表文件属主
  |  |__ g --代表文件属组内的用户
@@ -1175,21 +1316,14 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
 <h2 id="chown命令"><a href="#chown命令" class="headerlink" title="chown命令"></a>chown命令</h2><p>chown命令设置文件的归属</p>
 <pre>
  chown 属主 [:[属组]] 文件
-</pre>
-
-
-<h1 id="目录权限及归属"><a href="#目录权限及归属" class="headerlink" title="目录权限及归属"></a>目录权限及归属</h1><h2 id="chmod命令-1"><a href="#chmod命令-1" class="headerlink" title="chmod命令"></a>chmod命令</h2><pre>
- chmod [ugoa...][+-=][rwx] 目录...
- chmod nnn 目录...
-</pre>
-
-<h2 id="chown命令-1"><a href="#chown命令-1" class="headerlink" title="chown命令"></a>chown命令</h2><pre>
  chown 属主目录...
  chown : 属组目录...
  chown 属主 : 属组目录...
 </pre>
 
-<h2 id="umask命令"><a href="#umask命令" class="headerlink" title="umask命令"></a>umask命令</h2><p>umask命令默认指定目前用户在新建文件或目录时的权限默认值<br><code>umask nnn</code></p>
+<h2 id="umask命令"><a href="#umask命令" class="headerlink" title="umask命令"></a>umask命令</h2><p>umask命令默认指定目前用户在新建文件或目录时的权限默认值</p>
+<pre>umask nnn</pre>
+
 <h2 id="chattr命令"><a href="#chattr命令" class="headerlink" title="chattr命令"></a>chattr命令</h2><p>chattr命令设置基于ext2/ext3文件系统的底层属性</p>
 <pre>
  chattr [+-=][ai] 文件
@@ -1237,7 +1371,9 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
  |__ q --退出fdisk分区工具, 但不保存分区操作.
 </pre>
 
-<h2 id="partprobe命令"><a href="#partprobe命令" class="headerlink" title="partprobe命令"></a>partprobe命令</h2><p>partprobe命令让操作系统检测新的分区表情况<br><code>partprobe /dev/硬盘设备</code></p>
+<h2 id="partprobe命令"><a href="#partprobe命令" class="headerlink" title="partprobe命令"></a>partprobe命令</h2><p>partprobe命令让操作系统检测新的分区表情况</p>
+<pre>partprobe /dev/硬盘设备</pre>
+
 <h2 id="mkfs命令"><a href="#mkfs命令" class="headerlink" title="mkfs命令"></a>mkfs命令</h2><p>mkfs命令创建文件系统</p>
 <pre>
  mkfs -t [文件系统类型] 分区设备
@@ -1261,8 +1397,12 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
  mount 存储设备 挂载点--系统会自动去判断要挂载文件的类型
 </pre>
 
-<h2 id="umount命令"><a href="#umount命令" class="headerlink" title="umount命令"></a>umount命令</h2><p>mount命令用于卸载文件系统<br><code>umount 存储设备/挂载点</code></p>
-<h2 id="df-hT命令"><a href="#df-hT命令" class="headerlink" title="df-hT命令"></a>df-hT命令</h2><p>df-hT命令查看当前系统中挂载的各文件系统的磁盘使用情况<br><code>df-hT</code></p>
+<h2 id="umount命令"><a href="#umount命令" class="headerlink" title="umount命令"></a>umount命令</h2><p>mount命令用于卸载文件系统</p>
+<pre>umount 存储设备/挂载点</pre>
+
+<h2 id="df-hT命令"><a href="#df-hT命令" class="headerlink" title="df-hT命令"></a>df-hT命令</h2><p>df-hT命令查看当前系统中挂载的各文件系统的磁盘使用情况</p>
+<pre>df-hT</pre>
+
 <h2 id="du命令"><a href="#du命令" class="headerlink" title="du命令"></a>du命令</h2><p>du命令可用于统计指定目录或文件所占用磁盘空间的大小</p>
 <pre>
  du [选项] 文件/目录
@@ -1271,19 +1411,43 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
  |__ -s --只统计每个参数所占用空间总的大小, 而不是统计每个子目录、文件的大小.
 </pre>
 
-<h2 id="scan命令"><a href="#scan命令" class="headerlink" title="scan命令"></a>scan命令</h2><p>pvscan命令用于扫描系统中的所有物理卷, 并输出相关信息.<br>vgscan命令用于扫描系统中已建立的LVM卷组及相关信息<br>lvscan命令用于扫描系统中已建立的逻辑卷及相关信息<br><code>pvscan/vgscan/lvscan</code></p>
-<h2 id="create命令"><a href="#create命令" class="headerlink" title="create命令"></a>create命令</h2><p>pvcreate用于将分区或整个硬盘转换成物理卷, 主要是添加LVM属性信息并划分PE存储单位.<br><code>pvcreate 分区设备 分区设备...</code></p>
-<p>vgcreate用于将一个或多个物理卷创建为一个卷组<br><code>vgcreate 卷组名 物理卷 物理卷...</code></p>
-<p>lvcreate用于从指定的卷组中分割空间<br><code>lvcreate -L 容量大小 -n 逻辑卷名 卷组名</code></p>
-<h2 id="display命令"><a href="#display命令" class="headerlink" title="display命令"></a>display命令</h2><p>pvdisplay命令用于显示物理卷的详细信息, 默认时将显示所有物理卷的信息.<br><code>pvdisplay 物理卷</code></p>
-<p>vgdisplay命令用于显示系统中各卷组的详细信息<br><code>vgdisplay 卷组名</code></p>
-<p>lvdisplay命令用于显示逻辑卷的详细信息<br><code>lvdisplay 逻辑卷</code></p>
-<h2 id="remove命令"><a href="#remove命令" class="headerlink" title="remove命令"></a>remove命令</h2><p>pvremove命令用于将物理卷还原成普通分区或磁盘, 不再用于LVM体系, 被移除的物理卷无法被pvscan识别.<br><code>pvremove 物理卷</code></p>
-<p>vgremove命令用于删除指定的卷组<br><code>vgremove 卷组名</code></p>
-<p>lvremove命令用于删除指定的逻辑卷<br><code>lvremove 物理卷</code></p>
-<h2 id="extend命令"><a href="#extend命令" class="headerlink" title="extend命令"></a>extend命令</h2><p>vgextend命令用于扩展卷组的磁盘空间<br><code>vgextend 卷组名 物理卷</code></p>
-<p>lvextend命令用于动态扩展逻辑卷的空间<br><code>lvextend +L 容量大小 逻辑卷</code></p>
-<p>注: 逻辑卷扩容后更新系统识别的文件系统大小<br>EXT4: <code>resize2f 逻辑卷</code><br>xfs: <code>xfs_growfs 逻辑卷</code></p>
+<h2 id="scan命令"><a href="#scan命令" class="headerlink" title="scan命令"></a>scan命令</h2><p>pvscan命令用于扫描系统中的所有物理卷, 并输出相关信息.<br>vgscan命令用于扫描系统中已建立的LVM卷组及相关信息<br>lvscan命令用于扫描系统中已建立的逻辑卷及相关信息</p>
+<pre>pvscan/vgscan/lvscan</pre>
+
+<h2 id="create命令"><a href="#create命令" class="headerlink" title="create命令"></a>create命令</h2><p>pvcreate用于将分区或整个硬盘转换成物理卷, 主要是添加LVM属性信息并划分PE存储单位.</p>
+<pre>pvcreate 分区设备 分区设备...</pre>
+
+<p>vgcreate用于将一个或多个物理卷创建为一个卷组</p>
+<pre>vgcreate 卷组名 物理卷 物理卷...</pre>
+
+<p>lvcreate用于从指定的卷组中分割空间</p>
+<pre>lvcreate -L 容量大小 -n 逻辑卷名 卷组名</pre>
+
+<h2 id="display命令"><a href="#display命令" class="headerlink" title="display命令"></a>display命令</h2><p>pvdisplay命令用于显示物理卷的详细信息, 默认时将显示所有物理卷的信息.</p>
+<pre>pvdisplay 物理卷</pre>
+
+<p>vgdisplay命令用于显示系统中各卷组的详细信息</p>
+<pre>vgdisplay 卷组名</pre>
+
+<p>lvdisplay命令用于显示逻辑卷的详细信息</p>
+<pre>lvdisplay 逻辑卷</pre>
+
+<h2 id="remove命令"><a href="#remove命令" class="headerlink" title="remove命令"></a>remove命令</h2><p>pvremove命令用于将物理卷还原成普通分区或磁盘, 不再用于LVM体系, 被移除的物理卷无法被pvscan识别.</p>
+<pre>pvremove 物理卷</pre>
+
+<p>vgremove命令用于删除指定的卷组</p>
+<pre>vgremove 卷组名</pre>
+
+<p>lvremove命令用于删除指定的逻辑卷</p>
+<pre>lvremove 物理卷</pre>
+
+<h2 id="extend命令"><a href="#extend命令" class="headerlink" title="extend命令"></a>extend命令</h2><p>vgextend命令用于扩展卷组的磁盘空间</p>
+<pre>vgextend 卷组名 物理卷</pre>
+
+<p>lvextend命令用于动态扩展逻辑卷的空间</p>
+<pre>lvextend +L 容量大小 逻辑卷</pre>
+
+<p>注: 逻辑卷扩容后更新系统识别的文件系统大小<br>EXT4: <pre>resize2f 逻辑卷</pre><br>xfs: <pre>xfs_growfs 逻辑卷</pre></p>
 <h1 id="服务管理命令"><a href="#服务管理命令" class="headerlink" title="服务管理命令"></a>服务管理命令</h1><h2 id="systemctl命令"><a href="#systemctl命令" class="headerlink" title="systemctl命令"></a>systemctl命令</h2><pre>
  systemctl [选项] 服务名称
  |__ start --启动服务
@@ -1295,6 +1459,22 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
  |__ disable --开机不自动启动
  |__ is-enabled --查看特定服务是否为开机自启动
  |__ list-unit-files --type=service --查看各个级别下服务的启动与禁用情况  
+</pre>
+
+<h1 id="脚本命令"><a href="#脚本命令" class="headerlink" title="脚本命令"></a>脚本命令</h1><h2 id="sh命令"><a href="#sh命令" class="headerlink" title="sh命令"></a>sh命令</h2><p>UNIX标准的默认shell脚本解释器</p>
+<pre>
+ sh [选项] 脚本名
+ |__ -n --不会执行该脚本, 仅查询脚本语法是否有问题, 如果没有语法问题就不显示任何内容, 如果有问题就会提示报错.
+ |__ -v --在执行脚本时, 先将脚本的内容输出到屏幕上然后执行脚本, 如果有错误, 也会给出错误提示.
+ |__ -x --将执行的脚本内容输出到屏幕上, 这是个对调试很有用的参数.
+</pre>
+
+<h2 id="bash命令"><a href="#bash命令" class="headerlink" title="bash命令"></a>bash命令</h2><p>Linux标准的默认shell脚本解释器</p>
+<pre>
+ bash [选项] 脚本名
+ |__ -n --检测脚本是否正确, 并不执行脚本.
+ |__ -x --执行脚本, 输出执行过程.
+ |__ -c --bash从字符串中读入命令, 如果字符串后还有变量就被设定为从$0开始的位置参数.
 </pre>
     </div>
 
@@ -1357,6 +1537,7 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
 
 
       
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -1397,11 +1578,6 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">云</span>
-    <div>
-		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-		本站总访问量<span id="busuanzi_value_site_pv"></span>次
-		&nbsp;本站访客数<span id="busuanzi_value_site_uv"></span>人次
-	</div>
 </div>
 <div class="wordcount">
   <span class="post-meta-item">
@@ -1409,14 +1585,14 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">228k</span>
+    <span title="站点总字数">238k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:27</span>
+    <span title="站点阅读时长">3:36</span>
   </span>
 </div>
 
@@ -1459,6 +1635,17 @@ drwxr-xr-x.  20 root root  4096 6月  10 21:52 var
   
 
   
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/post/82734d8/",
+    }, {"enable":true,"appId":"HKOdg6jtf8l5uFP2Ag6eDIIk-gzGzoHsz","appKey":"Gn11LWMBtG3eEkwpnpDhJUI3","placeholder":"请输入你的评论内容, 可编写Markdown语法.","avatar":"mm","meta":["nick","mail"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":true,"requiredFields":[]}
+    ));
+  }, window.Valine);
+});
+</script>
 
   
 </body>
