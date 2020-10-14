@@ -78,6 +78,32 @@
   </entry>
   
   <entry>
+    <title>Kubernetes</title>
+    <link href="http://www.mengyun.ink/post/9acacb00/"/>
+    <id>http://www.mengyun.ink/post/9acacb00/</id>
+    <published>2020-09-13T09:59:13.000Z</published>
+    <updated>2020-09-18T01:30:04.320Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr><p><a href="https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/" target="_blank" rel="noopener">点击跳转至官方文档</a></p><h1 id="Kubernetes的架构"><a href="#Kubernetes的架构" class="headerlink" title="Kubernetes的架构"></a>Kubernetes的架构</h1><table><tr><td><img src="/post/9acacb00/Kubernetes架构图.png" title></td></tr></table><table><tr><td>API server</td><td>所有服务访问统一入口</td></tr><tr><td>Crontroller Manager</td><td>维持副本期望数目(最好是大于、等于三的奇数)</td></tr><tr><td>Cloud<br>crontroller Manager</td><td>和crontroller Manager类似, 基于一种插件机制来构造的, 这种机制使得不同的云厂商都能将其平台与Kubernetes集成.</td></tr><tr><td>Scheduler</td><td>负责介绍任务, 选择合适的节点进行分配任务.</td></tr><tr><td><a style="background-color:#09E9F9;" href="https://juejin.im/post/6844904031186321416" target="_blank" rel="noopener">etcd</a></td><td>键值对数据库, 储存K8S集群所有重要信息(持久化).</td></tr><tr><td>Kubelet</td><td>直接跟容器引擎交互实现容器的生命周期管理</td></tr><tr><td>Kube-proxy</td><td>负责写入规则至IPTABLES、IPVS, 来实现服务映射访问的.</td></tr><tr><td>COREDNS</td><td>可以为集群中的SVC创建一个域名IP的对应关系解析</td></tr><tr><td>DASHBOARD</td><td>给K8S集群提供一个B/S结构访问体系</td></tr><tr><td>INGRESS CONTROLLER</td><td>官方只能实现四层代理, INGRESS可以实现七层代理.</td></tr><tr><td>FEDERATION</td><td>提供一个可以跨集群中心多K8S统一管理功能</td></tr><tr><td>PROMETHEUS</td><td>提供K8S集群的监控能力</td></tr><tr><td>ELK</td><td>提供K8S集群日志统一分析介入平台</td></tr></table><h1 id="Kubernetes的基本概念"><a href="#Kubernetes的基本概念" class="headerlink" title="Kubernetes的基本概念"></a>Kubernetes的基本概念</h1><h2 id="Pod概念"><a href="#Pod概念" class="headerlink" title="Pod概念"></a>Pod概念</h2><h2 id="网络通讯模式"><a href="#网络通讯模式" class="headerlink" title="网络通讯模式"></a>网络通讯模式</h2>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://www.mengyun.ink/categories/Linux/"/>
+    
+    
+      <category term="k8s" scheme="http://www.mengyun.ink/tags/k8s/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Docker数据管理与网络通信</title>
     <link href="http://www.mengyun.ink/post/6b6ee287/"/>
     <id>http://www.mengyun.ink/post/6b6ee287/</id>
@@ -807,38 +833,6 @@ SQL thread:SQL语句线程, 状态同样必须为开启状态(YES).
     
     
       <category term="Linux" scheme="http://www.mengyun.ink/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CentOS系统简单配置网站</title>
-    <link href="http://www.mengyun.ink/post/294723c9/"/>
-    <id>http://www.mengyun.ink/post/294723c9/</id>
-    <published>2020-06-04T01:25:09.000Z</published>
-    <updated>2020-09-02T13:53:50.237Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr><h1 id="在Apache上搭建网站"><a href="#在Apache上搭建网站" class="headerlink" title="在Apache上搭建网站"></a>在Apache上搭建网站</h1><h2 id="httpd的配置过程"><a href="#httpd的配置过程" class="headerlink" title="httpd的配置过程"></a>httpd的配置过程</h2><p><em>(1)</em> 安装httpd、官方文档、工具.<br><code> yum install -y httpd httpd-manual httpd-tools</code></p><p><em>(2)</em> 确保SElinux和iptables防火墙不会干扰httpd服务的提供<br>SElinux:<br><code> getenforce</code><br><code> setenforce 0</code></p><p>查看iptables防火墙<br><code> iptables -vnl</code></p><p>如有防火墙规则, 需要进行如下处理<br>停止防火墙: <code> systemctl disable firewalld.service</code><br>禁用防火墙: <code> systemctl stop firewalld.service</code></p><p>清除所有规则来暂时停止防火墙: <code>iptables -F</code><br>(只适合在没有配置防火墙的环境中, 如果已经配置过默认规则为deny的环境, 此步骤将使系统的所有网络访问中断.)</p><a id="more"></a><p><em>(3)</em> 添加网站文件到/var/www/html文件夹下</p><p><em>(4)</em> 启动httpd服务<br><code> systemctl start httpd</code></p><p><em>(5)</em> 监测服务启动是否正常<br><code> ss -tnl | grep httpd<br> ps aux | grep httpd<br> systemctl status httpd.service<br></code></p><p>注①:<br>解决一: 如果遇到端口被占用时, 查看并更换端口号.<br>执行命令增加这个指定的非标准端口后, 更换端口号.<br>|<br>查看端口号: <code> semanage port -l|grep http</code><br>添加非标准端口: <code> semanage port -a -t http_port_t -p tcp 888</code><br>更换端口号:<br><code> vim /etc/httpd/conf/httpd.conf<br> /Listen 80<br></code></p><p>解决二: 结束掉占用端口的进程<br>查看占用端口号的进程: <code> lsof -i:80</code><br>结束掉占用进程: <code> kill -9 进程ID</code></p><p>注②:<br>执行semanege命令或lsof命令提示未有此命令时, 需要进行安装.<br>安装lsof: <code> yum install -y lsof</code><br>安装semanage: <code> yum provides semanage</code><br>安装python: <code> yum -y install policycoreutils-python.x86_64</code></p><p><em>(6)</em> 设置httpd服务开机自动启动：<br><code> systemctl enable httpd.service</code></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;h1 id=&quot;在Apache上搭建网站&quot;&gt;&lt;a href=&quot;#在Apache上搭建网站&quot; class=&quot;headerlink&quot; title=&quot;在Apache上搭建网站&quot;&gt;&lt;/a&gt;在Apache上搭建网站&lt;/h1&gt;&lt;h2 id=&quot;httpd的配置过程&quot;&gt;&lt;a href=&quot;#httpd的配置过程&quot; class=&quot;headerlink&quot; title=&quot;httpd的配置过程&quot;&gt;&lt;/a&gt;httpd的配置过程&lt;/h2&gt;&lt;p&gt;&lt;em&gt;(1)&lt;/em&gt; 安装httpd、官方文档、工具.&lt;br&gt;&lt;code&gt; yum install -y httpd httpd-manual httpd-tools&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;(2)&lt;/em&gt; 确保SElinux和iptables防火墙不会干扰httpd服务的提供&lt;br&gt;SElinux:&lt;br&gt;&lt;code&gt; getenforce&lt;/code&gt;&lt;br&gt;&lt;code&gt; setenforce 0&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;查看iptables防火墙&lt;br&gt;&lt;code&gt; iptables -vnl&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;如有防火墙规则, 需要进行如下处理&lt;br&gt;停止防火墙: &lt;code&gt; systemctl disable firewalld.service&lt;/code&gt;&lt;br&gt;禁用防火墙: &lt;code&gt; systemctl stop firewalld.service&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;清除所有规则来暂时停止防火墙: &lt;code&gt;iptables -F&lt;/code&gt;&lt;br&gt;(只适合在没有配置防火墙的环境中, 如果已经配置过默认规则为deny的环境, 此步骤将使系统的所有网络访问中断.)&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="http://www.mengyun.ink/categories/Linux/"/>
-    
-    
-      <category term="Linux" scheme="http://www.mengyun.ink/tags/Linux/"/>
-    
-      <category term="CentOS" scheme="http://www.mengyun.ink/tags/CentOS/"/>
-    
-      <category term="Apache" scheme="http://www.mengyun.ink/tags/Apache/"/>
     
   </entry>
   
