@@ -449,9 +449,9 @@ SQL thread:SQL语句线程, 状态同样必须为开启状态(YES).
     
       <category term="Apache" scheme="http://www.mengyun.ink/tags/Apache/"/>
     
-      <category term="NFS" scheme="http://www.mengyun.ink/tags/NFS/"/>
-    
       <category term="Keepalived" scheme="http://www.mengyun.ink/tags/Keepalived/"/>
+    
+      <category term="NFS" scheme="http://www.mengyun.ink/tags/NFS/"/>
     
   </entry>
   
