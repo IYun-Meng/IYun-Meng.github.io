@@ -513,11 +513,11 @@ SQL thread:SQL语句线程, 状态同样必须为开启状态(YES).
     
       <category term="Apache" scheme="http://www.mengyun.ink/tags/Apache/"/>
     
+      <category term="NFS" scheme="http://www.mengyun.ink/tags/NFS/"/>
+    
       <category term="MySQL" scheme="http://www.mengyun.ink/tags/MySQL/"/>
     
       <category term="Nginx" scheme="http://www.mengyun.ink/tags/Nginx/"/>
-    
-      <category term="NFS" scheme="http://www.mengyun.ink/tags/NFS/"/>
     
       <category term="SSH" scheme="http://www.mengyun.ink/tags/SSH/"/>
     
