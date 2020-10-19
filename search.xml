@@ -133,27 +133,6 @@ ping 连接别名
       </tags>
   </entry>
   <entry>
-    <title>Hexo博客更换主题</title>
-    <url>/post/e5bd2a87/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>
-<h1 id="如何在Hexo上更换自己想要的主题"><a href="#如何在Hexo上更换自己想要的主题" class="headerlink" title="如何在Hexo上更换自己想要的主题"></a>如何在Hexo上更换自己想要的主题</h1><h2 id="选择主题"><a href="#选择主题" class="headerlink" title="选择主题"></a>选择主题</h2><p><em>(1)</em>在<a href="https://hexo.io/themes/" target="_blank" rel="noopener">官方主题</a>中选好自己想要的主题</p>
-<h2 id="执行命令下载主题文件"><a href="#执行命令下载主题文件" class="headerlink" title="执行命令下载主题文件"></a>执行命令下载主题文件</h2><p><em>(1)</em>点击主题名跳转到GitHub后, 往下拉看到Installation后打开CMD到生成博客文件的文件夹下执行命令进行文件的下载.</p>
-<p>查看命令示例:<br><img src="/post/e5bd2a87/2.1_DownloadFileCode.png" alt="查看命令示例图"></p>
-<p>执行命令示例:<br><img src="/post/e5bd2a87/2.2_DownloadFile.png" alt="执行命令示例图"></p>
-<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p><em>(1)</em>修改_config.yml配置文件中的theme项为你选择的主题名<br>修改示例:<br><img src="/post/e5bd2a87/3.1_AlterTheme.png" alt="修改示例图"></p>
-<p>博主使用的主题是next<br>注: 该_config.yml不是刚下载后主题里的配置文件!</p>
-<h2 id="重新生成博客文件"><a href="#重新生成博客文件" class="headerlink" title="重新生成博客文件"></a>重新生成博客文件</h2><p><em>(1)</em>清除缓存文件和已生成的静态文件<br>hexo clean</p>
-<p><em>(2)</em>生成静态文件<br>hexo g</p>
-<p><em>(3)</em>启动服务, 查看主题效果.<br>hexo s</p>
-]]></content>
-      <categories>
-        <category>个人博客</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Docker架构、镜像及容器</title>
     <url>/post/41804c37/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>
@@ -387,6 +366,222 @@ cat 文件名 | docker import - 生成的镜像名称:标签
       </categories>
       <tags>
         <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo博客更换主题</title>
+    <url>/post/e5bd2a87/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>
+<h1 id="如何在Hexo上更换自己想要的主题"><a href="#如何在Hexo上更换自己想要的主题" class="headerlink" title="如何在Hexo上更换自己想要的主题"></a>如何在Hexo上更换自己想要的主题</h1><h2 id="选择主题"><a href="#选择主题" class="headerlink" title="选择主题"></a>选择主题</h2><p><em>(1)</em>在<a href="https://hexo.io/themes/" target="_blank" rel="noopener">官方主题</a>中选好自己想要的主题</p>
+<h2 id="执行命令下载主题文件"><a href="#执行命令下载主题文件" class="headerlink" title="执行命令下载主题文件"></a>执行命令下载主题文件</h2><p><em>(1)</em>点击主题名跳转到GitHub后, 往下拉看到Installation后打开CMD到生成博客文件的文件夹下执行命令进行文件的下载.</p>
+<p>查看命令示例:<br><img src="/post/e5bd2a87/2.1_DownloadFileCode.png" alt="查看命令示例图"></p>
+<p>执行命令示例:<br><img src="/post/e5bd2a87/2.2_DownloadFile.png" alt="执行命令示例图"></p>
+<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p><em>(1)</em>修改_config.yml配置文件中的theme项为你选择的主题名<br>修改示例:<br><img src="/post/e5bd2a87/3.1_AlterTheme.png" alt="修改示例图"></p>
+<p>博主使用的主题是next<br>注: 该_config.yml不是刚下载后主题里的配置文件!</p>
+<h2 id="重新生成博客文件"><a href="#重新生成博客文件" class="headerlink" title="重新生成博客文件"></a>重新生成博客文件</h2><p><em>(1)</em>清除缓存文件和已生成的静态文件<br>hexo clean</p>
+<p><em>(2)</em>生成静态文件<br>hexo g</p>
+<p><em>(3)</em>启动服务, 查看主题效果.<br>hexo s</p>
+]]></content>
+      <categories>
+        <category>个人博客</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>KVM虚拟化平台</title>
+    <url>/post/fbec7778/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>
+<h1 id="KVM概述"><a href="#KVM概述" class="headerlink" title="KVM概述"></a>KVM概述</h1><h2 id="什么是虚拟化"><a href="#什么是虚拟化" class="headerlink" title="什么是虚拟化"></a>什么是虚拟化</h2><p>虚拟化就是把硬件资源从物理方式转变为逻辑方式, 打破原有物理结构, 使用户可以灵活管理这些资源, 并且允许1台物理机上同时运行多个操作系统, 以实现资源利用率最大化和灵活管理的一项技术.</p>
+<h2 id="虚拟化的优势"><a href="#虚拟化的优势" class="headerlink" title="虚拟化的优势"></a>虚拟化的优势</h2><p>1.减少服务器数量, 降低硬件采购成本.<br>2.资源利用率最大化<br>3.降低机房空间、散热、用电消耗的成本<br>4.硬件资源可动态调整, 提高企业IT业务灵活性.<br>5.高可用性<br>6.在不中断服务的情况下进行物理硬件调整<br>7.降低管理成本<br>8.具备更高效的灾备能力</p>
+<h2 id="KVM虚拟化"><a href="#KVM虚拟化" class="headerlink" title="KVM虚拟化"></a>KVM虚拟化</h2><p>KVM自Linux2.6.20版本后就直接整合到Linux内核中, 它依托CPU虚拟化指令集(如Inter-VT、AMD-V)实现高性能的虚拟化支持. 由于与Linux内核高度整合, 因此在性能、安全性、兼容性、稳定性上都有很好的表现.</p>
+<table>
+<tr><td><img src="/post/fbec7778/KVM虚拟化架构.png"></td></tr>
+</table>
+
+<a id="more"></a>
+
+<h1 id="搭建KVM虚拟化平台"><a href="#搭建KVM虚拟化平台" class="headerlink" title="搭建KVM虚拟化平台"></a>搭建KVM虚拟化平台</h1><h2 id="KVM环境搭建"><a href="#KVM环境搭建" class="headerlink" title="KVM环境搭建"></a>KVM环境搭建</h2><p>1.关闭虚拟机, 并在设置中开启虚拟化.</p>
+<table>
+<tr><td><img src="/post/fbec7778/开启虚拟化.png"></td></tr>
+</table>
+
+<p>2.检测系统是否已经支持虚拟化, 有条目表示已支持.</p>
+<figure class="highlight coq"><table><tr><td class="code"><pre><span class="line">cat /proc/cpuinfo | <span class="type">egrep</span> 'vmx|<span class="type">svm</span>' | <span class="type">wc</span> -l</span><br></pre></td></tr></table></figure>
+
+<p>3.安装KVM环境后并重启加载KVM相关模块</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">yum -y <span class="keyword">install</span> qemu-kvm qemu-kvm-tools</span><br><span class="line">yum -y <span class="keyword">install</span> libvirt python-virtinst libvirt-python virt-<span class="keyword">install</span> virt-manager</span><br><span class="line"><span class="keyword">shutdown</span> -r <span class="keyword">now</span></span><br></pre></td></tr></table></figure>
+<p><code>qemu-kvm qemu-kvm-tools</code>:虚拟操作系统模拟器加速模块(KVM核心)<br><code>libvirt</code>:必须要装的核心工具<br><code>virt-manager</code>:虚拟机图形管理工具<br><code>bridge-utils</code>:虚拟机与外界通信的命令管理工具<br><code>virt-install</code>:虚拟机安装工具<br><code>pyhon-virtinst</code>::包含python模块和工具(virt-install，virt-clone和virt-image)</p>
+<p>4.查看KVM模块是否被正确加载</p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">lsmod <span class="string">| grep kvm</span></span><br></pre></td></tr></table></figure>
+<pre>
+kvm_amd              2176426  0 
+kvm                   578518  1 kvm_amd
+irqbypass              13503  1 kvm
+</pre>
+
+<p>5.开启KVM服务, 并设置开机自启动.</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">systemctl <span class="keyword">start</span> libvirtd</span><br><span class="line">systemctl <span class="keyword">enable</span> libvirtd</span><br></pre></td></tr></table></figure>
+
+<p>6.查看KVM服务状态</p>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">status</span> libvirtd</span><br><span class="line">systemctl <span class="built_in">is</span>-enabled libvirtd</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置KVM网络"><a href="#设置KVM网络" class="headerlink" title="设置KVM网络"></a>设置KVM网络</h2><p>1.查看虚拟机网卡信息, 确定名称后复制文件.</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">ip</span> <span class="string">addr</span></span><br><span class="line"><span class="attr">cd</span> <span class="string">/etc/sysconfig/network-scripts/</span></span><br><span class="line"><span class="attr">cp</span> <span class="string">ifcfg-ens33 ifcfg-br0</span></span><br></pre></td></tr></table></figure>
+
+<p>2.修改ens33网卡配置</p>
+<figure class="highlight gcode"><table><tr><td class="code"><pre><span class="line">vim ifcfg-e<span class="symbol">ns33</span></span><br></pre></td></tr></table></figure>
+<pre>
+TYPE=<font color="red">Ethernet</font>
+PROXY_METHOD=none
+BROWSER_ONLY=no
+<font color="green">#BOOTPROTO=none
+#DEFROUTE=yes</font>
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=ens33
+UUID=eb242f93-3890-4f77-b15a-12589b9e7bad
+DEVICE=ens33
+ONBOOT=yes
+<font color="green">#IPADDR=192.168.100.60
+#PREFIX=24
+#GATEWAY=192.168.100.2
+#DNS1=192.168.100.2</font>
+
+<font color="red">BRIDGE=br0
+NM_CONTROLLED=no</font>
+</pre>
+
+<p>3.修改桥接网卡配置</p>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line">vim ifcfg-<span class="keyword">br</span><span class="number">0</span></span><br><span class="line">sed -i <span class="string">"/UUID/c UUID=`uuidgen`"</span> ifcfg-<span class="keyword">br</span><span class="number">0</span></span><br></pre></td></tr></table></figure>
+<pre>
+TYPE=<font color="red">Bridge</font>
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=<font color="red">static</font>
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=<font color="red">br0</font>
+UUID=03983d4e-3d8d-4212-aa90-7043a259ff6b
+DEVICE=<font color="red">br0</font>
+ONBOOT=yes
+IPADDR=<font color="red">192.168.127.60</font>
+PREFIX=24
+GATEWAY=<font color="red">192.168.127.1</font>
+DNS1=<font color="red">192.168.127.1</font>
+</pre>
+
+<p>4.重启网络服务</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">systemctl</span> <span class="string">stop NetworkManager</span></span><br><span class="line"><span class="attr">systemctl</span> <span class="string">restart network</span></span><br></pre></td></tr></table></figure>
+
+<p>5.查看网络配置信息</p>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brctl </span>show</span><br></pre></td></tr></table></figure>
+<pre>
+ridge name    bridge id            STP enabled    interfaces
+<font color="red">br0</font>           8000.000c293a6592    no             <font color="red">ens33</font>
+virbr0        8000.525400c83c0d    yes            virbr0-nic
+</pre>
+
+<h2 id="KVM创建管理"><a href="#KVM创建管理" class="headerlink" title="KVM创建管理"></a>KVM创建管理</h2><p>打开KVM图形化管理界面</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">virt-manager</span></span><br></pre></td></tr></table></figure>
+<table>
+<tr><td><img src="/post/fbec7778/KVM管理.png"></td></tr>
+</table>
+
+<h3 id="1-创建镜像存储池"><a href="#1-创建镜像存储池" class="headerlink" title="1.创建镜像存储池"></a>1.创建镜像存储池</h3><table>
+<tr><td><img src="/post/fbec7778/KVM管理-镜像池创建.png"></td></tr>
+<tr><td><img src="/post/fbec7778/KVM管理-镜像池创建2.png"></td></tr>
+<tr><td><img src="/post/fbec7778/KVM管理-镜像池创建3.png"></td></tr>
+</table>
+
+<h3 id="2-用WinSCP软件将镜像文件上传至指定目录下"><a href="#2-用WinSCP软件将镜像文件上传至指定目录下" class="headerlink" title="2.用WinSCP软件将镜像文件上传至指定目录下"></a>2.用WinSCP软件将镜像文件上传至指定目录下</h3><table>
+<tr><td><img src="/post/fbec7778/KVM-WinSCP连接.png"></td></tr>
+<tr><td><img src="/post/fbec7778/KVM-WinSCP连接2.png"></td></tr>
+<tr><td><img src="/post/fbec7778/KVM管理-镜像池创建4.png"></td></tr>
+</table>
+
+<h3 id="3-创建存储池"><a href="#3-创建存储池" class="headerlink" title="3.创建存储池"></a>3.创建存储池</h3><table>
+注: 在创建该存储池时请保证磁盘容量足够大, 以便存储新建的虚拟机.
+<tr><td><img src="/post/fbec7778/KVM管理-虚拟机池创建.png"></td></tr>
+<tr><td><img src="/post/fbec7778/KVM管理-虚拟机池创建2.png"></td></tr>
+<tr><td><img src="/post/fbec7778/KVM管理-虚拟机池创建3.png"></td></tr>
+</table>
+
+<h3 id="4-创建存储卷"><a href="#4-创建存储卷" class="headerlink" title="4.创建存储卷"></a>4.创建存储卷</h3><table>
+<tr><td><img src="/post/fbec7778/KVM管理-虚拟机池创建4.png"></td></tr>
+<tr><td><img src="/post/fbec7778/KVM管理-存储卷创建.png"></td></tr>
+<tr><td><img src="/post/fbec7778/KVM管理-存储卷创建2.png"></td></tr>
+</table>
+
+<h3 id="5-创建虚拟机"><a href="#5-创建虚拟机" class="headerlink" title="5.创建虚拟机"></a>5.创建虚拟机</h3><talbe>
+<tr><td><img src="/post/fbec7778/KVM管理-虚拟机创建2.png"></td></tr>
+<tr><td><img src="/post/fbec7778/KVM管理-虚拟机创建3.png"></td></tr>
+<tr><td><img src="/post/fbec7778/KVM管理-虚拟机创建4.png"></td></tr>
+<tr><td><img src="/post/fbec7778/KVM管理-虚拟机创建5.png"></td></tr>
+<tr><td><img src="/post/fbec7778/KVM管理-虚拟机创建6.png"></td></tr>
+<tr><td><img src="/post/fbec7778/KVM管理-虚拟机创建7.png"></td></tr>
+<tr><td><img src="/post/fbec7778/KVM管理-虚拟机创建8.png"></td></tr>
+<tr><td><img src="/post/fbec7778/KVM管理-虚拟机创建9.png"></td></tr>
+<tr><td><img src="/post/fbec7778/KVM管理-虚拟机创建10.png"></td></tr>
+
+
+<div class="note info"><p>可用<code>cat /proc/scsi/scsi</code>命令查看该主机是否为虚拟机</p>
+</div>
+
+<h2 id="KVM功能管理"><a href="#KVM功能管理" class="headerlink" title="KVM功能管理"></a>KVM功能管理</h2><figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看命令帮助</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">-h</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看KVM的配置文件存放目录</span></span><br><span class="line"><span class="attr">ls</span> <span class="string">/etc/libvirt/qemu/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看虚拟机状态</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">list --all</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 虚拟机关机与开机</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">shutdown 虚拟机名</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">start 虚拟机名</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 强制实例系统关闭电源</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">destroy 虚拟机名</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过配置文件启动虚拟机系统实例</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">create /etc/libvirt/qemu/虚拟机名.xml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 虚拟机挂起与恢复</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">suspend 虚拟机名</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">resume 虚拟机名</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出虚拟机配置</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">dumpxml 虚拟机名 &gt; /etc/libvirt/qemu/配置文件名2.xml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置虚拟机实例伴随宿主机自动启动</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">autostart 虚拟机名</span></span><br></pre></td></tr></table></figure>
+<div class="note info"><p>上述命令将创建/etc/libvirt/qemu/autostart/目录, 目录内容为开机自动启动的系统.</p>
+</div>
+
+<p>虚拟机的删除与添加</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line">virsh <span class="keyword">shutdown</span> test01</span><br><span class="line">virsh undefine test01</span><br><span class="line"><span class="keyword">ls</span> <span class="string">/etc/libvirt/qemu/</span></span><br><span class="line">virsh list <span class="params">--all</span></span><br></pre></td></tr></table></figure>
+<div class="note info"><p>配置文件会被删除, 但是磁盘文件不会被删除.</p>
+</div>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">cd /etc/libvirt/qemu</span><br><span class="line">mv 虚拟机名.<span class="keyword">xml</span> <span class="title">虚拟机名.xml</span></span><br><span class="line">virsh define 虚拟机名.xml</span><br><span class="line">virsh list --all</span><br></pre></td></tr></table></figure>
+
+<h2 id="KVM文件管理"><a href="#KVM文件管理" class="headerlink" title="KVM文件管理"></a>KVM文件管理</h2><h3 id="磁盘格式转换"><a href="#磁盘格式转换" class="headerlink" title="磁盘格式转换"></a>磁盘格式转换</h3><p>1.转换格式</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">qemu-img <span class="builtin-name">info</span> /路径/虚拟机名.img</span><br><span class="line">virsh shutdown 虚拟机名</span><br><span class="line"></span><br><span class="line">qemu-img convert -f<span class="built_in"> raw </span>/路径/虚拟机名.img -O qcow2 /路径/虚拟机名.qcow2</span><br></pre></td></tr></table></figure>
+<pre>
+image: /data/centos7/CentOS7_10_kvm.img
+file format: <font color="red">raw</font>
+virtual size: 20G (21474836480 bytes)
+disk size: 20G
+</pre>
+
+<p>2.编辑配置</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">virsh <span class="builtin-name">edit</span> 虚拟机名</span><br></pre></td></tr></table></figure>
+<pre>
+  &lt;disk type='file' device='disk'>
+      &lt;driver name='qemu' type='<font color="red">qcow2</font>'/>
+      &lt;source file='/data/centos7/CentOS7_10_kvm.<font color="red">qcow2</font>'/>
+      &lt;target dev='vda' bus='virtio'/>
+      &lt;address type='pci' domain='0x0000' bus='0x00' slot='0x07' function='0x0'/>
+  &lt;/disk>
+</pre>
+
+
+<h3 id="虚拟机克隆"><a href="#虚拟机克隆" class="headerlink" title="虚拟机克隆"></a>虚拟机克隆</h3><figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">virsh list --all</span><br><span class="line">virt-<span class="keyword">clone</span> <span class="title">-o</span> 虚拟机名 -n 克隆虚拟机名 -f /data/Centos7/虚拟机名.qcow2</span><br><span class="line">virsh <span class="literal">start</span> 虚拟机名</span><br></pre></td></tr></table></figure>
+
+<h3 id="虚拟机快照"><a href="#虚拟机快照" class="headerlink" title="虚拟机快照"></a>虚拟机快照</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建快照</span></span><br><span class="line">virsh snapshot-<span class="keyword">create</span> 虚拟机名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看虚拟机快照版本信息</span></span><br><span class="line">virsh <span class="keyword">snapshot</span>-<span class="keyword">current</span> 虚拟机名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看快照信息</span></span><br><span class="line">virsh <span class="keyword">snapshot</span>-<span class="keyword">list</span> 虚拟机名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复虚拟机状态至指定快照</span></span><br><span class="line">virsh <span class="keyword">snapshot</span>-revert 虚拟机名 快照名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除快照</span></span><br><span class="line">virsh <span class="keyword">snapshot</span>-<span class="keyword">delete</span> 虚拟机名 快照名</span><br></pre></td></tr></table></figure>
+
+
+
+
+</talbe>]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>KVM</tag>
       </tags>
   </entry>
   <entry>
@@ -666,201 +861,6 @@ Aug 12 19:21:40 localhost avahi-daemon[723]: Withdrawing address record for 192.
       <tags>
         <tag>Linux</tag>
         <tag>Keepalived</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>KVM虚拟化平台</title>
-    <url>/post/fbec7778/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>
-<h1 id="KVM概述"><a href="#KVM概述" class="headerlink" title="KVM概述"></a>KVM概述</h1><h2 id="什么是虚拟化"><a href="#什么是虚拟化" class="headerlink" title="什么是虚拟化"></a>什么是虚拟化</h2><p>虚拟化就是把硬件资源从物理方式转变为逻辑方式, 打破原有物理结构, 使用户可以灵活管理这些资源, 并且允许1台物理机上同时运行多个操作系统, 以实现资源利用率最大化和灵活管理的一项技术.</p>
-<h2 id="虚拟化的优势"><a href="#虚拟化的优势" class="headerlink" title="虚拟化的优势"></a>虚拟化的优势</h2><p>1.减少服务器数量, 降低硬件采购成本.<br>2.资源利用率最大化<br>3.降低机房空间、散热、用电消耗的成本<br>4.硬件资源可动态调整, 提高企业IT业务灵活性.<br>5.高可用性<br>6.在不中断服务的情况下进行物理硬件调整<br>7.降低管理成本<br>8.具备更高效的灾备能力</p>
-<h2 id="KVM虚拟化"><a href="#KVM虚拟化" class="headerlink" title="KVM虚拟化"></a>KVM虚拟化</h2><p>KVM自Linux2.6.20版本后就直接整合到Linux内核中, 它依托CPU虚拟化指令集(如Inter-VT、AMD-V)实现高性能的虚拟化支持. 由于与Linux内核高度整合, 因此在性能、安全性、兼容性、稳定性上都有很好的表现.</p>
-<table>
-<tr><td><img src="/post/fbec7778/KVM虚拟化架构.png"></td></tr>
-</table>
-
-<a id="more"></a>
-
-<h1 id="搭建KVM虚拟化平台"><a href="#搭建KVM虚拟化平台" class="headerlink" title="搭建KVM虚拟化平台"></a>搭建KVM虚拟化平台</h1><h2 id="KVM环境搭建"><a href="#KVM环境搭建" class="headerlink" title="KVM环境搭建"></a>KVM环境搭建</h2><p>1.关闭虚拟机, 并在设置中开启虚拟化.</p>
-<table>
-<tr><td><img src="/post/fbec7778/开启虚拟化.png"></td></tr>
-</table>
-
-<p>2.检测系统是否已经支持虚拟化, 有条目表示已支持.</p>
-<figure class="highlight coq"><table><tr><td class="code"><pre><span class="line">cat /proc/cpuinfo | <span class="type">egrep</span> 'vmx|<span class="type">svm</span>' | <span class="type">wc</span> -l</span><br></pre></td></tr></table></figure>
-
-<p>3.安装KVM环境后并重启加载KVM相关模块</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">yum -y <span class="keyword">install</span> qemu-kvm qemu-kvm-tools</span><br><span class="line">yum -y <span class="keyword">install</span> libvirt python-virtinst libvirt-python virt-<span class="keyword">install</span> virt-manager</span><br><span class="line"><span class="keyword">shutdown</span> -r <span class="keyword">now</span></span><br></pre></td></tr></table></figure>
-<p><code>qemu-kvm qemu-kvm-tools</code>:虚拟操作系统模拟器加速模块(KVM核心)<br><code>libvirt</code>:必须要装的核心工具<br><code>virt-manager</code>:虚拟机图形管理工具<br><code>bridge-utils</code>:虚拟机与外界通信的命令管理工具<br><code>virt-install</code>:虚拟机安装工具<br><code>pyhon-virtinst</code>::包含python模块和工具(virt-install，virt-clone和virt-image)</p>
-<p>4.查看KVM模块是否被正确加载</p>
-<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">lsmod <span class="string">| grep kvm</span></span><br></pre></td></tr></table></figure>
-<pre>
-kvm_amd              2176426  0 
-kvm                   578518  1 kvm_amd
-irqbypass              13503  1 kvm
-</pre>
-
-<p>5.开启KVM服务, 并设置开机自启动.</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">systemctl <span class="keyword">start</span> libvirtd</span><br><span class="line">systemctl <span class="keyword">enable</span> libvirtd</span><br></pre></td></tr></table></figure>
-
-<p>6.查看KVM服务状态</p>
-<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">status</span> libvirtd</span><br><span class="line">systemctl <span class="built_in">is</span>-enabled libvirtd</span><br></pre></td></tr></table></figure>
-
-<h2 id="设置KVM网络"><a href="#设置KVM网络" class="headerlink" title="设置KVM网络"></a>设置KVM网络</h2><p>1.查看虚拟机网卡信息, 确定名称后复制文件.</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">ip</span> <span class="string">addr</span></span><br><span class="line"><span class="attr">cd</span> <span class="string">/etc/sysconfig/network-scripts/</span></span><br><span class="line"><span class="attr">cp</span> <span class="string">ifcfg-ens33 ifcfg-br0</span></span><br></pre></td></tr></table></figure>
-
-<p>2.修改ens33网卡配置</p>
-<figure class="highlight gcode"><table><tr><td class="code"><pre><span class="line">vim ifcfg-e<span class="symbol">ns33</span></span><br></pre></td></tr></table></figure>
-<pre>
-TYPE=<font color="red">Ethernet</font>
-PROXY_METHOD=none
-BROWSER_ONLY=no
-<font color="green">#BOOTPROTO=none
-#DEFROUTE=yes</font>
-IPV4_FAILURE_FATAL=no
-IPV6INIT=yes
-IPV6_AUTOCONF=yes
-IPV6_DEFROUTE=yes
-IPV6_FAILURE_FATAL=no
-IPV6_ADDR_GEN_MODE=stable-privacy
-NAME=ens33
-UUID=eb242f93-3890-4f77-b15a-12589b9e7bad
-DEVICE=ens33
-ONBOOT=yes
-<font color="green">#IPADDR=192.168.100.60
-#PREFIX=24
-#GATEWAY=192.168.100.2
-#DNS1=192.168.100.2</font>
-
-<font color="red">BRIDGE=br0
-NM_CONTROLLED=no</font>
-</pre>
-
-<p>3.修改桥接网卡配置</p>
-<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line">vim ifcfg-<span class="keyword">br</span><span class="number">0</span></span><br><span class="line">sed -i <span class="string">"/UUID/c UUID=`uuidgen`"</span> ifcfg-<span class="keyword">br</span><span class="number">0</span></span><br></pre></td></tr></table></figure>
-<pre>
-TYPE=<font color="red">Bridge</font>
-PROXY_METHOD=none
-BROWSER_ONLY=no
-BOOTPROTO=<font color="red">static</font>
-DEFROUTE=yes
-IPV4_FAILURE_FATAL=no
-IPV6INIT=yes
-IPV6_AUTOCONF=yes
-IPV6_DEFROUTE=yes
-IPV6_FAILURE_FATAL=no
-IPV6_ADDR_GEN_MODE=stable-privacy
-NAME=<font color="red">br0</font>
-UUID=03983d4e-3d8d-4212-aa90-7043a259ff6b
-DEVICE=<font color="red">br0</font>
-ONBOOT=yes
-IPADDR=<font color="red">192.168.127.60</font>
-PREFIX=24
-GATEWAY=<font color="red">192.168.127.1</font>
-DNS1=<font color="red">192.168.127.1</font>
-</pre>
-
-<p>4.重启网络服务</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">systemctl</span> <span class="string">stop NetworkManager</span></span><br><span class="line"><span class="attr">systemctl</span> <span class="string">restart network</span></span><br></pre></td></tr></table></figure>
-
-<p>5.查看网络配置信息</p>
-<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brctl </span>show</span><br></pre></td></tr></table></figure>
-<pre>
-ridge name    bridge id            STP enabled    interfaces
-<font color="red">br0</font>           8000.000c293a6592    no             <font color="red">ens33</font>
-virbr0        8000.525400c83c0d    yes            virbr0-nic
-</pre>
-
-<h2 id="KVM创建管理"><a href="#KVM创建管理" class="headerlink" title="KVM创建管理"></a>KVM创建管理</h2><p>打开KVM图形化管理界面</p>
-<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">virt-manager</span></span><br></pre></td></tr></table></figure>
-<table>
-<tr><td><img src="/post/fbec7778/KVM管理.png"></td></tr>
-</table>
-
-<h3 id="1-创建镜像存储池"><a href="#1-创建镜像存储池" class="headerlink" title="1.创建镜像存储池"></a>1.创建镜像存储池</h3><table>
-<tr><td><img src="/post/fbec7778/KVM管理-镜像池创建.png"></td></tr>
-<tr><td><img src="/post/fbec7778/KVM管理-镜像池创建2.png"></td></tr>
-<tr><td><img src="/post/fbec7778/KVM管理-镜像池创建3.png"></td></tr>
-</table>
-
-<h3 id="2-用WinSCP软件将镜像文件上传至指定目录下"><a href="#2-用WinSCP软件将镜像文件上传至指定目录下" class="headerlink" title="2.用WinSCP软件将镜像文件上传至指定目录下"></a>2.用WinSCP软件将镜像文件上传至指定目录下</h3><table>
-<tr><td><img src="/post/fbec7778/KVM-WinSCP连接.png"></td></tr>
-<tr><td><img src="/post/fbec7778/KVM-WinSCP连接2.png"></td></tr>
-<tr><td><img src="/post/fbec7778/KVM管理-镜像池创建4.png"></td></tr>
-</table>
-
-<h3 id="3-创建存储池"><a href="#3-创建存储池" class="headerlink" title="3.创建存储池"></a>3.创建存储池</h3><table>
-注: 在创建该存储池时请保证磁盘容量足够大, 以便存储新建的虚拟机.
-<tr><td><img src="/post/fbec7778/KVM管理-虚拟机池创建.png"></td></tr>
-<tr><td><img src="/post/fbec7778/KVM管理-虚拟机池创建2.png"></td></tr>
-<tr><td><img src="/post/fbec7778/KVM管理-虚拟机池创建3.png"></td></tr>
-</table>
-
-<h3 id="4-创建存储卷"><a href="#4-创建存储卷" class="headerlink" title="4.创建存储卷"></a>4.创建存储卷</h3><table>
-<tr><td><img src="/post/fbec7778/KVM管理-虚拟机池创建4.png"></td></tr>
-<tr><td><img src="/post/fbec7778/KVM管理-存储卷创建.png"></td></tr>
-<tr><td><img src="/post/fbec7778/KVM管理-存储卷创建2.png"></td></tr>
-</table>
-
-<h3 id="5-创建虚拟机"><a href="#5-创建虚拟机" class="headerlink" title="5.创建虚拟机"></a>5.创建虚拟机</h3><talbe>
-<tr><td><img src="/post/fbec7778/KVM管理-虚拟机创建2.png"></td></tr>
-<tr><td><img src="/post/fbec7778/KVM管理-虚拟机创建3.png"></td></tr>
-<tr><td><img src="/post/fbec7778/KVM管理-虚拟机创建4.png"></td></tr>
-<tr><td><img src="/post/fbec7778/KVM管理-虚拟机创建5.png"></td></tr>
-<tr><td><img src="/post/fbec7778/KVM管理-虚拟机创建6.png"></td></tr>
-<tr><td><img src="/post/fbec7778/KVM管理-虚拟机创建7.png"></td></tr>
-<tr><td><img src="/post/fbec7778/KVM管理-虚拟机创建8.png"></td></tr>
-<tr><td><img src="/post/fbec7778/KVM管理-虚拟机创建9.png"></td></tr>
-<tr><td><img src="/post/fbec7778/KVM管理-虚拟机创建10.png"></td></tr>
-
-
-<div class="note info"><p>可用<code>cat /proc/scsi/scsi</code>命令查看该主机是否为虚拟机</p>
-</div>
-
-<h2 id="KVM功能管理"><a href="#KVM功能管理" class="headerlink" title="KVM功能管理"></a>KVM功能管理</h2><figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看命令帮助</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">-h</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看KVM的配置文件存放目录</span></span><br><span class="line"><span class="attr">ls</span> <span class="string">/etc/libvirt/qemu/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看虚拟机状态</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">list --all</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 虚拟机关机与开机</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">shutdown 虚拟机名</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">start 虚拟机名</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 强制实例系统关闭电源</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">destroy 虚拟机名</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过配置文件启动虚拟机系统实例</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">create /etc/libvirt/qemu/虚拟机名.xml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 虚拟机挂起与恢复</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">suspend 虚拟机名</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">resume 虚拟机名</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出虚拟机配置</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">dumpxml 虚拟机名 &gt; /etc/libvirt/qemu/配置文件名2.xml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置虚拟机实例伴随宿主机自动启动</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">autostart 虚拟机名</span></span><br></pre></td></tr></table></figure>
-<div class="note info"><p>上述命令将创建/etc/libvirt/qemu/autostart/目录, 目录内容为开机自动启动的系统.</p>
-</div>
-
-<p>虚拟机的删除与添加</p>
-<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line">virsh <span class="keyword">shutdown</span> test01</span><br><span class="line">virsh undefine test01</span><br><span class="line"><span class="keyword">ls</span> <span class="string">/etc/libvirt/qemu/</span></span><br><span class="line">virsh list <span class="params">--all</span></span><br></pre></td></tr></table></figure>
-<div class="note info"><p>配置文件会被删除, 但是磁盘文件不会被删除.</p>
-</div>
-<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">cd /etc/libvirt/qemu</span><br><span class="line">mv 虚拟机名.<span class="keyword">xml</span> <span class="title">虚拟机名.xml</span></span><br><span class="line">virsh define 虚拟机名.xml</span><br><span class="line">virsh list --all</span><br></pre></td></tr></table></figure>
-
-<h2 id="KVM文件管理"><a href="#KVM文件管理" class="headerlink" title="KVM文件管理"></a>KVM文件管理</h2><h3 id="磁盘格式转换"><a href="#磁盘格式转换" class="headerlink" title="磁盘格式转换"></a>磁盘格式转换</h3><p>1.转换格式</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">qemu-img <span class="builtin-name">info</span> /路径/虚拟机名.img</span><br><span class="line">virsh shutdown 虚拟机名</span><br><span class="line"></span><br><span class="line">qemu-img convert -f<span class="built_in"> raw </span>/路径/虚拟机名.img -O qcow2 /路径/虚拟机名.qcow2</span><br></pre></td></tr></table></figure>
-<pre>
-image: /data/centos7/CentOS7_10_kvm.img
-file format: <font color="red">raw</font>
-virtual size: 20G (21474836480 bytes)
-disk size: 20G
-</pre>
-
-<p>2.编辑配置</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">virsh <span class="builtin-name">edit</span> 虚拟机名</span><br></pre></td></tr></table></figure>
-<pre>
-  &lt;disk type='file' device='disk'>
-      &lt;driver name='qemu' type='<font color="red">qcow2</font>'/>
-      &lt;source file='/data/centos7/CentOS7_10_kvm.<font color="red">qcow2</font>'/>
-      &lt;target dev='vda' bus='virtio'/>
-      &lt;address type='pci' domain='0x0000' bus='0x00' slot='0x07' function='0x0'/>
-  &lt;/disk>
-</pre>
-
-
-<h3 id="虚拟机克隆"><a href="#虚拟机克隆" class="headerlink" title="虚拟机克隆"></a>虚拟机克隆</h3><figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">virsh list --all</span><br><span class="line">virt-<span class="keyword">clone</span> <span class="title">-o</span> 虚拟机名 -n 克隆虚拟机名 -f /data/Centos7/虚拟机名.qcow2</span><br><span class="line">virsh <span class="literal">start</span> 虚拟机名</span><br></pre></td></tr></table></figure>
-
-<h3 id="虚拟机快照"><a href="#虚拟机快照" class="headerlink" title="虚拟机快照"></a>虚拟机快照</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建快照</span></span><br><span class="line">virsh snapshot-<span class="keyword">create</span> 虚拟机名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看虚拟机快照版本信息</span></span><br><span class="line">virsh <span class="keyword">snapshot</span>-<span class="keyword">current</span> 虚拟机名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看快照信息</span></span><br><span class="line">virsh <span class="keyword">snapshot</span>-<span class="keyword">list</span> 虚拟机名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复虚拟机状态至指定快照</span></span><br><span class="line">virsh <span class="keyword">snapshot</span>-revert 虚拟机名 快照名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除快照</span></span><br><span class="line">virsh <span class="keyword">snapshot</span>-<span class="keyword">delete</span> 虚拟机名 快照名</span><br></pre></td></tr></table></figure>
-
-
-
-
-</talbe>]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>KVM</tag>
       </tags>
   </entry>
   <entry>
@@ -2638,405 +2638,6 @@ now:                     Mon Aug 31 2020 22:10:41 GMT+0800 (CST)
       </tags>
   </entry>
   <entry>
-    <title>MySQL主从复制、读写分离、MMM高可用</title>
-    <url>/post/c7e46abc/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>
-<h2 id="MySQL主从复制"><a href="#MySQL主从复制" class="headerlink" title="MySQL主从复制"></a>MySQL主从复制</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>主从复制原理</p>
-<table>
-<tr><td><img src="/post/c7e46abc/MySQL复制的工作过程.png"></td></tr>
-</table>
-Binary log:二进制日志
-Relay log:中继日志
-I/O thread:I/O线程, 状态必须为开启状态(YES).
-SQL thread:SQL语句线程, 状态同样必须为开启状态(YES).
-
-<p>1.在每个事务更新数据完成之前, Master在二进制日志中记录这些改变. 写入二进制日志完成后, Master通知存储引擎提交事务.</p>
-<p>2.Slave将Master的二进制日志复制到其中继日志. 首先, Slave开始一个工作线程-I/O线程, I/O线程在Master上打开一个普通的连接, 然后开始Binlog dump process. Binlog dump process从Master的二进制日志中读取事件, 如果已经跟上Master, 它会睡眠并等待Master产生新的事件. I/O线程将这些事件写入中继日志.</p>
-<p>3.SQL slave thread(SQL从线程)处理该过程的最后一步. SQL线程从中继日志读取事件, 并重放其中的事件而更新Slave的数据, 使其与Master中的数据一致. 只要该线程与I/O线程保持一致, 中继日志通常会位于Os的缓存中, 所以中继日志的开销很小.</p>
-<p>注:复制过程有一个很重要的限制, 即复制在Slave上是串行化的, 也就是说Master上的并行更新操作不能在Slave上并行操作.</p>
-<a id="more"></a>
-
-<p>MySQL支持的复制类型<br>1.基于语句的复制<br>在主服务器上执行的SQL语句, 在从服务器上执行同样的语句, MySQL默认采用基于语句的复制, 效率比较高.</p>
-<p>2.基于行的复制<br>把改变的内容复制过去, 而不是把命令在从服务器上执行一遍.</p>
-<p>3.混合类型的复制<br>默认采用基于语句的复制, 一旦发现基于语句无法精确复制时, 就会采用基于行的复制.</p>
-<h3 id="建立时间同步环境"><a href="#建立时间同步环境" class="headerlink" title="建立时间同步环境"></a>建立时间同步环境</h3><p>为了保证业务环境的实时同步, 需要建立时间同步环境.</p>
-<p>MySQL主服务器<br>1.安装NTP</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum -y install ntp</span><br></pre></td></tr></table></figure>
-
-<p>2.配置NTP</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/ntp.conf</span><br><span class="line">  server 时间供给源 #127.127.1.0 为本地</span><br><span class="line">  fudge 时间供给源 stratum 8</span><br></pre></td></tr></table></figure>
-<pre>
-阿里云时间服务器
-ntp1.aliyun.com
-ntp2.aliyun.com
-ntp3.aliyun.com
-ntp4.aliyun.com
-ntp5.aliyun.com
-ntp6.aliyun.com
-ntp7.aliyun.com
-</pre>
-
-<p>3.重启服务并设置为开机启动</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 立即同步时间</span></span><br><span class="line">ntpdate 时间供给源 </span><br><span class="line"></span><br><span class="line">systemctl restart ntpd</span><br><span class="line">systemctl enable ntpd</span><br></pre></td></tr></table></figure>
-
-<p>MySQL从服务器<br>1.安装NTPdate</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum -y install ntpdate</span><br><span class="line">ntpdate 主服务器ip地址</span><br></pre></td></tr></table></figure>
-
-<p>2.配置NTP</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/ntp.conf</span><br><span class="line">  server 主服务器ip地址</span><br><span class="line">  fudge 主服务器ip地址 stratum 8</span><br></pre></td></tr></table></figure>
-
-<p>3.重启服务并设置为开机启动</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl restart ntpd</span><br><span class="line">systemctl enable ntpd</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改主服务器"><a href="#修改主服务器" class="headerlink" title="修改主服务器"></a>修改主服务器</h3><p>1.修改配置文件后并重启</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br><span class="line">  [mysqld]</span><br><span class="line">  server-id = 11</span><br><span class="line">  log_bin = master-bin</span><br><span class="line">  log-slave-updates = true</span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">systemctl restart mysqld</span><br></pre></td></tr></table></figure>
-
-<p>2.登录mysql, 给服务器授权.</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -p[密码]</span><br><span class="line"></span><br><span class="line">grant replication slave on *.* to 'myslave'@'192.168.100.%' identified by '123456';</span><br><span class="line">flush privileges;</span><br><span class="line"></span><br><span class="line">show master status;</span><br></pre></td></tr></table></figure>
-<pre>
-+-------------------+----------+--------------+------------------+-------------------+
-| File              | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
-+-------------------+----------+--------------+------------------+-------------------+
-| master-bin.000001 |     4035 |              |                  |                   |
-+-------------------+----------+--------------+------------------+-------------------+
-</pre>
-<p>注: 主服务器要关闭防火墙让从服务器访问, 或者对指定主机开放端口.</p>
-<h3 id="修改从服务器"><a href="#修改从服务器" class="headerlink" title="修改从服务器"></a>修改从服务器</h3><p>1.修改配置文件后并重启</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br><span class="line">  [mysqld]</span><br><span class="line">  server-id = #22 #33</span><br><span class="line">  log_bin = slave-bin</span><br><span class="line">  log-slave-updates = true</span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">systemctl restart mysqld</span><br></pre></td></tr></table></figure>
-
-<p>2.从服务器配置同步</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql -u root -p[密码]</span><br><span class="line"><span class="keyword">change</span> <span class="keyword">master</span> <span class="keyword">to</span> master_host=<span class="string">'主服务器ip地址'</span>, master_user=<span class="string">'myslave'</span>, master_password=<span class="string">'123456'</span>, master_log_file=<span class="string">'master-bin.000001'</span>, master_log_pos=<span class="number">4035</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">stop</span> <span class="keyword">slave</span>;</span><br><span class="line"><span class="keyword">reset</span> <span class="keyword">slave</span>;</span><br><span class="line"><span class="keyword">start</span> <span class="keyword">slave</span>;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">slave</span> <span class="keyword">status</span>\G;</span><br></pre></td></tr></table></figure>
-<pre>
-*************************** 1. row ***************************
-               Slave_IO_State: Waiting for master to send event
-                  Master_Host: 192.168.100.10
-                  Master_User: myslave
-                  Master_Port: 3306
-                Connect_Retry: 60
-              Master_Log_File: master-bin.000001
-          Read_Master_Log_Pos: 4035
-               Relay_Log_File: localhost-relay-bin.000003
-                Relay_Log_Pos: 791
-        Relay_Master_Log_File: master-bin.000001
-             <font color="red">Slave_IO_Running: Yes</font>
-            <font color="red">Slave_SQL_Running: Yes</font>
-                             ...
-</pre>
-
-<p>reset slave执行时:<br>1.删除slave_master_info、slave_relay_log_info的表数据;<br>2.删除所有relay log文件, 并重新生成;<br>3.不会改变gtid_executed或gtid_purged的值</p>
-<h3 id="验证主从配置"><a href="#验证主从配置" class="headerlink" title="验证主从配置"></a>验证主从配置</h3><p>在主服务器上创建测试数据库</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">slave</span> <span class="keyword">hosts</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> db_test;</span><br><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> zang (<span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">10</span>),<span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">10</span>),address <span class="built_in">varchar</span>(<span class="number">20</span>));</span><br></pre></td></tr></table></figure>
-
-<p>在从服务器上查看测试数据库</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">databases</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="MySQL读写分离"><a href="#MySQL读写分离" class="headerlink" title="MySQL读写分离"></a>MySQL读写分离</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><a href="https://github.com/Qihoo360/Atlas/blob/master/README_ZH.md" target="_blank" rel="noopener">Atlas</a>是由Qihoo 360公司Web平台部基础架构团队开发维护的一个基于MySQL协议的数据中间层项目. 它在MySQL官方推出的MySQL-Proxy 0.8.2版本的基础上, 修改了大量bug, 添加了很多功能特性.</p>
-<h3 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h3><p>1.读写分离<br>2.从库负载均衡<br>3.IP过滤<br>4.自动分表<br>5.DBA可平滑上下线DB<br>6.自动摘除宕机的DB</p>
-<p>Atlas相对于官方MySQL-Proxy的优势:<br>1.将主流程中所有Lua代码用C重写, Lua仅用于管理接口.<br>2.重写网络模型、线程模型<br>3.实现了真正意义上的连接池<br>4.优化了锁机制, 性能提高数十倍.</p>
-<h3 id="配置读写分离"><a href="#配置读写分离" class="headerlink" title="配置读写分离"></a>配置读写分离</h3><table>
-在主从复制已搭建的环境下:
-<tr><td>MySQL-Master</td><td>192.168.100.10/24</td></tr>
-<tr><td>MySQL-Slave1</td><td>192.168.100.20/24</td></tr>
-<tr><td>MySQL-Slave2</td><td>192.168.100.30/24</td></tr>
-<tr><td>MySQL+Atlas</td><td>192.168.100.40/24</td></tr>
-</table>
-
-<h4 id="MySQL-Master、Slave1、Slave2"><a href="#MySQL-Master、Slave1、Slave2" class="headerlink" title="MySQL-Master、Slave1、Slave2."></a>MySQL-Master、Slave1、Slave2.</h4><p>配置权限给Atlas</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">'用户名'</span>@<span class="string">'192.168.100.%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'密码'</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
-
-<h4 id="MySQL-Atlas"><a href="#MySQL-Atlas" class="headerlink" title="MySQL-Atlas"></a>MySQL-Atlas</h4><p>1.<a href="https://github.com/Qihoo360/Atlas/releases/download/2.2.1/Atlas-2.2.1.el6.x86_64.rpm" target="_blank" rel="noopener">下载Atlas</a>并上传到当前目录下</p>
-<p>2.安装Atlas软件, 安装好后会在<code>/usr/local/mysql-proxy</code>目录下生成文件夹.</p>
-<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line">rpm -ivh Atlas-2.2.1.el6.x86_64.rpm </span><br><span class="line"></span><br><span class="line"><span class="keyword">cd</span> <span class="string">/usr/local/mysql-proxy/</span></span><br><span class="line"><span class="keyword">ls</span></span><br></pre></td></tr></table></figure>
-<pre>
-bin: 可执行文件
- |__ encrypt --对MySQL密码进行加密处理
- |__ mysql-proxy --MySQL自身的读写分离代理
- |__ mysql-proxyd --属于360, 管理服务的启动、重启、停止.
-
-lib: 库及Atlas的依赖项
-log: 日志文件
-
-conf: 配置文件
- |__ test.cnf
-</pre>
-
-<p>3.对MySQL的密码进行加密</p>
-<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">bin/encrypt </span>密码</span><br><span class="line">  加密后的密码</span><br></pre></td></tr></table></figure>
-
-<p>4.编辑test.cnf配置文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim conf/test.cnf</span><br><span class="line">  <span class="comment"># 管理员登陆MySQL的用户名和密码</span></span><br><span class="line">  admin-username = user</span><br><span class="line">  admin-password = <span class="built_in">pwd</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 代理MySQL-Master</span></span><br><span class="line">  proxy-backend-addresses = 192.168.100.10:3306</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 代理MySQL-Slave1、MySQL-Slave2.</span></span><br><span class="line">  proxy-read-only-backend-addresses = 192.168.100.20:3306@1, 192.168.100.30:3306@1</span><br><span class="line">  pwds = 用户名:加密后的密码</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 管理员和代理登录MySQL时, 允许访问的IP地址与端口号.</span></span><br><span class="line">  proxy-address = 192.168.100.40:1234</span><br><span class="line">  admin-address = 192.168.100.40:2345</span><br></pre></td></tr></table></figure>
-
-<p>5.重启Atlas软件</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">bin/mysql-proxyd test <span class="keyword">start</span></span><br><span class="line">ps -ef | grep mysql-proxy</span><br><span class="line"></span><br><span class="line"><span class="keyword">bin</span>/mysql-proxyd <span class="keyword">test</span> restart</span><br></pre></td></tr></table></figure>
-
-<h3 id="检测读写分离"><a href="#检测读写分离" class="headerlink" title="检测读写分离"></a>检测读写分离</h3><p>1.用Yum安装MySQL后并登陆MySQL</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">yum -y <span class="keyword">install</span> mysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 管理员登陆MySQL</span></span><br><span class="line">mysql -h192<span class="number">.168</span><span class="number">.100</span><span class="number">.40</span> -uuser -ppwd -P2345</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> backends;</span><br></pre></td></tr></table></figure>
-<pre>
-+-------------+---------------------+-------+------+
-| backend_ndx | address             | state | type |
-+-------------+---------------------+-------+------+
-|           1 | 192.168.100.10:3306 | up    | rw   |
-|           2 | 192.168.100.20:3306 | up    | ro   |
-|           3 | 192.168.100.30:3306 | up    | ro   |
-+-------------+---------------------+-------+------+
-</pre>
-
-<p>2.在MySQL-Master上创建一个表</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> db_test;</span><br><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> zang (<span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">10</span>),<span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">10</span>),address <span class="built_in">varchar</span>(<span class="number">20</span>));</span><br></pre></td></tr></table></figure>
-
-<p>3.停止MySQL-Slave1、MySQL-Slave2的复制.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">stop</span> <span class="keyword">slave</span>;</span><br></pre></td></tr></table></figure>
-
-<p>4.在MySQL-Master上插入一条数据</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> zang <span class="keyword">values</span>(<span class="string">'1'</span>,<span class="string">'master'</span>,<span class="string">'this_is_master'</span>);</span><br></pre></td></tr></table></figure>
-
-<p>5.分别在MySQL-Slave1、MySQL-Slave2中插入一条数据</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># MySQL-Slave1</span></span><br><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> zang <span class="keyword">values</span>(<span class="string">'2'</span>,<span class="string">'slave1'</span>,<span class="string">'this_is_slave1'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment"># MySQL-Slave2</span></span><br><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> zang <span class="keyword">values</span>(<span class="string">'3'</span>,<span class="string">'slave2'</span>,<span class="string">'this_is_slave2'</span>);</span><br></pre></td></tr></table></figure>
-
-<p>6.在MySQL-Atlas上测试读操作</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代理登陆MySQL</span></span><br><span class="line">mysql -h192.168.100.40 -u用户名 -p密码 -P1234</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> zang;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> zang;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> zang;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> zang;</span><br></pre></td></tr></table></figure>
-
-<h2 id="MySQL-MMM高可用"><a href="#MySQL-MMM高可用" class="headerlink" title="MySQL-MMM高可用"></a>MySQL-MMM高可用</h2><p>MMML(Master-Master replication manager for MySQL, MySQL主主复制管理器)是一套支持双主故障切换和双主日常管理的脚本程序.</p>
-<p>MMM使用Perl语言开发, 主要用来监控和管理MySQL Master-Master(双主)复制, 这套脚本程序一方面实现了故障切换的功能, 另一方面其内部附加的工具脚本也可以实现多个Slave的read负载均衡.</p>
-<p>MMM提供了自动和手动两种方式移除一组服务器中复制延迟较高的服务器的虚拟ip. 同时它还可以备份数据, 实现两节点之间的数据同步等, 但MMM无法完全保证数据的一致性.</p>
-<table>
-<tr><td><img src="/post/c7e46abc/MMM架构图.jpg"></td></tr>
-</table>
-
-<p><code>mmm_mon</code>: 监控进程, 负责所有的监控工作, 决定和处理所有节点角色活动. 此脚本需要在监管机上运行.<br><code>mnm_agent</code>: 运行在每个MySQL服务器上的代理进程, 完成监控的探针工作和执行简单的远端服务设置. 此脚本需要在被监管机上运行.<br><code>mmm_control</code>: 一个简单的脚本, 提供管理<code>mmm_mond</code>进程的命令.</p>
-<p>mysal-mmm的监管端会提供多个虚拟IP(VIP), 包括一个可写VIP, 多个可读VIP, 通过监管的管理, 这些IP会绑定在可用MySQL之上, 当某一台MySQL宕机时, 监管会将VIP迁移至其他MySQL.</p>
-<h3 id="MMM高可用搭建"><a href="#MMM高可用搭建" class="headerlink" title="MMM高可用搭建"></a>MMM高可用搭建</h3><table>
-搭建环境:
-<tr><td>MySQL-Master1</td><td>192.168.100.10/24</td></tr>
-<tr><td>MySQL-Master2</td><td>192.168.100.20/24</td></tr>
-<tr><td>MySQL-Slave1</td><td>192.168.100.30/24</td></tr>
-<tr><td>MySQL-Slave2</td><td>192.168.100.40/24</td></tr>
-<tr><td>MySQL+Atlas+monitor</td><td>192.168.100.50/24</td></tr>
-</table>
-
-<h4 id="配置MySQL主主复制"><a href="#配置MySQL主主复制" class="headerlink" title="配置MySQL主主复制"></a>配置MySQL主主复制</h4><p>1.全部都安装上MySQL<br><a href="http://www.mengyun.ink/2020/08/13/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/#%E4%BD%BF%E7%94%A8%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E8%A3%85MySQL-5-7-30">二进制安装MySQL-5.7.30</a></p>
-<p>2.配置Master1、2和Slave1、2的my.cnf文件</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br><span class="line">  <span class="comment"># MySQL-Master1</span></span><br><span class="line">  server_id = 11</span><br><span class="line">  log_bin = master-bin</span><br><span class="line">  log-slave-updates = true</span><br><span class="line">  auto-increment-increment = 2</span><br><span class="line">  auto-increment-offset = 1</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># MySQL-Master2</span></span><br><span class="line">  [mysqld]</span><br><span class="line">  server_id = 22</span><br><span class="line">  log_bin = master-bin</span><br><span class="line">  log-slave-updates = true</span><br><span class="line">  auto-increment-increment = 2</span><br><span class="line">  auto-increment-offset = 2</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># MySQL-Slave1</span></span><br><span class="line">  [mysqld]</span><br><span class="line">  server_id = 33</span><br><span class="line">  relay-log = relay-log-bin</span><br><span class="line">  relay-log-index = slave-relay-bin.index</span><br><span class="line">  log-slave-updates = true</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># MySQL-Slave2</span></span><br><span class="line">  [mysqld]</span><br><span class="line">  server_id = 44</span><br><span class="line">  relay-log = relay-log-bin</span><br><span class="line">  relay-log-index = slave-relay-bin.index</span><br><span class="line">  log-slave-updates = true</span><br><span class="line"></span><br><span class="line">systemctl restart mysqld</span><br></pre></td></tr></table></figure>
-
-<p>注: 如果是虚拟机克隆出来的话, 需删除auto.cnf文件后重启.</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">systemctl</span> <span class="string">stop mysqld</span></span><br><span class="line"><span class="attr">rm</span> <span class="string">-rf /data/mysql/auto.cnf</span></span><br><span class="line"><span class="attr">systemctl</span> <span class="string">start mysqld</span></span><br></pre></td></tr></table></figure>
-
-<p>3.配置Master1、2的主主模式</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># MySQL-Master1</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">replication</span> <span class="keyword">slave</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">'myslave'</span>@<span class="string">'192.168.100.%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'123456'</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">master</span> <span class="keyword">status</span>;<span class="comment">--Master2定位</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">change</span> <span class="keyword">master</span> <span class="keyword">to</span> master_host=<span class="string">'192.168.100.20'</span>, master_user=<span class="string">'myslave'</span>, master_password=<span class="string">'123456'</span>, master_log_file=<span class="string">'master-bin.000002'</span>, master_log_pos=<span class="number">615</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># MySQL-Master2</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">replication</span> <span class="keyword">slave</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">'myslave'</span>@<span class="string">'192.168.100.%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'123456'</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">master</span> <span class="keyword">status</span>;<span class="comment">--Master1定位</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">change</span> <span class="keyword">master</span> <span class="keyword">to</span> master_host=<span class="string">'192.168.100.10'</span>, master_user=<span class="string">'myslave'</span>, master_password=<span class="string">'123456'</span>, master_log_file=<span class="string">'master-bin.000003'</span>, master_log_pos=<span class="number">1076</span>;</span><br></pre></td></tr></table></figure>
-<pre>
-<font color="green">Master1:</font>
-+-------------------+----------+--------------+------------------+-------------------+
-| File              | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
-+-------------------+----------+--------------+------------------+-------------------+
-| master-bin.000003 |     1076 |              |                  |                   |
-+-------------------+----------+--------------+------------------+-------------------+
-
-<font color="green">Master2:</font>
-+-------------------+----------+--------------+------------------+-------------------+
-| File              | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
-+-------------------+----------+--------------+------------------+-------------------+
-| master-bin.000002 |      615 |              |                  |                   |
-+-------------------+----------+--------------+------------------+-------------------+
-</pre>
-
-
-<p>4.查看Master1、2的主从状态</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">start</span> <span class="keyword">slave</span>;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">slave</span> <span class="keyword">status</span>\G;</span><br></pre></td></tr></table></figure>
-<pre>
-<font color="green">Master1:</font>
-*************************** 1. row ***************************
-               Slave_IO_State: Waiting for master to send event
-                  Master_Host: 192.168.100.20
-                  Master_User: myslave
-                  Master_Port: 3306
-                Connect_Retry: 60
-              Master_Log_File: master-bin.000002
-          Read_Master_Log_Pos: 615
-               Relay_Log_File: localhost-relay-bin.000002
-                Relay_Log_Pos: 321
-        Relay_Master_Log_File: master-bin.000002
-             <font color="red">Slave_IO_Running: Yes</font>
-            <font color="red">Slave_SQL_Running: Yes</font>
-                             ...
-
-<font color="green">Master2:</font>
-*************************** 1. row ***************************
-               Slave_IO_State: Waiting for master to send event
-                  Master_Host: 192.168.100.10
-                  Master_User: myslave
-                  Master_Port: 3306
-                Connect_Retry: 60
-              Master_Log_File: master-bin.000003
-          Read_Master_Log_Pos: 1076
-               Relay_Log_File: localhost-relay-bin.000002
-                Relay_Log_Pos: 321
-        Relay_Master_Log_File: master-bin.000003
-             <font color="red">Slave_IO_Running: Yes</font>
-            <font color="red">Slave_SQL_Running: Yes</font>
-                             ...
-</pre>
-
-<p>5.测试主主同步, 在Master2中新建一个库.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> db_test;</span><br><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> zang (<span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">10</span>),<span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">10</span>),address <span class="built_in">varchar</span>(<span class="number">20</span>));</span><br></pre></td></tr></table></figure>
-
-<p>6.回到Master1中进行查看</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">databases</span>;</span><br></pre></td></tr></table></figure>
-
-<h4 id="配置MySQL主从复制"><a href="#配置MySQL主从复制" class="headerlink" title="配置MySQL主从复制"></a>配置MySQL主从复制</h4><p>1.查看Master1的状态值</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">master</span> <span class="keyword">status</span>;</span><br></pre></td></tr></table></figure>
-<pre>
-+-------------------+----------+--------------+------------------+-------------------+
-| File              | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
-+-------------------+----------+--------------+------------------+-------------------+
-| master-bin.000003 |     1249 |              |                  |                   |
-+-------------------+----------+--------------+------------------+-------------------+
-</pre>
-
-
-<p>2.配置Slave1、2为Master1的从库</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">change</span> <span class="keyword">master</span> <span class="keyword">to</span> master_host=<span class="string">'192.168.100.10'</span>, master_user=<span class="string">'myslave'</span>, master_password=<span class="string">'123456'</span>, master_log_file=<span class="string">'master-bin.000003'</span>, master_log_pos=<span class="number">1249</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">start</span> <span class="keyword">slave</span>;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">slave</span> <span class="keyword">status</span>\G;</span><br></pre></td></tr></table></figure>
-
-<h4 id="配置MySQL-MMM"><a href="#配置MySQL-MMM" class="headerlink" title="配置MySQL-MMM"></a>配置MySQL-MMM</h4><p>1.全部都安装上MMM</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">wget -O <span class="regexp">/etc/</span>yum.repos.d<span class="regexp">/epel.repo http:/</span><span class="regexp">/mirrors.aliyun.com/</span>repo/epel<span class="number">-7.</span>repo </span><br><span class="line">yum install -y  mysql-mmm*</span><br></pre></td></tr></table></figure>
-
-<p>2.在Master1、2和Slave1、2上授权monitor访问</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 监控用户授权</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">replication</span> <span class="keyword">client</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">'mmm_monitor'</span>@<span class="string">'192.168.100.%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'monitor'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 代理用户授权</span></span><br><span class="line"><span class="keyword">grant</span> super, <span class="keyword">replication</span> <span class="keyword">client</span>, process <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">'mmm_agent'</span>@<span class="string">'192.168.100.%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'agent'</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
-
-<p>3.修改每台的<code>mmm_common.conf</code>文件</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">vim /etc/mysql-mmm/mmm_common.conf</span><br><span class="line">    active_master_role      writer</span><br><span class="line">    <span class="tag">&lt;<span class="name">host</span> <span class="attr">default</span>&gt;</span></span><br><span class="line">                              # 本机网卡</span><br><span class="line">        cluster_interface       ens33 </span><br><span class="line">        pid_path                /run/mysql-mmm-agent.pid</span><br><span class="line">        bin_path                /usr/libexec/mysql-mmm/</span><br><span class="line"></span><br><span class="line">                              # 主数据库用户</span><br><span class="line">        replication_user        myslave</span><br><span class="line"></span><br><span class="line">                              # 主数据库用户密码</span><br><span class="line">        replication_password    123456</span><br><span class="line"></span><br><span class="line">                              # 代理用户</span><br><span class="line">        agent_user              mmm_agent</span><br><span class="line">        </span><br><span class="line">                              # 代理用户密码</span><br><span class="line">        agent_password          agent</span><br><span class="line">    <span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">host</span> <span class="attr">db1</span>&gt;</span></span><br><span class="line">        ip      192.168.100.10</span><br><span class="line">        mode    master</span><br><span class="line">        peer    db2</span><br><span class="line">    <span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">host</span> <span class="attr">db2</span>&gt;</span></span><br><span class="line">        ip      192.168.100.20</span><br><span class="line">        mode    master</span><br><span class="line">        peer    db1</span><br><span class="line">    <span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">host</span> <span class="attr">db3</span>&gt;</span></span><br><span class="line">        ip      192.168.100.30</span><br><span class="line">        mode    slave</span><br><span class="line">    <span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">host</span> <span class="attr">db4</span>&gt;</span></span><br><span class="line">        ip      192.168.100.40</span><br><span class="line">        mode    slave</span><br><span class="line">    <span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">role</span> <span class="attr">writer</span>&gt;</span></span><br><span class="line">        hosts   db1, db2</span><br><span class="line">        # 写操作的VIP地址</span><br><span class="line">        ips     192.168.100.12 </span><br><span class="line">        mode    exclusive</span><br><span class="line">    <span class="tag">&lt;/<span class="name">role</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">role</span> <span class="attr">reader</span>&gt;</span></span><br><span class="line">        hosts   db3, db4</span><br><span class="line">        # 读操作的VIP地址</span><br><span class="line">        ips     192.168.100.34, 192.168.100.35</span><br><span class="line">        mode    balanced</span><br><span class="line">    <span class="tag">&lt;/<span class="name">role</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>4.修改Master1、2和Slave1、2上的<code>mmm_agent.conf</code>文件, 不同的主机为不同的值.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/mysql-mmm/mmm_agent.conf</span><br><span class="line">    <span class="comment"># Master1</span></span><br><span class="line">    include mmm_common.conf</span><br><span class="line">    this db1</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Master2</span></span><br><span class="line">    include mmm_common.conf</span><br><span class="line">    this db2</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Slave1</span></span><br><span class="line">    include mmm_common.conf</span><br><span class="line">    this db3</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Slave2</span></span><br><span class="line">    include mmm_common.conf</span><br><span class="line">    this db4</span><br></pre></td></tr></table></figure>
-
-<p>5.修改monitor上的<code>mmm_mon.conf</code>文件</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">vim /etc/mysql-mmm/mmm_mon.conf</span><br><span class="line">    include mmm_common.conf</span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">monitor</span>&gt;</span></span><br><span class="line">        ip                  127.0.0.1</span><br><span class="line">        pid_path            /run/mysql-mmm-monitor.pid</span><br><span class="line">        bin_path            /usr/libexec/mysql-mmm</span><br><span class="line">        status_path         /var/lib/mysql-mmm/mmm_mond.status</span><br><span class="line">        # 要监控的ip地址</span><br><span class="line">        ping_ips            192.168.100.10, 192.168.100.20, 192.168.100.30, 192.168.100.40 </span><br><span class="line">        auto_set_online     60</span><br><span class="line"></span><br><span class="line">        # The kill_host_bin does not exist by default, though the monitor will</span><br><span class="line">        # throw a warning about it missing.  See the section 5.10 "Kill Host</span><br><span class="line">        # Functionality" in the PDF documentation.</span><br><span class="line">        #</span><br><span class="line">        # kill_host_bin     /usr/libexec/mysql-mmm/monitor/kill_host</span><br><span class="line">        #</span><br><span class="line">    <span class="tag">&lt;/<span class="name">monitor</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">host</span> <span class="attr">default</span>&gt;</span></span><br><span class="line">        # 监控用户</span><br><span class="line">        monitor_user        mmm_monitor</span><br><span class="line"></span><br><span class="line">        # 监控用户密码</span><br><span class="line">        monitor_password    monitor</span><br><span class="line">    <span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    debug 0</span><br></pre></td></tr></table></figure>
-
-<p>6.启动代理和监控</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment"># monitor</span></span><br><span class="line">systemctl start mysql-mmm-monitor</span><br><span class="line">systemctl <span class="builtin-name">enable</span> mysql-mmm-monitor</span><br><span class="line"></span><br><span class="line"><span class="comment"># Master1、2和Slave1、2</span></span><br><span class="line">systemctl start mysql-mmm-agent</span><br><span class="line">service mysql-mmm-agent status</span><br><span class="line">systemctl <span class="builtin-name">enable</span> mysql-mmm-agent</span><br></pre></td></tr></table></figure>
-
-<p>7.配置读写分离<br>(1).Master1、2和Slave1、2配置权限给Atlas</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">'Atlas'</span>@<span class="string">'192.168.100.%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'密码'</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
-
-<p>(2).安装Atlas软件</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">wget https:<span class="regexp">//gi</span>thub.com<span class="regexp">/Qihoo360/</span>Atlas<span class="regexp">/releases/</span>download<span class="regexp">/2.2.1/</span>Atlas-<span class="number">2.2</span>.<span class="number">1</span>.el6.x86_64.rpm</span><br><span class="line">rpm -ivh Atlas-<span class="number">2.2</span>.<span class="number">1</span>.el6.x86_64.rpm</span><br></pre></td></tr></table></figure>
-
-<p>(3).将配置权限的密码进行加密</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/mysql-proxy/</span><br><span class="line">bin/encrypt 密码</span><br><span class="line">  加密后的密码</span><br></pre></td></tr></table></figure>
-
-<p>(4).编辑test.cnf配置文件</p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">vim conf/test.cnf</span><br><span class="line">  # 管理员登陆MySQL的用户名和密码</span><br><span class="line">  admin-username = user</span><br><span class="line">  admin-password = pwd</span><br><span class="line"></span><br><span class="line">  # 代理MySQL-Master</span><br><span class="line">  proxy-backend-addresses = <span class="number">192.168</span><span class="number">.100</span><span class="number">.10</span>:<span class="number">3306</span>, <span class="number">192.168</span><span class="number">.100</span><span class="number">.20</span>:<span class="number">3306</span></span><br><span class="line"></span><br><span class="line">  # 代理MySQL-Slave1、MySQL-Slave2.</span><br><span class="line">  proxy-read-only-backend-addresses = <span class="number">192.168</span><span class="number">.100</span><span class="number">.30</span>:<span class="symbol">3306@</span><span class="number">1</span>, <span class="number">192.168</span><span class="number">.100</span><span class="number">.40</span>:<span class="symbol">3306@</span><span class="number">1</span></span><br><span class="line">  pwds = Atlas:加密后的密码</span><br><span class="line"></span><br><span class="line">  # 设置Atlas的运行方式, 设为<span class="literal">true</span>时为守护进程方式, 设为<span class="literal">false</span>时为前台方式.</span><br><span class="line">  daemon = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  # 管理员和代理登录MySQL时, 允许访问的IP地址与端口号.</span><br><span class="line">  proxy-address = <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">1234</span></span><br><span class="line">  admin-address = <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">2345</span></span><br></pre></td></tr></table></figure>
-
-<p>(5).重启Atlas软件</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">bin/mysql-proxyd test <span class="keyword">start</span></span><br><span class="line">ps -ef | grep mysql-proxy</span><br><span class="line"></span><br><span class="line"><span class="keyword">bin</span>/mysql-proxyd <span class="keyword">test</span> restart</span><br></pre></td></tr></table></figure>
-
-<p>(6).检查读写分离</p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">mysql -h192<span class="number">.168</span><span class="number">.100</span><span class="number">.50</span> -uuser -ppwd -P2345</span><br><span class="line">select * <span class="keyword">from</span> backends;</span><br></pre></td></tr></table></figure>
-<pre>
-+-------------+---------------------+-------+------+
-| backend_ndx | address             | state | type |
-+-------------+---------------------+-------+------+
-|           1 | 192.168.100.10:3306 | up    | rw   |
-|           2 | 192.168.100.20:3306 | up    | rw   |
-|           3 | 192.168.100.30:3306 | up    | ro   |
-|           4 | 192.168.100.40:3306 | up    | ro   |
-+-------------+---------------------+-------+------+
-</pre>
-
-<p>7.在monitor上检查群集状态</p>
-<figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">mmm_control checks <span class="keyword">all</span></span><br></pre></td></tr></table></figure>
-<pre>
-db4  ping         [last change: 2020/08/25 17:12:14]  OK
-db4  mysql        [last change: 2020/08/25 17:12:14]  OK
-db4  rep_threads  [last change: 2020/08/25 17:12:14]  OK
-db4  rep_backlog  [last change: 2020/08/25 17:12:14]  OK: Backlog is null
-db2  ping         [last change: 2020/08/25 17:12:14]  OK
-db2  mysql        [last change: 2020/08/25 17:20:52]  OK
-db2  rep_threads  [last change: 2020/08/25 17:26:04]  OK
-db2  rep_backlog  [last change: 2020/08/25 17:12:14]  OK: Backlog is null
-db3  ping         [last change: 2020/08/25 17:12:14]  OK
-db3  mysql        [last change: 2020/08/25 17:12:14]  OK
-db3  rep_threads  [last change: 2020/08/25 17:12:14]  OK
-db3  rep_backlog  [last change: 2020/08/25 17:12:14]  OK: Backlog is null
-db1  ping         [last change: 2020/08/25 17:12:14]  OK
-db1  mysql        [last change: 2020/08/25 17:16:21]  OK
-db1  rep_threads  [last change: 2020/08/25 17:12:14]  OK
-db1  rep_backlog  [last change: 2020/08/25 17:12:14]  OK: Backlog is null
-</pre>
-
-<p>8.在monitor上查看群集状态</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">mmm_control <span class="keyword">show</span></span><br></pre></td></tr></table></figure>
-<pre>
-db1(192.168.100.10) master/ONLINE. Roles: writer(192.168.100.12)
-db2(192.168.100.20) master/ONLINE. Roles: 
-db3(192.168.100.30) slave/ONLINE. Roles: reader(192.168.100.35)
-db4(192.168.100.40) slave/ONLINE. Roles: reader(192.168.100.34)
-</pre>
-
-<p>(*1)关闭SeLinux子安全系统, 让agent访问数据.</p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">setenforce <span class="number">0</span></span><br></pre></td></tr></table></figure>
-<pre>
-# Warning: agent on host db1 is not reachable
-# Warning: agent on host db2 is not reachable
-# Warning: agent on host db3 is not reachable
-# Warning: agent on host db4 is not reachable
-</pre>
-
-<p>(*2)如果出现此状态, 则对所有主机进行时间同步.</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">yum</span> <span class="selector-tag">-y</span> <span class="selector-tag">install</span> <span class="selector-tag">ntpdate</span></span><br><span class="line"><span class="selector-tag">ntpdate</span> <span class="selector-tag">ntp1</span><span class="selector-class">.aliyun</span><span class="selector-class">.com</span></span><br></pre></td></tr></table></figure>
-<pre>
-db1(192.168.100.10) master/AWAITING_RECOVERY. Roles: 
-db2(192.168.100.20) master/AWAITING_RECOVERY. Roles: 
-db3(192.168.100.30) slave/AWAITING_RECOVERY. Roles: 
-db4(192.168.100.40) slave/AWAITING_RECOVERY. Roles: 
-</pre>
-
-<h4 id="测试MySQL-MMM"><a href="#测试MySQL-MMM" class="headerlink" title="测试MySQL-MMM"></a>测试MySQL-MMM</h4><p>1.故障转移切换<br>(1)停止Master1的MySQL服务</p>
-<figure class="highlight gauss"><table><tr><td class="code"><pre><span class="line"><span class="meta"># Master1</span></span><br><span class="line">systemctl <span class="keyword">stop</span> mysqld</span><br><span class="line"></span><br><span class="line"><span class="meta"># monitor</span></span><br><span class="line">mmm_contorl <span class="keyword">show</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># 几秒过后</span></span><br><span class="line">mmm_contorl <span class="keyword">show</span></span><br></pre></td></tr></table></figure>
-
-<p>2.模拟主主故障插入数据测试, 虚拟ip地址漂移, 存在延10秒左右.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># monitor</span></span><br><span class="line">mysql -uAtlas -h192.168.100.12 -p密码</span><br><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> zang <span class="keyword">values</span>(<span class="string">'1'</span>,<span class="string">'master'</span>,<span class="string">'this_is_master'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment"># Master2</span></span><br><span class="line">mysql -uroot -p[密码]</span><br><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> zang;</span><br></pre></td></tr></table></figure>
-
-<p>3.在monitor中查看群集状态</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">systemctl <span class="keyword">start</span> mysqld</span><br><span class="line">mmm_contorl <span class="keyword">show</span> </span><br><span class="line">mmm_contorl <span class="keyword">show</span> </span><br><span class="line">mmm_contorl <span class="keyword">show</span></span><br></pre></td></tr></table></figure>
-<pre>
-# 关闭状态
-db2(192.168.100.20) master/<font color="red">HARD_OFFLINE</font>. Roles:
-# 正在恢复
-db2(192.168.100.20) master/<font color="red">AWAITING_RECOVERY</font>. Roles: 
-# 已恢复在线状态
-db2(192.168.100.20) master/<font color="red">ONLINE</font>. Roles:
-</pre>
-
-<p>4.在Master1中查看数据是否同步</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql -uroot -p[密码]</span><br><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> zang;</span><br></pre></td></tr></table></figure>
-
-<p>5.模拟主从故障</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Slave1</span></span><br><span class="line"><span class="attr">systemctl</span> <span class="string">stop mysqld</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># monitor</span></span><br><span class="line"><span class="attr">mmm_contorl</span> <span class="string">show</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Slave1</span></span><br><span class="line"><span class="attr">systemctl</span> <span class="string">start mysqld</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># monitor</span></span><br><span class="line"><span class="attr">mmm_contorl</span> <span class="string">show</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>MySQL</tag>
-        <tag>Atlas</tag>
-        <tag>NTP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MySQL数据库基础</title>
     <url>/post/2c642c75/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>
@@ -3509,6 +3110,405 @@ MySQL的体系架构
       </tags>
   </entry>
   <entry>
+    <title>MySQL主从复制、读写分离、MMM高可用</title>
+    <url>/post/c7e46abc/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>
+<h2 id="MySQL主从复制"><a href="#MySQL主从复制" class="headerlink" title="MySQL主从复制"></a>MySQL主从复制</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>主从复制原理</p>
+<table>
+<tr><td><img src="/post/c7e46abc/MySQL复制的工作过程.png"></td></tr>
+</table>
+Binary log:二进制日志
+Relay log:中继日志
+I/O thread:I/O线程, 状态必须为开启状态(YES).
+SQL thread:SQL语句线程, 状态同样必须为开启状态(YES).
+
+<p>1.在每个事务更新数据完成之前, Master在二进制日志中记录这些改变. 写入二进制日志完成后, Master通知存储引擎提交事务.</p>
+<p>2.Slave将Master的二进制日志复制到其中继日志. 首先, Slave开始一个工作线程-I/O线程, I/O线程在Master上打开一个普通的连接, 然后开始Binlog dump process. Binlog dump process从Master的二进制日志中读取事件, 如果已经跟上Master, 它会睡眠并等待Master产生新的事件. I/O线程将这些事件写入中继日志.</p>
+<p>3.SQL slave thread(SQL从线程)处理该过程的最后一步. SQL线程从中继日志读取事件, 并重放其中的事件而更新Slave的数据, 使其与Master中的数据一致. 只要该线程与I/O线程保持一致, 中继日志通常会位于Os的缓存中, 所以中继日志的开销很小.</p>
+<p>注:复制过程有一个很重要的限制, 即复制在Slave上是串行化的, 也就是说Master上的并行更新操作不能在Slave上并行操作.</p>
+<a id="more"></a>
+
+<p>MySQL支持的复制类型<br>1.基于语句的复制<br>在主服务器上执行的SQL语句, 在从服务器上执行同样的语句, MySQL默认采用基于语句的复制, 效率比较高.</p>
+<p>2.基于行的复制<br>把改变的内容复制过去, 而不是把命令在从服务器上执行一遍.</p>
+<p>3.混合类型的复制<br>默认采用基于语句的复制, 一旦发现基于语句无法精确复制时, 就会采用基于行的复制.</p>
+<h3 id="建立时间同步环境"><a href="#建立时间同步环境" class="headerlink" title="建立时间同步环境"></a>建立时间同步环境</h3><p>为了保证业务环境的实时同步, 需要建立时间同步环境.</p>
+<p>MySQL主服务器<br>1.安装NTP</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum -y install ntp</span><br></pre></td></tr></table></figure>
+
+<p>2.配置NTP</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/ntp.conf</span><br><span class="line">  server 时间供给源 #127.127.1.0 为本地</span><br><span class="line">  fudge 时间供给源 stratum 8</span><br></pre></td></tr></table></figure>
+<pre>
+阿里云时间服务器
+ntp1.aliyun.com
+ntp2.aliyun.com
+ntp3.aliyun.com
+ntp4.aliyun.com
+ntp5.aliyun.com
+ntp6.aliyun.com
+ntp7.aliyun.com
+</pre>
+
+<p>3.重启服务并设置为开机启动</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 立即同步时间</span></span><br><span class="line">ntpdate 时间供给源 </span><br><span class="line"></span><br><span class="line">systemctl restart ntpd</span><br><span class="line">systemctl enable ntpd</span><br></pre></td></tr></table></figure>
+
+<p>MySQL从服务器<br>1.安装NTPdate</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum -y install ntpdate</span><br><span class="line">ntpdate 主服务器ip地址</span><br></pre></td></tr></table></figure>
+
+<p>2.配置NTP</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/ntp.conf</span><br><span class="line">  server 主服务器ip地址</span><br><span class="line">  fudge 主服务器ip地址 stratum 8</span><br></pre></td></tr></table></figure>
+
+<p>3.重启服务并设置为开机启动</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl restart ntpd</span><br><span class="line">systemctl enable ntpd</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改主服务器"><a href="#修改主服务器" class="headerlink" title="修改主服务器"></a>修改主服务器</h3><p>1.修改配置文件后并重启</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br><span class="line">  [mysqld]</span><br><span class="line">  server-id = 11</span><br><span class="line">  log_bin = master-bin</span><br><span class="line">  log-slave-updates = true</span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">systemctl restart mysqld</span><br></pre></td></tr></table></figure>
+
+<p>2.登录mysql, 给服务器授权.</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -p[密码]</span><br><span class="line"></span><br><span class="line">grant replication slave on *.* to 'myslave'@'192.168.100.%' identified by '123456';</span><br><span class="line">flush privileges;</span><br><span class="line"></span><br><span class="line">show master status;</span><br></pre></td></tr></table></figure>
+<pre>
++-------------------+----------+--------------+------------------+-------------------+
+| File              | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
++-------------------+----------+--------------+------------------+-------------------+
+| master-bin.000001 |     4035 |              |                  |                   |
++-------------------+----------+--------------+------------------+-------------------+
+</pre>
+<p>注: 主服务器要关闭防火墙让从服务器访问, 或者对指定主机开放端口.</p>
+<h3 id="修改从服务器"><a href="#修改从服务器" class="headerlink" title="修改从服务器"></a>修改从服务器</h3><p>1.修改配置文件后并重启</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br><span class="line">  [mysqld]</span><br><span class="line">  server-id = #22 #33</span><br><span class="line">  log_bin = slave-bin</span><br><span class="line">  log-slave-updates = true</span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">systemctl restart mysqld</span><br></pre></td></tr></table></figure>
+
+<p>2.从服务器配置同步</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql -u root -p[密码]</span><br><span class="line"><span class="keyword">change</span> <span class="keyword">master</span> <span class="keyword">to</span> master_host=<span class="string">'主服务器ip地址'</span>, master_user=<span class="string">'myslave'</span>, master_password=<span class="string">'123456'</span>, master_log_file=<span class="string">'master-bin.000001'</span>, master_log_pos=<span class="number">4035</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">stop</span> <span class="keyword">slave</span>;</span><br><span class="line"><span class="keyword">reset</span> <span class="keyword">slave</span>;</span><br><span class="line"><span class="keyword">start</span> <span class="keyword">slave</span>;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">slave</span> <span class="keyword">status</span>\G;</span><br></pre></td></tr></table></figure>
+<pre>
+*************************** 1. row ***************************
+               Slave_IO_State: Waiting for master to send event
+                  Master_Host: 192.168.100.10
+                  Master_User: myslave
+                  Master_Port: 3306
+                Connect_Retry: 60
+              Master_Log_File: master-bin.000001
+          Read_Master_Log_Pos: 4035
+               Relay_Log_File: localhost-relay-bin.000003
+                Relay_Log_Pos: 791
+        Relay_Master_Log_File: master-bin.000001
+             <font color="red">Slave_IO_Running: Yes</font>
+            <font color="red">Slave_SQL_Running: Yes</font>
+                             ...
+</pre>
+
+<p>reset slave执行时:<br>1.删除slave_master_info、slave_relay_log_info的表数据;<br>2.删除所有relay log文件, 并重新生成;<br>3.不会改变gtid_executed或gtid_purged的值</p>
+<h3 id="验证主从配置"><a href="#验证主从配置" class="headerlink" title="验证主从配置"></a>验证主从配置</h3><p>在主服务器上创建测试数据库</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">slave</span> <span class="keyword">hosts</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> db_test;</span><br><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> zang (<span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">10</span>),<span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">10</span>),address <span class="built_in">varchar</span>(<span class="number">20</span>));</span><br></pre></td></tr></table></figure>
+
+<p>在从服务器上查看测试数据库</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">databases</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="MySQL读写分离"><a href="#MySQL读写分离" class="headerlink" title="MySQL读写分离"></a>MySQL读写分离</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><a href="https://github.com/Qihoo360/Atlas/blob/master/README_ZH.md" target="_blank" rel="noopener">Atlas</a>是由Qihoo 360公司Web平台部基础架构团队开发维护的一个基于MySQL协议的数据中间层项目. 它在MySQL官方推出的MySQL-Proxy 0.8.2版本的基础上, 修改了大量bug, 添加了很多功能特性.</p>
+<h3 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h3><p>1.读写分离<br>2.从库负载均衡<br>3.IP过滤<br>4.自动分表<br>5.DBA可平滑上下线DB<br>6.自动摘除宕机的DB</p>
+<p>Atlas相对于官方MySQL-Proxy的优势:<br>1.将主流程中所有Lua代码用C重写, Lua仅用于管理接口.<br>2.重写网络模型、线程模型<br>3.实现了真正意义上的连接池<br>4.优化了锁机制, 性能提高数十倍.</p>
+<h3 id="配置读写分离"><a href="#配置读写分离" class="headerlink" title="配置读写分离"></a>配置读写分离</h3><table>
+在主从复制已搭建的环境下:
+<tr><td>MySQL-Master</td><td>192.168.100.10/24</td></tr>
+<tr><td>MySQL-Slave1</td><td>192.168.100.20/24</td></tr>
+<tr><td>MySQL-Slave2</td><td>192.168.100.30/24</td></tr>
+<tr><td>MySQL+Atlas</td><td>192.168.100.40/24</td></tr>
+</table>
+
+<h4 id="MySQL-Master、Slave1、Slave2"><a href="#MySQL-Master、Slave1、Slave2" class="headerlink" title="MySQL-Master、Slave1、Slave2."></a>MySQL-Master、Slave1、Slave2.</h4><p>配置权限给Atlas</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">'用户名'</span>@<span class="string">'192.168.100.%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'密码'</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="MySQL-Atlas"><a href="#MySQL-Atlas" class="headerlink" title="MySQL-Atlas"></a>MySQL-Atlas</h4><p>1.<a href="https://github.com/Qihoo360/Atlas/releases/download/2.2.1/Atlas-2.2.1.el6.x86_64.rpm" target="_blank" rel="noopener">下载Atlas</a>并上传到当前目录下</p>
+<p>2.安装Atlas软件, 安装好后会在<code>/usr/local/mysql-proxy</code>目录下生成文件夹.</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line">rpm -ivh Atlas-2.2.1.el6.x86_64.rpm </span><br><span class="line"></span><br><span class="line"><span class="keyword">cd</span> <span class="string">/usr/local/mysql-proxy/</span></span><br><span class="line"><span class="keyword">ls</span></span><br></pre></td></tr></table></figure>
+<pre>
+bin: 可执行文件
+ |__ encrypt --对MySQL密码进行加密处理
+ |__ mysql-proxy --MySQL自身的读写分离代理
+ |__ mysql-proxyd --属于360, 管理服务的启动、重启、停止.
+
+lib: 库及Atlas的依赖项
+log: 日志文件
+
+conf: 配置文件
+ |__ test.cnf
+</pre>
+
+<p>3.对MySQL的密码进行加密</p>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">bin/encrypt </span>密码</span><br><span class="line">  加密后的密码</span><br></pre></td></tr></table></figure>
+
+<p>4.编辑test.cnf配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim conf/test.cnf</span><br><span class="line">  <span class="comment"># 管理员登陆MySQL的用户名和密码</span></span><br><span class="line">  admin-username = user</span><br><span class="line">  admin-password = <span class="built_in">pwd</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 代理MySQL-Master</span></span><br><span class="line">  proxy-backend-addresses = 192.168.100.10:3306</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 代理MySQL-Slave1、MySQL-Slave2.</span></span><br><span class="line">  proxy-read-only-backend-addresses = 192.168.100.20:3306@1, 192.168.100.30:3306@1</span><br><span class="line">  pwds = 用户名:加密后的密码</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 管理员和代理登录MySQL时, 允许访问的IP地址与端口号.</span></span><br><span class="line">  proxy-address = 192.168.100.40:1234</span><br><span class="line">  admin-address = 192.168.100.40:2345</span><br></pre></td></tr></table></figure>
+
+<p>5.重启Atlas软件</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">bin/mysql-proxyd test <span class="keyword">start</span></span><br><span class="line">ps -ef | grep mysql-proxy</span><br><span class="line"></span><br><span class="line"><span class="keyword">bin</span>/mysql-proxyd <span class="keyword">test</span> restart</span><br></pre></td></tr></table></figure>
+
+<h3 id="检测读写分离"><a href="#检测读写分离" class="headerlink" title="检测读写分离"></a>检测读写分离</h3><p>1.用Yum安装MySQL后并登陆MySQL</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">yum -y <span class="keyword">install</span> mysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 管理员登陆MySQL</span></span><br><span class="line">mysql -h192<span class="number">.168</span><span class="number">.100</span><span class="number">.40</span> -uuser -ppwd -P2345</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> backends;</span><br></pre></td></tr></table></figure>
+<pre>
++-------------+---------------------+-------+------+
+| backend_ndx | address             | state | type |
++-------------+---------------------+-------+------+
+|           1 | 192.168.100.10:3306 | up    | rw   |
+|           2 | 192.168.100.20:3306 | up    | ro   |
+|           3 | 192.168.100.30:3306 | up    | ro   |
++-------------+---------------------+-------+------+
+</pre>
+
+<p>2.在MySQL-Master上创建一个表</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> db_test;</span><br><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> zang (<span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">10</span>),<span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">10</span>),address <span class="built_in">varchar</span>(<span class="number">20</span>));</span><br></pre></td></tr></table></figure>
+
+<p>3.停止MySQL-Slave1、MySQL-Slave2的复制.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">stop</span> <span class="keyword">slave</span>;</span><br></pre></td></tr></table></figure>
+
+<p>4.在MySQL-Master上插入一条数据</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> zang <span class="keyword">values</span>(<span class="string">'1'</span>,<span class="string">'master'</span>,<span class="string">'this_is_master'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>5.分别在MySQL-Slave1、MySQL-Slave2中插入一条数据</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># MySQL-Slave1</span></span><br><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> zang <span class="keyword">values</span>(<span class="string">'2'</span>,<span class="string">'slave1'</span>,<span class="string">'this_is_slave1'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment"># MySQL-Slave2</span></span><br><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> zang <span class="keyword">values</span>(<span class="string">'3'</span>,<span class="string">'slave2'</span>,<span class="string">'this_is_slave2'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>6.在MySQL-Atlas上测试读操作</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代理登陆MySQL</span></span><br><span class="line">mysql -h192.168.100.40 -u用户名 -p密码 -P1234</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> zang;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> zang;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> zang;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> zang;</span><br></pre></td></tr></table></figure>
+
+<h2 id="MySQL-MMM高可用"><a href="#MySQL-MMM高可用" class="headerlink" title="MySQL-MMM高可用"></a>MySQL-MMM高可用</h2><p>MMML(Master-Master replication manager for MySQL, MySQL主主复制管理器)是一套支持双主故障切换和双主日常管理的脚本程序.</p>
+<p>MMM使用Perl语言开发, 主要用来监控和管理MySQL Master-Master(双主)复制, 这套脚本程序一方面实现了故障切换的功能, 另一方面其内部附加的工具脚本也可以实现多个Slave的read负载均衡.</p>
+<p>MMM提供了自动和手动两种方式移除一组服务器中复制延迟较高的服务器的虚拟ip. 同时它还可以备份数据, 实现两节点之间的数据同步等, 但MMM无法完全保证数据的一致性.</p>
+<table>
+<tr><td><img src="/post/c7e46abc/MMM架构图.jpg"></td></tr>
+</table>
+
+<p><code>mmm_mon</code>: 监控进程, 负责所有的监控工作, 决定和处理所有节点角色活动. 此脚本需要在监管机上运行.<br><code>mnm_agent</code>: 运行在每个MySQL服务器上的代理进程, 完成监控的探针工作和执行简单的远端服务设置. 此脚本需要在被监管机上运行.<br><code>mmm_control</code>: 一个简单的脚本, 提供管理<code>mmm_mond</code>进程的命令.</p>
+<p>mysal-mmm的监管端会提供多个虚拟IP(VIP), 包括一个可写VIP, 多个可读VIP, 通过监管的管理, 这些IP会绑定在可用MySQL之上, 当某一台MySQL宕机时, 监管会将VIP迁移至其他MySQL.</p>
+<h3 id="MMM高可用搭建"><a href="#MMM高可用搭建" class="headerlink" title="MMM高可用搭建"></a>MMM高可用搭建</h3><table>
+搭建环境:
+<tr><td>MySQL-Master1</td><td>192.168.100.10/24</td></tr>
+<tr><td>MySQL-Master2</td><td>192.168.100.20/24</td></tr>
+<tr><td>MySQL-Slave1</td><td>192.168.100.30/24</td></tr>
+<tr><td>MySQL-Slave2</td><td>192.168.100.40/24</td></tr>
+<tr><td>MySQL+Atlas+monitor</td><td>192.168.100.50/24</td></tr>
+</table>
+
+<h4 id="配置MySQL主主复制"><a href="#配置MySQL主主复制" class="headerlink" title="配置MySQL主主复制"></a>配置MySQL主主复制</h4><p>1.全部都安装上MySQL<br><a href="http://www.mengyun.ink/2020/08/13/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/#%E4%BD%BF%E7%94%A8%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E8%A3%85MySQL-5-7-30">二进制安装MySQL-5.7.30</a></p>
+<p>2.配置Master1、2和Slave1、2的my.cnf文件</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br><span class="line">  <span class="comment"># MySQL-Master1</span></span><br><span class="line">  server_id = 11</span><br><span class="line">  log_bin = master-bin</span><br><span class="line">  log-slave-updates = true</span><br><span class="line">  auto-increment-increment = 2</span><br><span class="line">  auto-increment-offset = 1</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># MySQL-Master2</span></span><br><span class="line">  [mysqld]</span><br><span class="line">  server_id = 22</span><br><span class="line">  log_bin = master-bin</span><br><span class="line">  log-slave-updates = true</span><br><span class="line">  auto-increment-increment = 2</span><br><span class="line">  auto-increment-offset = 2</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># MySQL-Slave1</span></span><br><span class="line">  [mysqld]</span><br><span class="line">  server_id = 33</span><br><span class="line">  relay-log = relay-log-bin</span><br><span class="line">  relay-log-index = slave-relay-bin.index</span><br><span class="line">  log-slave-updates = true</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># MySQL-Slave2</span></span><br><span class="line">  [mysqld]</span><br><span class="line">  server_id = 44</span><br><span class="line">  relay-log = relay-log-bin</span><br><span class="line">  relay-log-index = slave-relay-bin.index</span><br><span class="line">  log-slave-updates = true</span><br><span class="line"></span><br><span class="line">systemctl restart mysqld</span><br></pre></td></tr></table></figure>
+
+<p>注: 如果是虚拟机克隆出来的话, 需删除auto.cnf文件后重启.</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">systemctl</span> <span class="string">stop mysqld</span></span><br><span class="line"><span class="attr">rm</span> <span class="string">-rf /data/mysql/auto.cnf</span></span><br><span class="line"><span class="attr">systemctl</span> <span class="string">start mysqld</span></span><br></pre></td></tr></table></figure>
+
+<p>3.配置Master1、2的主主模式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># MySQL-Master1</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">replication</span> <span class="keyword">slave</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">'myslave'</span>@<span class="string">'192.168.100.%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'123456'</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">master</span> <span class="keyword">status</span>;<span class="comment">--Master2定位</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">change</span> <span class="keyword">master</span> <span class="keyword">to</span> master_host=<span class="string">'192.168.100.20'</span>, master_user=<span class="string">'myslave'</span>, master_password=<span class="string">'123456'</span>, master_log_file=<span class="string">'master-bin.000002'</span>, master_log_pos=<span class="number">615</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># MySQL-Master2</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">replication</span> <span class="keyword">slave</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">'myslave'</span>@<span class="string">'192.168.100.%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'123456'</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">master</span> <span class="keyword">status</span>;<span class="comment">--Master1定位</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">change</span> <span class="keyword">master</span> <span class="keyword">to</span> master_host=<span class="string">'192.168.100.10'</span>, master_user=<span class="string">'myslave'</span>, master_password=<span class="string">'123456'</span>, master_log_file=<span class="string">'master-bin.000003'</span>, master_log_pos=<span class="number">1076</span>;</span><br></pre></td></tr></table></figure>
+<pre>
+<font color="green">Master1:</font>
++-------------------+----------+--------------+------------------+-------------------+
+| File              | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
++-------------------+----------+--------------+------------------+-------------------+
+| master-bin.000003 |     1076 |              |                  |                   |
++-------------------+----------+--------------+------------------+-------------------+
+
+<font color="green">Master2:</font>
++-------------------+----------+--------------+------------------+-------------------+
+| File              | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
++-------------------+----------+--------------+------------------+-------------------+
+| master-bin.000002 |      615 |              |                  |                   |
++-------------------+----------+--------------+------------------+-------------------+
+</pre>
+
+
+<p>4.查看Master1、2的主从状态</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">start</span> <span class="keyword">slave</span>;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">slave</span> <span class="keyword">status</span>\G;</span><br></pre></td></tr></table></figure>
+<pre>
+<font color="green">Master1:</font>
+*************************** 1. row ***************************
+               Slave_IO_State: Waiting for master to send event
+                  Master_Host: 192.168.100.20
+                  Master_User: myslave
+                  Master_Port: 3306
+                Connect_Retry: 60
+              Master_Log_File: master-bin.000002
+          Read_Master_Log_Pos: 615
+               Relay_Log_File: localhost-relay-bin.000002
+                Relay_Log_Pos: 321
+        Relay_Master_Log_File: master-bin.000002
+             <font color="red">Slave_IO_Running: Yes</font>
+            <font color="red">Slave_SQL_Running: Yes</font>
+                             ...
+
+<font color="green">Master2:</font>
+*************************** 1. row ***************************
+               Slave_IO_State: Waiting for master to send event
+                  Master_Host: 192.168.100.10
+                  Master_User: myslave
+                  Master_Port: 3306
+                Connect_Retry: 60
+              Master_Log_File: master-bin.000003
+          Read_Master_Log_Pos: 1076
+               Relay_Log_File: localhost-relay-bin.000002
+                Relay_Log_Pos: 321
+        Relay_Master_Log_File: master-bin.000003
+             <font color="red">Slave_IO_Running: Yes</font>
+            <font color="red">Slave_SQL_Running: Yes</font>
+                             ...
+</pre>
+
+<p>5.测试主主同步, 在Master2中新建一个库.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> db_test;</span><br><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> zang (<span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">10</span>),<span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">10</span>),address <span class="built_in">varchar</span>(<span class="number">20</span>));</span><br></pre></td></tr></table></figure>
+
+<p>6.回到Master1中进行查看</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">databases</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置MySQL主从复制"><a href="#配置MySQL主从复制" class="headerlink" title="配置MySQL主从复制"></a>配置MySQL主从复制</h4><p>1.查看Master1的状态值</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">master</span> <span class="keyword">status</span>;</span><br></pre></td></tr></table></figure>
+<pre>
++-------------------+----------+--------------+------------------+-------------------+
+| File              | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
++-------------------+----------+--------------+------------------+-------------------+
+| master-bin.000003 |     1249 |              |                  |                   |
++-------------------+----------+--------------+------------------+-------------------+
+</pre>
+
+
+<p>2.配置Slave1、2为Master1的从库</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">change</span> <span class="keyword">master</span> <span class="keyword">to</span> master_host=<span class="string">'192.168.100.10'</span>, master_user=<span class="string">'myslave'</span>, master_password=<span class="string">'123456'</span>, master_log_file=<span class="string">'master-bin.000003'</span>, master_log_pos=<span class="number">1249</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">start</span> <span class="keyword">slave</span>;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">slave</span> <span class="keyword">status</span>\G;</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置MySQL-MMM"><a href="#配置MySQL-MMM" class="headerlink" title="配置MySQL-MMM"></a>配置MySQL-MMM</h4><p>1.全部都安装上MMM</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">wget -O <span class="regexp">/etc/</span>yum.repos.d<span class="regexp">/epel.repo http:/</span><span class="regexp">/mirrors.aliyun.com/</span>repo/epel<span class="number">-7.</span>repo </span><br><span class="line">yum install -y  mysql-mmm*</span><br></pre></td></tr></table></figure>
+
+<p>2.在Master1、2和Slave1、2上授权monitor访问</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 监控用户授权</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">replication</span> <span class="keyword">client</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">'mmm_monitor'</span>@<span class="string">'192.168.100.%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'monitor'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 代理用户授权</span></span><br><span class="line"><span class="keyword">grant</span> super, <span class="keyword">replication</span> <span class="keyword">client</span>, process <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">'mmm_agent'</span>@<span class="string">'192.168.100.%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'agent'</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
+
+<p>3.修改每台的<code>mmm_common.conf</code>文件</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">vim /etc/mysql-mmm/mmm_common.conf</span><br><span class="line">    active_master_role      writer</span><br><span class="line">    <span class="tag">&lt;<span class="name">host</span> <span class="attr">default</span>&gt;</span></span><br><span class="line">                              # 本机网卡</span><br><span class="line">        cluster_interface       ens33 </span><br><span class="line">        pid_path                /run/mysql-mmm-agent.pid</span><br><span class="line">        bin_path                /usr/libexec/mysql-mmm/</span><br><span class="line"></span><br><span class="line">                              # 主数据库用户</span><br><span class="line">        replication_user        myslave</span><br><span class="line"></span><br><span class="line">                              # 主数据库用户密码</span><br><span class="line">        replication_password    123456</span><br><span class="line"></span><br><span class="line">                              # 代理用户</span><br><span class="line">        agent_user              mmm_agent</span><br><span class="line">        </span><br><span class="line">                              # 代理用户密码</span><br><span class="line">        agent_password          agent</span><br><span class="line">    <span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">host</span> <span class="attr">db1</span>&gt;</span></span><br><span class="line">        ip      192.168.100.10</span><br><span class="line">        mode    master</span><br><span class="line">        peer    db2</span><br><span class="line">    <span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">host</span> <span class="attr">db2</span>&gt;</span></span><br><span class="line">        ip      192.168.100.20</span><br><span class="line">        mode    master</span><br><span class="line">        peer    db1</span><br><span class="line">    <span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">host</span> <span class="attr">db3</span>&gt;</span></span><br><span class="line">        ip      192.168.100.30</span><br><span class="line">        mode    slave</span><br><span class="line">    <span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">host</span> <span class="attr">db4</span>&gt;</span></span><br><span class="line">        ip      192.168.100.40</span><br><span class="line">        mode    slave</span><br><span class="line">    <span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">role</span> <span class="attr">writer</span>&gt;</span></span><br><span class="line">        hosts   db1, db2</span><br><span class="line">        # 写操作的VIP地址</span><br><span class="line">        ips     192.168.100.12 </span><br><span class="line">        mode    exclusive</span><br><span class="line">    <span class="tag">&lt;/<span class="name">role</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">role</span> <span class="attr">reader</span>&gt;</span></span><br><span class="line">        hosts   db3, db4</span><br><span class="line">        # 读操作的VIP地址</span><br><span class="line">        ips     192.168.100.34, 192.168.100.35</span><br><span class="line">        mode    balanced</span><br><span class="line">    <span class="tag">&lt;/<span class="name">role</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>4.修改Master1、2和Slave1、2上的<code>mmm_agent.conf</code>文件, 不同的主机为不同的值.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/mysql-mmm/mmm_agent.conf</span><br><span class="line">    <span class="comment"># Master1</span></span><br><span class="line">    include mmm_common.conf</span><br><span class="line">    this db1</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Master2</span></span><br><span class="line">    include mmm_common.conf</span><br><span class="line">    this db2</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Slave1</span></span><br><span class="line">    include mmm_common.conf</span><br><span class="line">    this db3</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Slave2</span></span><br><span class="line">    include mmm_common.conf</span><br><span class="line">    this db4</span><br></pre></td></tr></table></figure>
+
+<p>5.修改monitor上的<code>mmm_mon.conf</code>文件</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">vim /etc/mysql-mmm/mmm_mon.conf</span><br><span class="line">    include mmm_common.conf</span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">monitor</span>&gt;</span></span><br><span class="line">        ip                  127.0.0.1</span><br><span class="line">        pid_path            /run/mysql-mmm-monitor.pid</span><br><span class="line">        bin_path            /usr/libexec/mysql-mmm</span><br><span class="line">        status_path         /var/lib/mysql-mmm/mmm_mond.status</span><br><span class="line">        # 要监控的ip地址</span><br><span class="line">        ping_ips            192.168.100.10, 192.168.100.20, 192.168.100.30, 192.168.100.40 </span><br><span class="line">        auto_set_online     60</span><br><span class="line"></span><br><span class="line">        # The kill_host_bin does not exist by default, though the monitor will</span><br><span class="line">        # throw a warning about it missing.  See the section 5.10 "Kill Host</span><br><span class="line">        # Functionality" in the PDF documentation.</span><br><span class="line">        #</span><br><span class="line">        # kill_host_bin     /usr/libexec/mysql-mmm/monitor/kill_host</span><br><span class="line">        #</span><br><span class="line">    <span class="tag">&lt;/<span class="name">monitor</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">host</span> <span class="attr">default</span>&gt;</span></span><br><span class="line">        # 监控用户</span><br><span class="line">        monitor_user        mmm_monitor</span><br><span class="line"></span><br><span class="line">        # 监控用户密码</span><br><span class="line">        monitor_password    monitor</span><br><span class="line">    <span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    debug 0</span><br></pre></td></tr></table></figure>
+
+<p>6.启动代理和监控</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment"># monitor</span></span><br><span class="line">systemctl start mysql-mmm-monitor</span><br><span class="line">systemctl <span class="builtin-name">enable</span> mysql-mmm-monitor</span><br><span class="line"></span><br><span class="line"><span class="comment"># Master1、2和Slave1、2</span></span><br><span class="line">systemctl start mysql-mmm-agent</span><br><span class="line">service mysql-mmm-agent status</span><br><span class="line">systemctl <span class="builtin-name">enable</span> mysql-mmm-agent</span><br></pre></td></tr></table></figure>
+
+<p>7.配置读写分离<br>(1).Master1、2和Slave1、2配置权限给Atlas</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">'Atlas'</span>@<span class="string">'192.168.100.%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'密码'</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
+
+<p>(2).安装Atlas软件</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">wget https:<span class="regexp">//gi</span>thub.com<span class="regexp">/Qihoo360/</span>Atlas<span class="regexp">/releases/</span>download<span class="regexp">/2.2.1/</span>Atlas-<span class="number">2.2</span>.<span class="number">1</span>.el6.x86_64.rpm</span><br><span class="line">rpm -ivh Atlas-<span class="number">2.2</span>.<span class="number">1</span>.el6.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<p>(3).将配置权限的密码进行加密</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/mysql-proxy/</span><br><span class="line">bin/encrypt 密码</span><br><span class="line">  加密后的密码</span><br></pre></td></tr></table></figure>
+
+<p>(4).编辑test.cnf配置文件</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">vim conf/test.cnf</span><br><span class="line">  # 管理员登陆MySQL的用户名和密码</span><br><span class="line">  admin-username = user</span><br><span class="line">  admin-password = pwd</span><br><span class="line"></span><br><span class="line">  # 代理MySQL-Master</span><br><span class="line">  proxy-backend-addresses = <span class="number">192.168</span><span class="number">.100</span><span class="number">.10</span>:<span class="number">3306</span>, <span class="number">192.168</span><span class="number">.100</span><span class="number">.20</span>:<span class="number">3306</span></span><br><span class="line"></span><br><span class="line">  # 代理MySQL-Slave1、MySQL-Slave2.</span><br><span class="line">  proxy-read-only-backend-addresses = <span class="number">192.168</span><span class="number">.100</span><span class="number">.30</span>:<span class="symbol">3306@</span><span class="number">1</span>, <span class="number">192.168</span><span class="number">.100</span><span class="number">.40</span>:<span class="symbol">3306@</span><span class="number">1</span></span><br><span class="line">  pwds = Atlas:加密后的密码</span><br><span class="line"></span><br><span class="line">  # 设置Atlas的运行方式, 设为<span class="literal">true</span>时为守护进程方式, 设为<span class="literal">false</span>时为前台方式.</span><br><span class="line">  daemon = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  # 管理员和代理登录MySQL时, 允许访问的IP地址与端口号.</span><br><span class="line">  proxy-address = <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">1234</span></span><br><span class="line">  admin-address = <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">2345</span></span><br></pre></td></tr></table></figure>
+
+<p>(5).重启Atlas软件</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">bin/mysql-proxyd test <span class="keyword">start</span></span><br><span class="line">ps -ef | grep mysql-proxy</span><br><span class="line"></span><br><span class="line"><span class="keyword">bin</span>/mysql-proxyd <span class="keyword">test</span> restart</span><br></pre></td></tr></table></figure>
+
+<p>(6).检查读写分离</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">mysql -h192<span class="number">.168</span><span class="number">.100</span><span class="number">.50</span> -uuser -ppwd -P2345</span><br><span class="line">select * <span class="keyword">from</span> backends;</span><br></pre></td></tr></table></figure>
+<pre>
++-------------+---------------------+-------+------+
+| backend_ndx | address             | state | type |
++-------------+---------------------+-------+------+
+|           1 | 192.168.100.10:3306 | up    | rw   |
+|           2 | 192.168.100.20:3306 | up    | rw   |
+|           3 | 192.168.100.30:3306 | up    | ro   |
+|           4 | 192.168.100.40:3306 | up    | ro   |
++-------------+---------------------+-------+------+
+</pre>
+
+<p>7.在monitor上检查群集状态</p>
+<figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">mmm_control checks <span class="keyword">all</span></span><br></pre></td></tr></table></figure>
+<pre>
+db4  ping         [last change: 2020/08/25 17:12:14]  OK
+db4  mysql        [last change: 2020/08/25 17:12:14]  OK
+db4  rep_threads  [last change: 2020/08/25 17:12:14]  OK
+db4  rep_backlog  [last change: 2020/08/25 17:12:14]  OK: Backlog is null
+db2  ping         [last change: 2020/08/25 17:12:14]  OK
+db2  mysql        [last change: 2020/08/25 17:20:52]  OK
+db2  rep_threads  [last change: 2020/08/25 17:26:04]  OK
+db2  rep_backlog  [last change: 2020/08/25 17:12:14]  OK: Backlog is null
+db3  ping         [last change: 2020/08/25 17:12:14]  OK
+db3  mysql        [last change: 2020/08/25 17:12:14]  OK
+db3  rep_threads  [last change: 2020/08/25 17:12:14]  OK
+db3  rep_backlog  [last change: 2020/08/25 17:12:14]  OK: Backlog is null
+db1  ping         [last change: 2020/08/25 17:12:14]  OK
+db1  mysql        [last change: 2020/08/25 17:16:21]  OK
+db1  rep_threads  [last change: 2020/08/25 17:12:14]  OK
+db1  rep_backlog  [last change: 2020/08/25 17:12:14]  OK: Backlog is null
+</pre>
+
+<p>8.在monitor上查看群集状态</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">mmm_control <span class="keyword">show</span></span><br></pre></td></tr></table></figure>
+<pre>
+db1(192.168.100.10) master/ONLINE. Roles: writer(192.168.100.12)
+db2(192.168.100.20) master/ONLINE. Roles: 
+db3(192.168.100.30) slave/ONLINE. Roles: reader(192.168.100.35)
+db4(192.168.100.40) slave/ONLINE. Roles: reader(192.168.100.34)
+</pre>
+
+<p>(*1)关闭SeLinux子安全系统, 让agent访问数据.</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">setenforce <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<pre>
+# Warning: agent on host db1 is not reachable
+# Warning: agent on host db2 is not reachable
+# Warning: agent on host db3 is not reachable
+# Warning: agent on host db4 is not reachable
+</pre>
+
+<p>(*2)如果出现此状态, 则对所有主机进行时间同步.</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">yum</span> <span class="selector-tag">-y</span> <span class="selector-tag">install</span> <span class="selector-tag">ntpdate</span></span><br><span class="line"><span class="selector-tag">ntpdate</span> <span class="selector-tag">ntp1</span><span class="selector-class">.aliyun</span><span class="selector-class">.com</span></span><br></pre></td></tr></table></figure>
+<pre>
+db1(192.168.100.10) master/AWAITING_RECOVERY. Roles: 
+db2(192.168.100.20) master/AWAITING_RECOVERY. Roles: 
+db3(192.168.100.30) slave/AWAITING_RECOVERY. Roles: 
+db4(192.168.100.40) slave/AWAITING_RECOVERY. Roles: 
+</pre>
+
+<h4 id="测试MySQL-MMM"><a href="#测试MySQL-MMM" class="headerlink" title="测试MySQL-MMM"></a>测试MySQL-MMM</h4><p>1.故障转移切换<br>(1)停止Master1的MySQL服务</p>
+<figure class="highlight gauss"><table><tr><td class="code"><pre><span class="line"><span class="meta"># Master1</span></span><br><span class="line">systemctl <span class="keyword">stop</span> mysqld</span><br><span class="line"></span><br><span class="line"><span class="meta"># monitor</span></span><br><span class="line">mmm_contorl <span class="keyword">show</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># 几秒过后</span></span><br><span class="line">mmm_contorl <span class="keyword">show</span></span><br></pre></td></tr></table></figure>
+
+<p>2.模拟主主故障插入数据测试, 虚拟ip地址漂移, 存在延10秒左右.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># monitor</span></span><br><span class="line">mysql -uAtlas -h192.168.100.12 -p密码</span><br><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> zang <span class="keyword">values</span>(<span class="string">'1'</span>,<span class="string">'master'</span>,<span class="string">'this_is_master'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment"># Master2</span></span><br><span class="line">mysql -uroot -p[密码]</span><br><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> zang;</span><br></pre></td></tr></table></figure>
+
+<p>3.在monitor中查看群集状态</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">systemctl <span class="keyword">start</span> mysqld</span><br><span class="line">mmm_contorl <span class="keyword">show</span> </span><br><span class="line">mmm_contorl <span class="keyword">show</span> </span><br><span class="line">mmm_contorl <span class="keyword">show</span></span><br></pre></td></tr></table></figure>
+<pre>
+# 关闭状态
+db2(192.168.100.20) master/<font color="red">HARD_OFFLINE</font>. Roles:
+# 正在恢复
+db2(192.168.100.20) master/<font color="red">AWAITING_RECOVERY</font>. Roles: 
+# 已恢复在线状态
+db2(192.168.100.20) master/<font color="red">ONLINE</font>. Roles:
+</pre>
+
+<p>4.在Master1中查看数据是否同步</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql -uroot -p[密码]</span><br><span class="line"><span class="keyword">use</span> db_test;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> zang;</span><br></pre></td></tr></table></figure>
+
+<p>5.模拟主从故障</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Slave1</span></span><br><span class="line"><span class="attr">systemctl</span> <span class="string">stop mysqld</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># monitor</span></span><br><span class="line"><span class="attr">mmm_contorl</span> <span class="string">show</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Slave1</span></span><br><span class="line"><span class="attr">systemctl</span> <span class="string">start mysqld</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># monitor</span></span><br><span class="line"><span class="attr">mmm_contorl</span> <span class="string">show</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>MySQL</tag>
+        <tag>Atlas</tag>
+        <tag>NTP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Nagios监控系统</title>
     <url>/post/25c16f2d/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>
@@ -3795,6 +3795,95 @@ define service{
       <tags>
         <tag>Linux</tag>
         <tag>Nagios</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python基础知识与爬虫技术</title>
+    <url>/post/248475c2/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>
+<h1 id="Python环境安装"><a href="#Python环境安装" class="headerlink" title="Python环境安装"></a>Python环境安装</h1><p>在<a href="http://www.python.org" target="_blank" rel="noopener">官方网站</a>下载Python安装程序<br>Windows x86-64 executable installer</p>
+<table>
+<tr><td><img src="/post/248475c2/Python安装1.png"></td></tr>
+<tr><td><img src="/post/248475c2/Python安装2.png"></td></tr>
+</table>
+
+<h1 id="Pycharm集成开发环境安装"><a href="#Pycharm集成开发环境安装" class="headerlink" title="Pycharm集成开发环境安装"></a>Pycharm集成开发环境安装</h1><p>在<a href="https://www.jetbrains.com/pycharm/" target="_blank" rel="noopener">官方网站</a>下载Pycharm安装程序<br>Community Download</p>
+<table>
+<tr><td><img src="/post/248475c2/PyCharm安装.png"></td></tr>
+</table>
+
+<a id="more"></a>
+
+<h1 id="Python基础知识"><a href="#Python基础知识" class="headerlink" title="Python基础知识"></a>Python基础知识</h1><h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p><code>#</code>:单行注释<br><code>&#39;&#39;&#39;</code><br>多行注释<br><code>&#39;&#39;&#39;</code></p>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>变量可以是任意的数据类型, 在程序中用一个变量名表示.<br>变量名必须是大小写英文、数字和下划线(-)的组合, 且不能以<font color="red">数字</font>开头.</p>
+<h2 id="核心数据类型"><a href="#核心数据类型" class="headerlink" title="核心数据类型"></a>核心数据类型</h2><h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>多行字符串</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(<span class="string">"""</span></span><br><span class="line"><span class="string">-"""</span> * <span class="number">60</span>)</span><br></pre></td></tr></table></figure>
+
+<p>字符串截取</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">str = <span class="string">"1234567890"</span></span><br><span class="line">print(str[下标])</span><br><span class="line">print(str[:终止位置])</span><br><span class="line">print(str[起始位置:终止位置])</span><br><span class="line">print(str[起始位置:])</span><br><span class="line">print(str[起始位置:终止位置:步进值])</span><br></pre></td></tr></table></figure>
+
+<p>全部转义</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(<span class="string">r"\t\b\n\a"</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="列表-List"><a href="#列表-List" class="headerlink" title="列表(List)"></a>列表(List)</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">list = [<span class="number">0</span>, <span class="number">0.0</span>, <span class="string">'1'</span>, <span class="string">"2s"</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> values <span class="keyword">in</span> list:</span><br><span class="line">    print(values)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="标识符和关键字"><a href="#标识符和关键字" class="headerlink" title="标识符和关键字"></a>标识符和关键字</h2><p>显示所有的关键字</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> keyword</span><br><span class="line">print(keyword.kwlist)</span><br></pre></td></tr></table></figure>
+
+<h2 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(变量名<span class="number">1</span>/值<span class="number">1</span>, 变量名<span class="number">2</span>/值<span class="number">2</span>, 变量名<span class="number">3</span>/值<span class="number">3</span>,...)</span><br></pre></td></tr></table></figure>
+<table>
+占位符输出
+<tr><td>%с</td><td>字符</td></tr>
+<tr><td>%s</td><td>通过str()字符串转换来格式化</td></tr>
+<tr><td>%i</td><td>有符号十进制整数</td></tr>
+<tr><td>%d</td><td>有符号十进制整数</td></tr>
+<tr><td>%u</td><td>无符号十进制整数</td></tr>
+<tr><td>%o</td><td>八进制整数</td></tr>
+<tr><td>%x</td><td>十六进制整数(小写字母)</td></tr>
+<tr><td>%X</td><td>十六进制整数(大写字母)</td></tr>
+<tr><td>%е</td><td>索引符号(小写'e')</td></tr>
+<tr><td>%E</td><td>索引符号(大写"E")</td></tr>
+<tr><td>%f</td><td>浮点实数</td></tr>
+</table>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#单值输出</span></span><br><span class="line">print(<span class="string">"%d"</span> % <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#多值输出</span></span><br><span class="line">print(<span class="string">"%c %s %i %d %u %o %x %X %e %E %f"</span> % (<span class="string">'o'</span>, <span class="string">"other"</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">15</span>, <span class="number">100</span>, <span class="number">0.01</span>, <span class="number">1.0044</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">#多值输出-指定符分隔</span></span><br><span class="line">print(<span class="string">'1'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'4'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'3'</span>, sep=<span class="string">"-"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#多语句输出-结尾带指定符</span></span><br><span class="line">print(<span class="string">' |-----'</span>, end=<span class="string">'|\n|0'</span>)</span><br><span class="line">print(<span class="string">'-----'</span>, end=<span class="string">'0|\n+|'</span>)</span><br><span class="line">print(<span class="string">'-----'</span>, end=<span class="string">'|+\n|0'</span>)</span><br><span class="line">print(<span class="string">'-----'</span>, end=<span class="string">'0|\n |'</span>)</span><br><span class="line">print(<span class="string">'-----'</span>, end=<span class="string">'|'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="格式化输入"><a href="#格式化输入" class="headerlink" title="格式化输入"></a>格式化输入</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 值输入</span></span><br><span class="line">变量名 = input(<span class="string">"输入提示信息: "</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 类型判断</span></span><br><span class="line">print(type(变量名))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 类型转换</span></span><br><span class="line">变量名 = int(值)</span><br></pre></td></tr></table></figure>
+
+<h2 id="算术、比较、赋值运算符"><a href="#算术、比较、赋值运算符" class="headerlink" title="算术、比较、赋值运算符"></a>算术、比较、赋值运算符</h2><table style="text-align:center">
+<tr><td colspan="2">算术</td><td colspan="2">比较</td><td colspan="2">赋值</td></tr>
+<tr><td>+</td><td></td><td>==</td><td></td><td>=</td><td></td></tr>
+<tr><td>-</td><td></td><td>!=</td><td></td><td>+=</td><td></td></tr>
+<tr><td>*</td><td></td><td>></td><td></td><td>-=</td><td></td></tr>
+<tr><td>/</td><td></td><td><</td><td></td><td>*=</td><td></td></tr>
+<tr><td>%</td><td></td><td>>=</td><td></td><td>/=</td><td></td></tr>
+<tr><td>**</td><td>幕</td><td><=< td><td></td><td>%=</td><td></td></=<></td></tr>
+<tr><td>//</td><td>向下取整除</td><td></td><td></td><td>**=</td><td></td>
+</tr><tr><td></td><td></td><td></td><td></td><td>//=</td><td></td></tr>
+</table>
+
+<h2 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 单条件判断</span></span><br><span class="line"><span class="keyword">if</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="comment"># True/非0值/(not None)</span></span><br><span class="line">    print(<span class="string">"True"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># False/0值/()/None</span></span><br><span class="line">    print(<span class="string">"False"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多条件判断</span></span><br><span class="line">num = <span class="number">100</span></span><br><span class="line"><span class="keyword">if</span> <span class="number">50</span> &lt;= num <span class="keyword">and</span> num &lt;= <span class="number">100</span>:  <span class="comment"># 不推荐此写法...</span></span><br><span class="line">    print(<span class="string">"num = %d, 50 &lt;= num &lt;= 100"</span> % num)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="number">50</span> &lt;= num &lt;= <span class="number">100</span>:  <span class="comment"># 推荐此写法...</span></span><br><span class="line">    print(<span class="string">"num = %d, 50 &lt;= num &lt;= 100"</span> % num)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> <span class="number">20</span> &lt;= num &lt; <span class="number">50</span>:</span><br><span class="line">    print(<span class="string">"num = %d, 20 &lt;= num &lt; 50"</span> % num)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> <span class="number">0</span> &lt;= num &lt; <span class="number">20</span>:</span><br><span class="line">    print(<span class="string">"num = %d, 0 &lt;= num &lt; 20"</span> % num)</span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"num = %d, num &gt; 100, num &lt; 0"</span> % num)</span><br></pre></td></tr></table></figure>
+
+<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><p><a href="https://docs.python.org/3/library/stdtypes.html#range" target="_blank" rel="noopener">range(): 官方资料</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># for循环</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(起始值, 结束值, 步进值):  <span class="comment">#不包含结束值</span></span><br><span class="line">    print(i, end=<span class="string">'\t'</span>)</span><br><span class="line"></span><br><span class="line">str = <span class="string">"abcde"</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> str:</span><br><span class="line">    print(i, end=<span class="string">'\t'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># while循环</span></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> i &lt; 结束值:  <span class="comment">#不包含结束值</span></span><br><span class="line">    print(i, end=<span class="string">'\t'</span>)</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">'\n不满足条件时, 退出循环前执行. i:'</span>, i)</span><br><span class="line"></span><br><span class="line"><span class="comment"># fow+while循环</span></span><br><span class="line">print(<span class="string">'-'</span> * <span class="number">110</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">    j = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> j &lt;= i:</span><br><span class="line">        print(<span class="string">'%d * %d = %d'</span> % (i, j, i*j), end=<span class="string">'\t'</span>)</span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print()</span><br><span class="line">print(<span class="string">'-'</span> * <span class="number">110</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># break、continue、pass</span></span><br><span class="line"><span class="comment"># pass用于占位</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="引入库"><a href="#引入库" class="headerlink" title="引入库"></a>引入库</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 引入随机库</span></span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="comment"># 存储随机数</span></span><br><span class="line">x = random.randint(下限, 上限)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Pycharm</tag>
       </tags>
   </entry>
   <entry>
@@ -4283,95 +4372,6 @@ define service{
       </tags>
   </entry>
   <entry>
-    <title>Python基础知识与爬虫技术</title>
-    <url>/post/248475c2/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>
-<h1 id="Python环境安装"><a href="#Python环境安装" class="headerlink" title="Python环境安装"></a>Python环境安装</h1><p>在<a href="http://www.python.org" target="_blank" rel="noopener">官方网站</a>下载Python安装程序<br>Windows x86-64 executable installer</p>
-<table>
-<tr><td><img src="/post/248475c2/Python安装1.png"></td></tr>
-<tr><td><img src="/post/248475c2/Python安装2.png"></td></tr>
-</table>
-
-<h1 id="Pycharm集成开发环境安装"><a href="#Pycharm集成开发环境安装" class="headerlink" title="Pycharm集成开发环境安装"></a>Pycharm集成开发环境安装</h1><p>在<a href="https://www.jetbrains.com/pycharm/" target="_blank" rel="noopener">官方网站</a>下载Pycharm安装程序<br>Community Download</p>
-<table>
-<tr><td><img src="/post/248475c2/PyCharm安装.png"></td></tr>
-</table>
-
-<a id="more"></a>
-
-<h1 id="Python基础知识"><a href="#Python基础知识" class="headerlink" title="Python基础知识"></a>Python基础知识</h1><h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p><code>#</code>:单行注释<br><code>&#39;&#39;&#39;</code><br>多行注释<br><code>&#39;&#39;&#39;</code></p>
-<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>变量可以是任意的数据类型, 在程序中用一个变量名表示.<br>变量名必须是大小写英文、数字和下划线(-)的组合, 且不能以<font color="red">数字</font>开头.</p>
-<h2 id="核心数据类型"><a href="#核心数据类型" class="headerlink" title="核心数据类型"></a>核心数据类型</h2><h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>多行字符串</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(<span class="string">"""</span></span><br><span class="line"><span class="string">-"""</span> * <span class="number">60</span>)</span><br></pre></td></tr></table></figure>
-
-<p>字符串截取</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">str = <span class="string">"1234567890"</span></span><br><span class="line">print(str[下标])</span><br><span class="line">print(str[:终止位置])</span><br><span class="line">print(str[起始位置:终止位置])</span><br><span class="line">print(str[起始位置:])</span><br><span class="line">print(str[起始位置:终止位置:步进值])</span><br></pre></td></tr></table></figure>
-
-<p>全部转义</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(<span class="string">r"\t\b\n\a"</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="列表-List"><a href="#列表-List" class="headerlink" title="列表(List)"></a>列表(List)</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">list = [<span class="number">0</span>, <span class="number">0.0</span>, <span class="string">'1'</span>, <span class="string">"2s"</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> values <span class="keyword">in</span> list:</span><br><span class="line">    print(values)</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="标识符和关键字"><a href="#标识符和关键字" class="headerlink" title="标识符和关键字"></a>标识符和关键字</h2><p>显示所有的关键字</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> keyword</span><br><span class="line">print(keyword.kwlist)</span><br></pre></td></tr></table></figure>
-
-<h2 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(变量名<span class="number">1</span>/值<span class="number">1</span>, 变量名<span class="number">2</span>/值<span class="number">2</span>, 变量名<span class="number">3</span>/值<span class="number">3</span>,...)</span><br></pre></td></tr></table></figure>
-<table>
-占位符输出
-<tr><td>%с</td><td>字符</td></tr>
-<tr><td>%s</td><td>通过str()字符串转换来格式化</td></tr>
-<tr><td>%i</td><td>有符号十进制整数</td></tr>
-<tr><td>%d</td><td>有符号十进制整数</td></tr>
-<tr><td>%u</td><td>无符号十进制整数</td></tr>
-<tr><td>%o</td><td>八进制整数</td></tr>
-<tr><td>%x</td><td>十六进制整数(小写字母)</td></tr>
-<tr><td>%X</td><td>十六进制整数(大写字母)</td></tr>
-<tr><td>%е</td><td>索引符号(小写'e')</td></tr>
-<tr><td>%E</td><td>索引符号(大写"E")</td></tr>
-<tr><td>%f</td><td>浮点实数</td></tr>
-</table>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#单值输出</span></span><br><span class="line">print(<span class="string">"%d"</span> % <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#多值输出</span></span><br><span class="line">print(<span class="string">"%c %s %i %d %u %o %x %X %e %E %f"</span> % (<span class="string">'o'</span>, <span class="string">"other"</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">15</span>, <span class="number">100</span>, <span class="number">0.01</span>, <span class="number">1.0044</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">#多值输出-指定符分隔</span></span><br><span class="line">print(<span class="string">'1'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'4'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'3'</span>, sep=<span class="string">"-"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#多语句输出-结尾带指定符</span></span><br><span class="line">print(<span class="string">' |-----'</span>, end=<span class="string">'|\n|0'</span>)</span><br><span class="line">print(<span class="string">'-----'</span>, end=<span class="string">'0|\n+|'</span>)</span><br><span class="line">print(<span class="string">'-----'</span>, end=<span class="string">'|+\n|0'</span>)</span><br><span class="line">print(<span class="string">'-----'</span>, end=<span class="string">'0|\n |'</span>)</span><br><span class="line">print(<span class="string">'-----'</span>, end=<span class="string">'|'</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="格式化输入"><a href="#格式化输入" class="headerlink" title="格式化输入"></a>格式化输入</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 值输入</span></span><br><span class="line">变量名 = input(<span class="string">"输入提示信息: "</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 类型判断</span></span><br><span class="line">print(type(变量名))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 类型转换</span></span><br><span class="line">变量名 = int(值)</span><br></pre></td></tr></table></figure>
-
-<h2 id="算术、比较、赋值运算符"><a href="#算术、比较、赋值运算符" class="headerlink" title="算术、比较、赋值运算符"></a>算术、比较、赋值运算符</h2><table style="text-align:center">
-<tr><td colspan="2">算术</td><td colspan="2">比较</td><td colspan="2">赋值</td></tr>
-<tr><td>+</td><td></td><td>==</td><td></td><td>=</td><td></td></tr>
-<tr><td>-</td><td></td><td>!=</td><td></td><td>+=</td><td></td></tr>
-<tr><td>*</td><td></td><td>></td><td></td><td>-=</td><td></td></tr>
-<tr><td>/</td><td></td><td><</td><td></td><td>*=</td><td></td></tr>
-<tr><td>%</td><td></td><td>>=</td><td></td><td>/=</td><td></td></tr>
-<tr><td>**</td><td>幕</td><td><=< td><td></td><td>%=</td><td></td></=<></td></tr>
-<tr><td>//</td><td>向下取整除</td><td></td><td></td><td>**=</td><td></td>
-</tr><tr><td></td><td></td><td></td><td></td><td>//=</td><td></td></tr>
-</table>
-
-<h2 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 单条件判断</span></span><br><span class="line"><span class="keyword">if</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="comment"># True/非0值/(not None)</span></span><br><span class="line">    print(<span class="string">"True"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># False/0值/()/None</span></span><br><span class="line">    print(<span class="string">"False"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多条件判断</span></span><br><span class="line">num = <span class="number">100</span></span><br><span class="line"><span class="keyword">if</span> <span class="number">50</span> &lt;= num <span class="keyword">and</span> num &lt;= <span class="number">100</span>:  <span class="comment"># 不推荐此写法...</span></span><br><span class="line">    print(<span class="string">"num = %d, 50 &lt;= num &lt;= 100"</span> % num)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="number">50</span> &lt;= num &lt;= <span class="number">100</span>:  <span class="comment"># 推荐此写法...</span></span><br><span class="line">    print(<span class="string">"num = %d, 50 &lt;= num &lt;= 100"</span> % num)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> <span class="number">20</span> &lt;= num &lt; <span class="number">50</span>:</span><br><span class="line">    print(<span class="string">"num = %d, 20 &lt;= num &lt; 50"</span> % num)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> <span class="number">0</span> &lt;= num &lt; <span class="number">20</span>:</span><br><span class="line">    print(<span class="string">"num = %d, 0 &lt;= num &lt; 20"</span> % num)</span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"num = %d, num &gt; 100, num &lt; 0"</span> % num)</span><br></pre></td></tr></table></figure>
-
-<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><p><a href="https://docs.python.org/3/library/stdtypes.html#range" target="_blank" rel="noopener">range(): 官方资料</a></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># for循环</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(起始值, 结束值, 步进值):  <span class="comment">#不包含结束值</span></span><br><span class="line">    print(i, end=<span class="string">'\t'</span>)</span><br><span class="line"></span><br><span class="line">str = <span class="string">"abcde"</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> str:</span><br><span class="line">    print(i, end=<span class="string">'\t'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># while循环</span></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> i &lt; 结束值:  <span class="comment">#不包含结束值</span></span><br><span class="line">    print(i, end=<span class="string">'\t'</span>)</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">'\n不满足条件时, 退出循环前执行. i:'</span>, i)</span><br><span class="line"></span><br><span class="line"><span class="comment"># fow+while循环</span></span><br><span class="line">print(<span class="string">'-'</span> * <span class="number">110</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">    j = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> j &lt;= i:</span><br><span class="line">        print(<span class="string">'%d * %d = %d'</span> % (i, j, i*j), end=<span class="string">'\t'</span>)</span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print()</span><br><span class="line">print(<span class="string">'-'</span> * <span class="number">110</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># break、continue、pass</span></span><br><span class="line"><span class="comment"># pass用于占位</span></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="引入库"><a href="#引入库" class="headerlink" title="引入库"></a>引入库</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 引入随机库</span></span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="comment"># 存储随机数</span></span><br><span class="line">x = random.randint(下限, 上限)</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>Pycharm</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Tomcat服务器</title>
     <url>/post/36f957e6/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>
@@ -4626,6 +4626,41 @@ tcp6       0      0 :::8080                 :::*                    LISTEN      
       </tags>
   </entry>
   <entry>
+    <title>在Linux操作系统下用源码包安装Apache</title>
+    <url>/post/719db4d3/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>
+<h1 id="Apache的概述"><a href="#Apache的概述" class="headerlink" title="Apache的概述"></a>Apache的概述</h1><h2 id="什么是Apache"><a href="#什么是Apache" class="headerlink" title="什么是Apache"></a>什么是Apache</h2><p><em>(1)</em>Apache是世界第一并且开放源代码的Web服务器, 全称为Apache HTTP Server.<br>该服务器直接面向用户提供网站访问, 发送网页、图片等文件内容.</p>
+<h1 id="Apache的安装与检测"><a href="#Apache的安装与检测" class="headerlink" title="Apache的安装与检测"></a>Apache的安装与检测</h1><h2 id="Apache的安装"><a href="#Apache的安装" class="headerlink" title="Apache的安装"></a>Apache的安装</h2><pre>
+系统环境: CentOs7.3.10
+源码包: httpd-2-4-38.tar.gz
+依赖项: apr-1.4.6.tar.gz、apr-util-1.5.1.tar.gz、pcre-8.32.tar.gz
+</pre>
+<p><a href="http://archive.apache.org/dist/apr/?C=S;O=A" target="_blank" rel="noopener">apr、apr-util</a>和<a href="http://ftp.pcre.org/pub/pcre/" target="_blank" rel="noopener">pcre</a>下载</p>
+<p><em>(1)</em> 查找之前是否已经安装过httpd, 如果有就删除.<br><code>rpm -qa | grep httpd<br>rpm -e --nodeps httpd包名<br></code></p>
+<a id="more"></a>
+
+<p><em>(2)</em> 安装编译apache所用到的包, 即安装编译源代码的开发环境.<br><code>yum -y install gcc gcc-c++ make expat-devel</code><br>注: gcc-c++编译prce, expat-devel不装会影响apr-util使用make.</p>
+<p><em>(3)</em> 将apache源码包和依赖项包上传linux系统里的文件夹中<br>注: 博主存放在/usr/local/src文件目录下</p>
+<p><em>(4)</em> 在依赖项的压缩包所在路径下, 安装httpd的依赖项.<br>1.安装apr<br><code> tar -zvxf apr-1.4.6.tar.gz<br> cd apr-1.4.6<br> ./configure --prefix=/usr/local/apr<br> make && make install<br></code></p>
+<p><code>rm: cannot remove 'libtoolT': No such file or directory</code><br>注: 安装时如出现上方代码, 则直接用vi或vim打开apr-1.4.6目录下的configure文件, 把$RM “$cfgfile”那行删除掉后再次安装.<br><code> vi /usr/local/src/apr-1.4.6/configure<br> /$RM "$cfgfile"<br> dd<br> :wq!<br></code></p>
+<p>2.安装apr-util<br><code> tar -zvxf apr-util-1.5.1.tar.gz<br> cd apr-util-1.5.1<br> ./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr<br> make && make install<br></code></p>
+<p>3.安装pcre<br><code> tar -zvxf pcre-8.32.tar.gz<br> cd pcre-8.32<br> ./configure --prefix=/usr/local/pcre<br> make && make install<br></code></p>
+<p><em>(5)</em> 安装httpd<br><code> tar zxvf httpd-2.4.38.tar.gz -C /usr/local/src/<br> cd httpd-2.4.38<br> ./configure --prefix=/usr/local/apache --with-apr=/usr/local/apr --with-apr-util=/usr/local/apr-util --with-pcre=/usr/local/pcre<br> make && make install<br></code></p>
+<p>注: 配置文件需指定依赖项的路径</p>
+<p><em>(6)</em> 虚拟机中执行命令<br>启动: <code>/usr/local/apache/bin/apachectl start</code><br>重启: <code>/usr/local/apache/bin/apachectl restart</code><br>停用: <code>/usr/local/apache/bin/apachectl stop</code></p>
+<p>注: 修改配置文件/usr/local/apache/conf/httpd.conf中的ServerName为非注释后在启动<br><code> vi /usr/local/apache/conf/httpd.conf<br> /#ServerName<br> x<br> :wq!<br></code></p>
+<h2 id="Apache的检测"><a href="#Apache的检测" class="headerlink" title="Apache的检测"></a>Apache的检测</h2><p><em>(1)</em>使用lyxn命令对本机进行访问<br>无lyxn命令时则安装: <code>yum install lynx</code><br>执行lyxn命令: <code>lynx 127.0.0.1</code></p>
+<p>注: 如果屏幕中间上方显示It works!, 表示Apache已经正常工作.</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Apache</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>linux系统重置root用户密码</title>
     <url>/post/d8982727/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>
@@ -4643,6 +4678,48 @@ tcp6       0      0 :::8080                 :::*                    LISTEN      
       <tags>
         <tag>Linux</tag>
         <tag>root</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我的第一篇博客文章</title>
+    <url>/post/b24dd347/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>
+<h1 id="博主第一次在win10上搭建博客的过程"><a href="#博主第一次在win10上搭建博客的过程" class="headerlink" title="博主第一次在win10上搭建博客的过程"></a>博主第一次在win10上搭建博客的过程</h1><h2 id="1-对需要软件、插件进行安装"><a href="#1-对需要软件、插件进行安装" class="headerlink" title="1.对需要软件、插件进行安装"></a>1.对需要软件、插件进行安装</h2><p><em>(1)</em>在node.js官网选择对应的版本下载后进行安装, 安装时直接无脑下一步就可以了.<br>官方链接:<a href="https://nodejs.org/zh-cn/download/" target="_blank" rel="noopener">https://nodejs.org/zh-cn/download/</a><br><img src="/post/b24dd347/Node.js_download.png" alt="node.js版本下载选择示例图"></p>
+<p><em>(2)</em>打开CMD, 输入命令用淘宝源替换镜像源后, 安装cnpm.<br>npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
+<p>出错示例: 输入命令不正确(taobao -&gt; tooboo)<br><img src="/post/b24dd347/1.2_Error.png" alt="命令错误示例图"></p>
+<p><em>(3)</em>使用cnpm安装hexo框架<br>cnpm install -g hexo-cli</p>
+<p>要验证是否安装成功可以用命令显示一下hexo的版本<br>hexo -v</p>
+<a id="more"></a>
+
+<h2 id="2-搭建博客环境"><a href="#2-搭建博客环境" class="headerlink" title="2.搭建博客环境"></a>2.搭建博客环境</h2><p><em>(1)</em>创建一个文件夹来存放生成的博客文件<br>例: D:\blog</p>
+<p><em>(2)</em>在GIT官网中或下面的链接里选择版本进行下载、安装GIT.<br><a href="https://npm.taobao.org/mirrors/git-for-windows/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/git-for-windows/</a></p>
+<p><em>(3)</em>在D:\blog目录下打开CMD, 执行命令自动下载文件进行博客搭建. 下载时间有点长, 耐心等待即可.<br>(如果想强行终止重来的话可以关掉CMD, 删除blog文件夹; 重新创建blog文件夹后, 继续在该文件下打开CMD执行命令.)<br>hexo init</p>
+<p>执行完成示例:<br><img src="/post/b24dd347/2.3_Pass.png" alt="搭建完成示例图"></p>
+<p><em>(4)</em>启动博客, 默认创建为4000端口. (即在网页中输入: localhost:4000)<br>hexo s</p>
+<h2 id="3-通过CMD进行博客操作"><a href="#3-通过CMD进行博客操作" class="headerlink" title="3.通过CMD进行博客操作"></a>3.通过CMD进行博客操作</h2><p><em>(1)</em>创建博客文章<br>hexo n “文章名”</p>
+<p>创建完成示例:<br><img src="/post/b24dd347/3.1_Create.png" title="创建完成示例图" align="left"><br><br></p>
+<p><em>(2)</em>根据文件路径找到文件后, 用编辑器对博客文章的内容进行书写.<br>D:\blog\source\_posts\我的第一篇博客文章.md</p>
+<p>书写示例: 博主用的是Visual Studio Code编辑器<br>官方链接: <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">https://code.visualstudio.com/</a><br><img src="/post/b24dd347/3.2_WriteContent.png" alt="书写示例图"></p>
+<p><em>(3)</em>编辑完后回到CMD, 清除博客数据.<br>hexo clean</p>
+<p><em>(4)</em>清除数据后, 重新生成博客数据.<br>hexo g</p>
+<p>执行hexo命令时出错示例: 没有到指定的文件根目录执行(存放生成博客文件的文件夹)<br><img src="/post/b24dd347/3.End.png" title="hexo命令出错示例图" align="left"><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+<h2 id="4-将博客部署到GitHub上"><a href="#4-将博客部署到GitHub上" class="headerlink" title="4.将博客部署到GitHub上"></a>4.将博客部署到GitHub上</h2><p><em>(1)</em>安装deployer<br>cnpm install —save hexo-deployer-git</p>
+<p>安装完成示例:<br><img src="/post/b24dd347/4.1_Pass.png" alt="安装完成示例图"></p>
+<p><em>(2)</em>在GitHub中创建一个仓库, 点击Create repository后复制仓库地址.</p>
+<p>创建示例图: 建议仓库名称以自己的用户名开头<br><img src="/post/b24dd347/4.2_CreateRepository.png" alt="创建仓库示例图"></p>
+<p><em>(3)</em>对blog文件下的_config.yml文件最底部部分进行修改<br># Deployment<br>## Docs: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">https://hexo.io/docs/deployment.html</a><br>deploy:<br>  type: ‘git’<br>  repo: 输入GitHub的仓库地址<br>  branch: master</p>
+<p>配置文件修改示例:<br><img src="/post/b24dd347/4.3_ConfigAlter.png" title="配置文件修改示例图" align="left"><br><br><br><br><br><br></p>
+<p><em>(4)</em>执行命令配置好git后, 输入账号和密码后部署到远端.<br>git config —global user.email “输入Git的邮箱地址”<br>git config —global user.name “输入Git的用户名”</p>
+<p>hexo d</p>
+<p>出错示例一: deloyer没有安装成功 -&gt; 4.(1)在生成博客文件的文件夹根目录重新安装deloyer<br><img src="/post/b24dd347/4.4_Reset.png" title="出错示例图一" align="left"><br><br></p>
+<p>出错示例二: 没有对访问GitHub的邮箱和用户名进行配置<br><img src="/post/b24dd347/4.4_AccessError.png" alt="出错示例图二"></p>
+<p>备注: 该博客选用的是Hexo框架+部署到GitHub实现</p>
+]]></content>
+      <categories>
+        <category>个人博客</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -4940,83 +5017,6 @@ Password: zbx123mm
       <tags>
         <tag>Linux</tag>
         <tag>Zabbix</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在Linux操作系统下用源码包安装Apache</title>
-    <url>/post/719db4d3/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>
-<h1 id="Apache的概述"><a href="#Apache的概述" class="headerlink" title="Apache的概述"></a>Apache的概述</h1><h2 id="什么是Apache"><a href="#什么是Apache" class="headerlink" title="什么是Apache"></a>什么是Apache</h2><p><em>(1)</em>Apache是世界第一并且开放源代码的Web服务器, 全称为Apache HTTP Server.<br>该服务器直接面向用户提供网站访问, 发送网页、图片等文件内容.</p>
-<h1 id="Apache的安装与检测"><a href="#Apache的安装与检测" class="headerlink" title="Apache的安装与检测"></a>Apache的安装与检测</h1><h2 id="Apache的安装"><a href="#Apache的安装" class="headerlink" title="Apache的安装"></a>Apache的安装</h2><pre>
-系统环境: CentOs7.3.10
-源码包: httpd-2-4-38.tar.gz
-依赖项: apr-1.4.6.tar.gz、apr-util-1.5.1.tar.gz、pcre-8.32.tar.gz
-</pre>
-<p><a href="http://archive.apache.org/dist/apr/?C=S;O=A" target="_blank" rel="noopener">apr、apr-util</a>和<a href="http://ftp.pcre.org/pub/pcre/" target="_blank" rel="noopener">pcre</a>下载</p>
-<p><em>(1)</em> 查找之前是否已经安装过httpd, 如果有就删除.<br><code>rpm -qa | grep httpd<br>rpm -e --nodeps httpd包名<br></code></p>
-<a id="more"></a>
-
-<p><em>(2)</em> 安装编译apache所用到的包, 即安装编译源代码的开发环境.<br><code>yum -y install gcc gcc-c++ make expat-devel</code><br>注: gcc-c++编译prce, expat-devel不装会影响apr-util使用make.</p>
-<p><em>(3)</em> 将apache源码包和依赖项包上传linux系统里的文件夹中<br>注: 博主存放在/usr/local/src文件目录下</p>
-<p><em>(4)</em> 在依赖项的压缩包所在路径下, 安装httpd的依赖项.<br>1.安装apr<br><code> tar -zvxf apr-1.4.6.tar.gz<br> cd apr-1.4.6<br> ./configure --prefix=/usr/local/apr<br> make && make install<br></code></p>
-<p><code>rm: cannot remove 'libtoolT': No such file or directory</code><br>注: 安装时如出现上方代码, 则直接用vi或vim打开apr-1.4.6目录下的configure文件, 把$RM “$cfgfile”那行删除掉后再次安装.<br><code> vi /usr/local/src/apr-1.4.6/configure<br> /$RM "$cfgfile"<br> dd<br> :wq!<br></code></p>
-<p>2.安装apr-util<br><code> tar -zvxf apr-util-1.5.1.tar.gz<br> cd apr-util-1.5.1<br> ./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr<br> make && make install<br></code></p>
-<p>3.安装pcre<br><code> tar -zvxf pcre-8.32.tar.gz<br> cd pcre-8.32<br> ./configure --prefix=/usr/local/pcre<br> make && make install<br></code></p>
-<p><em>(5)</em> 安装httpd<br><code> tar zxvf httpd-2.4.38.tar.gz -C /usr/local/src/<br> cd httpd-2.4.38<br> ./configure --prefix=/usr/local/apache --with-apr=/usr/local/apr --with-apr-util=/usr/local/apr-util --with-pcre=/usr/local/pcre<br> make && make install<br></code></p>
-<p>注: 配置文件需指定依赖项的路径</p>
-<p><em>(6)</em> 虚拟机中执行命令<br>启动: <code>/usr/local/apache/bin/apachectl start</code><br>重启: <code>/usr/local/apache/bin/apachectl restart</code><br>停用: <code>/usr/local/apache/bin/apachectl stop</code></p>
-<p>注: 修改配置文件/usr/local/apache/conf/httpd.conf中的ServerName为非注释后在启动<br><code> vi /usr/local/apache/conf/httpd.conf<br> /#ServerName<br> x<br> :wq!<br></code></p>
-<h2 id="Apache的检测"><a href="#Apache的检测" class="headerlink" title="Apache的检测"></a>Apache的检测</h2><p><em>(1)</em>使用lyxn命令对本机进行访问<br>无lyxn命令时则安装: <code>yum install lynx</code><br>执行lyxn命令: <code>lynx 127.0.0.1</code></p>
-<p>注: 如果屏幕中间上方显示It works!, 表示Apache已经正常工作.</p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Apache</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>我的第一篇博客文章</title>
-    <url>/post/b24dd347/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><hr>
-<h1 id="博主第一次在win10上搭建博客的过程"><a href="#博主第一次在win10上搭建博客的过程" class="headerlink" title="博主第一次在win10上搭建博客的过程"></a>博主第一次在win10上搭建博客的过程</h1><h2 id="1-对需要软件、插件进行安装"><a href="#1-对需要软件、插件进行安装" class="headerlink" title="1.对需要软件、插件进行安装"></a>1.对需要软件、插件进行安装</h2><p><em>(1)</em>在node.js官网选择对应的版本下载后进行安装, 安装时直接无脑下一步就可以了.<br>官方链接:<a href="https://nodejs.org/zh-cn/download/" target="_blank" rel="noopener">https://nodejs.org/zh-cn/download/</a><br><img src="/post/b24dd347/Node.js_download.png" alt="node.js版本下载选择示例图"></p>
-<p><em>(2)</em>打开CMD, 输入命令用淘宝源替换镜像源后, 安装cnpm.<br>npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
-<p>出错示例: 输入命令不正确(taobao -&gt; tooboo)<br><img src="/post/b24dd347/1.2_Error.png" alt="命令错误示例图"></p>
-<p><em>(3)</em>使用cnpm安装hexo框架<br>cnpm install -g hexo-cli</p>
-<p>要验证是否安装成功可以用命令显示一下hexo的版本<br>hexo -v</p>
-<a id="more"></a>
-
-<h2 id="2-搭建博客环境"><a href="#2-搭建博客环境" class="headerlink" title="2.搭建博客环境"></a>2.搭建博客环境</h2><p><em>(1)</em>创建一个文件夹来存放生成的博客文件<br>例: D:\blog</p>
-<p><em>(2)</em>在GIT官网中或下面的链接里选择版本进行下载、安装GIT.<br><a href="https://npm.taobao.org/mirrors/git-for-windows/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/git-for-windows/</a></p>
-<p><em>(3)</em>在D:\blog目录下打开CMD, 执行命令自动下载文件进行博客搭建. 下载时间有点长, 耐心等待即可.<br>(如果想强行终止重来的话可以关掉CMD, 删除blog文件夹; 重新创建blog文件夹后, 继续在该文件下打开CMD执行命令.)<br>hexo init</p>
-<p>执行完成示例:<br><img src="/post/b24dd347/2.3_Pass.png" alt="搭建完成示例图"></p>
-<p><em>(4)</em>启动博客, 默认创建为4000端口. (即在网页中输入: localhost:4000)<br>hexo s</p>
-<h2 id="3-通过CMD进行博客操作"><a href="#3-通过CMD进行博客操作" class="headerlink" title="3.通过CMD进行博客操作"></a>3.通过CMD进行博客操作</h2><p><em>(1)</em>创建博客文章<br>hexo n “文章名”</p>
-<p>创建完成示例:<br><img src="/post/b24dd347/3.1_Create.png" title="创建完成示例图" align="left"><br><br></p>
-<p><em>(2)</em>根据文件路径找到文件后, 用编辑器对博客文章的内容进行书写.<br>D:\blog\source\_posts\我的第一篇博客文章.md</p>
-<p>书写示例: 博主用的是Visual Studio Code编辑器<br>官方链接: <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">https://code.visualstudio.com/</a><br><img src="/post/b24dd347/3.2_WriteContent.png" alt="书写示例图"></p>
-<p><em>(3)</em>编辑完后回到CMD, 清除博客数据.<br>hexo clean</p>
-<p><em>(4)</em>清除数据后, 重新生成博客数据.<br>hexo g</p>
-<p>执行hexo命令时出错示例: 没有到指定的文件根目录执行(存放生成博客文件的文件夹)<br><img src="/post/b24dd347/3.End.png" title="hexo命令出错示例图" align="left"><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
-<h2 id="4-将博客部署到GitHub上"><a href="#4-将博客部署到GitHub上" class="headerlink" title="4.将博客部署到GitHub上"></a>4.将博客部署到GitHub上</h2><p><em>(1)</em>安装deployer<br>cnpm install —save hexo-deployer-git</p>
-<p>安装完成示例:<br><img src="/post/b24dd347/4.1_Pass.png" alt="安装完成示例图"></p>
-<p><em>(2)</em>在GitHub中创建一个仓库, 点击Create repository后复制仓库地址.</p>
-<p>创建示例图: 建议仓库名称以自己的用户名开头<br><img src="/post/b24dd347/4.2_CreateRepository.png" alt="创建仓库示例图"></p>
-<p><em>(3)</em>对blog文件下的_config.yml文件最底部部分进行修改<br># Deployment<br>## Docs: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">https://hexo.io/docs/deployment.html</a><br>deploy:<br>  type: ‘git’<br>  repo: 输入GitHub的仓库地址<br>  branch: master</p>
-<p>配置文件修改示例:<br><img src="/post/b24dd347/4.3_ConfigAlter.png" title="配置文件修改示例图" align="left"><br><br><br><br><br><br></p>
-<p><em>(4)</em>执行命令配置好git后, 输入账号和密码后部署到远端.<br>git config —global user.email “输入Git的邮箱地址”<br>git config —global user.name “输入Git的用户名”</p>
-<p>hexo d</p>
-<p>出错示例一: deloyer没有安装成功 -&gt; 4.(1)在生成博客文件的文件夹根目录重新安装deloyer<br><img src="/post/b24dd347/4.4_Reset.png" title="出错示例图一" align="left"><br><br></p>
-<p>出错示例二: 没有对访问GitHub的邮箱和用户名进行配置<br><img src="/post/b24dd347/4.4_AccessError.png" alt="出错示例图二"></p>
-<p>备注: 该博客选用的是Hexo框架+部署到GitHub实现</p>
-]]></content>
-      <categories>
-        <category>个人博客</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
