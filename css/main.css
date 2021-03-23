@@ -3060,7 +3060,7 @@ hr {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #8aa1ff;
+  background: #694d46;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3141,7 +3141,7 @@ table {
 }
 .category-all-page {
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
-  background-color: #797d7f;
+  background-color: rgba(53,77,138,0.71);
   padding: 20px 30px 60px 30px;
   border-radius: 25px 25px 25px 25px;
 }
@@ -3230,16 +3230,16 @@ a[href="/post/bb6c6bce/#valine-comments"]:hover,
 }
 /* webkit, opera, IE9 */
 ::selection {
-  background: #fce4b6;
+  background: #4357b9;
   color: #f7f7f7;
 }
 /* firefox */
 ::-moz-selection {
-  background: #fce4b6;
+  background: #4357b9;
   color: #f7f7f7;
 }
 .highlight *::selection {
-  background: #fce4b6;
+  background: #4357b9;
 }
 .tag-cloud a {
   box-shadow: 0 1px 3px #f3f3f3, 0 1px 2px #4f99d9;
@@ -3253,10 +3253,10 @@ a[href="/post/bb6c6bce/#valine-comments"]:hover,
   color: #000;
 }
 #valine-comments .vcard {
-  background: rgba(150,150,150,0.6);
+  background: rgba(105,77,77,0.55);
   border: 1px solid #f0f0f0;
   border-radius: 4px;
 }
 #valine-comments .vwrap {
-  background: rgba(212,251,255,0.651);
+  background: rgba(62,105,109,0.49);
 }
