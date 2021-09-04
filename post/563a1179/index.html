@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Grandstander:300,300italic,400,400italic,700,700italic|Noto+Serif+SC:300,300italic,400,400italic,700,700italic|Architects+Daughter:300,300italic,400,400italic,700,700italic|Dosis:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.mengyun.club","root":"/","scheme":"Mist","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="Shell能做什么 自动化批量系统初始化程序 自动化批量软件部署程序 应用管理程序 日志分析处理程序 自动化备份恢复程序 自动化管理程序 自动化信息采集及监控程序 配合Zabbix信息采集 自动化扩容…  Shell脚本的编写注: 脚本文件名建议以.sh结尾 基本结构脚本声明(即使用指定解释器解释):#!&#x2F;bin&#x2F;bash脚本注释:#对该脚本的描述脚本命令:命令序列 Shell脚本的运行执行脚本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shell脚本">
+<meta property="og:url" content="http://www.mengyun.club/post/563a1179/index.html">
+<meta property="og:site_name" content="爱梦的博客">
+<meta property="og:description" content="Shell能做什么 自动化批量系统初始化程序 自动化批量软件部署程序 应用管理程序 日志分析处理程序 自动化备份恢复程序 自动化管理程序 自动化信息采集及监控程序 配合Zabbix信息采集 自动化扩容…  Shell脚本的编写注: 脚本文件名建议以.sh结尾 基本结构脚本声明(即使用指定解释器解释):#!&#x2F;bin&#x2F;bash脚本注释:#对该脚本的描述脚本命令:命令序列 Shell脚本的运行执行脚本">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-16T08:49:02.000Z">
+<meta property="article:modified_time" content="2020-10-09T02:27:14.000Z">
+<meta property="article:author" content="云">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Shell">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://www.mengyun.club/post/563a1179/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Shell脚本 | 爱梦的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="爱梦的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/src/clickLove.js"></script>
+
+<script type="text/javascript"
+color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+  
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">爱梦的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">常常与我陪伴的就是梦</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">38</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-playlist">
+
+    <a href="/playlist/" rel="section"><i class="fa fa-music fa-fw"></i>网易云歌单</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">	
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Shell能做什么"><span class="nav-text">Shell能做什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shell脚本的编写"><span class="nav-text">Shell脚本的编写</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本结构"><span class="nav-text">基本结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shell脚本的运行"><span class="nav-text">Shell脚本的运行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#执行脚本文件"><span class="nav-text">执行脚本文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shell脚本的调试"><span class="nav-text">shell脚本的调试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用sh命令参数调试"><span class="nav-text">使用sh命令参数调试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shell的特性"><span class="nav-text">shell的特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令和文件自动补齐"><span class="nav-text">命令和文件自动补齐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#login-shell和nologin-shell"><span class="nav-text">login shell和nologin shell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#login-shell"><span class="nav-text">login shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nologin-shell"><span class="nav-text">nologin shell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令历史记忆功能"><span class="nav-text">命令历史记忆功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快捷键"><span class="nav-text">快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令排序"><span class="nav-text">命令排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shell通配符"><span class="nav-text">shell通配符</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bash中调用Python-Expect"><span class="nav-text">Bash中调用Python Expect</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#标记输出"><span class="nav-text">标记输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调用Python和Expect"><span class="nav-text">调用Python和Expect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量类型"><span class="nav-text">变量类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量操作"><span class="nav-text">变量操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量删除"><span class="nav-text">变量删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量替换"><span class="nav-text">变量替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量替代"><span class="nav-text">变量替代</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整数运算"><span class="nav-text">整数运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方式一"><span class="nav-text">方式一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方式二"><span class="nav-text">方式二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方式三"><span class="nav-text">方式三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方式四"><span class="nav-text">方式四</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小数运算"><span class="nav-text">小数运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各种符号"><span class="nav-text">各种符号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接收用户参数"><span class="nav-text">接收用户参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断用户参数"><span class="nav-text">判断用户参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件测试语句"><span class="nav-text">文件测试语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量测试语句"><span class="nav-text">变量测试语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑测试语句"><span class="nav-text">逻辑测试语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#整数值比较语句"><span class="nav-text">整数值比较语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串比较语句"><span class="nav-text">字符串比较语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程控制语句"><span class="nav-text">流程控制语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#if条件测试语句"><span class="nav-text">if条件测试语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for条件循环语句"><span class="nav-text">for条件循环语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#while条件循环语句"><span class="nav-text">while条件循环语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#case条件测试语句"><span class="nav-text">case条件测试语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shell函数"><span class="nav-text">shell函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义格式"><span class="nav-text">定义格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数调用"><span class="nav-text">函数调用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#grep与egrep"><span class="nav-text">grep与egrep</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sed与Awk"><span class="nav-text">Sed与Awk</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sed工具概述"><span class="nav-text">Sed工具概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sed基本语法"><span class="nav-text">Sed基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sed用法示例"><span class="nav-text">Sed用法示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输出指定的行"><span class="nav-text">输出指定的行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入符合条件的行"><span class="nav-text">插入符合条件的行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除符合要求的行"><span class="nav-text">删除符合要求的行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换符号条件的文本"><span class="nav-text">替换符号条件的文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迁移符号条件的文本"><span class="nav-text">迁移符号条件的文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行多次命令"><span class="nav-text">执行多次命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接修改文件内容"><span class="nav-text">直接修改文件内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Awk编辑工具概述"><span class="nav-text">Awk编辑工具概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Awk基本语法"><span class="nav-text">Awk基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Awk用法示例"><span class="nav-text">Awk用法示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#打印文本内容"><span class="nav-text">打印文本内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按字段输出文本"><span class="nav-text">按字段输出文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理命令输出的结果"><span class="nav-text">处理命令输出的结果</span></a></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="云"
+      src="/images/head_Picture/Yu_Me5.jpg">
+  <p class="site-author-name" itemprop="name">云</p>
+  <div class="site-description" itemprop="description">我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/IYun-Meng" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;IYun-Meng" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kili3kili1miyukeno4@foxmail.co" title="E-Mail → mailto:kili3kili1miyukeno4@foxmail.co" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/?hl=zh_CN" title="https:&#x2F;&#x2F;www.google.com&#x2F;?hl&#x3D;zh_CN" rel="noopener" target="_blank">谷歌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zhihu.com/" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;" rel="noopener" target="_blank">知乎</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.github.com/" title="https:&#x2F;&#x2F;www.github.com&#x2F;" rel="noopener" target="_blank">GitHub</a>
+        </li>
+    </ul>
+  </div>
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoFs/" rel="tag">AutoFs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bind/" rel="tag">Bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DHCP/" rel="tag">DHCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deepin/" rel="tag">Deepin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dovecot/" rel="tag">Dovecot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/" rel="tag">FTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KVM/" rel="tag">KVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keepalived/" rel="tag">Keepalived</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KickStart/" rel="tag">KickStart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/" rel="tag">NFS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTP/" rel="tag">NTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nagios/" rel="tag">Nagios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PXE/" rel="tag">PXE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Physics2D/" rel="tag">Physics2D</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postfix/" rel="tag">Postfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/" rel="tag">SELinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSLinux/" rel="tag">SYSLinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Samba/" rel="tag">Samba</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sprite/" rel="tag">Sprite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TFTP/" rel="tag">TFTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/" rel="tag">Unity</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zabbix/" rel="tag">Zabbix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/" rel="tag">root</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+      </section>
+	  
+	</div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.mengyun.club/post/563a1179/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_Picture/Yu_Me5.jpg">
+      <meta itemprop="name" content="云">
+      <meta itemprop="description" content="我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱梦的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Shell脚本
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-06-16 16:49:02" itemprop="dateCreated datePublished" datetime="2020-06-16T16:49:02+08:00">2020-06-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-10-09 10:27:14" itemprop="dateModified" datetime="2020-10-09T10:27:14+08:00">2020-10-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/post/563a1179/" class="post-meta-item leancloud_visitors" data-flag-title="Shell脚本" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/post/563a1179/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/post/563a1179/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<h1 id="Shell能做什么"><a href="#Shell能做什么" class="headerlink" title="Shell能做什么"></a>Shell能做什么</h1><ol>
+<li>自动化批量系统初始化程序</li>
+<li>自动化批量软件部署程序</li>
+<li>应用管理程序</li>
+<li>日志分析处理程序</li>
+<li>自动化备份恢复程序</li>
+<li>自动化管理程序</li>
+<li>自动化信息采集及监控程序</li>
+<li>配合Zabbix信息采集</li>
+<li>自动化扩容<br>…</li>
+</ol>
+<h1 id="Shell脚本的编写"><a href="#Shell脚本的编写" class="headerlink" title="Shell脚本的编写"></a>Shell脚本的编写</h1><p>注: 脚本文件名建议以.sh结尾</p>
+<h2 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h2><p>脚本声明(即使用指定解释器解释):<code>#!/bin/bash</code><br>脚本注释:<code>#对该脚本的描述</code><br>脚本命令:<code>命令序列</code></p>
+<h1 id="Shell脚本的运行"><a href="#Shell脚本的运行" class="headerlink" title="Shell脚本的运行"></a>Shell脚本的运行</h1><h2 id="执行脚本文件"><a href="#执行脚本文件" class="headerlink" title="执行脚本文件"></a>执行脚本文件</h2><p>赋予脚本文件执行权限后, 程序会运行在一个全新的shell中, 不继承当前shell的环境变量的值, 同时若在程序中改变了当前shell中的环境变量(不使用export), 则当前shell的环境变量值不变.</p>
+<pre>
+ chmod u+x 脚本文件
+ ./脚本文件 或 sh 脚本文件
+</pre>
+
+<pre>
+ bash [选项] 脚本名
+ |__ -n --检测脚本是否正确, 并不执行脚本.
+ |__ -x --执行脚本, 输出执行过程.
+ |__ -c --bash从字符串中读入命令, 如果字符串后还有变量就被设定为从$0开始的位置参数.
+</pre>
+
+<p>不赋予脚本文件执行权限, 只是暂时提升脚本文件执行权限, 程序继承当前shell中的环境变量, 同时, 若在程序中改变了当前shell中的环境变量(不使用export), 则当前shell中该环境变量的值也会改变.</p>
+<pre>
+ . 脚本文件 或 source /脚本文件
+</pre>
+
+<h1 id="shell脚本的调试"><a href="#shell脚本的调试" class="headerlink" title="shell脚本的调试"></a>shell脚本的调试</h1><h2 id="使用sh命令参数调试"><a href="#使用sh命令参数调试" class="headerlink" title="使用sh命令参数调试"></a>使用sh命令参数调试</h2><pre>
+ sh [-nvx] 脚本名
+ |__ n --不会执行该脚本, 仅查询脚本语法是否有问题, 如果没有语法问题就不显示任何内容, 如果有问题就会提示报错.
+ |__ v --在执行脚本时, 先将脚本的内容输出到屏幕上然后执行脚本, 如果有错误, 也会给出错误提示.
+ |__ x --将执行的脚本内容输出到屏幕上, 这是个对调试很有用的参数.
+</pre>
+
+<h1 id="shell的特性"><a href="#shell的特性" class="headerlink" title="shell的特性"></a>shell的特性</h1><h2 id="命令和文件自动补齐"><a href="#命令和文件自动补齐" class="headerlink" title="命令和文件自动补齐"></a>命令和文件自动补齐</h2><p>Tab键自动补齐</p>
+<h2 id="login-shell和nologin-shell"><a href="#login-shell和nologin-shell" class="headerlink" title="login shell和nologin shell"></a>login shell和nologin shell</h2><p>login shell登陆时执行的文件</p>
+<pre>
+ /etc/profile
+ /etc/bashrc
+ ~/.bash_profile
+ ~/.bashrc
+</pre>
+
+<p>nologin shell登陆时执行的文件</p>
+<pre>
+ /etc/bashrc
+ ~/.bashrc
+</pre>
+
+<h3 id="login-shell"><a href="#login-shell" class="headerlink" title="login shell"></a>login shell</h3><pre>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">su</span> - 用户名</span><br></pre></td></tr></table></figure>
+系统级:
+ /etc/profile
+ /etc/bashrc
+</pre>
+
+<h3 id="nologin-shell"><a href="#nologin-shell" class="headerlink" title="nologin shell"></a>nologin shell</h3><pre>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">su</span> 用户名</span><br></pre></td></tr></table></figure>
+用户级:
+ ~/.bash_profile
+ ~/.bashrc
+
+ 离开shell时执行的文件
+ ~/.bash logout
+ ~/.bash_history
+</pre>
+
+<h2 id="命令历史记忆功能"><a href="#命令历史记忆功能" class="headerlink" title="命令历史记忆功能"></a>命令历史记忆功能</h2><table>
+<tr><td>上下键</td><td>上一次/下一次执行过的命令</td></tr>
+<tr><td>!数字</td><td>执行指定序号的历史命令</td></tr>
+<tr><td>!命令名</td><td>找到相关命令名的命令执行</td></tr>
+<tr><td>!$</td><td>上一次命令执行过的最后一个参数</td></tr>
+<tr><td>!!</td><td>执行上一次执行后的命令</td></tr>
+</table>
+
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><table>
+<tr><td>Ctrl + R</td><td>搜索历史命令</td></tr>
+<tr><td>Ctrl + D</td><td>退出</td></tr>
+<tr><td>Ctrl + A</td><td>将光标移动到最前面</td></tr>
+<tr><td>Ctrl + E</td><td>将光标移动到最后面</td></tr>
+<tr><td>Ctrl + L</td><td>清屏</td></tr>
+<tr><td>Ctrl + U</td><td>将光标处前面部分删除</td></tr>
+<tr><td>Ctrl + K</td><td>将光标后后面部分删除</td></tr>
+<tr><td>Ctrl + Y</td><td>撤销</td></tr>
+<tr><td>Shift + V</td><td>进入行选中模式</td></tr>
+<tr><td>Shift + &lt;或&gt;</td><td>减少缩进/增加缩进</td></tr>
+</table>
+
+<h2 id="命令排序"><a href="#命令排序" class="headerlink" title="命令排序"></a>命令排序</h2><p><code>;</code>: 不具备逻辑判断<br><code>&&</code>,<code>||</code>: 具备逻辑判断</p>
+<h2 id="shell通配符"><a href="#shell通配符" class="headerlink" title="shell通配符"></a>shell通配符</h2><p><code>(命令)</code>: 在子shell中执行命令<br><code>{项1,项2,项3,...}</code>: 项的集合</p>
+<h1 id="Bash中调用Python-Expect"><a href="#Bash中调用Python-Expect" class="headerlink" title="Bash中调用Python Expect"></a>Bash中调用Python Expect</h1><h2 id="标记输出"><a href="#标记输出" class="headerlink" title="标记输出"></a>标记输出</h2><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;-标记名 <span class="comment"># - 表示:结束标记名前可跟缩进</span></span><br><span class="line">  输出内容1.<span class="string">..</span></span><br><span class="line">  输出内容2.<span class="string">..</span></span><br><span class="line">  输出内容3.<span class="string">..</span></span><br><span class="line">标记名</span><br></pre></td></tr></table></figure>
+
+<h2 id="调用Python和Expect"><a href="#调用Python和Expect" class="headerlink" title="调用Python和Expect"></a>调用Python和Expect</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"在shell脚本中调用Python或Expect"</span></span><br><span class="line">/usr/bin/python &lt;&lt;-EOF</span><br><span class="line">  <span class="built_in">print</span> <span class="string">"hellow word!"</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">注:给<span class="built_in">test</span>后面的EOF加<span class="string">""</span>即为把内容全部转义</span><br><span class="line">cat &gt; <span class="built_in">test</span> &lt;&lt;-EOF</span><br><span class="line">  格化输出到<span class="built_in">test</span>文件中...</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h2 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型"></a>变量类型</h2><table>
+<tr><td>自定义变量</td><td>由用户自己定义、修改和使用</td></tr>
+<tr><td>环境变量</td><td>由系统维护, 用于设置工作环境.</td></tr>
+<tr><td>位置变量</td><td>通过命令行给脚本程序传递参数</td></tr>
+<tr><td>预定义变量</td><td>Bash中内置的一类变量, 不能直接修改.</td></tr>
+<pre>
+提升变量为全局变量:
+ export 变量名 ...
+ export 变量名=变量值 
+</pre>
+</table>
+环境变量的全局配置文件(全局):<code>/etc/profile</code><br>
+环境变量的全局配置文件(用户):<code>~/.bash_profile</code><br>
+使用<code>env</code>命令查看当前工作环境下的环境变量
+
+<a id="more"></a>
+
+<h2 id="变量操作"><a href="#变量操作" class="headerlink" title="变量操作"></a>变量操作</h2><table>
+<tr><td>定义</td><td>变量名</td></tr>
+<tr><td>赋值</td><td>变量名=值</td></tr>
+<tr><td>使用</td><td>$变量名</td></tr>
+<tr><td>同时定、赋、使</td><td>$((变量名=值))</td></tr>
+<tr><td>区分</td><td>${变量名}</td></tr>
+</table>
+
+<p>read是用来读取用户输入信息的命令, 能够把接收到的用户输入信息赋值给后面的指定变量.</p>
+<pre>
+ read [选项] 变量名1, 变量名2,...
+ |__ p --用于向用户显示一定的提示信息
+ |__ n --后跟一个数字, 定义输入文本的长度.
+ |__ t --后面跟秒数, 定义输入字符的等待时间.
+</pre>
+
+<pre>
+ # 查看变量的内容
+ echo ${变量名} 
+
+ # 查看该变量的长度
+ echo ${<font>#</font>变量名}
+
+ # 截取从指定索引开始后的所有字符
+ echo ${变量名:字符索引}
+
+ # 截取从指定索引开始后的指定数量的字符
+ echo ${变量名:字符索引:截取个数}
+</pre>
+
+<h3 id="变量删除"><a href="#变量删除" class="headerlink" title="变量删除"></a>变量删除</h3><pre>
+ # 删除变量里从左边开始匹配的字符串内容
+ echo ${变量名#字符串} 
+
+ # 删除第一次匹配的字符串所在处左边的内容
+ echo ${变量名#*字符串} 
+
+ # 删除最后一次匹配的字符串所在处左边的内容
+ echo ${变量名##*字符串} 
+
+ # 删除变量里从右边开始匹配的字符串内容
+ echo ${变量名%字符串}
+
+ # 删除第一次匹配的字符串所在处右边的内容
+ echo ${变量名%字符串*}
+
+ # 删除最后一次匹配的字符串所在处右边的内容
+ echo ${变量名%%字符串*}
+</pre>
+
+<h3 id="变量替换"><a href="#变量替换" class="headerlink" title="变量替换"></a>变量替换</h3><pre>
+ # 将源字符串替换成指定字符串
+ echo ${变量/源字符串/指定字符串} 
+
+ # 将源字符串替换成指定字符串(全部匹配)
+ echo ${变量//源字符串/指定字符串}
+</pre>
+
+<h3 id="变量替代"><a href="#变量替代" class="headerlink" title="变量替代"></a>变量替代</h3><pre>
+ unset var1
+ # 输出aaaa
+ echo ${var1-aaaa}
+
+ var2=
+ # 输出空值
+ echo ${var2-bbbb}
+
+ ${变量名-新的变量值}
+ |__ 变量没有被赋值: 会使用"新的变量值"替代
+ |__ 变量有被賦值(包括空值): 不会被替代
+
+ ${变量名:-新的变量值}
+ |__ 变量没有被赋值(包括空值): 会使用"新的变量值"替代
+ |__ 变量有被賦值: 不会被替代
+
+ ${变量名+新的变量值}
+ |__ 变量没有被赋值: 不会被替代
+ |__ 变量有被賦值(包括空值): 会使用"新的变量值"替代
+
+ ${变量名:+新的变量值}
+ |__ 变量没有被赋值(包括空值): 不会被替代
+ |__ 变量有被賦值: 会使用"新的变量值"替代
+
+ ${变量名=新的变量值}
+ |__ 变量没有被赋值: 原变量会被"新的变量值"赋值
+ |__ 变量有被賦值(包括空值): 原变量不会被赋值
+
+ ${变量名:=新的变量值}
+ |__ 变量没有被赋值(包括空值): 原变量会被"新的变量值"赋值
+ |__ 变量有被賦值: 原变量不会被赋值
+
+ ${变量名?新的变量值}
+ |__ 变量没有被赋值: 输出bash: 变量名: "新的变量值"
+ |__ 变量有被賦值(包括空值): 输出原变量值
+
+ ${变量名:?新的变量值}
+ |__ 变量没有被赋值(包括空值): 输出bash: 变量名: "新的变量值"
+ |__ 变量有被賦值: 输出原变量值
+</pre>
+
+<h2 id="整数运算"><a href="#整数运算" class="headerlink" title="整数运算"></a>整数运算</h2><p>$RANDOM是存放一个随机数的变量, $()同``.</p>
+<h3 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h3><p>expr命令是求表达式变量的值, 一般用于整数值, 也可用于字符串.</p>
+<pre>
+ expr $a + $b
+ expr $a \* $b
+</pre>
+
+<h3 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h3><p>** :表示求次方运算</p>
+<p>$((整数表达式))</p>
+<pre>
+ echo $(($a+$b))
+ echo $(($a*$b))
+ echo $(($a**$b))
+</pre>
+
+<h3 id="方式三"><a href="#方式三" class="headerlink" title="方式三"></a>方式三</h3><p>$[整数表达式]</p>
+<pre>
+ echo $[$a+$b]
+ echo $[$a*$b]
+ echo $[$a**$b]
+</pre>
+
+<h3 id="方式四"><a href="#方式四" class="headerlink" title="方式四"></a>方式四</h3><p>let命令是用于执行一个或多个表达式, 变量计算中不需要加上$来表示变量.</p>
+<pre>
+ let a=5+6 b=10*3 c=6-1,...
+ let a=b+c,...
+ echo $a $b $c
+</pre>
+
+<h2 id="小数运算"><a href="#小数运算" class="headerlink" title="小数运算"></a>小数运算</h2><pre>
+ echo "scale=保留位;1/3" | bc
+ echo "print 5.0/2" | python
+ awk 'BEGIN{print 1/3}' # 有效位为6位
+</pre>
+
+<h2 id="各种符号"><a href="#各种符号" class="headerlink" title="各种符号"></a>各种符号</h2><table>
+<tr><td>`</td><td>将执行某个命令的结果赋值给变量</td></tr>
+<tr><td>'(强引用)</td><td>对所有字符进行转义</td></tr>
+<tr><td>"(弱引用)</td><td>对字符串进行边界划分</td></tr>
+<tr><td>()</td><td>在子shell中执行</td></tr>
+<tr><td>(())</td><td>数值比较</td></tr>
+<tr><td>$()</td><td>命令替换</td></tr>
+<tr><td>$(())</td><td>整数运算</td></tr>
+<tr><td>{}</td><td>集合</td></tr>
+<tr><td>${}</td><td>变量区分</td></tr>
+<tr><td>[]</td><td>条件测试</td></tr>
+<tr><td>[[]]</td><td>条件测试, 支持正则.</td></tr>
+<tr><td>$[]</td><td>整数运算</td></tr>
+</table>
+
+<h2 id="接收用户参数"><a href="#接收用户参数" class="headerlink" title="接收用户参数"></a>接收用户参数</h2><p>在执行脚本文件后直接加上参数, 即<code>脚本文件 参数1 参数2 参数3,...</code></p>
+<table>
+<tr><td>$0</td><td>脚本文件的名称</td></tr>
+<tr><td>$n</td><td>第n个用户参数</td></tr>
+<tr><td>$#</td><td>命令行中位置变量的个数</td></tr>
+<tr><td>$*</td><td>所有用户参数(所有参数为整体)</td></tr>
+<tr><td>$@</td><td>所有用户参数(每个参数为独立)</td></tr>
+<tr><td>$$</td><td>当前进程的PID</td></tr>
+<tr><td>$!</td><td>上一个后台进程的PID</td></tr>
+</table>
+
+<h2 id="判断用户参数"><a href="#判断用户参数" class="headerlink" title="判断用户参数"></a>判断用户参数</h2><p>条件测试语句的执行格式:<code>[ 条件表达式 ] / test 条件表达式</code><br>将<code>[ 条件表达式 ]</code>作为一个条件测试语句:<code>[[ 条件表达式 ]]</code></p>
+<p>检查语句执行结果:<code>echo $?</code><br>正确返回0, 错误返回非0.</p>
+<table>
+<tr><td>状态码</td><td>描述</td></tr>
+<tr><td>0</td><td>命令成功结束</td></tr>
+<tr><td>1</td><td>一般性未知错误</td></tr>
+<tr><td>2</td><td>不适合的shell命令</td></tr>
+<tr><td>126</td><td>命令不可执行</td></tr>
+<tr><td>127</td><td>没找到命令</td></tr>
+<tr><td>128</td><td>无效的退出</td></tr>
+<tr><td>128+x</td><td>与Linux信号x相关的严重错误</td></tr>
+<tr><td>130</td><td>通过ctrl+c终止的命令</td></tr>
+<tr><td>255</td><td>正常范围之外的退出状态码</td></tr>
+</table>
+<!--more-->
+
+<h3 id="文件测试语句"><a href="#文件测试语句" class="headerlink" title="文件测试语句"></a>文件测试语句</h3><table>
+<tr><td>-d</td><td>测试文件是否为目录类型</td></tr>
+<tr><td>-e</td><td>测试文件是否存在</td></tr>
+<tr><td>-L</td><td>测试文件是否存在并且是一个符号链接</td></tr>
+<tr><td>-f</td><td>判断是否为一般文件</td></tr>
+<tr><td>-r</td><td>测试当前用户是否有权限读取</td></tr>
+<tr><td>-w</td><td>测试当前用户是否有权限写入</td></tr>
+<tr><td>-x</td><td>测试当前用户是否有权限执行</td></tr>
+</table>
+
+<h3 id="变量测试语句"><a href="#变量测试语句" class="headerlink" title="变量测试语句"></a>变量测试语句</h3><table>
+<tr><td>-z</td><td>判断变量的值的长度为0</td></tr>
+<tr><td>-n</td><td>判断变量的值的长度为非0</td></tr>
+</table>
+
+<h3 id="逻辑测试语句"><a href="#逻辑测试语句" class="headerlink" title="逻辑测试语句"></a>逻辑测试语句</h3><table>
+<tr><td>&&</td><td>前面的命令执行成功后才会执行它后面的命令</td></tr>
+<tr><td>||</td><td>当前面的命令执行失败后才会执行它后面的命令</td></tr>
+<tr><td>!</td><td>把条件测试中的判断结果取相反值</td></tr>
+</table>
+
+<h3 id="整数值比较语句"><a href="#整数值比较语句" class="headerlink" title="整数值比较语句"></a>整数值比较语句</h3><table>
+<tr><td>-eq</td><td>是否等于</td></tr>
+<tr><td>-ne</td><td>是否不等于</td></tr>
+<tr><td>-gt</td><td>是否大于</td></tr>
+<tr><td>-lt</td><td>是否小于</td></tr>
+<tr><td>-le</td><td>是否等于或小于</td></tr>
+<tr><td>-ge</td><td>是否大于或等于</td></tr>
+</table>
+
+<h3 id="字符串比较语句"><a href="#字符串比较语句" class="headerlink" title="字符串比较语句"></a>字符串比较语句</h3><table>
+<tr><td>=~</td><td>判断字符串和右边的正则表达式范例是否匹配</td></tr>
+<tr><td>==</td><td>比较字符串内容是否相同</td></tr>
+<tr><td>!=</td><td>比较字符串内容是否不同</td></tr>
+<tr><td>-z</td><td>判断字符串内容是否为空</td></tr>
+</table>
+
+<h2 id="流程控制语句"><a href="#流程控制语句" class="headerlink" title="流程控制语句"></a>流程控制语句</h2><h3 id="if条件测试语句"><a href="#if条件测试语句" class="headerlink" title="if条件测试语句"></a>if条件测试语句</h3><p><code>read -p "提示信息" 变量名</code><br>命令序列中只写<code>:</code>表示返回真</p>
+<blockquote>
+<p>单分支<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="comment">#条件测试操作</span></span><br><span class="line">  <span class="keyword">then</span></span><br><span class="line">   <span class="comment">#命令序列</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>双分支<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="comment">#条件测试操作</span></span><br><span class="line">  <span class="keyword">then</span> </span><br><span class="line">   <span class="comment">#命令序列1</span></span><br><span class="line">  <span class="keyword">else</span> </span><br><span class="line">   <span class="comment">#命令序列2</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>多分支<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="comment">#条件测试操作1</span></span><br><span class="line">  <span class="keyword">then</span></span><br><span class="line">   <span class="comment">#命令序列1</span></span><br><span class="line"><span class="keyword">elif</span> <span class="comment">#条件测试操作2</span></span><br><span class="line">  <span class="keyword">then</span></span><br><span class="line">   <span class="comment">#命令序列2</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"> <span class="comment">#命令序列3</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="for条件循环语句"><a href="#for条件循环语句" class="headerlink" title="for条件循环语句"></a>for条件循环语句</h3><p>/dev/null是一个被称作Linux黑洞的文件, 把输出信息重定向到这个文件等同于删除数据(类似于没有回收功能的垃圾箱), 可以让用户的屏幕窗口保持简洁.</p>
+<p>.. :表示范围(即 ?..?, 多少至多少.)</p>
+<blockquote>
+<p>for循环<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> 变量名 <span class="keyword">in</span> <span class="comment">#取值列表(每个值之间空格分隔)</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"> <span class="comment">#命令序列</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="while条件循环语句"><a href="#while条件循环语句" class="headerlink" title="while条件循环语句"></a>while条件循环语句</h3><p>exit命令使shell以指定的状态值退出, 若不设置状态值参数, 则shell以预设值退出.<br>例:<code>exit 0</code></p>
+<blockquote>
+<p>while循环<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="comment">#条件测试操作</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"> <span class="comment">#命令序列</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="case条件测试语句"><a href="#case条件测试语句" class="headerlink" title="case条件测试语句"></a>case条件测试语句</h3><blockquote>
+<p>case测试<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> 变量值 <span class="keyword">in</span> </span><br><span class="line"><span class="comment">#模式1)</span></span><br><span class="line"> <span class="comment">#命令序列1</span></span><br><span class="line">;;</span><br><span class="line"></span><br><span class="line"><span class="comment">#模式2)</span></span><br><span class="line"> <span class="comment">#命令序列2</span></span><br><span class="line">;;</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">*)</span><br><span class="line"> <span class="comment">#默认命令序列</span></span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="shell函数"><a href="#shell函数" class="headerlink" title="shell函数"></a>shell函数</h2><h3 id="定义格式"><a href="#定义格式" class="headerlink" title="定义格式"></a>定义格式</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[function] 函数名()&#123;</span><br><span class="line">  命令序列</span><br><span class="line">  [return x]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>函数里的位置变量为调用函数时后面的值</p>
+<h3 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h3><figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">函数名 [值<span class="number">1</span>] [值<span class="number">2</span>]...</span><br></pre></td></tr></table></figure>
+
+<h1 id="grep与egrep"><a href="#grep与egrep" class="headerlink" title="grep与egrep"></a>grep与egrep</h1><table>
+ <tr><td>文本处理工具</td><td>基础正则表达式</td><td>扩展正则表达式(限定符)</td></tr>
+ <tr><td>vi编辑器</td><td>支持</td><td></td></tr>
+ <tr><td>grep</td><td>支持</td><td></td></tr>
+ <tr><td>egrep</td><td>支持</td><td>支持</td></tr>
+ <tr><td>sed</td><td>支持</td><td></td></tr>
+ <tr><td>awk</td><td>支持</td><td>支持</td></tr>
+</table>
+
+<h1 id="Sed与Awk"><a href="#Sed与Awk" class="headerlink" title="Sed与Awk"></a>Sed与Awk</h1><h2 id="Sed工具概述"><a href="#Sed工具概述" class="headerlink" title="Sed工具概述"></a>Sed工具概述</h2><p>Sed是文本处理工具, 依赖于正则表达式, 可以读取文本内容, 根据指定条件对数据进行添加、删除、替换等操作.</p>
+<p>Sed在处理数据时默认不直接修改源文件, 而是把当前处理的行存储在临时缓冲区中, 所有指令都在缓冲区中操作, 处理完成后,把缓冲区内容默认输出到屏幕接着处理下一行内容, 这样不断重复, 直到文件末尾, 文件本身内容没有改变.</p>
+<h2 id="Sed基本语法"><a href="#Sed基本语法" class="headerlink" title="Sed基本语法"></a>Sed基本语法</h2><table>
+<code>sed [选项] '编辑指令' 文件1 文件2...</code><br>
+常用选项
+<tr><td>-e</td><td>指定要执行的命令, 只有一个编辑命令时可省略.</td></tr>
+<tr><td>-n</td><td>只输出处理后的行, 读入时不显示.</td></tr>
+<tr><td>-i</td><td>直接编辑文件, 而不输出结果.</td></tr>
+</table>
+编辑指令格式:<code>[地址1] [地址2] 操作 [参数]</code><br>
+没有地址则代表所有的行, 参数g代表只要符合条件, 全部都进行处理.<br>
+<table>
+常用操作
+<tr><td>p</td><td>输出指定的行</td></tr>
+<tr><td>d</td><td>删除指定的行</td></tr>
+<tr><td>s</td><td>字串替换, 格式:"行范围s/旧字符串/新字符串/g"</td></tr>
+<tr><td>r</td><td>读取指定文件</td></tr>
+<tr><td>w</td><td>保存为文件</td></tr>
+<tr><td>a</td><td>在当前行后面插入一行或多行</td></tr>
+<tr><td>c</td><td>用新文本替换定位文本</td></tr>
+<tr><td>i</td><td>在当前行前面插入一行或多行</td></tr>
+<tr><td>n</td><td>从文件中读取文本下一行, 并从下一条命令而不是第一条命令开始对其的处理.</td></tr>
+<tr><td>y</td><td>传送字符, 替换单个字符.</td></tr>
+<tr><td>=</td><td>显示文件行号</td></tr>
+</table>
+
+<h2 id="Sed用法示例"><a href="#Sed用法示例" class="headerlink" title="Sed用法示例"></a>Sed用法示例</h2><h3 id="输出指定的行"><a href="#输出指定的行" class="headerlink" title="输出指定的行"></a>输出指定的行</h3><p>将所有内容输出<br><code>sed -n 'p' /etc/passwd</code></p>
+<p>将第6行内容输出<br><code>sed -n '6p' /etc/passwd</code></p>
+<p>将第6~8行内容输出<br><code>sed -n '6, 8p' /etc/passwd</code></p>
+<p>将所有奇数行输出<br><code>sed -n 'p;n' /etc/passwd</code></p>
+<p>将所有偶数行输出<br><code>sed -n 'n;p' /etc/passwd</code></p>
+<p>将1~10行中的奇数行输出<br><code>sed -n '1,10p;n' /etc/passwd</code></p>
+<p>将1~10行中的偶数行输出<br><code>sed -n '1,10{n;p}' /etc/passwd</code></p>
+<p>将第10行到末尾之间的奇数行输出<br><code>sed -n '10,${n;p}' /etc/passwd</code></p>
+<p>将最后一行输出<br><code>sed -n '$p' /etc/passwd</code></p>
+<p>将第1行开始, 连续4行进行输出(1~5行).<br><code>sed -n '1,+4p' /etc/passwd</code></p>
+<p>将匹配包含root的行进行输出<br><code>sed -n '/root/p' /etc/passwd</code></p>
+<p>将从第10行至第一个包含nom之间的行进行输出<br><code>sed -n '10,/nom/p' /etc/passwd</code></p>
+<p>匹配不少于1次前导字符o, 加-r参数:支持拓展正则表达式.<br><code>sed -nr '/ro{1,}t/p' /etc/passwd</code></p>
+<p>输出包含root或者ntp的行<br><code>sed -n '/root\|ntp/p' /etc/passwd</code></p>
+<p>将包含nom所在的行行号输出, “=”号用来输出行号.<br><code>sed -n '/nom/=' /etc/passwd</code></p>
+<p>输出前5行信息后退出, q退出.<br><code>sed -e '5q' /etc/passwd</code></p>
+<h3 id="插入符合条件的行"><a href="#插入符合条件的行" class="headerlink" title="插入符合条件的行"></a>插入符合条件的行</h3><p>添加多行数据, 除最后一行外, 每行末尾都需要用”\n”符号表示数据未完结, 换行.</p>
+<p>在含有root行的前面一行添加<code>admin:x：490：490：/sbin nologin</code><br><code>sed '/root/i admin:x:490:490::/:/sbin/nologin' /etc/passwd</code></p>
+<p>在含有root行的后面一行添加<code>admin:x：490：490：/sbin nologin</code><br><code>sed '/root/a admin:x:490:490::/:/sbin/nologin' /etc/passwd</code></p>
+<p>在第3行之后插入ADMIN<br><code>sed '3aADMIN' /etc/passwd</code></p>
+<h3 id="删除符合要求的行"><a href="#删除符合要求的行" class="headerlink" title="删除符合要求的行"></a>删除符合要求的行</h3><p>删除第1行<br><code>sed '1d' /etc/passwd</code></p>
+<p>删除最后1行<br><code>sed '$d' /etc/passwd</code></p>
+<p>删除所有空行<br><code>sed '/^$/d' /etc/passwd</code></p>
+<p>删除第2-4行<br><code>sed '2,4d' /etc/passwd</code></p>
+<p>删除含有root的行<br><code>sed '/root/d' /etc/passwd</code></p>
+<p>删除不包含root的行, 这里的”!”号表示取反操作.<br><code>sed '/root/!d' /etc/passwd</code></p>
+<p>删除以root开头的行<br><code>sed '/^root/d' /etc/passwd</code></p>
+<p>删除以nologin结尾的行<br><code>sed '/nologin$/d' /etc/passwd</code></p>
+<h3 id="替换符号条件的文本"><a href="#替换符号条件的文本" class="headerlink" title="替换符号条件的文本"></a>替换符号条件的文本</h3><p>将文件中所有的root都删除<br><code>sed 's/root//g' /etc/passwd</code></p>
+<p>将含有root的行替换为admin:x：490：490：/sbin/nlogin<br><code>sed '/root/c admin:x:490:490::/:/sbin/nologin' /etc/passwd</code></p>
+<p>把每行的第2个root替换成admin<br><code>sed -n 's/root/admin/2p' /etc/passwd</code></p>
+<p>将包含root的所有行中的root都替换为ROOT<br><code>sed '/root/s/root/ROOT/g' /etc/passwd</code></p>
+<p>将第1~3行中的所有bin都替换为BIN<br><code>sed '1,3s/bin/BIN/g' /etc/passwd/</code></p>
+<p>在每行行尾插入字符串ABC<br><code>sed 's/$/ABC/' /etc/passwd</code></p>
+<p>在每行行首插入#号<br><code>sed 's/^/#/' /etc/passwd</code></p>
+<p>将包含root的行的行首插入#号<br><code>sed '/root/s/^/#/' /etc/passwd</code></p>
+<p>将第一行替换为ABC<br><code>sed '1cABC' /etc/passwd</code></p>
+<p>将root对应替换为ROOT, y表示对应替换.<br><code>sed 'y/root/ROOT/' /etc/passwd</code></p>
+<p>将第1~10行中的root对应替换为ROOT<br><code>sed '1,10y/root/ROOT/' /etc/passwd</code></p>
+<h3 id="迁移符号条件的文本"><a href="#迁移符号条件的文本" class="headerlink" title="迁移符号条件的文本"></a>迁移符号条件的文本</h3><p>H表示保存当前模式到一个缓冲区, G表示取出保存的模式.</p>
+<p>将包含root的行另存为文件filel<br><code>sed '/root/w file1' /etc/passwd</code></p>
+<p>将包含root的行迁移至末尾<br><code>sed '/root/{H;d};$G' /etc/passwd</code></p>
+<p>将第1~5行内容迁移至末尾<br><code>sed '1,5{H;d};$G' /etc/passwd</code></p>
+<p>将包含root的行迁移至末尾<br><code>sed '/root/{H;d};$G' /etc/passwd</code></p>
+<h3 id="执行多次命令"><a href="#执行多次命令" class="headerlink" title="执行多次命令"></a>执行多次命令</h3><p>-e可以将多个命令连接起来, 也可将多个编辑命令保存到文件中, 通过-f指定文件, 已完成多个处理操作.</p>
+<p>将root和bash行作替换<br><code>sed -ne 's/root/admin/' -ne 's/bash/sh/p' /etc/passwd</code></p>
+<h3 id="直接修改文件内容"><a href="#直接修改文件内容" class="headerlink" title="直接修改文件内容"></a>直接修改文件内容</h3><p>在每行开头插入#号, 直接修改原文件.<br><code>sed -i 's/^/#/' /etc/passwad</code></p>
+<p>将每行开头的#号删除, 直接修改原文件.<br><code>sed -i 's/^#//g' /etcpasswd</code></p>
+<h2 id="Awk编辑工具概述"><a href="#Awk编辑工具概述" class="headerlink" title="Awk编辑工具概述"></a>Awk编辑工具概述</h2><p>Awk是一个功能强大的编辑工具, 用于在Linux/UNIX下对文本和数据进行处理.<br>数据可以来自一个或多个文件, 也可以为其他命令的输出, 常作为脚本来使用.<br>在执行操作时, Awk逐行读取文本, 默认以空格为分隔符进行分隔, 将分隔所得的各个字段保存到内建变量中, 对比该行是否与给定的模式相匹配, 并按模式或者条件执行编辑命令, 也可从脚本中调用编辑指令过滤输出相应内容.</p>
+<h2 id="Awk基本语法"><a href="#Awk基本语法" class="headerlink" title="Awk基本语法"></a>Awk基本语法</h2><p>Awk的两种语法格式<br><code>awk [选项] '模式或条件{编辑指令}' 文件1 文件2</code><br><code>awk -f 脚本文件 文件1 文件2</code><br>模式可以为条件语句、复合语句或正则表达式等<br>每条编辑指令可以包含多条语句, 多条语句之间要使用分号或者空格分隔的多个1区域.<br>常用选项-F定义字段分隔符, 默认以空格或者制表符作为分隔符.</p>
+<table>
+常见内置变量
+<tr><td>FS</td><td>指定每行文本的字段分隔符, 缺省为空格或制表位.</td></tr>
+<tr><td>NF</td><td>当前处理的行的字段个数</td></tr>
+<tr><td>NR</td><td>当前处理的行的行号(序数)</td></tr>
+<tr><td>$0</td><td>当前处理的行的整行内容</td></tr>
+<tr><td>$n</td><td>当前处理行的第n个字段(第n列)</td></tr>
+</table>
+
+<h2 id="Awk用法示例"><a href="#Awk用法示例" class="headerlink" title="Awk用法示例"></a>Awk用法示例</h2><h3 id="打印文本内容"><a href="#打印文本内容" class="headerlink" title="打印文本内容"></a>打印文本内容</h3><p>输出以root开头的行<br><code>awk '/^root/{print}' /etc/passwd</code></p>
+<p>输出以nologin结尾的行<br><code>awk '/nologin$/{print}' /etc/passwd</code></p>
+<p>统计可登录系统用户的个数. 使用管道符调用命令wc-1统计使用bash的用户个数即可登录系统用户的个数.<br><code>awk -F ':' '/bash$/{print|"wc -l"}' /etc/passwd</code></p>
+<p>输出第1行到第3行内容<br><code>awk 'NR==1,NR==3{print}' /etc/passwd</code></p>
+<p>输出第1、3行内容<br><code>awk 'NR==1||NR==3{print}' /etc/passwd</code></p>
+<p>输出第1行到第3行内容<br><code>awk '(NR>=1)&&(NR<=3){print}' etc passwd< code></=3){print}'></code></p>
+<p>输出所有奇数行的内容<br><code>awk '(NR%2)==1{print}' /etc/passwd</code></p>
+<p>输出所有偶数行的内容<br><code>awk '(NR%2)==0{print}' /etc/passwd</code></p>
+<p>输出第3个字段不小于900的行, “!”号表示取反.<br><code>awk -F ':' '!($3 < 900)' /etc/passwd</code></p>
+<p>输出第3个字段大于200的行<br><code>awk -F ':' '{if($3>200){print $0}}' /etc/passwd</code></p>
+<h3 id="按字段输出文本"><a href="#按字段输出文本" class="headerlink" title="按字段输出文本"></a>按字段输出文本</h3><p>如果第3个字段的值大于第4个字段的值, 则把问号前表达式的值赋给max, 否则就将冒号后那个表达式的值赋给max.<br><code>awk -F ':' '{max=($3>$4)?$3:$4;print max}' /etc/passwd</code></p>
+<p>如果第3个字段的值大于200, 则把第3个字段的值赋给max, 否则就将第1个字段的值赋给max.<br><code>awk -F ':' '{max=($3>200)?$3:$l;print max}' /etc/passwd</code></p>
+<p>输出处理数据的行号, 每处理完一条记录, NR值加1.<br><code>awk -F ':' '{print NR,$O}' /etc/passwd</code></p>
+<p>输出第3列小于5的第1列与第3列数据<br><code>awk -F ':' '$3&lt;5{print $1 $3}' /etc/passwd</code></p>
+<p>输出包含7个字段, 并且第1个字段中包含root的行的第1与第2个字段内容.<br><code>awk -F ':' '($1~"root")&&(NF==7){print $1,$3}' /etc/passwd</code></p>
+<p>输出第3行到第7行中以冒号为分隔符的第1列与第7列的数据<br><code>awk -F ':' 'NR==3,NR==7{print $1,$7}' /etc/passwd</code><br><code>awk -F ':' 'NR==3,NR==7{print "USERNAME:" $1, "SHELL:" $7}' /etc/passwd</code></p>
+<p>输出Hi,加以root开头的第1个字段.<br><code>awk -F ':' '/^root/{print "Hi,"$1}' /etc/passwd</code></p>
+<p>输出以冒号分隔且第7个字段中包含/bash的行的第1个字段<br><code>awk -F ':' '$7~"/bash"{print $1}' /etc/passwd</code></p>
+<p>保留原来的格式, 输出以冒号为分隔. /etc/passwd文件的前4个字段.<br><code>awk -F ':' '{print $1":"$2":"$3":"$4}' /etc/passwd</code></p>
+<p>输出以冒号为分隔符的第1列和第3列数据<br><code>awk -F ':' '{print $1,$3}' /etc/passwd</code></p>
+<p>在FS之前加一个BEGIN, 当读取第一条数据之前, 先把分隔符加上后再进去操作. 相似的还有END, 在所有数据处理完毕后执行.<br><code>awk 'BEGIN{FS=":"}{print $1,$3}' /etc/passwd</code></p>
+<p>统计以/bin/bash为结尾的行数<br><code>awk 'BEGIN{X=0};/\/bin\/bash$/{x++};END{print x}' /etc/passwd</code></p>
+<h3 id="处理命令输出的结果"><a href="#处理命令输出的结果" class="headerlink" title="处理命令输出的结果"></a>处理命令输出的结果</h3><p>输出月份和年份<br><code>date | awk '{print "Month:"$2 "\nYear:", $6}'</code></p>
+
+    </div>
+
+    
+    
+    
+
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color:white;font-size:14px;">-------------------本文结束 <i class="fa fa-heart"></i> 感谢阅读-------------------</div>
+    
+</div>
+	
+	</div>
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>云
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.mengyun.club/post/563a1179/" title="Shell脚本">http://www.mengyun.club/post/563a1179/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+              <a href="/tags/Shell/" rel="tag"><i class="fa fa-tag"></i> Shell</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/82734d8/" rel="prev" title="Linux命令">
+                  <i class="fa fa-chevron-left"></i> Linux命令
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/df41aea9/" rel="next" title="Linux基础知识">
+                  Linux基础知识 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">云</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">250k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:47</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/post/563a1179/",
+    }, {"enable":true,"appId":"HKOdg6jtf8l5uFP2Ag6eDIIk-gzGzoHsz","appKey":"Gn11LWMBtG3eEkwpnpDhJUI3","placeholder":"请输入你的评论内容, 可编写Markdown语法.","avatar":"mm","meta":["nick","mail"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":true,"requiredFields":[]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+  
+</body>
+</html>

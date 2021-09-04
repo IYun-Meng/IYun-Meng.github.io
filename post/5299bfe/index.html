@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Grandstander:300,300italic,400,400italic,700,700italic|Noto+Serif+SC:300,300italic,400,400italic,700,700italic|Architects+Daughter:300,300italic,400,400italic,700,700italic|Dosis:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.mengyun.club","root":"/","scheme":"Mist","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="Sprite在2D项目中, Sprite是一个2D图形对象; 在3D项目中, Sprite是一个纹理对象.官方说明 Sprite Creator(创建)在项目中创建占位精灵 Sprite Editor(编辑)允许从较大的图像中提取精灵图形, 并在图像编辑器中编辑单个纹理内的多个分量图像. Sprite Renderer(渲染)应使用Sprite Renderer组件而不是用于3D对象的Mesh R">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity游戏组件">
+<meta property="og:url" content="http://www.mengyun.club/post/5299bfe/index.html">
+<meta property="og:site_name" content="爱梦的博客">
+<meta property="og:description" content="Sprite在2D项目中, Sprite是一个2D图形对象; 在3D项目中, Sprite是一个纹理对象.官方说明 Sprite Creator(创建)在项目中创建占位精灵 Sprite Editor(编辑)允许从较大的图像中提取精灵图形, 并在图像编辑器中编辑单个纹理内的多个分量图像. Sprite Renderer(渲染)应使用Sprite Renderer组件而不是用于3D对象的Mesh R">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.mengyun.club/post/5299bfe/Sprite/importPath.png">
+<meta property="og:image" content="http://www.mengyun.club/post/5299bfe/Sprite/SelectType.png">
+<meta property="og:image" content="http://www.mengyun.club/post/5299bfe/Sprite/SetSpritSort01.png">
+<meta property="og:image" content="http://www.mengyun.club/post/5299bfe/Sprite/SetSpritSort02.png">
+<meta property="article:published_time" content="2021-05-19T02:01:43.000Z">
+<meta property="article:modified_time" content="2021-05-20T10:52:01.431Z">
+<meta property="article:author" content="云">
+<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="Sprite">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.mengyun.club/post/5299bfe/Sprite/importPath.png">
+
+
+<link rel="canonical" href="http://www.mengyun.club/post/5299bfe/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Unity游戏组件 | 爱梦的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="爱梦的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/src/clickLove.js"></script>
+
+<script type="text/javascript"
+color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+  
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">爱梦的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">常常与我陪伴的就是梦</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">38</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-playlist">
+
+    <a href="/playlist/" rel="section"><i class="fa fa-music fa-fw"></i>网易云歌单</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">	
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sprite"><span class="nav-text">Sprite</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sprite-Creator-创建"><span class="nav-text">Sprite Creator(创建)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sprite-Editor-编辑"><span class="nav-text">Sprite Editor(编辑)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sprite-Renderer-渲染"><span class="nav-text">Sprite Renderer(渲染)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sprite-Packer"><span class="nav-text">Sprite Packer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入精灵"><span class="nav-text">导入精灵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置精灵"><span class="nav-text">设置精灵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序精灵"><span class="nav-text">排序精灵</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TileMap"><span class="nav-text">TileMap</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="云"
+      src="/images/head_Picture/Yu_Me5.jpg">
+  <p class="site-author-name" itemprop="name">云</p>
+  <div class="site-description" itemprop="description">我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/IYun-Meng" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;IYun-Meng" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kili3kili1miyukeno4@foxmail.co" title="E-Mail → mailto:kili3kili1miyukeno4@foxmail.co" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/?hl=zh_CN" title="https:&#x2F;&#x2F;www.google.com&#x2F;?hl&#x3D;zh_CN" rel="noopener" target="_blank">谷歌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zhihu.com/" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;" rel="noopener" target="_blank">知乎</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.github.com/" title="https:&#x2F;&#x2F;www.github.com&#x2F;" rel="noopener" target="_blank">GitHub</a>
+        </li>
+    </ul>
+  </div>
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoFs/" rel="tag">AutoFs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bind/" rel="tag">Bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DHCP/" rel="tag">DHCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deepin/" rel="tag">Deepin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dovecot/" rel="tag">Dovecot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/" rel="tag">FTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KVM/" rel="tag">KVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keepalived/" rel="tag">Keepalived</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KickStart/" rel="tag">KickStart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/" rel="tag">NFS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTP/" rel="tag">NTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nagios/" rel="tag">Nagios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PXE/" rel="tag">PXE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Physics2D/" rel="tag">Physics2D</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postfix/" rel="tag">Postfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/" rel="tag">SELinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSLinux/" rel="tag">SYSLinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Samba/" rel="tag">Samba</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sprite/" rel="tag">Sprite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TFTP/" rel="tag">TFTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/" rel="tag">Unity</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zabbix/" rel="tag">Zabbix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/" rel="tag">root</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+      </section>
+	  
+	</div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.mengyun.club/post/5299bfe/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_Picture/Yu_Me5.jpg">
+      <meta itemprop="name" content="云">
+      <meta itemprop="description" content="我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱梦的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Unity游戏组件
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-19 10:01:43" itemprop="dateCreated datePublished" datetime="2021-05-19T10:01:43+08:00">2021-05-19</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-05-20 18:52:01" itemprop="dateModified" datetime="2021-05-20T18:52:01+08:00">2021-05-20</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Unity/" itemprop="url" rel="index"><span itemprop="name">Unity</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/post/5299bfe/" class="post-meta-item leancloud_visitors" data-flag-title="Unity游戏组件" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/post/5299bfe/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/post/5299bfe/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Sprite"><a href="#Sprite" class="headerlink" title="Sprite"></a>Sprite</h1><p>在2D项目中, Sprite是一个2D图形对象; 在3D项目中, Sprite是一个纹理对象.<br><a href="https://docs.unity.cn/cn/2019.4/Manual/Sprites.html" target="_blank" rel="noopener" color="red">官方说明</a></p>
+<h2 id="Sprite-Creator-创建"><a href="#Sprite-Creator-创建" class="headerlink" title="Sprite Creator(创建)"></a>Sprite Creator(创建)</h2><p>在项目中创建占位精灵</p>
+<h2 id="Sprite-Editor-编辑"><a href="#Sprite-Editor-编辑" class="headerlink" title="Sprite Editor(编辑)"></a>Sprite Editor(编辑)</h2><p>允许从较大的图像中提取精灵图形, 并在图像编辑器中编辑单个纹理内的多个分量图像.</p>
+<h2 id="Sprite-Renderer-渲染"><a href="#Sprite-Renderer-渲染" class="headerlink" title="Sprite Renderer(渲染)"></a>Sprite Renderer(渲染)</h2><p>应使用<code>Sprite Renderer</code>组件而不是用于<code>3D对象</code>的<code>Mesh Renderer</code>来渲染<code>精灵</code>. 使用该组件可将图像显示为<code>精灵</code>, 以便在2D和3D场景中均可使用.</p>
+<h2 id="Sprite-Packer"><a href="#Sprite-Packer" class="headerlink" title="Sprite Packer"></a>Sprite Packer</h2><p>根据项目来优化视频内存的使用和性能</p>
+<a id="more"></a>
+
+<h2 id="导入精灵"><a href="#导入精灵" class="headerlink" title="导入精灵"></a>导入精灵</h2><ol>
+<li><p>直接将图像放入<code>Unity</code>项目的<code>Assets</code>文件夹中, 最好单独存放.<br>例如: <code>Assets\Sprites</code></p>
+<table>
+<tr><td><img src="/post/5299bfe/Sprite/importPath.png"></td></tr>
+</table>
+</li>
+<li><p>在<code>Unity</code>中, 选择<code>Assets</code>&gt;<code>Import New Asset</code>打开文件管理器后选择所需的图像, Unity会将其放在<code>Project视图</code>中.</p>
+</li>
+</ol>
+<h2 id="设置精灵"><a href="#设置精灵" class="headerlink" title="设置精灵"></a>设置精灵</h2><ol>
+<li><p>如果项目模式设置为<code>2D</code>, 则导入的图像将自动设置为<code>精灵(Sprite)</code>.</p>
+</li>
+<li><p>如果项目模式设置为<code>3D</code>, 则图像将设置为<code>纹理(Texture)</code>, 因此需要更改资源的<code>纹理类型(Texture Type)</code>.</p>
+</li>
+</ol>
+<pre>
+1.单击该资源以查看其<font color="green">Import Inspector</font>
+2.将<font color="green">Texture Type</font>设置为<font color="red">Sprite (2D and UI)</font>
+</pre>
+<table>
+<tr><td><img src="/post/5299bfe/Sprite/SelectType.png"></td></tr>
+</table>
+
+<h2 id="排序精灵"><a href="#排序精灵" class="headerlink" title="排序精灵"></a>排序精灵</h2><p><code>Unity</code>中的渲染器按几个条件排序, 例如图层顺序或与摄像机的距离.<br>菜单栏中的<code>Edit</code> &gt; <code>Project Settings...</code> &gt; <code>Graphics</code> &gt; <code>Transparency Sort Mode</code>这项设置使用精灵在轴上的位置来确定哪些精灵相对于其他精灵透明, 而哪些不透明. </p>
+<table>
+<tr style="text-align:center"><td colspan="2">Transparency Sort Mode的四个可用选项</td></tr>
+<tr><td>Default</td><td>根据摄像机的 Projection 模式设置为 Perspective 还是 Orthographic 来进行排序</td></tr>
+<tr><td>Perspective</td><td>根据透视图进行排序. 透视图根据从摄像机位置到精灵中心的距离对精灵进行排序. </td></tr>
+<tr><td>Orthographic</td><td>根据正交视图进行排序. 正交视图根据沿视图方向的距离对精灵进行排序. </td></tr>
+<tr><td>Custom Axis</td><td>根据 Transparency Sort Axis 中设置的指定轴进行排序</td></tr>
+</table>
+
+<p>当<code>Transparency Sort Mode</code>设置为<code>Custom Axis</code>时, 则需要设置 <code>Transparency Sort Axis</code>的<code>xyz值</code>:</p>
+<table>
+<tr><td><img src="/post/5299bfe/Sprite/SetSpritSort01.png"></td><td><img src="/post/5299bfe/Sprite/SetSpritSort02.png"></td></tr>
+</table>
+<pre>
+Scene视图中的渲染器将根据此轴与摄像机之间的距离进行排序. 应使用介于–1和1之间的值来定义此轴. 
+
+<p>例如：X=0、Y=1、Z=0 将此轴方向设置为向上;<br>               X=1、Y=1、Z=0 将此轴方向设置为 X 和 Y 之间的对角线方向. </p>
+<p>例如: 如果希望精灵在y轴值较高的精灵, 将站在y轴值较低的精灵的后面.<br>请将 Transparency Sort Mode 设置为 Custom Axis, 并将 Transparency Sort Axis 的 Y值 设置为大于0的值.<br></p></pre><p></p>
+<h1 id="TileMap"><a href="#TileMap" class="headerlink" title="TileMap"></a>TileMap</h1>
+    </div>
+
+    
+    
+    
+
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color:white;font-size:14px;">-------------------本文结束 <i class="fa fa-heart"></i> 感谢阅读-------------------</div>
+    
+</div>
+	
+	</div>
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>云
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.mengyun.club/post/5299bfe/" title="Unity游戏组件">http://www.mengyun.club/post/5299bfe/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Unity/" rel="tag"><i class="fa fa-tag"></i> Unity</a>
+              <a href="/tags/Sprite/" rel="tag"><i class="fa fa-tag"></i> Sprite</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/f7f05fc0/" rel="prev" title="在Deepin系统上搭建PXE服务器">
+                  <i class="fa fa-chevron-left"></i> 在Deepin系统上搭建PXE服务器
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/738741fb/" rel="next" title="Unity2D - 射线">
+                  Unity2D - 射线 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">云</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">250k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:47</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/post/5299bfe/",
+    }, {"enable":true,"appId":"HKOdg6jtf8l5uFP2Ag6eDIIk-gzGzoHsz","appKey":"Gn11LWMBtG3eEkwpnpDhJUI3","placeholder":"请输入你的评论内容, 可编写Markdown语法.","avatar":"mm","meta":["nick","mail"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":true,"requiredFields":[]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+  
+</body>
+</html>

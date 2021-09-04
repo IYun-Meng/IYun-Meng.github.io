@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Grandstander:300,300italic,400,400italic,700,700italic|Noto+Serif+SC:300,300italic,400,400italic,700,700italic|Architects+Daughter:300,300italic,400,400italic,700,700italic|Dosis:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.mengyun.club","root":"/","scheme":"Mist","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="MongoDB复制集概述什么是复制集复制集(Replica Sets)是额外的数据副本, 是跨多个服务器同步数据的过程, 复制集提供了冗余并增加了数据可用性, 通过复制集可以对硬件故障和中断的服务进行恢复. 复制集的优势如下:1.让数据更安全2.高数据可用性(24*7)3.灾难恢复4.无停机维护(如备份、索引重建、故障转移)5.读缩放(额外的副本读取)6.副本集对应用程序是透明的 复制集工作原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB复制集">
+<meta property="og:url" content="http://www.mengyun.club/post/37db6981/index.html">
+<meta property="og:site_name" content="爱梦的博客">
+<meta property="og:description" content="MongoDB复制集概述什么是复制集复制集(Replica Sets)是额外的数据副本, 是跨多个服务器同步数据的过程, 复制集提供了冗余并增加了数据可用性, 通过复制集可以对硬件故障和中断的服务进行恢复. 复制集的优势如下:1.让数据更安全2.高数据可用性(24*7)3.灾难恢复4.无停机维护(如备份、索引重建、故障转移)5.读缩放(额外的副本读取)6.副本集对应用程序是透明的 复制集工作原理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.mengyun.club/post/37db6981/MongoDB%E5%A4%8D%E5%88%B6%E7%BB%93%E6%9E%84%E5%9B%BE.png">
+<meta property="og:image" content="http://www.mengyun.club/post/37db6981/MongoDB%E5%A4%8D%E5%88%B6%E9%9B%86%E8%8A%82%E7%82%B9%E9%97%B4%E9%80%89%E4%B8%BE.png">
+<meta property="article:published_time" content="2020-08-27T11:27:15.000Z">
+<meta property="article:modified_time" content="2020-09-18T01:28:36.915Z">
+<meta property="article:author" content="云">
+<meta property="article:tag" content="MongoDB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.mengyun.club/post/37db6981/MongoDB%E5%A4%8D%E5%88%B6%E7%BB%93%E6%9E%84%E5%9B%BE.png">
+
+
+<link rel="canonical" href="http://www.mengyun.club/post/37db6981/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MongoDB复制集 | 爱梦的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="爱梦的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/src/clickLove.js"></script>
+
+<script type="text/javascript"
+color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+  
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">爱梦的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">常常与我陪伴的就是梦</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">38</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-playlist">
+
+    <a href="/playlist/" rel="section"><i class="fa fa-music fa-fw"></i>网易云歌单</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">	
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MongoDB复制集概述"><span class="nav-text">MongoDB复制集概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是复制集"><span class="nav-text">什么是复制集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制集工作原理"><span class="nav-text">复制集工作原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复制集的选举原理"><span class="nav-text">复制集的选举原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#复制原理"><span class="nav-text">复制原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选举原理"><span class="nav-text">选举原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MongoDB复制集部属"><span class="nav-text">MongoDB复制集部属</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置复制集"><span class="nav-text">配置复制集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加和删除节点"><span class="nav-text">增加和删除节点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MongoDB复制集切换"><span class="nav-text">MongoDB复制集切换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模拟故障自动转移"><span class="nav-text">模拟故障自动转移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手动进行主从切换"><span class="nav-text">手动进行主从切换</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#验证复制集的选举原理"><span class="nav-text">验证复制集的选举原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MongoDB复制集管理"><span class="nav-text">MongoDB复制集管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置允许在从节点读取数据"><span class="nav-text">配置允许在从节点读取数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看复制状态信息"><span class="nav-text">查看复制状态信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更改oplog大小"><span class="nav-text">更改oplog大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署认证的复制"><span class="nav-text">部署认证的复制</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="云"
+      src="/images/head_Picture/Yu_Me5.jpg">
+  <p class="site-author-name" itemprop="name">云</p>
+  <div class="site-description" itemprop="description">我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/IYun-Meng" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;IYun-Meng" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kili3kili1miyukeno4@foxmail.co" title="E-Mail → mailto:kili3kili1miyukeno4@foxmail.co" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/?hl=zh_CN" title="https:&#x2F;&#x2F;www.google.com&#x2F;?hl&#x3D;zh_CN" rel="noopener" target="_blank">谷歌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zhihu.com/" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;" rel="noopener" target="_blank">知乎</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.github.com/" title="https:&#x2F;&#x2F;www.github.com&#x2F;" rel="noopener" target="_blank">GitHub</a>
+        </li>
+    </ul>
+  </div>
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoFs/" rel="tag">AutoFs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bind/" rel="tag">Bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DHCP/" rel="tag">DHCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deepin/" rel="tag">Deepin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dovecot/" rel="tag">Dovecot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/" rel="tag">FTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KVM/" rel="tag">KVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keepalived/" rel="tag">Keepalived</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KickStart/" rel="tag">KickStart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/" rel="tag">NFS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTP/" rel="tag">NTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nagios/" rel="tag">Nagios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PXE/" rel="tag">PXE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Physics2D/" rel="tag">Physics2D</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postfix/" rel="tag">Postfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/" rel="tag">SELinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSLinux/" rel="tag">SYSLinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Samba/" rel="tag">Samba</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sprite/" rel="tag">Sprite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TFTP/" rel="tag">TFTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/" rel="tag">Unity</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zabbix/" rel="tag">Zabbix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/" rel="tag">root</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+      </section>
+	  
+	</div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.mengyun.club/post/37db6981/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_Picture/Yu_Me5.jpg">
+      <meta itemprop="name" content="云">
+      <meta itemprop="description" content="我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱梦的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MongoDB复制集
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-08-27 19:27:15" itemprop="dateCreated datePublished" datetime="2020-08-27T19:27:15+08:00">2020-08-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-18 09:28:36" itemprop="dateModified" datetime="2020-09-18T09:28:36+08:00">2020-09-18</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/post/37db6981/" class="post-meta-item leancloud_visitors" data-flag-title="MongoDB复制集" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/post/37db6981/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/post/37db6981/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>15k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>14 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<h1 id="MongoDB复制集概述"><a href="#MongoDB复制集概述" class="headerlink" title="MongoDB复制集概述"></a>MongoDB复制集概述</h1><h2 id="什么是复制集"><a href="#什么是复制集" class="headerlink" title="什么是复制集"></a>什么是复制集</h2><p>复制集(Replica Sets)是额外的数据副本, 是跨多个服务器同步数据的过程, 复制集提供了冗余并增加了数据可用性, 通过复制集可以对硬件故障和中断的服务进行恢复.</p>
+<p>复制集的优势如下:<br>1.让数据更安全<br>2.高数据可用性(24*7)<br>3.灾难恢复<br>4.无停机维护(如备份、索引重建、故障转移)<br>5.读缩放(额外的副本读取)<br>6.副本集对应用程序是透明的</p>
+<h2 id="复制集工作原理"><a href="#复制集工作原理" class="headerlink" title="复制集工作原理"></a>复制集工作原理</h2><p>MongoDB的复制集至少需要两个节点. 其中一个是主节点(Primary), 负责处理客户端的请求, 其余的都是从节点(Secondary), 负责复制主节点上的数据.</p>
+<p>复制集特点:<br>1.N个节点的群集<br>2.任何节点可作为主节点<br>3.所有写入操作都在主节点上<br>4.自动故障转移<br>5.自动恢复</p>
+<table>
+客户端在主节点写入数据, 在从节点读取数据, 主节点与从节点进行数据交互保障数据的一致性. 如果其中一个节点出现故障, 其他节点马上会将业务接过来而无需停机操作.
+<tr><td><img src="/post/37db6981/MongoDB复制结构图.png" title="复制集工作原理"></td></tr>
+</table>
+
+<a id="more"></a>
+
+<h1 id="复制集的选举原理"><a href="#复制集的选举原理" class="headerlink" title="复制集的选举原理"></a>复制集的选举原理</h1><p>MongoDB复制集的节点是通过选举产生主节点</p>
+<h2 id="复制原理"><a href="#复制原理" class="headerlink" title="复制原理"></a>复制原理</h2><p>复制是基于操作日志oplog, 相当于MySQL中的二进制日志, 只记录发生改变的记录. 复制是将主节点的oplog日志同步并应用到其他从节点的过程.</p>
+<h2 id="选举原理"><a href="#选举原理" class="headerlink" title="选举原理"></a>选举原理</h2><p>节点类型分为标准(host)节点、被动(passive)节点和仲裁(arbiter)节点.</p>
+<p>(1)只有标准节点可能被选举为活跃(primary)节点, 有选举权. 被动节点有完整副本, 不可能成为活跃节点, 有选举权. 仲裁节点不复制数据, 不可能成为活跃跃点只有选举权.<br>(2)标准节点与被动节点的区别: priority值高者是标准节点, 低者则为被动节点.<br>(3)选举规则是票数高者获胜, priority是优先权为0~1000的值, 相当于额外增加0~1000的票数.<br>选举结果:票数高者获胜; 若票数相同, 数据新者获胜.</p>
+<table>
+<tr><td><img src="/post/37db6981/MongoDB复制集节点间选举.png" title="复制集选举原理"></td></tr>
+</table>
+
+<h1 id="MongoDB复制集部属"><a href="#MongoDB复制集部属" class="headerlink" title="MongoDB复制集部属"></a>MongoDB复制集部属</h1><h2 id="配置复制集"><a href="#配置复制集" class="headerlink" title="配置复制集"></a>配置复制集</h2><p>安装MongoDB后配置多实例</p>
+<p>(1).将mongoDB原本的数据清空</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf /var/<span class="class"><span class="keyword">lib</span>/<span class="title">mongo</span>/*</span></span><br></pre></td></tr></table></figure>
+
+<p>(2).创建数据文件和日志文件存储路径</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /var/<span class="class"><span class="keyword">lib</span>/<span class="title">mongo</span>&#123;2,3,4&#125;</span></span><br></pre></td></tr></table></figure>
+<p>注: 日志文件可以自动生成</p>
+<p>(4).编译4个MongoDB实例的配置文件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -------27017-------</span></span><br><span class="line"><span class="string">cat</span> <span class="string">&gt;</span> <span class="string">/etc/mongod.conf</span> <span class="string">&lt;&lt;-EOF</span></span><br><span class="line"><span class="attr">systemLog:</span></span><br><span class="line">  <span class="attr">destination:</span> <span class="string">file</span></span><br><span class="line">  <span class="attr">logAppend:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">/var/log/mongodb/mongod.log</span></span><br><span class="line"></span><br><span class="line"><span class="attr">storage:</span></span><br><span class="line">  <span class="attr">dbPath:</span> <span class="string">/var/lib/mongo</span></span><br><span class="line">  <span class="attr">journal:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="attr">processManagement:</span></span><br><span class="line">  <span class="attr">fork:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">pidFilePath:</span> <span class="string">/var/run/mongodb/mongod.pid</span></span><br><span class="line"></span><br><span class="line"><span class="attr">net:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">27017</span></span><br><span class="line">  <span class="attr">bindIp:</span> <span class="number">192.168</span><span class="number">.100</span><span class="number">.10</span></span><br><span class="line"></span><br><span class="line"><span class="attr">replication:</span></span><br><span class="line">  <span class="attr">oplogSizeMB:</span> <span class="number">2048</span></span><br><span class="line">  <span class="attr">replSetName:</span> <span class="string">test_rs</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -------27018-------</span></span><br><span class="line"><span class="string">cat</span> <span class="string">&gt;</span> <span class="string">/etc/mongod2.conf</span> <span class="string">&lt;&lt;-EOF</span></span><br><span class="line"><span class="attr">systemLog:</span></span><br><span class="line">  <span class="attr">destination:</span> <span class="string">file</span></span><br><span class="line">  <span class="attr">logAppend:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">/var/log/mongodb/mongod2.log</span></span><br><span class="line"></span><br><span class="line"><span class="attr">storage:</span></span><br><span class="line">  <span class="attr">dbPath:</span> <span class="string">/var/lib/mongo2</span></span><br><span class="line">  <span class="attr">journal:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="attr">processManagement:</span></span><br><span class="line">  <span class="attr">fork:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">pidFilePath:</span> <span class="string">/var/run/mongodb/mongod.pid</span></span><br><span class="line"></span><br><span class="line"><span class="attr">net:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">27018</span></span><br><span class="line">  <span class="attr">bindIp:</span> <span class="number">192.168</span><span class="number">.100</span><span class="number">.10</span></span><br><span class="line"></span><br><span class="line"><span class="attr">replication:</span></span><br><span class="line">  <span class="attr">oplogSizeMB:</span> <span class="number">2048</span></span><br><span class="line">  <span class="attr">replSetName:</span> <span class="string">test_rs</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -------27019-------</span></span><br><span class="line"><span class="string">cat</span> <span class="string">&gt;</span> <span class="string">/etc/mongod3.conf</span> <span class="string">&lt;&lt;-EOF</span></span><br><span class="line"><span class="attr">systemLog:</span></span><br><span class="line">  <span class="attr">destination:</span> <span class="string">file</span></span><br><span class="line">  <span class="attr">logAppend:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">/var/log/mongodb/mongod3.log</span></span><br><span class="line"></span><br><span class="line"><span class="attr">storage:</span></span><br><span class="line">  <span class="attr">dbPath:</span> <span class="string">/var/lib/mongo3</span></span><br><span class="line">  <span class="attr">journal:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="attr">processManagement:</span></span><br><span class="line">  <span class="attr">fork:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">pidFilePath:</span> <span class="string">/var/run/mongodb/mongod.pid</span></span><br><span class="line"></span><br><span class="line"><span class="attr">net:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">27019</span></span><br><span class="line">  <span class="attr">bindIp:</span> <span class="number">192.168</span><span class="number">.100</span><span class="number">.10</span></span><br><span class="line"></span><br><span class="line"><span class="attr">replication:</span></span><br><span class="line">  <span class="attr">oplogSizeMB:</span> <span class="number">2048</span></span><br><span class="line">  <span class="attr">replSetName:</span> <span class="string">test_rs</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -------27020-------</span></span><br><span class="line"><span class="string">cat</span> <span class="string">&gt;</span> <span class="string">/etc/mongod4.conf</span> <span class="string">&lt;&lt;-EOF</span></span><br><span class="line"><span class="attr">systemLog:</span></span><br><span class="line">  <span class="attr">destination:</span> <span class="string">file</span></span><br><span class="line">  <span class="attr">logAppend:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">/var/log/mongodb/mongod4.log</span></span><br><span class="line"></span><br><span class="line"><span class="attr">storage:</span></span><br><span class="line">  <span class="attr">dbPath:</span> <span class="string">/var/lib/mongo4</span></span><br><span class="line">  <span class="attr">journal:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="attr">processManagement:</span></span><br><span class="line">  <span class="attr">fork:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">pidFilePath:</span> <span class="string">/var/run/mongodb/mongod.pid</span></span><br><span class="line"></span><br><span class="line"><span class="attr">net:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">27020</span></span><br><span class="line">  <span class="attr">bindIp:</span> <span class="number">192.168</span><span class="number">.100</span><span class="number">.10</span></span><br><span class="line"></span><br><span class="line"><span class="attr">replication:</span></span><br><span class="line">  <span class="attr">oplogSizeMB:</span> <span class="number">2048</span></span><br><span class="line">  <span class="attr">replSetName:</span> <span class="string">test_rs</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+<p>注: bindIp更改为本机上的网卡IP地址</p>
+<p>(5).启动mongoDB服务</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mongod</span> <span class="string">-f /etc/mongod.conf</span></span><br><span class="line"><span class="attr">mongod</span> <span class="string">-f /etc/mongod2.conf</span></span><br><span class="line"><span class="attr">mongod</span> <span class="string">-f /etc/mongod3.conf</span></span><br><span class="line"><span class="attr">mongod</span> <span class="string">-f /etc/mongod4.conf</span></span><br><span class="line"><span class="attr">netstat</span> <span class="string">-lnt</span></span><br></pre></td></tr></table></figure>
+
+<p>(6).初始化配置复制集</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mongo --host <span class="number">192.168</span><span class="number">.100</span><span class="number">.10</span>:<span class="number">27017</span></span><br><span class="line">show dbs</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看复制集</span></span><br><span class="line">rs.status()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化配置并设置优先级</span></span><br><span class="line"><span class="built_in">config</span>=&#123;<span class="string">"_id"</span>:<span class="string">"test_rs"</span>,<span class="string">"members"</span>:[&#123;<span class="string">"_id"</span>:<span class="number">0</span>,<span class="string">"host"</span>:<span class="string">"192.168.100.10:27017"</span>,<span class="string">"priority"</span>:<span class="number">100</span>&#125;, &#123;<span class="string">"_id"</span>:<span class="number">1</span>,<span class="string">"host"</span>:<span class="string">"192.168.100.10:27018"</span>,<span class="string">"priority"</span>:<span class="number">100</span>&#125;, &#123;<span class="string">"_id"</span>:<span class="number">2</span>,<span class="string">"host"</span>:<span class="string">"192.168.100.10:27019"</span>,<span class="string">"priority"</span>:<span class="number">0</span>&#125;, &#123;<span class="string">"_id"</span>:<span class="number">3</span>,<span class="string">"host"</span>:<span class="string">"192.168.100.10:27020"</span>,<span class="string">"arbiterOnly"</span>:<span class="literal">true</span>&#125;]&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化复制集</span></span><br><span class="line">rs.initiate(<span class="built_in">config</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 几秒后查看复制集</span></span><br><span class="line">rs.status()</span><br></pre></td></tr></table></figure>
+<pre>
+当前未配置复制集时的错误提示:
+2020-08-28T15:29:12.858+0800 E QUERY    [thread1] Error: listDatabases failed:{
+    "ok" : 0,
+    <font color="red">"errmsg" : "not master and slaveOk=false"</font>,
+    "code" : 13435,
+    "codeName" : "NotMasterNoSlaveOk"
+} :
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+Mongo.prototype.getDBs@src/mongo/shell/mongo.js:62:1
+shellHelper.show@src/mongo/shell/utils.js:814:19
+shellHelper@src/mongo/shell/utils.js:704:15
+@(shellhelp2):1:1
+
+复制集状态:
+{
+    "info" : "run rs.initiate(...) if not yet done for the set",
+    "ok" : 0,
+    <font color="red">"errmsg" : "no replset config has been received"</font>,
+    "code" : 94,
+    "codeName" : "NotYetInitialized"
+}
+
+<details blue><summary> <p>初始化后的复制集状态</p> </summary>
+              <div class="content">
+              <p>{<br>    “set” : “test_rs”,<br>    “date” : ISODate(“2020-08-28T07:44:08.660Z”),<br>    “myState” : 1,<br>    “term” : NumberLong(1),<br>    “syncingTo” : “”,<br>    “syncSourceHost” : “”,<br>    “syncSourceId” : -1,<br>    “heartbeatIntervalMillis” : NumberLong(2000),<br>    “optimes” : {<br>        “lastCommittedOpTime” : {<br>            “ts” : Timestamp(1598600645, 1),<br>            “t” : NumberLong(1)<br>        },<br>        “appliedOpTime” : {<br>            “ts” : Timestamp(1598600645, 1),<br>            “t” : NumberLong(1)<br>        },<br>        “durableOpTime” : {<br>            “ts” : Timestamp(1598600645, 1),<br>            “t” : NumberLong(1)<br>        }<br>    },<br>    “members” : [<br>        {<br>            <font color="red">“_id” : 0,<br>            “name” : “192.168.100.10:27017”,<br>            “health” : 1,<br>            “state” : 1,<br>            “stateStr” : “PRIMARY”,</font> <font color="green"># 主节点</font><br>            “uptime” : 1047,<br>            “optime” : {<br>                “ts” : Timestamp(1598600645, 1),<br>                “t” : NumberLong(1)<br>            },<br>            “optimeDate” : ISODate(“2020-08-28T07:44:05Z”),<br>            “syncingTo” : “”,<br>            “syncSourceHost” : “”,<br>            “syncSourceId” : -1,<br>            “infoMessage” : “”,<br>            “electionTime” : Timestamp(1598600384, 1),<br>            “electionDate” : ISODate(“2020-08-28T07:39:44Z”),<br>            “configVersion” : 1,<br>            “self” : true,<br>            “lastHeartbeatMessage” : “”<br>        },<br>        {<br>            <font color="red">“_id” : 1,<br>            “name” : “192.168.100.10:27018”,<br>            “health” : 1,<br>            “state” : 2,<br>            “stateStr” : “SECONDARY”,</font> <font color="green"># 从节点</font><br>            “uptime” : 275,<br>            “optime” : {<br>                “ts” : Timestamp(1598600645, 1),<br>                “t” : NumberLong(1)<br>            },<br>            “optimeDurable” : {<br>                “ts” : Timestamp(1598600645, 1),<br>                “t” : NumberLong(1)<br>            },<br>            “optimeDate” : ISODate(“2020-08-28T07:44:05Z”),<br>            “optimeDurableDate” : ISODate(“2020-08-28T07:44:05Z”),<br>            “lastHeartbeat” : ISODate(“2020-08-28T07:44:08.245Z”),<br>            “lastHeartbeatRecv” : ISODate(“2020-08-28T07:44:08.471Z”),<br>            “pingMs” : NumberLong(0),<br>            “lastHeartbeatMessage” : “”,<br>            “syncingTo” : “192.168.100.10:27019”,<br>            “syncSourceHost” : “192.168.100.10:27019”,<br>            “syncSourceId” : 2,<br>            “infoMessage” : “”,<br>            “configVersion” : 1<br>        },<br>        {<br>            <font color="red">“_id” : 2,<br>            “name” : “192.168.100.10:27019”,<br>            “health” : 1,<br>            “state” : 2,<br>            “stateStr” : “SECONDARY”,</font> <font color="green"># 从节点</font><br>            “uptime” : 275,<br>            “optime” : {<br>                “ts” : Timestamp(1598600645, 1),<br>                “t” : NumberLong(1)<br>            },<br>            “optimeDurable” : {<br>                “ts” : Timestamp(1598600645, 1),<br>                “t” : NumberLong(1)<br>            },<br>            “optimeDate” : ISODate(“2020-08-28T07:44:05Z”),<br>            “optimeDurableDate” : ISODate(“2020-08-28T07:44:05Z”),<br>            “lastHeartbeat” : ISODate(“2020-08-28T07:44:08.245Z”),<br>            “lastHeartbeatRecv” : ISODate(“2020-08-28T07:44:08.450Z”),<br>            “pingMs” : NumberLong(0),<br>            “lastHeartbeatMessage” : “”,<br>            “syncingTo” : “192.168.100.10:27017”,<br>            “syncSourceHost” : “192.168.100.10:27017”,<br>            “syncSourceId” : 0,<br>            “infoMessage” : “”,<br>            “configVersion” : 1<br>        },<br>        {<br>            <font color="red">“_id” : 3,<br>            “name” : “192.168.100.10:27020”,<br>            “health” : 1,<br>            “state” : 7,<br>            “stateStr” : “ARBITER”,</font> <font color="green"># 仲裁节点</font><br>            “uptime” : 275,<br>            “lastHeartbeat” : ISODate(“2020-08-28T07:44:08.245Z”),<br>            “lastHeartbeatRecv” : ISODate(“2020-08-28T07:44:05.120Z”),<br>            “pingMs” : NumberLong(0),<br>            “lastHeartbeatMessage” : “”,<br>            “syncingTo” : “”,<br>            “syncSourceHost” : “”,<br>            “syncSourceId” : -1,<br>            “infoMessage” : “”,<br>            “configVersion” : 1<br>        }<br>    ],<br>    “ok” : 1<br>}</p>
+              </div>
+            </details>
+</pre>
+
+<h2 id="增加和删除节点"><a href="#增加和删除节点" class="headerlink" title="增加和删除节点"></a>增加和删除节点</h2><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">rs</span><span class="selector-class">.add</span>(<span class="string">"ip地址:端口号"</span>)</span><br><span class="line"><span class="selector-tag">rs</span><span class="selector-class">.status</span>()</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">rs</span><span class="selector-class">.remove</span>(<span class="string">"ip地址:端口号"</span>)</span><br><span class="line"><span class="selector-tag">rs</span><span class="selector-class">.status</span>()</span><br></pre></td></tr></table></figure>
+
+<h1 id="MongoDB复制集切换"><a href="#MongoDB复制集切换" class="headerlink" title="MongoDB复制集切换"></a>MongoDB复制集切换</h1><h2 id="模拟故障自动转移"><a href="#模拟故障自动转移" class="headerlink" title="模拟故障自动转移"></a>模拟故障自动转移</h2><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关闭第一个实例</span></span><br><span class="line">mongod -f <span class="string">/etc/mongod.conf</span> <span class="params">--shutdown</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 登陆主节点</span></span><br><span class="line">mongo <span class="params">--host</span> 192.168.100.10<span class="function">:27018</span></span><br><span class="line"></span><br><span class="line"><span class="string">//</span> 查看复制集状态</span><br><span class="line">rs.status<span class="params">()</span></span><br></pre></td></tr></table></figure>
+<pre>
+<details blue><summary> <p>切换后的复制集状态</p> </summary>
+              <div class="content">
+              <p>{<br>    “set” : “test_rs”,<br>    “date” : ISODate(“2020-08-28T08:32:33.539Z”),<br>    “myState” : 1,<br>    “term” : NumberLong(2),<br>    “syncingTo” : “”,<br>    “syncSourceHost” : “”,<br>    “syncSourceId” : -1,<br>    “heartbeatIntervalMillis” : NumberLong(2000),<br>    “optimes” : {<br>        “lastCommittedOpTime” : {<br>            “ts” : Timestamp(1598603535, 1),<br>            “t” : NumberLong(1)<br>        },<br>        “appliedOpTime” : {<br>            “ts” : Timestamp(1598603548, 1),<br>            “t” : NumberLong(2)<br>        },<br>        “durableOpTime” : {<br>            “ts” : Timestamp(1598603548, 1),<br>            “t” : NumberLong(2)<br>        }<br>    },<br>    “members” : [<br>        {<br>            “_id” : 0,<br>            “name” : “192.168.100.10:27017”,<br>            <font color="red">“health” : 0,<br>            “state” : 8,<br>            “stateStr” : “(not reachable/healthy)”,</font><br>            “uptime” : 0,<br>            “optime” : {<br>                “ts” : Timestamp(0, 0),<br>                “t” : NumberLong(-1)<br>            },<br>            “optimeDurable” : {<br>                “ts” : Timestamp(0, 0),<br>                “t” : NumberLong(-1)<br>            },<br>            “optimeDate” : ISODate(“1970-01-01T00:00:00Z”),<br>            “optimeDurableDate” : ISODate(“1970-01-01T00:00:00Z”),<br>            “lastHeartbeat” : ISODate(“2020-08-28T08:32:32.982Z”),<br>            “lastHeartbeatRecv” : ISODate(“2020-08-28T08:32:14.597Z”),<br>            “pingMs” : NumberLong(0),<br>            “lastHeartbeatMessage” : “Connection refused”,<br>            “syncingTo” : “”,<br>            “syncSourceHost” : “”,<br>            “syncSourceId” : -1,<br>            “infoMessage” : “”,<br>            “configVersion” : -1<br>        },<br>        {<br>            “_id” : 1,<br>            “name” : “192.168.100.10:27018”,<br>            <font color="green">“health” : 1,<br>            “state” : 1,<br>            “stateStr” : “PRIMARY”,</font><br>            “uptime” : 3952,<br>            “optime” : {<br>                “ts” : Timestamp(1598603548, 1),<br>                “t” : NumberLong(2)<br>            },<br>            “optimeDate” : ISODate(“2020-08-28T08:32:28Z”),<br>            “syncingTo” : “”,<br>            “syncSourceHost” : “”,<br>            “syncSourceId” : -1,<br>            “infoMessage” : “could not find member to sync from”,<br>            “electionTime” : Timestamp(1598603546, 1),<br>            “electionDate” : ISODate(“2020-08-28T08:32:26Z”),<br>            “configVersion” : 1,<br>            “self” : true,<br>            “lastHeartbeatMessage” : “”<br>        },<br>        ……<br>    ],<br>    “ok” : 1<br>}</p>
+              </div>
+            </details>
+</pre>
+
+<h2 id="手动进行主从切换"><a href="#手动进行主从切换" class="headerlink" title="手动进行主从切换"></a>手动进行主从切换</h2><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 开启第一个实例</span><br><span class="line">mongod -f /etc/mongod.conf</span><br><span class="line"></span><br><span class="line"># 登陆主节点</span><br><span class="line">mongo --host <span class="number">192.168</span><span class="number">.100</span><span class="number">.10</span>:<span class="number">27018</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 主节点配置交出主节点位置, 维持从节点不少于60秒, 同时等待30秒以使主节点和从节点日志同步.</span></span><br><span class="line">rs.stepDown(<span class="number">60</span>, <span class="number">30</span>)</span><br><span class="line">rs.status()</span><br></pre></td></tr></table></figure>
+<pre>
+<details blue><summary> <p>切换前的复制集状态</p> </summary>
+              <div class="content">
+              <p>{<br>    “_id” : 0,<br>    “name” : “192.168.100.10:27017”,<br>    <font color="green">“health” : 1,<br>    “state” : 2,<br>    “stateStr” : “SECONDARY”,</font><br>    “uptime” : 663,<br>    “optime” : {<br>        “ts” : Timestamp(1598865163, 1),<br>        “t” : NumberLong(2)<br>    },<br>    “optimeDurable” : {<br>        “ts” : Timestamp(1598865163, 1),<br>        “t” : NumberLong(2)<br>    },<br>    “optimeDate” : ISODate(“2020-08-31T09:12:43Z”),<br>    “optimeDurableDate” : ISODate(“2020-08-31T09:12:43Z”),<br>    “lastHeartbeat” : ISODate(“2020-08-31T09:12:45.437Z”),<br>    “lastHeartbeatRecv” : ISODate(“2020-08-31T09:12:47.729Z”),<br>    “pingMs” : NumberLong(0),<br>    “lastHeartbeatMessage” : “”,<br>    “syncingTo” : “192.168.100.10:27019”,<br>    “syncSourceHost” : “192.168.100.10:27019”,<br>    “syncSourceId” : 2,<br>    “infoMessage” : “”,<br>    “configVersion” : 1<br>},<br>{<br>    “_id” : 1,<br>    “name” : “192.168.100.10:27018”,<br>    <font color="green">“health” : 1,<br>    “state” : 2,<br>    “stateStr” : “SECONDARY”,</font><br>    “uptime” : 1318,<br>    “optime” : {<br>        “ts” : Timestamp(1598865163, 1),<br>        “t” : NumberLong(2)<br>    },<br>    “optimeDate” : ISODate(“2020-08-31T09:12:43Z”),<br>    “syncingTo” : “”,<br>    “syncSourceHost” : “”,<br>    “syncSourceId” : -1,<br>    “infoMessage” : “could not find member to sync from”,<br>    “configVersion” : 1,<br>    “self” : true,<br>    “lastHeartbeatMessage” : “”<br>},<br>……</p>
+              </div>
+            </details><details blue><summary> <p>切换后的复制集状态</p> </summary>
+              <div class="content">
+              <p>{<br>    “_id” : 0,<br>    “name” : “192.168.100.10:27017”,<br>    <font color="green">“health” : 1,<br>    “state” : 1,<br>    “stateStr” : “PRIMARY”,</font><br>    “uptime” : 710,<br>    “optime” : {<br>        “ts” : Timestamp(1598865205, 1),<br>        “t” : NumberLong(3)<br>    },<br>    “optimeDurable” : {<br>        “ts” : Timestamp(1598865205, 1),<br>        “t” : NumberLong(3)<br>    },<br>    “optimeDate” : ISODate(“2020-08-31T09:13:25Z”),<br>    “optimeDurableDate” : ISODate(“2020-08-31T09:13:25Z”),<br>    “lastHeartbeat” : ISODate(“2020-08-31T09:13:34.476Z”),<br>    “lastHeartbeatRecv” : ISODate(“2020-08-31T09:13:34.450Z”),<br>    “pingMs” : NumberLong(0),<br>    “lastHeartbeatMessage” : “”,<br>    “syncingTo” : “”,<br>    “syncSourceHost” : “”,<br>    “syncSourceId” : -1,<br>    “infoMessage” : “”,<br>    “electionTime” : Timestamp(1598865174, 1),<br>    “electionDate” : ISODate(“2020-08-31T09:12:54Z”),<br>    “configVersion” : 1<br>},<br>{<br>    “_id” : 1,<br>    “name” : “192.168.100.10:27018”,<br>    <font color="green">“health” : 1,<br>    “state” : 2,<br>    “stateStr” : “SECONDARY”,</font><br>    “uptime” : 1366,<br>    “optime” : {<br>        “ts” : Timestamp(1598865205, 1),<br>        “t” : NumberLong(3)<br>    },<br>    “optimeDate” : ISODate(“2020-08-31T09:13:25Z”),<br>    “syncingTo” : “192.168.100.10:27017”,<br>    “syncSourceHost” : “192.168.100.10:27017”,<br>    “syncSourceId” : 0,<br>    “infoMessage” : “”,<br>    “configVersion” : 1,<br>    “self” : true,<br>    “lastHeartbeatMessage” : “”<br>},<br>……</p>
+              </div>
+            </details>
+</pre>
+
+<h1 id="验证复制集的选举原理"><a href="#验证复制集的选举原理" class="headerlink" title="验证复制集的选举原理"></a>验证复制集的选举原理</h1><p>1.查看oplog日志</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 登录主节点</span><br><span class="line">mongo --host <span class="number">192.168</span><span class="number">.100</span><span class="number">.10</span>:<span class="number">27017</span></span><br><span class="line"></span><br><span class="line">use local</span><br><span class="line"><span class="comment">// oplog除查询操作不会记录外, 会对数据有修改的所有操作进行记录.</span></span><br><span class="line">db.oplog.rs.find()</span><br></pre></td></tr></table></figure>
+
+<p>2.配置复制集的优先级</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看所有节点的状态</span></span><br><span class="line">rs.isMaster<span class="comment">()</span></span><br></pre></td></tr></table></figure>
+<pre>
+config={"_id":"test_rs","members":[
+    {"_id":0,"host":"192.168.100.10:27017",<font color="green">"priority":100</font>}, 
+    {"_id":1,"host":"192.168.100.10:27018",<font color="green">"priority":100</font>}, 
+    {"_id":2,"host":"192.168.100.10:27019",<font color="green">"priority":0}</font>, 
+    {"_id":3,"host":"192.168.100.10:27020",<font color="green">"arbiterOnly":true</font>}]}
+
+<details blue><summary> <p>所有节点的状态</p> </summary>
+              <div class="content">
+              <p>{<br>    “hosts” : [<br>        “192.168.100.10:27017”,<br>        “192.168.100.10:27018”<br>    ],<br>    “passives” : [<br>        “192.168.100.10:27019”<br>    ],<br>    “arbiters” : [<br>        “192.168.100.10:27020”<br>    ],<br>    “setName” : “test_rs”,<br>    “setVersion” : 1,<br>    “ismaster” : true,<br>    “secondary” : false,<br>    “primary” : “192.168.100.10:27017”,<br>    “me” : “192.168.100.10:27017”,<br>    “electionId” : ObjectId(“7fffffff0000000000000003”),<br>    “lastWrite” : {<br>        “opTime” : {<br>            “ts” : Timestamp(1598877986, 1),<br>            “t” : NumberLong(3)<br>        },<br>        “lastWriteDate” : ISODate(“2020-08-31T12:46:26Z”)<br>    },<br>    “maxBsonObjectSize” : 16777216,<br>    “maxMessageSizeBytes” : 48000000,<br>    “maxWriteBatchSize” : 1000,<br>    “localTime” : ISODate(“2020-08-31T12:46:26.933Z”),<br>    “maxWireVersion” : 5,<br>    “minWireVersion” : 0,<br>    “readOnly” : false,<br>    “ok” : 1<br>}</p>
+              </div>
+            </details>
+</pre>
+
+<h1 id="MongoDB复制集管理"><a href="#MongoDB复制集管理" class="headerlink" title="MongoDB复制集管理"></a>MongoDB复制集管理</h1><h2 id="配置允许在从节点读取数据"><a href="#配置允许在从节点读取数据" class="headerlink" title="配置允许在从节点读取数据"></a>配置允许在从节点读取数据</h2><p>默认MongoDB复制集的从节点不能读取数据, 可以使用rs.slaveOk()命令允许能够在从节点读取数据. 连接到复制集的其中一个从节点, 配置其允许读取数据.</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 登录从节点</span><br><span class="line">mongo --host <span class="number">192.168</span><span class="number">.100</span><span class="number">.10</span>:<span class="number">27019</span></span><br><span class="line">show dbs</span><br><span class="line"></span><br><span class="line"><span class="comment">// 允许在从节点读取数据</span></span><br><span class="line">rs.slaveOk() </span><br><span class="line">show dbs</span><br></pre></td></tr></table></figure>
+<pre>
+# 允许在从节点读取数据前
+2020-08-31T21:41:36.272+0800 E QUERY    [thread1] Error: listDatabases failed:{
+    "ok" : 0,
+    "errmsg" : "not master and slaveOk=false",
+    "code" : 13435,
+    "codeName" : "NotMasterNoSlaveOk"
+} :
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+Mongo.prototype.getDBs@src/mongo/shell/mongo.js:62:1
+shellHelper.show@src/mongo/shell/utils.js:814:19
+shellHelper@src/mongo/shell/utils.js:704:15
+@(shellhelp2):1:1
+test_rs:SECONDARY> quit;
+function quit() {
+    [native code]
+}
+
+# 允许在从节点读取数据后
+admin   0.000GB
+local   0.000GB
+mytest  0.000GB
+</pre>
+
+<h2 id="查看复制状态信息"><a href="#查看复制状态信息" class="headerlink" title="查看复制状态信息"></a>查看复制状态信息</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">rs</span><span class="selector-class">.printReplicationInfo</span>()</span><br><span class="line"><span class="selector-tag">rs</span><span class="selector-class">.printSlaveReplicationInfo</span>()</span><br></pre></td></tr></table></figure>
+<pre>
+<details blue><summary> <p>rs.printReplicationInfo()</p> </summary>
+              <div class="content">
+              <p>configured oplog size:   2048MB <font color="green"># 配置的oplog文件大小</font><br>log length start to end: 18118secs (5.03hrs) <font color="green"># oplog日志的启用时间段</font><br>oplog first event time:  Mon Aug 31 2020 16:50:59 GMT+0800 (CST) <font color="green"># 第一个事务日志的产生时间</font><br>oplog last event time:   Mon Aug 31 2020 21:52:57 GMT+0800 (CST) <font color="green"># 最后一个事务日志的产生时间</font><br>now:                     Mon Aug 31 2020 21:53:03 GMT+0800 (CST) <font color="green"># 现在的时间</font></p>
+              </div>
+            </details><details blue><summary> <p>rs.printSlaveReplicationInfo()</p> </summary>
+              <div class="content">
+              <p>source: 192.168.100.10:27018 <font color="green"># 从库的IP及端口</font><br>    syncedTo: Mon Aug 31 2020 22:01:07 GMT+0800 (CST) <font color="green"># 目前的同步情况, 以及最后一次同步时间等信息.</font><br>    0 secs (0 hrs) behind the primary<br>source: 192.168.100.10:27019<br>    syncedTo: Mon Aug 31 2020 22:01:07 GMT+0800 (CST)<br>    0 secs (0 hrs) behind the primary </p>
+              </div>
+            </details>
+</pre>
+
+<h2 id="更改oplog大小"><a href="#更改oplog大小" class="headerlink" title="更改oplog大小"></a>更改oplog大小</h2><p>oplog即operations log的简写, 存储在local数据库中. oplog中新操作会自动替换旧的操作, 以保证oplog不会超过预设的大小. 默认情况下, oplog大小会占用64位的实例5%的可用磁盘空间.</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="keyword">local</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 更改oplog的大小</span></span><br><span class="line"><span class="keyword">db</span>.runCommand(&#123;<span class="string">"convertToCapped"</span>:<span class="string">"oplog.rs"</span>, <span class="string">"size"</span>:102400000&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">db</span>.oplog.rs.stats()</span><br><span class="line">rs.printReplicationInfo()</span><br></pre></td></tr></table></figure>
+<pre>
+{
+    "ns" : "local.oplog.rs",
+    "size" : 185610,
+    "count" : 1930,
+    "avgObjSize" : 96,
+    "storageSize" : 4096,
+    "capped" : true,
+    "max" : -1,
+    "maxSize" : 102400000,
+    "sleepCount" : 0,
+    "sleepMS" : 0,
+    "wiredTiger" : {
+        "metadata" : {
+            "formatVersion" : 1
+        },
+        ......
+    }
+}
+
+configured oplog size:   97.65625MB
+log length start to end: 19178secs (5.33hrs)
+oplog first event time:  Mon Aug 31 2020 16:50:59 GMT+0800 (CST)
+oplog last event time:   Mon Aug 31 2020 22:10:37 GMT+0800 (CST)
+now:                     Mon Aug 31 2020 22:10:41 GMT+0800 (CST)
+</pre>
+
+<h2 id="部署认证的复制"><a href="#部署认证的复制" class="headerlink" title="部署认证的复制"></a>部署认证的复制</h2><p>1.为每个实例生成密钥文件, 并修改权限.</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">touch /var/<span class="class"><span class="keyword">lib</span>/<span class="title">testKeyFile</span>.<span class="title">file</span></span></span><br><span class="line"></span><br><span class="line">openssl rand -base64 <span class="number">756</span>  &gt; <span class="regexp">/var/lib</span><span class="regexp">/testKeyFile.file</span></span><br><span class="line"><span class="regexp">chmod 400 /var</span><span class="regexp">/lib/test</span>KeyFile.file</span><br><span class="line"></span><br><span class="line">cp /var/<span class="class"><span class="keyword">lib</span>/<span class="title">testKeyFile</span>.<span class="title">file</span> /<span class="title">var</span>/<span class="title">lib</span>/<span class="title">testKeyFile2</span>.<span class="title">file</span> </span></span><br><span class="line">cp /var/<span class="class"><span class="keyword">lib</span>/<span class="title">testKeyFile</span>.<span class="title">file</span> /<span class="title">var</span>/<span class="title">lib</span>/<span class="title">testKeyFile3</span>.<span class="title">file</span> </span></span><br><span class="line">cp /var/<span class="class"><span class="keyword">lib</span>/<span class="title">testKeyFile</span>.<span class="title">file</span> /<span class="title">var</span>/<span class="title">lib</span>/<span class="title">testKeyFile4</span>.<span class="title">file</span></span></span><br></pre></td></tr></table></figure>
+
+<p>2.登录主节点添加权限用户</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mongo --host <span class="number">192.168</span>.<span class="number">100.10</span>:<span class="number">27017</span></span><br><span class="line">use admin</span><br><span class="line">db.createUser(&#123;user:<span class="string">"root"</span>,pwd:<span class="string">"123zxc"</span>,roles:[<span class="string">"root"</span>]&#125;)</span><br><span class="line"><span class="keyword">exit</span>;</span><br></pre></td></tr></table></figure>
+
+<p>3.关闭各实例服务, 为各实例配置文件添加上用户认证和密钥文件位置后并重新启动.</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mongod</span> <span class="string">-f /etc/mongod.conf --shutdown</span></span><br><span class="line"><span class="attr">mongod</span> <span class="string">-f /etc/mongod1.conf --shutdown</span></span><br><span class="line"><span class="attr">mongod</span> <span class="string">-f /etc/mongod2.conf --shutdown</span></span><br><span class="line"><span class="attr">mongod</span> <span class="string">-f /etc/mongod3.conf --shutdown</span></span><br><span class="line"></span><br><span class="line"><span class="attr">cat</span> <span class="string">&gt;&gt; /etc/mongod.conf &lt;&lt;-EOF</span></span><br><span class="line"><span class="attr">security</span>:<span class="string"></span></span><br><span class="line">  <span class="attr">keyFile</span>: <span class="string">/var/lib/testKeyFile.file</span></span><br><span class="line">  <span class="attr">authorization</span>: <span class="string">enabled</span></span><br><span class="line"><span class="attr">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="attr">cat</span> <span class="string">&gt;&gt; /etc/mongod2.conf &lt;&lt;-EOF</span></span><br><span class="line"><span class="attr">security</span>:<span class="string"></span></span><br><span class="line">  <span class="attr">keyFile</span>: <span class="string">/var/lib/testKeyFile2.file</span></span><br><span class="line">  <span class="attr">authorization</span>: <span class="string">enabled</span></span><br><span class="line"><span class="attr">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="attr">cat</span> <span class="string">&gt;&gt; /etc/mongod3.conf &lt;&lt;-EOF</span></span><br><span class="line"><span class="attr">security</span>:<span class="string"></span></span><br><span class="line">  <span class="attr">keyFile</span>: <span class="string">/var/lib/testKeyFile3.file</span></span><br><span class="line">  <span class="attr">authorization</span>: <span class="string">enabled</span></span><br><span class="line"><span class="attr">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="attr">cat</span> <span class="string">&gt;&gt; /etc/mongod4.conf &lt;&lt;-EOF</span></span><br><span class="line"><span class="attr">security</span>:<span class="string"></span></span><br><span class="line">  <span class="attr">keyFile</span>: <span class="string">/var/lib/testKeyFile4.file</span></span><br><span class="line">  <span class="attr">authorization</span>: <span class="string">enabled</span></span><br><span class="line"><span class="attr">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="attr">mongod</span> <span class="string">-f /etc/mongod.conf</span></span><br><span class="line"><span class="attr">mongod</span> <span class="string">-f /etc/mongod1.conf</span></span><br><span class="line"><span class="attr">mongod</span> <span class="string">-f /etc/mongod2.conf</span></span><br><span class="line"><span class="attr">mongod</span> <span class="string">-f /etc/mongod3.conf</span></span><br></pre></td></tr></table></figure>
+
+<p>4.登录主节点服务器, 验证群集.</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mongo</span> <span class="selector-tag">--host</span> <span class="selector-tag">192</span><span class="selector-class">.168</span><span class="selector-class">.100</span><span class="selector-class">.10</span><span class="selector-pseudo">:27017</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 未认证前</span></span><br><span class="line"><span class="selector-tag">show</span> <span class="selector-tag">dbs</span></span><br><span class="line"><span class="selector-tag">rs</span><span class="selector-class">.status</span>()</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">use</span> <span class="selector-tag">admin</span></span><br><span class="line"><span class="comment">// 认证后</span></span><br><span class="line"><span class="selector-tag">db</span><span class="selector-class">.auth</span>(<span class="string">"root"</span>, <span class="string">"123zxc"</span>)</span><br><span class="line"><span class="selector-tag">show</span> <span class="selector-tag">dbs</span></span><br><span class="line"><span class="selector-tag">rs</span><span class="selector-class">.status</span>()</span><br></pre></td></tr></table></figure>
+<pre>
+<details blue><summary> <p>认证前</p> </summary>
+              <div class="content">
+              <p>2020-09-01T09:34:48.476+0800 E QUERY    [thread1] Error: listDatabases failed:{<br>    “ok” : 0,<br>    <font color="red">“errmsg” : “not authorized on admin to execute command { listDatabases: 1.0 }”,</font><br>    “code” : 13,<br>    “codeName” : “Unauthorized”<br>} :</p><p>{<br>    “ok” : 0,<br>    <font color="red">“errmsg” : “not authorized on admin to execute command { replSetGetStatus: 1.0 }”,</font><br>    “code” : 13,<br>    “codeName” : “Unauthorized”<br>}</p>
+              </div>
+            </details><details blue><summary> <p>认证后</p> </summary>
+              <div class="content">
+              <p>admin   0.000GB<br>local   0.000GB<br>mytest  0.000GB</p><p>{<br>    “set” : “test_rs”,<br>    “date” : ISODate(“2020-09-01T01:34:49.819Z”),<br>    “myState” : 1,<br>    “term” : NumberLong(5),<br>    “syncingTo” : “”,<br>    “syncSourceHost” : “”,<br>    “syncSourceId” : -1,<br>    “heartbeatIntervalMillis” : NumberLong(2000),<br>    “optimes” : {<br>        “lastCommittedOpTime” : {<br>            “ts” : Timestamp(1598924082, 1),<br>            “t” : NumberLong(5)<br>        },<br>        “appliedOpTime” : {<br>            “ts” : Timestamp(1598924082, 1),<br>            “t” : NumberLong(5)<br>        },<br>        “durableOpTime” : {<br>            “ts” : Timestamp(1598924082, 1),<br>            “t” : NumberLong(5)<br>        }<br>    },<br>    ……<br>}</p>
+              </div>
+            </details>
+</pre>
+
+<p>5.登录从节点服务器, 验证群集.</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mongo --host <span class="number">192.168</span>.<span class="number">100.10</span>:<span class="number">27018</span></span><br><span class="line">rs.status()</span><br><span class="line"></span><br><span class="line">use admin</span><br><span class="line">db.auth(<span class="string">"root"</span>, <span class="string">"123zxc"</span>)</span><br><span class="line">rs.status()</span><br><span class="line"><span class="keyword">exit</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color:white;font-size:14px;">-------------------本文结束 <i class="fa fa-heart"></i> 感谢阅读-------------------</div>
+    
+</div>
+	
+	</div>
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>云
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.mengyun.club/post/37db6981/" title="MongoDB复制集">http://www.mengyun.club/post/37db6981/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/MongoDB/" rel="tag"><i class="fa fa-tag"></i> MongoDB</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/f20a5c88/" rel="prev" title="MongoDB基础">
+                  <i class="fa fa-chevron-left"></i> MongoDB基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/41804c37/" rel="next" title="Docker架构、镜像及容器">
+                  Docker架构、镜像及容器 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">云</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">250k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:47</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/post/37db6981/",
+    }, {"enable":true,"appId":"HKOdg6jtf8l5uFP2Ag6eDIIk-gzGzoHsz","appKey":"Gn11LWMBtG3eEkwpnpDhJUI3","placeholder":"请输入你的评论内容, 可编写Markdown语法.","avatar":"mm","meta":["nick","mail"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":true,"requiredFields":[]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+  
+</body>
+</html>

@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Grandstander:300,300italic,400,400italic,700,700italic|Noto+Serif+SC:300,300italic,400,400italic,700,700italic|Architects+Daughter:300,300italic,400,400italic,700,700italic|Dosis:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.mengyun.club","root":"/","scheme":"Mist","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="Tomcat简介Tomcat服务器是一个免费的开放源代码的web应用服务器, 属于轻量级应用级服务器, 在中小型系统和并发访问用户不是很多的场合下被普遍使用, 是开放和调试JSP程序的首先. Tomcat和Nginx、Apache(httpd)、lighttpd等Web服务器一样, 具有处理HTML页面的功能, 另外它还是一个Servlet和JSP容器, 独立的Servlet容器是Tomcat的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tomcat服务器">
+<meta property="og:url" content="http://www.mengyun.club/post/36f957e6/index.html">
+<meta property="og:site_name" content="爱梦的博客">
+<meta property="og:description" content="Tomcat简介Tomcat服务器是一个免费的开放源代码的web应用服务器, 属于轻量级应用级服务器, 在中小型系统和并发访问用户不是很多的场合下被普遍使用, 是开放和调试JSP程序的首先. Tomcat和Nginx、Apache(httpd)、lighttpd等Web服务器一样, 具有处理HTML页面的功能, 另外它还是一个Servlet和JSP容器, 独立的Servlet容器是Tomcat的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-05T14:00:33.000Z">
+<meta property="article:modified_time" content="2020-09-06T04:39:18.460Z">
+<meta property="article:author" content="云">
+<meta property="article:tag" content="Tomcat">
+<meta property="article:tag" content="Nginx">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://www.mengyun.club/post/36f957e6/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Tomcat服务器 | 爱梦的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="爱梦的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/src/clickLove.js"></script>
+
+<script type="text/javascript"
+color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+  
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">爱梦的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">常常与我陪伴的就是梦</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">38</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-playlist">
+
+    <a href="/playlist/" rel="section"><i class="fa fa-music fa-fw"></i>网易云歌单</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">	
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tomcat"><span class="nav-text">Tomcat</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础配置"><span class="nav-text">基础配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装JDK-amp-Tomcat"><span class="nav-text">安装JDK&amp;Tomcat</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统环境"><span class="nav-text">系统环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装JDK"><span class="nav-text">安装JDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Tomcat"><span class="nav-text">安装Tomcat</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tomcat目录介绍"><span class="nav-text">Tomcat目录介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tomcat主目录介绍"><span class="nav-text">tomcat主目录介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webapps目录介绍"><span class="nav-text">webapps目录介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#conf目录介绍"><span class="nav-text">conf目录介绍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tomcat运维"><span class="nav-text">Tomcat运维</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat启动"><span class="nav-text">Tomcat启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat停止"><span class="nav-text">Tomcat停止</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat检测"><span class="nav-text">Tomcat检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat日志"><span class="nav-text">Tomcat日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat管理功能"><span class="nav-text">Tomcat管理功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tomcat主配置文件详解"><span class="nav-text">Tomcat主配置文件详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#server-xml组件类别"><span class="nav-text">server.xml组件类别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件介绍"><span class="nav-text">组件介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Connector主要参数说明"><span class="nav-text">Connector主要参数说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#host参数说明"><span class="nav-text">host参数说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Context参数说明"><span class="nav-text">Context参数说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web站点部署"><span class="nav-text">Web站点部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用war包部署web站点"><span class="nav-text">使用war包部署web站点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义默认网站目录"><span class="nav-text">自定义默认网站目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tomcat安全优化"><span class="nav-text">Tomcat安全优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#telnet管理端口保护-强制"><span class="nav-text">telnet管理端口保护(强制)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ajp连接端口保护-推荐"><span class="nav-text">ajp连接端口保护(推荐)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#禁用管理端-强制"><span class="nav-text">禁用管理端(强制)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#降权启动-强制"><span class="nav-text">降权启动(强制)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件列表访问控制-强制"><span class="nav-text">文件列表访问控制(强制)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本信息隐藏-强制"><span class="nav-text">版本信息隐藏(强制)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx-Tomcat负载均衡集群"><span class="nav-text">Nginx + Tomcat负载均衡集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境配置"><span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat服务器配置"><span class="nav-text">Tomcat服务器配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx服务器配置"><span class="nav-text">Nginx服务器配置</span></a></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="云"
+      src="/images/head_Picture/Yu_Me5.jpg">
+  <p class="site-author-name" itemprop="name">云</p>
+  <div class="site-description" itemprop="description">我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/IYun-Meng" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;IYun-Meng" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kili3kili1miyukeno4@foxmail.co" title="E-Mail → mailto:kili3kili1miyukeno4@foxmail.co" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/?hl=zh_CN" title="https:&#x2F;&#x2F;www.google.com&#x2F;?hl&#x3D;zh_CN" rel="noopener" target="_blank">谷歌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zhihu.com/" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;" rel="noopener" target="_blank">知乎</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.github.com/" title="https:&#x2F;&#x2F;www.github.com&#x2F;" rel="noopener" target="_blank">GitHub</a>
+        </li>
+    </ul>
+  </div>
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoFs/" rel="tag">AutoFs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bind/" rel="tag">Bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DHCP/" rel="tag">DHCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deepin/" rel="tag">Deepin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dovecot/" rel="tag">Dovecot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/" rel="tag">FTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KVM/" rel="tag">KVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keepalived/" rel="tag">Keepalived</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KickStart/" rel="tag">KickStart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/" rel="tag">NFS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTP/" rel="tag">NTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nagios/" rel="tag">Nagios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PXE/" rel="tag">PXE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Physics2D/" rel="tag">Physics2D</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postfix/" rel="tag">Postfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/" rel="tag">SELinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSLinux/" rel="tag">SYSLinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Samba/" rel="tag">Samba</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sprite/" rel="tag">Sprite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TFTP/" rel="tag">TFTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/" rel="tag">Unity</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zabbix/" rel="tag">Zabbix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/" rel="tag">root</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+      </section>
+	  
+	</div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.mengyun.club/post/36f957e6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_Picture/Yu_Me5.jpg">
+      <meta itemprop="name" content="云">
+      <meta itemprop="description" content="我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱梦的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Tomcat服务器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-08-05 22:00:33" itemprop="dateCreated datePublished" datetime="2020-08-05T22:00:33+08:00">2020-08-05</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-06 12:39:18" itemprop="dateModified" datetime="2020-09-06T12:39:18+08:00">2020-09-06</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/post/36f957e6/" class="post-meta-item leancloud_visitors" data-flag-title="Tomcat服务器" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/post/36f957e6/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/post/36f957e6/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>10k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<h1 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Tomcat服务器是一个免费的开放源代码的web应用服务器, 属于轻量级应用级服务器, 在中小型系统和并发访问用户不是很多的场合下被普遍使用, 是开放和调试JSP程序的首先.</p>
+<p>Tomcat和Nginx、Apache(httpd)、lighttpd等Web服务器一样, 具有处理HTML页面的功能, 另外它还是一个Servlet和JSP容器, 独立的Servlet容器是Tomcat的默认模式. 但Tomcat处理静态HTML的能力不如Nginx/Apache服务器.</p>
+<p><strong>Servlet</strong>:Server Applet是Java Servlet的简称, 称为小服务程序或服务连接器, 用Java编写的服务器端程序, 具有独立于平台和协议的特性, 主要功能在于交互式地浏览和生成数据, 生成动态Web内容.<br><strong>JSP</strong>:全称Java Server Pages, 是一种动态网页开发技术, 主要用于实现Java web应用程序的用户界面部分.</p>
+<p><a href="http://tomcat.apache.org" target="_blank" rel="noopener">Tomcat官网地址</a></p>
+<a id="more"></a>
+
+<h2 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h2><p>JDK是Java语言的软件开发工具包, 主要用于移动设备、嵌入式设备上的Java应用程序. JDK是整个Java开发的核心, 它包含了Java的运行环境(JVM+Java系统库)和Java工具.</p>
+<table>
+JDK包含了一批用于Java开发的组件, 存放在bin目录中, 其中包括:
+<tr><td>apt</td><td>注释处理工具</td></tr>
+<tr><td>appletviewer</td><td>运行和调试applet程序的工具, 不需要使用浏览器.</td></tr>
+<tr><td>extcheck</td><td>一个检测jar包冲突的工具</td></tr>
+<tr><td>idlj</td><td>IDL-to-Java编译器, 将IDL语言转化为java文件.</td></tr>
+<tr><td>jar</td><td>打包工具, 将相关的类文件打包成一个文件.</td></tr>
+<tr><td>java</td><td>运行工具, 运行.class的字节码.</td></tr>
+<tr><td>javac</td><td>编译器, 将后缀名为.java的源代码编译成后缀名为".class"的字节码.</td></tr>
+<tr><td>javadoc</td><td>文档生成器, 从源码注释中提取文档, 注释需匹配规范.</td></tr>
+<tr><td>javah</td><td>从Java类生成C头文件和C源文件, 这些文件提供了连接胶合, 使Java和C代码可进行交互.</td></tr>
+<tr><td>javap</td><td>反编译程序</td></tr>
+<tr><td>javaws</td><td>运行JNLP程序</td></tr>
+<tr><td>jdb</td><td>调试工具</td></tr>
+<tr><td>jhat</td><td>java堆分析工具</td></tr>
+<tr><td>jinfo</td><td>获取正在运行或崩溃的java程序配置信息</td></tr>
+<tr><td>jmap</td><td>获取java进程内存映射信息</td></tr>
+<tr><td>jps</td><td>显示当前java程序运行的进程状态</td></tr>
+<tr><td>jrunscript</td><td>命令行脚本运行</td></tr>
+<tr><td>jstack</td><td>栈跟踪程序</td></tr>
+<tr><td>jstat</td><td>JVM检测统计工具</td></tr>
+<tr><td>jstatd</td><td>jstat守护进程</td></tr>
+<tr><td>policytool</td><td>一个GUI的策略文件创建和管理工具</td></tr>
+</table>
+
+<h2 id="安装JDK-amp-Tomcat"><a href="#安装JDK-amp-Tomcat" class="headerlink" title="安装JDK&amp;Tomcat"></a>安装JDK&amp;Tomcat</h2><h3 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h3><p>查看系统版本号: <code>cat /etc/redhat-release</code><br>查看系统内核: <code>uname -a</code><br>关闭SeLinux: </p>
+<pre>
+ vim /etc/sysconfig/selinux
+   SELINUX=disabled
+ setenforce 0
+</pre>
+<p>关闭防火墙: </p>
+<pre>
+ systemctl stop firewalld
+ systemctl disable firewalld
+</pre>
+
+<h3 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h3><p>安装包:jdk-8u251-linux-x64.tar.gz</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mkdir /application</span><br><span class="line">tar zxf jdk-8u251-linux-x64.tar.gz -C /application/</span><br><span class="line">mv /application/jdk1.8.0_60 /application/jdk</span><br><span class="line">cat &gt;&gt; /etc<span class="built_in">/profile </span>&lt;&lt;-EOF</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=/application/jdk</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$JAVA_HOME</span>/bin:$JAVA_HOME/jre/bin:$PATH</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">CLASSPATH</span>=.:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar</span><br><span class="line">EOF</span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装Tomcat"><a href="#安装Tomcat" class="headerlink" title="安装Tomcat"></a>安装Tomcat</h3><p>安装包:apache-tomcat-8.5.42.tar.gz</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tar zxf apache-tomcat-8.5.42.tar.gz -C /application/</span><br><span class="line">mv /application/apache-tomcat-8.5.42 /application/tomcat</span><br><span class="line">echo <span class="string">'export TOMCAT_HOME=/application/tomcat'</span> &gt;&gt; /etc/profile</span><br><span class="line">source /etc/profile</span><br><span class="line">chown -R root.root /application/jdk/ /application/tomcat/</span><br></pre></td></tr></table></figure>
+
+<p>检查Tomcat是否安装成功<br><code>/application/tomcat/bin/version.sh</code></p>
+<pre>
+Using CATALINA_BASE:   /application/tomcat
+Using CATALINA_HOME:   /application/tomcat
+Using CATALINA_TMPDIR: /application/tomcat/temp
+Using JRE_HOME:        /usr
+Using CLASSPATH:       /application/tomcat/bin/bootstrap.jar:/application/tomcat/bin/tomcat-juli.jar
+Server version: Apache Tomcat/9.0.34
+Server built:   Apr 3 2020 12:02:52 UTC
+Server number:  9.0.34.0
+OS Name:        Linux
+OS Version:     3.10.0-862.el7.x86_64
+Architecture:   amd64
+JVM Version:    1.8.0_161-b14
+JVM Vendor:     Oracle Corporation
+</pre>
+
+<h2 id="Tomcat目录介绍"><a href="#Tomcat目录介绍" class="headerlink" title="Tomcat目录介绍"></a>Tomcat目录介绍</h2><h3 id="tomcat主目录介绍"><a href="#tomcat主目录介绍" class="headerlink" title="tomcat主目录介绍"></a>tomcat主目录介绍</h3><p><code>cd /application/tomcat/</code></p>
+<pre>
+.
+├── bin <font color="green">#tomcat管理脚本存放目录</font>
+├── BUILDING.txt
+├── conf <font color="green">#tomcat配置文件存放目录</font>
+├── CONTRIBUTING.md
+├── lib <font color="green">#web应用调用的jar包存放路径</font>
+├── LICENSE
+├── logs <font color="green">#tomcat日志存放目录</font>
+├── NOTICE
+├── README.md
+├── RELEASE-NOTES
+├── RUNNING.txt
+├── temp <font color="green">#临时文件存放目录</font>
+├── webapps <font color="green">#web程序存放目录</font>
+└── work <font color="green">#.java和.class文件存放目录</font>
+</pre>
+
+
+
+<h3 id="webapps目录介绍"><a href="#webapps目录介绍" class="headerlink" title="webapps目录介绍"></a>webapps目录介绍</h3><p><code>cd webapps/</code></p>
+<pre>
+.
+├── docs <font color="green">#tomcat帮助文档目录</font>
+├── examples <font color="green">#web应用实例目录</font>
+├── host-manager <font color="green">#主机管理目录</font>
+├── manager <font color="green">#管理目录</font>
+└── ROOT <font color="green">#默认站点根目录</font>
+</pre>
+
+<h3 id="conf目录介绍"><a href="#conf目录介绍" class="headerlink" title="conf目录介绍"></a>conf目录介绍</h3><p><code>cd conf/</code></p>
+<pre>
+.
+├── Catalina
+├── catalina.policy <font color="green">#权限控制配置文件</font>
+├── catalina.properties <font color="green">#Tomcat属性配置文件</font>
+├── context.xml <font color="green">#上下文配置文件</font>
+├── jaspic-providers.xml
+├── jaspic-providers.xsd
+├── logging.properties <font color="green">#日志log相关配置文件</font>
+├── server.xml <font color="green">#tomcat#主配置文件</font>
+├── tomcat-users.xml <font color="green">#tomcat管理用户配置文件</font>
+├── tomcat-users.xsd
+└── web.xml <font color="green">#Tomcat的servlet、servlet-mapping、filter、MIME等相关配置</font>
+</pre>
+
+<h2 id="Tomcat运维"><a href="#Tomcat运维" class="headerlink" title="Tomcat运维"></a>Tomcat运维</h2><h3 id="Tomcat启动"><a href="#Tomcat启动" class="headerlink" title="Tomcat启动"></a>Tomcat启动</h3><p><code>/application/tomcat/bin/startup.sh</code></p>
+<pre>
+Using CATALINA_BASE:   /application/tomcat
+Using CATALINA_HOME:   /application/tomcat
+Using CATALINA_TMPDIR: /application/tomcat/temp
+Using JRE_HOME:        /usr
+Using CLASSPATH:       /application/tomcat/bin/bootstrap.jar:/application/tomcat/bin/tomcat-juli.jar
+Tomcat started.
+</pre>
+
+<h3 id="Tomcat停止"><a href="#Tomcat停止" class="headerlink" title="Tomcat停止"></a>Tomcat停止</h3><p><code>/application/tomcat/bin/shutdown.sh</code></p>
+<pre>
+Using CATALINA_BASE:   /application/tomcat
+Using CATALINA_HOME:   /application/tomcat
+Using CATALINA_TMPDIR: /application/tomcat/temp
+Using JRE_HOME:        /usr
+Using CLASSPATH:       /application/tomcat/bin/bootstrap.jar:/application/tomcat/bin/tomcat-juli.jar
+</pre>
+
+<h3 id="Tomcat检测"><a href="#Tomcat检测" class="headerlink" title="Tomcat检测"></a>Tomcat检测</h3><p><code>netstat -lntup | grep java</code></p>
+<pre>
+tcp6       0      0 127.0.0.1:8005          :::*                    LISTEN      7522/java           
+tcp6       0      0 :::8080                 :::*                    LISTEN      7522/java
+</pre>
+
+<h3 id="Tomcat日志"><a href="#Tomcat日志" class="headerlink" title="Tomcat日志"></a>Tomcat日志</h3><p>实时查看: <code>tail -f /application/tomcat/logs/catalina.out</code></p>
+<h3 id="Tomcat管理功能"><a href="#Tomcat管理功能" class="headerlink" title="Tomcat管理功能"></a>Tomcat管理功能</h3><p><font color="red">注意:测试功能, 生产环境不要用.</font></p>
+<p>Tomcat管理功能用于对Tomcat自身以及部署在Tomcat上的应用进行管理的web应用. 在默认情况下是处于禁用状态的. 如果需要开启这个功能, 就需要配置管理用户, 即配置tomcat-users.xml文件.</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /application/tomcat/conf/tomcat-users.xml</span><br><span class="line">  &lt;<span class="keyword">role</span> rolename="manager-gui"/&gt;</span><br><span class="line">  &lt;<span class="keyword">role</span> rolename="admin-gui"/&gt;</span><br><span class="line">  &lt;<span class="keyword">user</span> username="tomcat" <span class="keyword">password</span>="tomcat" roles="manager-gui,admin-gui"/&gt;</span><br><span class="line">  &lt;/tomcat-users&gt;#在此行前加入上面三行</span><br></pre></td></tr></table></figure>
+
+<p>需要注释一下内容:</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /application/tomcat/webapps/manager/META-INF/context.xml</span><br><span class="line">  &lt;!-- &lt;Valve className=<span class="string">"org.apache.catalina.valves.RemoteAddrValve allow="</span><span class="number">127</span>\.\d+\.\d+\.\d+<span class="number">1</span>::<span class="number">1</span>|<span class="number">0</span>:<span class="number">0</span>:<span class="number">0</span>:<span class="number">0</span>:<span class="number">0</span>:<span class="number">0</span>:<span class="number">0</span>:<span class="number">1</span><span class="string">" /&gt; --&gt;</span></span><br></pre></td></tr></table></figure>
+<p>验证效果:输入ip地址:8080 -&gt; Manager App -&gt; 输入用户名与密码</p>
+<h2 id="Tomcat主配置文件详解"><a href="#Tomcat主配置文件详解" class="headerlink" title="Tomcat主配置文件详解"></a>Tomcat主配置文件详解</h2><h3 id="server-xml组件类别"><a href="#server-xml组件类别" class="headerlink" title="server.xml组件类别"></a>server.xml组件类别</h3><p>顶级组件:位于整个配置的顶层 <font color="green">#server</font><br>容器类组件:可以包含其它组件的组件 <font color="green">#service、engine、host、context</font><br>连接器组件:连接用户请求至tomcat <font color="green">#connector</font><br>被嵌套类组件:位于一个容器当中, 不能包含其他组件. <font color="green">#Valve、logger</font></p>
+<pre>
+&lt;server&gt;
+ | &lt;service&gt;
+ |  | &lt;connector/&gt;
+ |  | &lt;engine&gt;
+ |  |  | &lt;host&gt;
+ |  |  |   &lt;context&gt;&lt;/context&gt;
+ |  |  | &lt;/host&gt;
+ |  |  | &lt;host&gt;
+ |  |  |   &lt;context&gt;&lt;/context&gt;
+ |  |  | &lt;/host&gt;
+ |  | &lt;/enginex&gt;
+ | &lt;/service&gt;
+&lt;/server&gt;
+</pre>
+
+<h3 id="组件介绍"><a href="#组件介绍" class="headerlink" title="组件介绍"></a>组件介绍</h3><table>
+组件名称功能介绍
+<tr><td>engine</td><td>核心容器组件,catalina引擎,负责通过connector接收用户请求,并处理请求,将请求转至对应的虚拟主机host.</td></tr>
+<tr><td>host</td><td>类似于httpd中的虚拟主机,一般而言带寺基于FQDN的虚拟主机.</td></tr>
+<tr><td>context</td><td>定义一个应用程序,是一个最内层的容器类组件(不能再嵌套).配置context的主要目的指定对应对的webapp的根目录,类似于httpd的alias,其还能为webapp指定额外的属性,如部罢方式等.</td></tr>
+<tr><td>connector</td><td>接收用户请求,类似于httpd的listen配置监听端口的.</td></tr>
+<tr><td>service</td><td>将connector关联至engine,因此一个service内部可以有多个connector,但只能有一个引擎engine.service内部有两个connector,一个engine.因此,一般情况下一个server内部只有一个service,一个service内部只有一个engine,但一个service内部可以有多个connector.</td></tr>
+<tr><td>server</td><td>表示一个运行于JVM中的tomcat实例</td></tr>
+<tr><td>Valve</td><td>阀门,拦截请求并在将其转至对应的webapp前进行某种处理操作,可以用于任何容器中,比如记录日志(access log valve)、基于IP做访问控制(remote address filter valve).</td></tr>
+<tr><td>logger</td><td>日志记录器,用于记录组件内部的状态信息,可以用于除context外的任何容器中.</td></tr>
+<tr><td>realm</td><td>可以用于任意容器类的组件中,关联一个用户认证库,实现认证和授权.可以关联的认证库有两种:UserDatabaseRealm、MemoryRealm和JDBCRealm.</td></tr>
+<tr><td>UserDatabaseRealm</td><td>使用JNDI自定义的用户认证库</td></tr>
+<tr><td>MemoryRealm</td><td>认证信息定义在tomcat-users.xml中</td></tr>
+<tr><td>JDBCRealm</td><td>认证信息定义在数据库中,并通过JDBC连接至数据库中查找认证用户.</td></tr>
+</table>
+
+<h3 id="Connector主要参数说明"><a href="#Connector主要参数说明" class="headerlink" title="Connector主要参数说明"></a>Connector主要参数说明</h3><table>
+<tr><td>connector</td><td>接收用户请求,类似于httpd的listen配置监听端口.</td></tr>
+<tr><td>port</td><td>指定服务器端要创建的端口号,并在这个端口监听来自客户端的请求.</td></tr>
+<tr><td>address</td><td>指定连接器监听的地址,默认为所有地址(即0.0.0.0).</td></tr>
+<tr><td>protocol</td><td>连接器使用的协议,支持HTTP和AJP,AJP(Apache Jserv Protocol)专用于tomcat与apache建立通信的,在httpd反向代理用户请求至tomcat时使用(可见Nginx反向代理时不可用AJP协议).</td></tr>
+<tr><td>minProcessors</td><td>服务器启动时创建的处理请求的线程数</td></tr>
+<tr><td>maxProcessors</td><td>最大可以创建的处理请求的线程数</td></tr>
+<tr><td>enableLookups</td><td>如果为true,则可以通过调用request.getRemoteHost()进行DNS查询来得到远程客户端的实际主机名,若为false则不进行DNS查询,而是返回其ip地址.</td></tr>
+<tr><td>redirectPort</td><td>指定服务器正在处理http请求时收到了一个SSL传输请求后重定向的端口号</td></tr>
+<tr><td>acceptCount</td><td>指定当所有可以使用的处理请求的线程数都被使用时,可以放到处理队列中的请求数,超过这个数的请求将不予处理.</td></tr>
+<tr><td>connectionTimeout</td><td>指定超时的时间数(以毫秒为单位)</td></tr>
+</table>
+
+<h3 id="host参数说明"><a href="#host参数说明" class="headerlink" title="host参数说明"></a>host参数说明</h3><table>
+<tr><td>host</td><td>表示一个虚拟主机</td></tr>
+<tr><td>name</td><td>指定主机名</td></tr>
+<tr><td>appBase</td><td>应用程序基本目录,即存放应用程序的目录.一般为appBase="webapps",相对于CATALINA_HOME而言的,也可以写绝对路径.</td></tr>
+<tr><td>unpackWARs</td><td>如果为true,则tomcat会自动将WAR文件解压,否则不解压,直接从WAR文件中运行应用程序.</td></tr>
+<tr><td>autoDeploy</td><td>在tomcat启动时,是否自动部罢.</td></tr>
+<tr><td>xmlValidation</td><td>是否启动xml的校验功能,一般xmlValidation="false".</td></tr>
+<tr><td>xmlNamespaceAware</td><td>检测名称空间,一般xmlNamespaceAware="false".</td></tr>
+</table>
+
+<h3 id="Context参数说明"><a href="#Context参数说明" class="headerlink" title="Context参数说明"></a>Context参数说明</h3><table>
+<tr><td>Context</td><td>表示一个web应用程序,通常为WAR文件.</td></tr>
+<tr><td>docBase</td><td>应用程序的路径或者是WAR文件存放的路径,也可以使用相对路径,起始路径为此Context所属Host中appBase定义的路径.</td></tr>
+<tr><td>path</td><td>表示此web应用程序的url的前缀,这样请求的url为http://localhost:8080/path/.</td></tr>
+<tr><td>reloadable</td><td>这个属性非常重要,如果为true,则tomcat会自动检测应用程序的/WEB-INF/lib和/WEB-INF/classes目录的变化,自动装载新的应用程序,可以在不重启tomcat的情况下改变应用程序.</td></tr>
+</table>
+
+<h2 id="Web站点部署"><a href="#Web站点部署" class="headerlink" title="Web站点部署"></a>Web站点部署</h2><h3 id="使用war包部署web站点"><a href="#使用war包部署web站点" class="headerlink" title="使用war包部署web站点"></a>使用war包部署web站点</h3><p>将准备的war包上传到服务中</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> <span class="string">/application/tomcat/webapps/</span></span><br><span class="line">rm -rf ROOT/*</span><br><span class="line">cp <span class="string">/root/jpress-v2.0.8.war</span> .</span><br><span class="line"><span class="string">/app1ication/tomcat/bin/startup.sh</span></span><br><span class="line"><span class="keyword">ls</span> -l</span><br><span class="line">cp -r jpress-v2.0.8/* ROOT/</span><br></pre></td></tr></table></figure>
+<p>浏览器访问:<code>http://ip地址:8080</code></p>
+<h3 id="自定义默认网站目录"><a href="#自定义默认网站目录" class="headerlink" title="自定义默认网站目录"></a>自定义默认网站目录</h3><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vim /application/tomcat/conf/server.xml +<span class="number">150</span></span><br><span class="line">  .....</span><br><span class="line">  &lt;Context path=<span class="string">""</span> docBase=<span class="string">"/application/tomcat/webapps/test"</span> delug=<span class="string">"0"</span></span><br><span class="line"> reloadable=<span class="string">"false"</span> crossContext=<span class="string">"true"</span> /&gt;</span><br><span class="line">  .....</span><br><span class="line">rm -rf jpress-v2<span class="number">.0</span><span class="number">.8</span>.war</span><br><span class="line">mkdir test</span><br><span class="line">mv  jpress-v2<span class="number">.0</span><span class="number">.8</span><span class="comment">/* test/</span></span><br></pre></td></tr></table></figure>
+
+<p>重启服务</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/application/</span>tomcat<span class="regexp">/bin/</span>shutdown.sh</span><br><span class="line"><span class="regexp">/application/</span>tomcat<span class="regexp">/bin/</span>startup.sh</span><br></pre></td></tr></table></figure>
+
+<h2 id="Tomcat安全优化"><a href="#Tomcat安全优化" class="headerlink" title="Tomcat安全优化"></a>Tomcat安全优化</h2><h3 id="telnet管理端口保护-强制"><a href="#telnet管理端口保护-强制" class="headerlink" title="telnet管理端口保护(强制)"></a>telnet管理端口保护(强制)</h3><p>1.修改默认的8005管理端口管理为不易猜测的端口(大于1024)<br>2.修改SHUTDOWN指令为其他字符串</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Server <span class="attribute">port</span>=<span class="string">"8527"</span> <span class="attribute">shutdown</span>=<span class="string">"dangerous"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>以上配置项的配置内容只是建议配置,可以按照服务实际情况进行合理配置,但要求端口配置在8000-8999之间.</p>
+<h3 id="ajp连接端口保护-推荐"><a href="#ajp连接端口保护-推荐" class="headerlink" title="ajp连接端口保护(推荐)"></a>ajp连接端口保护(推荐)</h3><p>1.修改默认的ajp 8009端口为不易冲突的大于1024端口<br>2.通过iptables规则限制ajp端口访问的权限仅为线上机器</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector <span class="attribute">port</span>=<span class="string">"8528"</span> <span class="attribute">protocol</span>=<span class="string">"AJP/1.3"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<p>保护此端口的目的在于防止线下的测试流量被mod_jk转发至线上tomcat服务器<br>以上配置项的配置内容仅为建议配置,请按照服务实际情况进行合理配置,但要求<br>端口配置在8000-8999之间.</p>
+<h3 id="禁用管理端-强制"><a href="#禁用管理端-强制" class="headerlink" title="禁用管理端(强制)"></a>禁用管理端(强制)</h3><p>1.删除默认的{Tomcat安装目录}/conf/tomcat-users.xml文件,重启tomcat后将会自动生<br>成新的文件.<br>2.删除{Tomcat安装目录}/webapps下默认的所有目录和文件<br>3.将tomcat应用根目录配置为tomcat安装目录以外的目录</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Host name=<span class="string">"localhost"</span> appBase=<span class="string">"/application/work/webapps"</span> ...</span><br><span class="line">mkdir -p <span class="regexp">/application/</span>work/webapps</span><br><span class="line">rm -rf <span class="regexp">/application/</span>tomcat<span class="regexp">/conf/</span>tomcat-users.xml</span><br><span class="line">rn -rf <span class="regexp">/application/</span>tomcat<span class="regexp">/webapps/</span>*</span><br></pre></td></tr></table></figure>
+<p>对于前端web模块,Tomcat管理端属于tomcat的高危安全隐患,一旦被攻破,黑客通过上传web shell的方式将会直接取得服务器的控制权,后果极其严重.</p>
+<h3 id="降权启动-强制"><a href="#降权启动-强制" class="headerlink" title="降权启动(强制)"></a>降权启动(强制)</h3><p>1.tomcat启动用户权限必须为非root权限,尽量降低tomcat启动用户的目录访问权限.<br>2.如需直接对外使用80端口,可通过普通账号启动后,配置iptables规则进行转发.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">useradd tomcat</span><br><span class="line">mkdir <span class="regexp">/home/</span>tomcat -p</span><br><span class="line">cp -a <span class="regexp">/application/</span>tomcat <span class="regexp">/home/</span>tomcat/tomcat8_1</span><br><span class="line">chown -R tomcat.tomcat <span class="regexp">/home/</span>tomcat<span class="regexp">/tomcat8_1/</span></span><br><span class="line">su -c <span class="string">'/home/tomcat/tomcat8_1/bin/startup.sh'</span> tomcat</span><br><span class="line">ps -ef | grep tomcat</span><br></pre></td></tr></table></figure>
+<p>避免一旦tomcat服务被入侵,黑客直接获取高级用户权限危害整个server的安全.</p>
+<h3 id="文件列表访问控制-强制"><a href="#文件列表访问控制-强制" class="headerlink" title="文件列表访问控制(强制)"></a>文件列表访问控制(强制)</h3><p>1.conf/wep.xml文件中default部分listings的配置必须为false</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;init-<span class="built_in">param</span>&gt;</span><br><span class="line">  &lt;<span class="built_in">param</span>-name&gt;</span><br><span class="line">    listings</span><br><span class="line">  &lt;/<span class="built_in">param</span>-name&gt;</span><br><span class="line">  &lt;<span class="built_in">param</span>-<span class="built_in">value</span>&gt;</span><br><span class="line">    <span class="literal">false</span></span><br><span class="line">  &lt;/<span class="built_in">param</span>-<span class="built_in">value</span>&gt;</span><br><span class="line">&lt;/init-<span class="built_in">param</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>false为不列出目录文件,true为允许列出,默认为false.</p>
+<h3 id="版本信息隐藏-强制"><a href="#版本信息隐藏-强制" class="headerlink" title="版本信息隐藏(强制)"></a>版本信息隐藏(强制)</h3><p>1.修改conf/Web.xml,重定向403、404以及500等错误到指定的错误页面<br>2.也可以通过修改应用程序目录下的WEB-INF/web.xml下的配置进行错误页面的重定向</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">error-page</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">error-code</span>&gt;</span>403<span class="tag">&lt;/<span class="name">error-code</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">location</span>&gt;</span>/forbidden.jsp<span class="tag">&lt;/<span class="name">location</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">error-page</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">error-page</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">error-code</span>&gt;</span>404<span class="tag">&lt;/<span class="name">error-code</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">location</span>&gt;</span>/notfound.jsp<span class="tag">&lt;/<span class="name">1ocation</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">error-page</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">error-page</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">error-code</span>&gt;</span>500<span class="tag">&lt;/<span class="name">error-code</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">location</span>&gt;</span>/systembusy.jsp<span class="tag">&lt;/<span class="name">location</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">error-page</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在配置中对一些常见错误进行重定向,避免当出现错误时tomcat默认显示的错误页面暴露服务器和版本信息.<br>必须确保程序根目录下的错误页面已经存</p>
+<h2 id="Nginx-Tomcat负载均衡集群"><a href="#Nginx-Tomcat负载均衡集群" class="headerlink" title="Nginx + Tomcat负载均衡集群"></a>Nginx + Tomcat负载均衡集群</h2><h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>Tomcat:192.168.100.40/24<br>Tomcat2:192.168.100.50/24<br>Nginx:192.168.100.60/24</p>
+<h3 id="Tomcat服务器配置"><a href="#Tomcat服务器配置" class="headerlink" title="Tomcat服务器配置"></a>Tomcat服务器配置</h3><figure class="highlight erb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">vim index.jsp</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">%</span></span></span><span class="ruby">@page language=<span class="string">"java"</span> import=<span class="string">"java.util.*"</span> pageEncoding=<span class="string">"UTF-8"</span></span><span class="xml"><span class="tag">%&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>JSP test page<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">%</span></span></span><span class="ruby">out.println(<span class="string">"-------------------test-------------------"</span>);</span><span class="xml"><span class="tag">%&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="xml">vim index.jsp</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">%</span></span></span><span class="ruby">@page language=<span class="string">"java"</span> import=<span class="string">"java.util.*"</span> pageEncoding=<span class="string">"UTF-8"</span></span><span class="xml"><span class="tag">%&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>JSP test2 page<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">%</span></span></span><span class="ruby">out.println(<span class="string">"-------------------test2-------------------"</span>);</span><span class="xml"><span class="tag">%&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Nginx服务器配置"><a href="#Nginx服务器配置" class="headerlink" title="Nginx服务器配置"></a>Nginx服务器配置</h3><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/local/nginx/conf/nginx.conf</span><br><span class="line">  #gzip on;</span><br><span class="line">  upstream myjava &#123;</span><br><span class="line">    server <span class="number">192.168</span><span class="number">.100</span><span class="number">.50</span>:<span class="number">8080</span> weight=<span class="number">1</span>;</span><br><span class="line">    server <span class="number">192.168</span><span class="number">.100</span><span class="number">.40</span>:<span class="number">8080</span> weight=<span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  location / &#123; </span><br><span class="line">    ......</span><br><span class="line">    proxy_pass http:<span class="comment">//myjava;</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>测试:在浏览器中输入Nginx服务器的ip地址</p>
+
+    </div>
+
+    
+    
+    
+
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color:white;font-size:14px;">-------------------本文结束 <i class="fa fa-heart"></i> 感谢阅读-------------------</div>
+    
+</div>
+	
+	</div>
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>云
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.mengyun.club/post/36f957e6/" title="Tomcat服务器">http://www.mengyun.club/post/36f957e6/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Tomcat/" rel="tag"><i class="fa fa-tag"></i> Tomcat</a>
+              <a href="/tags/Nginx/" rel="tag"><i class="fa fa-tag"></i> Nginx</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/d8982727/" rel="prev" title="linux系统重置root用户密码">
+                  <i class="fa fa-chevron-left"></i> linux系统重置root用户密码
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/9e53707d/" rel="next" title="LVS负载均衡群集">
+                  LVS负载均衡群集 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">云</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">250k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:47</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/post/36f957e6/",
+    }, {"enable":true,"appId":"HKOdg6jtf8l5uFP2Ag6eDIIk-gzGzoHsz","appKey":"Gn11LWMBtG3eEkwpnpDhJUI3","placeholder":"请输入你的评论内容, 可编写Markdown语法.","avatar":"mm","meta":["nick","mail"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":true,"requiredFields":[]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+  
+</body>
+</html>

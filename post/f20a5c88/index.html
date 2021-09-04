@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Grandstander:300,300italic,400,400italic,700,700italic|Noto+Serif+SC:300,300italic,400,400italic,700,700italic|Architects+Daughter:300,300italic,400,400italic,700,700italic|Dosis:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.mengyun.club","root":"/","scheme":"Mist","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="MongoDB概述简介MongoDB是一款跨平台、面向文档的数据库. 可以实现高性能、高可用性, 并且能够轻松扩展. 是一个基于分布式文件存储的开源数据库系统, 在高负载的情况下, 添加更多的节点, 可以保证服务器性能. MongoDB也是一个介于关系数据库和非关系数据库之间的产品, 是非关系数据库当中功能最丰富, 最像关系数据库的. 不采用关系模型主要是为了获得更好的扩展性, MongoDB不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB基础">
+<meta property="og:url" content="http://www.mengyun.club/post/f20a5c88/index.html">
+<meta property="og:site_name" content="爱梦的博客">
+<meta property="og:description" content="MongoDB概述简介MongoDB是一款跨平台、面向文档的数据库. 可以实现高性能、高可用性, 并且能够轻松扩展. 是一个基于分布式文件存储的开源数据库系统, 在高负载的情况下, 添加更多的节点, 可以保证服务器性能. MongoDB也是一个介于关系数据库和非关系数据库之间的产品, 是非关系数据库当中功能最丰富, 最像关系数据库的. 不采用关系模型主要是为了获得更好的扩展性, MongoDB不">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-26T08:10:46.000Z">
+<meta property="article:modified_time" content="2020-09-02T13:54:38.353Z">
+<meta property="article:author" content="云">
+<meta property="article:tag" content="MongoDB">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://www.mengyun.club/post/f20a5c88/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MongoDB基础 | 爱梦的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="爱梦的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/src/clickLove.js"></script>
+
+<script type="text/javascript"
+color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+  
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">爱梦的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">常常与我陪伴的就是梦</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">38</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-playlist">
+
+    <a href="/playlist/" rel="section"><i class="fa fa-music fa-fw"></i>网易云歌单</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">	
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MongoDB概述"><span class="nav-text">MongoDB概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特点"><span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#适用领域"><span class="nav-text">适用领域</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MongoDB安装"><span class="nav-text">MongoDB安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装及运行控制"><span class="nav-text">安装及运行控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动和停止"><span class="nav-text">启动和停止</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多实例启动"><span class="nav-text">多实例启动</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MongoDB存储结构"><span class="nav-text">MongoDB存储结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑存储结构"><span class="nav-text">逻辑存储结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#物理存储结构"><span class="nav-text">物理存储结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-text">数据类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MongoDB基本操作"><span class="nav-text">MongoDB基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用操作"><span class="nav-text">常用操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建、复制、删除数据库"><span class="nav-text">创建、复制、删除数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合和文档操作"><span class="nav-text">集合和文档操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MongoDB日常维护"><span class="nav-text">MongoDB日常维护</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#备份与恢复管理"><span class="nav-text">备份与恢复管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全管理"><span class="nav-text">安全管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MongoDB监控"><span class="nav-text">MongoDB监控</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="云"
+      src="/images/head_Picture/Yu_Me5.jpg">
+  <p class="site-author-name" itemprop="name">云</p>
+  <div class="site-description" itemprop="description">我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/IYun-Meng" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;IYun-Meng" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kili3kili1miyukeno4@foxmail.co" title="E-Mail → mailto:kili3kili1miyukeno4@foxmail.co" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/?hl=zh_CN" title="https:&#x2F;&#x2F;www.google.com&#x2F;?hl&#x3D;zh_CN" rel="noopener" target="_blank">谷歌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zhihu.com/" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;" rel="noopener" target="_blank">知乎</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.github.com/" title="https:&#x2F;&#x2F;www.github.com&#x2F;" rel="noopener" target="_blank">GitHub</a>
+        </li>
+    </ul>
+  </div>
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoFs/" rel="tag">AutoFs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bind/" rel="tag">Bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DHCP/" rel="tag">DHCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deepin/" rel="tag">Deepin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dovecot/" rel="tag">Dovecot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/" rel="tag">FTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KVM/" rel="tag">KVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keepalived/" rel="tag">Keepalived</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KickStart/" rel="tag">KickStart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/" rel="tag">NFS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTP/" rel="tag">NTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nagios/" rel="tag">Nagios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PXE/" rel="tag">PXE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Physics2D/" rel="tag">Physics2D</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postfix/" rel="tag">Postfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/" rel="tag">SELinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSLinux/" rel="tag">SYSLinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Samba/" rel="tag">Samba</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sprite/" rel="tag">Sprite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TFTP/" rel="tag">TFTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/" rel="tag">Unity</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zabbix/" rel="tag">Zabbix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/" rel="tag">root</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+      </section>
+	  
+	</div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.mengyun.club/post/f20a5c88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_Picture/Yu_Me5.jpg">
+      <meta itemprop="name" content="云">
+      <meta itemprop="description" content="我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱梦的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MongoDB基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-08-26 16:10:46" itemprop="dateCreated datePublished" datetime="2020-08-26T16:10:46+08:00">2020-08-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-02 21:54:38" itemprop="dateModified" datetime="2020-09-02T21:54:38+08:00">2020-09-02</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/post/f20a5c88/" class="post-meta-item leancloud_visitors" data-flag-title="MongoDB基础" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/post/f20a5c88/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/post/f20a5c88/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>8.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<h1 id="MongoDB概述"><a href="#MongoDB概述" class="headerlink" title="MongoDB概述"></a>MongoDB概述</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>MongoDB是一款跨平台、面向文档的数据库.</p>
+<p>可以实现高性能、高可用性, 并且能够轻松扩展. 是一个基于分布式文件存储的开源数据库系统, 在高负载的情况下, 添加更多的节点, 可以保证服务器性能.</p>
+<p>MongoDB也是一个介于关系数据库和非关系数据库之间的产品, 是非关系数据库当中功能最丰富, 最像关系数据库的. 不采用关系模型主要是为了获得更好的扩展性, MongoDB不再有”行”(row)的概念, 其运行方式主要基于两个概念:集合(collection)与文档(document).</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>MongoDB的特点包括面向集合存储、模式自由、丰富的查询语句和多级索引、复制集机制、易于水平扩展、可插入存储引擎、跨平台多语言支持等.</p>
+<p>MongoDB安装简单, 提供了面向文档存储功能, 操作起来比较容易.</p>
+<p>MongobB提供了复制、高可用性和自动分片功能.<br>如果负载增加(需要更多的存储空间和更强的处理能力), 它可以分布在计算机网络中的其他节点上, 这就是所谓的分片. Mongo支持丰富的查询表达式, 查询指令使用JSON形式的标记, 可轻易查询文档中内嵌的对象及数组.</p>
+<p>MongoDB支持各种编程语言:Ruby、Python、Java、C++、PHP、C#等多种语言</p>
+<h2 id="适用领域"><a href="#适用领域" class="headerlink" title="适用领域"></a>适用领域</h2><p>MongoDB可以为Web应用提供可扩展的高性能数据存储解决方案. MongoDB主要适用领域有网站数据、分布式场景、数据缓存和JSON文档格式存储. 适合大数据量、高并发、弱事务的互联网应用, 其内置的水平扩展机制提供了从几百万到十亿级别的数据处理能力, 可以很好地满足Web2.0和移动互联网应用数据存储的要求.</p>
+<a id="more"></a>
+
+<h1 id="MongoDB安装"><a href="#MongoDB安装" class="headerlink" title="MongoDB安装"></a>MongoDB安装</h1><h2 id="安装及运行控制"><a href="#安装及运行控制" class="headerlink" title="安装及运行控制"></a>安装及运行控制</h2><p>1.配置yum源进行安装MongoDB</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; /etc/yum.repos.d/mongodb-org.repo &lt;&lt;-EOF</span><br><span class="line">[mongodb-org]</span><br><span class="line"><span class="attribute">name</span>=MongoDB Repository</span><br><span class="line"><span class="attribute">baseurl</span>=http://mirrors.aliyun.com/mongodb/yum/redhat/7Server/mongodb-org/3.4/x86_64/</span><br><span class="line"><span class="attribute">gpgcheck</span>=0</span><br><span class="line"><span class="attribute">enabled</span>=1</span><br><span class="line">EOF</span><br><span class="line">yum install -y mongodb-org</span><br></pre></td></tr></table></figure>
+
+<p>2.MongoDB运行控制<br>设置内核参数</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 当某个节点可用内存不足时, 系统会从其他节点分配内存.</span></span><br><span class="line">echo <span class="number">0</span> &gt; <span class="meta-keyword">/proc/</span>sys<span class="meta-keyword">/vm/</span>zone_reclaim_mode</span><br><span class="line"></span><br><span class="line"><span class="meta"># 关闭大页内存</span></span><br><span class="line">echo never &gt; <span class="meta-keyword">/sys/</span>kernel<span class="meta-keyword">/mm/</span>transparent_hugepage/enabled</span><br><span class="line">echo never &gt; <span class="meta-keyword">/sys/</span>kernel<span class="meta-keyword">/mm/</span>transparent_hugepage/defrag</span><br><span class="line"></span><br><span class="line"><span class="meta"># 永久生效设置</span></span><br><span class="line">vi <span class="meta-keyword">/etc/</span>rc.local</span><br><span class="line">echo <span class="number">0</span> &gt; <span class="meta-keyword">/proc/</span>sys<span class="meta-keyword">/vm/</span>zone_reclaim_mode</span><br><span class="line">echo never &gt; <span class="meta-keyword">/sys/</span>kernel<span class="meta-keyword">/mm/</span>transparent_hugepage/enabled</span><br><span class="line">echo never &gt; <span class="meta-keyword">/sys/</span>kernel<span class="meta-keyword">/mm/</span>transparent_hugepage/defrag</span><br><span class="line">sh <span class="meta-keyword">/etc/</span>rc.local</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动和停止"><a href="#启动和停止" class="headerlink" title="启动和停止"></a>启动和停止</h2><p>1.启动MongoDB服务并设置开机自启动</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mongod -f /etc/mongod.conf</span><br><span class="line"></span><br><span class="line">vim /etc/rc.local</span><br><span class="line">  rm -rf  /var/<span class="class"><span class="keyword">lib</span>/<span class="title">mongo</span>/<span class="title">mongod</span>.<span class="title">lock</span></span></span><br><span class="line">  mongod -f /etc/mongod.conf</span><br></pre></td></tr></table></figure>
+
+<p>2.测试是否安装成功</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl <span class="string">http:</span><span class="comment">//localhost:27017</span></span><br></pre></td></tr></table></figure>
+<pre>
+It looks like you are trying to access MongoDB over HTTP on the native driver port.
+</pre>
+
+<p>3.停止MongoDB</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mongod -f /etc/mongod.conf --<span class="keyword">shutdown</span></span><br><span class="line">ps aux | <span class="keyword">grep</span> mongod</span><br><span class="line"></span><br><span class="line"><span class="comment"># 当没有正常关闭成功时, 直接结束进程.</span></span><br><span class="line"><span class="keyword">kill</span> -<span class="number">2</span> pid号</span><br></pre></td></tr></table></figure>
+
+<p>4.连接并访问MongoDB, 关闭数据库并退出.</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mongo</span><br><span class="line">use admin</span><br><span class="line">db.shutdownServer()</span><br><span class="line"><span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
+
+<p>注: 用Systemctl运行脚本文件来启动</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; /lib/systemd/system/mongod.service &lt;&lt;-EOF</span><br><span class="line">[Unit]</span><br><span class="line"><span class="attribute">Description</span>=MongoDB</span><br><span class="line"><span class="attribute">After</span>=network.target remote-fs.target nss-lookup.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line"><span class="attribute">Type</span>=forking</span><br><span class="line"><span class="attribute">PIDFile</span>=/var/lib/mongo/mongod.lock</span><br><span class="line"><span class="attribute">ExecStart</span>=/usr/bin/mongod --auth -f /etc/mongod.conf</span><br><span class="line"><span class="attribute">ExecReload</span>=rm -rf /var/lib/mongo/mongod.lock &amp;&gt; /dev/<span class="literal">null</span>;/usr/bin/mongod -f /etc/mongod.conf --shutdown;/usr/bin/mongod -f /etc/mongod.conf</span><br><span class="line"><span class="attribute">ExecStop</span>=/usr/bin/mongod -f /etc/mongod.conf --shutdown</span><br><span class="line"><span class="attribute">PrivateTmp</span>=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line"><span class="attribute">WantedBy</span>=multi-user.target</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h2 id="多实例启动"><a href="#多实例启动" class="headerlink" title="多实例启动"></a>多实例启动</h2><p>1.复制配置文件并更改</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cp</span> /etc/mongod.<span class="keyword">conf</span> /etc/mongod2.<span class="keyword">conf</span></span><br><span class="line"><span class="keyword">vim</span> /etc/mongod2.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure>
+<pre>
+systemLog:
+  destination: file
+  logAppend: true
+  <font color="red">path: /var/log/mongodb/mongod2.log</font>
+
+storage:
+  <font color="red">dbPath: /var/lib/mongo2</font>
+  journal:
+    enabled: true
+
+processManagement:
+  fork: true  
+  pidFilePath: /var/run/mongodb/mongod.pid
+
+net:
+  <font color="red">port: 27018</font>
+  bindIp: 127.0.0.1  
+</pre>
+
+<p>2.创建数据文件并赋予权限</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /var/<span class="class"><span class="keyword">lib</span>/<span class="title">mongo2</span></span></span><br><span class="line">touch /var/log/mongodb/mongod2.log</span><br><span class="line">chmod -R <span class="number">777</span> /var/log/mongodb/mongod2.log</span><br></pre></td></tr></table></figure>
+
+<p>2.启动多实例</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mongod -f <span class="regexp">/etc/m</span>ongod2.conf</span><br><span class="line">mongo</span><br><span class="line">use admin</span><br><span class="line">db.shutdownServer()</span><br><span class="line"><span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="MongoDB存储结构"><a href="#MongoDB存储结构" class="headerlink" title="MongoDB存储结构"></a>MongoDB存储结构</h1><h2 id="逻辑存储结构"><a href="#逻辑存储结构" class="headerlink" title="逻辑存储结构"></a>逻辑存储结构</h2><p>MongoDB的逻辑结构主要由文档(document)、集合(collection)和数据库(database)三部分组成.</p>
+<p>其中文档是MongoDB的核心概念, 它是MongoDB逻辑存储的最小单元, 相当于关系型数据库中的一行记录, 多个文档组成集合, 集合相当于关系型数据库中的表的概念, 多个集合组成数据库.</p>
+<table>
+<tr><td>SQL术语/概念</td><td>MongoDB术语/概念</td><td>解释/说明</td></tr>
+<tr><td>database</td><td>database</td><td>数据库</td></tr>
+<tr><td>table</td><td>collection</td><td>数据库表/集合</td></tr>
+<tr><td>row</td><td>documen</td><td>数据记录行/文档</td></tr>
+<tr><td>column</td><td>field</td><td>数据字段/域</td></tr>
+<tr><td>index</td><td>index</td><td>索引</td></tr>
+<tr><td>table joins</td><td></td><td>表连接, MongoDB不支持.</td></tr>
+<tr><td>primary key</td><td>primary key</td><td>主键, MongoDB自动将_id字段设置为主键.</td></tr>
+</table>
+
+<p>1.数据库<br>MongoDB的默认数据库:<code>test</code><br><code>admin</code>: root数据库, 如果将一个用户添加到这个数据库, 这个用户将自动继承所有数据库的权限. 一些特定的服务器端命令也只能从这个数据库运行.</p>
+<p><code>local</code>: 这个数据永远不会被复制, 可以用来存储限于本地单台服务器的任意集合.</p>
+<p><code>config</code>: 当Mongo用于分片设置时, config数据库在内部使用, 用于保存分片的相关信息.</p>
+<p>2.集合<br>集合存在于数据库中, 集合没有固定的结构, 这意味着在集合中可以插入不同格式和类型的数据, 但通常情况下插入集合的数据都会有一定的关联性.</p>
+<p>当第一个文档插入时, 集合就会被创建.</p>
+<p>合法的集合名不能是空字符串””, 不能含有\0字符(空字符), 这个字符表示集合名的结尾, 不能以”system.”开头, 这是为系统集合保留的前缀.</p>
+<p>3.文档<br>文档是一个键值对:<br>(1)文档中的键值对是有序的<br>(2)文档中的值可以是双引号里面的字符串, 也可以是其他几种数据类型(甚至可以是整个嵌入的文档).<br>(3)MongoDB区分类型和大小写<br>(4)MongoDB的文档不能有重复的键<br>(5)文档的键是字符串. 除了少数例外情况, 键可以使用任意UTF-8字符.</p>
+<p>文档键命名规范:<br>(1)键不能含有\0(空字符), 这个字符用来表示键的结尾.<br>(2).和$有特别的意义, 只有在特定环境下才能使用.<br>(3)以下划线”_”开头的键是保留的(不是严格要求的)</p>
+<h2 id="物理存储结构"><a href="#物理存储结构" class="headerlink" title="物理存储结构"></a>物理存储结构</h2><p>MongoDB物理存储结构主要包括数据存储和日志存储</p>
+<p>1.数据存储<br>MongoDB的数据目录由配置文件中的dbpath指定, 用来存储所有MongoDB的数据文件.</p>
+<p>在MongoDB内部, 每个数据库都包含一个.ns文件和一些数据文件.</p>
+<p>MongoDB内部有预分配空间的机制, 预分配的文件都用0进行填充, 这样MongoDB始终保持额外的空间和空余的数据文件. 数据文件每次新生成的一个文件, 大小都会是上一个文件的两倍.</p>
+<p>文件使用MMAP进行内存映射, 会将所有数据文件映射到内存中, 但是只是虚拟内存, 只有访问到这块数据时才会交换到物理内存.</p>
+<p>2.日志存储<br>结构:<br>(1)系统日志文件的存放由配置文件中的path指定<br>(2)Journal日志文件, 用于MongoDB崩溃恢复的保障.<br>(3)oplog复制操作日志文件在启动主从复制时出现<br>(4)慢查询日志文件, 需要在配置文件中指定profile=1(开启慢查询)与slowms<br>=200(记录毫秒数), 查看慢查询的命令:<code>db.system.profile.find()</code>.</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><table>
+常用数据类型
+<tr><td>String</td><td>字符串, 存储数据常用的数据类型. 在MongoDB中UTF-8编码的字符串才是合法的.</td></tr>
+<tr><td>Integer</td><td>整型数值, 用于存储数值. 根据用户的服务器, 可分为32位或64位.</td></tr>
+<tr><td>Boolean</td><td>布尔值, 用于存储布尔值(真/假).</td></tr>
+<tr><td>Double</td><td>双精度浮点值, 用于存储浮点值.</td></tr>
+<tr><td>Arrays</td><td>用于将数组或列表或多个值存储为一个键</td></tr>
+<tr><td>Object</td><td>用于内嵌文档</td></tr>
+<tr><td>Null</td><td>用于创建空值</td></tr>
+<tr><td>Date</td><td>日期时间, 用户可以指定自己的日期时间, 创建Date对象, 传入年月日信息.</td></tr>
+<tr><td>Binary Data</td><td>二进制数据, 用于存储二进制数据.</td></tr>
+</table>
+
+<h1 id="MongoDB基本操作"><a href="#MongoDB基本操作" class="headerlink" title="MongoDB基本操作"></a>MongoDB基本操作</h1><h2 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看当前操作的库</span></span><br><span class="line"><span class="keyword">db</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看当前实例下的数据库列表</span></span><br><span class="line">show dbs</span><br><span class="line"></span><br><span class="line"><span class="comment">// 切换到指定数据库, 如果数据库不存在, 则创建数据库.</span></span><br><span class="line"><span class="keyword">use</span> db_name</span><br><span class="line"></span><br><span class="line"><span class="comment">// 显示当前数据库中的集合</span></span><br><span class="line">show collections</span><br><span class="line"></span><br><span class="line"><span class="comment">// 显示数据库操作命令</span></span><br><span class="line"><span class="keyword">db</span>.<span class="keyword">help</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 显示集合操作命令</span></span><br><span class="line"><span class="keyword">db</span>.ct_name.<span class="keyword">help</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对当前数据库中指定的集合进行数据查找</span></span><br><span class="line"><span class="keyword">db</span>.ct_name.find()</span><br><span class="line"><span class="keyword">db</span>.ct_name.findOne()</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建、复制、删除数据库"><a href="#创建、复制、删除数据库" class="headerlink" title="创建、复制、删除数据库"></a>创建、复制、删除数据库</h2><p>1.创建数据库或切换数据库</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> db_name</span><br><span class="line"><span class="keyword">show</span> dbs</span><br></pre></td></tr></table></figure>
+
+<p>2.复制数据库</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.copyDatabase(<span class="string">"db_name"</span>,<span class="string">"db_name2"</span>,<span class="string">"localhost"</span>)</span><br><span class="line"><span class="keyword">show</span> dbs</span><br></pre></td></tr></table></figure>
+
+<p>3.删除数据库</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">db</span><span class="selector-class">.dropDatabase</span>()</span><br><span class="line"><span class="selector-tag">show</span> <span class="selector-tag">dbs</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="集合和文档操作"><a href="#集合和文档操作" class="headerlink" title="集合和文档操作"></a>集合和文档操作</h2><p>1.集合中插入文档</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 没有该集合时会自动创建</span></span><br><span class="line"><span class="selector-tag">db</span><span class="selector-class">.ct_name</span><span class="selector-class">.insert</span>(&#123;<span class="attribute">id</span>:数字, <span class="string">'字段名'</span>:<span class="string">'值'</span>&#125;)</span><br><span class="line"><span class="selector-tag">db_ct_name</span><span class="selector-class">.fint</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除当前这个集合</span></span><br><span class="line"><span class="selector-tag">db</span><span class="selector-class">.ct</span><span class="selector-class">.name</span><span class="selector-class">.drop</span>()</span><br></pre></td></tr></table></figure>
+
+<p>2.修改集合中的文档</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改匹配的第一条数据</span></span><br><span class="line"><span class="keyword">db</span>.ct_name.<span class="keyword">update</span>(&#123;id:数字,<span class="string">"字段名"</span>:<span class="string">"值"</span>&#125;, &#123;<span class="string">"字段名"</span>:<span class="string">"值"</span>,...&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>3.删除集合中符合条件的所有数据</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.ct_name.<span class="builtin-name">remove</span>(&#123;<span class="string">"字段名"</span>:<span class="string">"值"</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>4.克隆集合</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 启动另一个实例</span></span><br><span class="line">mongod -f /etc/mongod2.conf</span><br><span class="line"></span><br><span class="line"><span class="meta"># 查看实例端口是否存在</span></span><br><span class="line">netstat -lnt</span><br><span class="line"></span><br><span class="line">mongo --port <span class="number">27018</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 从指定来源实例中克隆指定数据库下的指定集合到当前实例中</span></span><br><span class="line">db.runCommand(&#123;<span class="string">"cloneCollection"</span>:<span class="string">"db_name.ct_name"</span>, <span class="string">"from"</span>:<span class="string">"127.0.0.1:27017"</span>&#125;)</span><br><span class="line">show dbs</span><br></pre></td></tr></table></figure>
+
+<h1 id="MongoDB日常维护"><a href="#MongoDB日常维护" class="headerlink" title="MongoDB日常维护"></a>MongoDB日常维护</h1><table>
+<tr><td>-d</td><td>指明数据库的名字</td></tr>
+<tr><td>-c</td><td>指明集合的名字</td></tr>
+<tr><td>-f</td><td>指明要导出的列名</td></tr>
+<tr><td>-o</td><td>指明要导出的文件名</td></tr>
+<tr><td>-q</td><td>指明导出数据的过滤条件</td></tr>
+<tr><td>-h</td><td>MongoDB所在服务器地址(可指定端口号)</td></tr>
+<tr><td>--authenticationDatabase</td><td>授权用户的数据库角色</td></tr>
+</table>
+
+<h2 id="备份与恢复管理"><a href="#备份与恢复管理" class="headerlink" title="备份与恢复管理"></a>备份与恢复管理</h2><p>1.导入与导出<br>(1).导出</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">use info</span><br><span class="line"></span><br><span class="line">\\ 创建测试数据</span><br><span class="line"><span class="keyword">for</span>(var i=<span class="number">1</span>;i&lt;=<span class="number">1000</span>;i++)&#123;db.test.insert(&#123;<span class="string">'id'</span>:i,<span class="string">'name'</span>:<span class="string">'Alice'</span>&#125;);&#125;</span><br><span class="line"><span class="keyword">exit</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出数据</span></span><br><span class="line">mongoexport -d info -c test -o <span class="regexp">/opt/i</span>nfo.json</span><br><span class="line"><span class="comment"># 带用户认证的导出数据</span></span><br><span class="line">mongoexport -h <span class="number">192.168</span>.<span class="number">100.10</span>:<span class="number">27017</span> -uroot -p123456 -d info -c test -o <span class="regexp">/opt/i</span>nfo.json --authenticationDatabase admin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出id&gt;500的数据</span></span><br><span class="line">mongoexport -d info -c test -q <span class="string">'&#123; "id":&#123; "$gt":500&#125; &#125;'</span> -o <span class="regexp">/opt/i</span>nfo_gt500.json</span><br><span class="line"><span class="comment"># 带用户认证导出id&gt;500的数据</span></span><br><span class="line">mongoexport -h <span class="number">192.168</span>.<span class="number">100.10</span>:<span class="number">27017</span> -uroot -p123456 -d info -c test -q <span class="string">'&#123; "id":&#123; "$gt":500&#125; &#125;'</span> -o <span class="regexp">/opt/i</span>nfo_gt500.json --authenticationDatabase admin</span><br><span class="line"></span><br><span class="line">head -<span class="number">10</span> <span class="regexp">/opt/i</span>nfo_gt500.json</span><br></pre></td></tr></table></figure>
+
+<p>(2).导入</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">\\ 删除集合</span><br><span class="line">db.test.drop()</span><br><span class="line"><span class="keyword">exit</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入数据</span></span><br><span class="line">mongoimport -d info -c test --file <span class="regexp">/opt/i</span>nfo.json</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看数据</span></span><br><span class="line">mongo</span><br><span class="line">use info</span><br><span class="line">show collections</span><br></pre></td></tr></table></figure>
+
+<p>2.备份与恢复<br>(1)备份</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mongodump -h <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">27017</span> -d info -o /opt/</span><br><span class="line"></span><br><span class="line"># 带用户认证</span><br><span class="line">mongodump -h <span class="number">192.168</span><span class="number">.100</span><span class="number">.10</span>:<span class="number">27017</span> -uroot -p123456 -d info -o /opt/ --authenticationDatabase admin</span><br></pre></td></tr></table></figure>
+
+<p>(2)恢复</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mongorestore -h 127.0.0.1:27017 -d <span class="builtin-name">info</span> <span class="attribute">--dir</span>=/opt/info/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 带用户认证</span></span><br><span class="line">mongorestore -h 192.168.100.10:27017 -uroot -p123456 -d <span class="builtin-name">info</span> <span class="attribute">--dir</span>=/opt/info/  --authenticationDatabase admin</span><br></pre></td></tr></table></figure>
+
+<h2 id="安全管理"><a href="#安全管理" class="headerlink" title="安全管理"></a>安全管理</h2><p>1.限定监听特定IP和端口</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">vim</span> <span class="string">/etc/mongod.conf</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">27017</span></span><br><span class="line">  <span class="attr">bindIp:</span> <span class="number">192.168</span><span class="number">.100</span><span class="number">.10</span></span><br><span class="line"></span><br><span class="line"><span class="string">netstat</span> <span class="string">-antp</span> <span class="string">|</span> <span class="string">grep</span> <span class="number">27017</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 连接MongoDB</span></span><br><span class="line"><span class="string">mongo</span> <span class="string">--host</span> <span class="number">192.168</span><span class="number">.100</span><span class="number">.10</span><span class="string">:27017</span></span><br></pre></td></tr></table></figure>
+
+<p>2.授权启动</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重新连接MongoDB</span></span><br><span class="line">mongod -f <span class="regexp">/etc/m</span>ongod.conf --shutdown</span><br><span class="line">mongod -f <span class="regexp">/etc/m</span>ongod.conf </span><br><span class="line"></span><br><span class="line">mongo --host <span class="number">192.168</span>.<span class="number">100.10</span>:<span class="number">27017</span></span><br><span class="line">use admin </span><br><span class="line"><span class="regexp">//</span> 创建用户</span><br><span class="line">db.createUser(</span><br><span class="line">	&#123;</span><br><span class="line">		user:<span class="string">"root"</span>,</span><br><span class="line">		pwd:<span class="string">"123456"</span>,</span><br><span class="line">		roles:[&#123;role:<span class="string">"root"</span>, db:<span class="string">"admin"</span>&#125;]</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span> 删除用户</span><br><span class="line">db.dropUser(<span class="string">'用户名'</span>)</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span> 授权验证</span><br><span class="line">db.auth(<span class="string">'root'</span>,<span class="string">'123456'</span>)</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span> 查看用户</span><br><span class="line">db.system.users.find().pretty()</span><br><span class="line"><span class="keyword">exit</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启MongoDB的授权</span></span><br><span class="line">vim <span class="regexp">/etc/m</span>ongod.conf</span><br><span class="line">  security:</span><br><span class="line">    authorization: enabled</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新连接MongoDB</span></span><br><span class="line">mongod -f <span class="regexp">/etc/m</span>ongod.conf --shutdown</span><br><span class="line">mongod -f <span class="regexp">/etc/m</span>ongod.conf </span><br><span class="line"></span><br><span class="line"><span class="comment"># 连接验证</span></span><br><span class="line">mongo -uroot -p123456  <span class="number">192.168</span>.<span class="number">100.10</span><span class="regexp">/admin</span></span><br></pre></td></tr></table></figure>
+
+<pre>
+<font color="red">1</font>: 表示验证成功
+
+db.createUser({
+    user: "用户名",
+    pwd: "密码",
+    roles: [ { role: "角色", db: "作用数据库" } ]
+})
+
+数据库用户角色: read、readWrite
+数据库管理角色: dbAdmin、dbOwner、userAdmin
+集群管理角色: clusterAdmin、clusterManager、clusterMonitor、hostManager
+备份恢复角色: backup、restore
+所有数据库角色: readAnyDatabase、readWriteAnyDatabase、userAdminAnyDatabase、dbAdminAnyDatabase
+超级用户角色: root
+</pre>
+
+<p>3.进程管理</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看当前正在运行的进程</span></span><br><span class="line"><span class="selector-tag">db</span><span class="selector-class">.currentOp</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据PID结束进程</span></span><br><span class="line"><span class="selector-tag">db</span><span class="selector-class">.killOp</span>(<span class="number">4988</span>)</span><br></pre></td></tr></table></figure>
+<pre>
+{
+    "inprog" : [
+        {
+            "desc" : "conn2",
+            "threadId" : "140116274083584",
+            "connectionId" : 2,
+            "client" : "192.168.100.10:51702",
+            "appName" : "MongoDB Shell",
+            "clientMetadata" : {
+                "application" : {
+                    "name" : "MongoDB Shell"
+                },
+                "driver" : {
+                    "name" : "MongoDB Internal Client",
+                    "version" : "3.4.24"
+                },
+                "os" : {
+                    "type" : "Linux",
+                    "name" : "CentOS Linux release 7.5.1804 (Core) ",
+                    "architecture" : "x86_64",
+                    "version" : "Kernel 3.10.0-862.el7.x86_64"
+                }
+            },
+            "active" : true,
+            <font color="red">"opid" : 4988,</font>
+            "secs_running" : 0,
+            "microsecs_running" : NumberLong(47),
+            "op" : "command",
+            "ns" : "admin.$cmd",
+            "query" : {
+                "currentOp" : 1
+            },
+            "numYields" : 0,
+            "locks" : {
+
+            },
+            "waitingForLock" : false,
+            "lockStats" : {
+
+            }
+        }
+    ],
+    "ok" : 1
+}
+</pre>
+
+<h2 id="MongoDB监控"><a href="#MongoDB监控" class="headerlink" title="MongoDB监控"></a>MongoDB监控</h2><p>1.查看数据库统计信息的命令<br>查看数据库实例的状态信息: <code>db.serverStatus()</code><br>查看当前数据库的统计信息: <code>db.stats()</code></p>
+<p>用Web界面查看系统监控信息<br><a href="https://docs.mongodb.com/v3.4/reference/configuration-options/#net.http.enabled" target="_blank" rel="noopener">官方文档资料参考</a></p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">vim <span class="meta-keyword">/etc/</span>mongod.conf</span><br><span class="line"><span class="symbol">  net:</span></span><br><span class="line">    ...</span><br><span class="line">  </span><br><span class="line"><span class="symbol">    http:</span></span><br><span class="line"><span class="symbol">      enabled:</span> true</span><br><span class="line">  </span><br><span class="line">  <span class="meta">#security:</span></span><br><span class="line">    <span class="meta">#authorization: enabled</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># 重新连接MongoDB</span></span><br><span class="line">mongod -f <span class="meta-keyword">/etc/</span>mongod.conf --shutdown</span><br><span class="line">mongod -f <span class="meta-keyword">/etc/</span>mongod.conf </span><br><span class="line"></span><br><span class="line"><span class="meta"># 访问HTTP状态界面</span></span><br><span class="line">curl http:<span class="comment">//192.168.100.10:28017</span></span><br></pre></td></tr></table></figure>
+
+<p>2.查看集合统计信息的命令<br>查看集合统计信息: <code>db.users.stats()</code><br>查看集合大小: <code>db.users.dataSize()</code></p>
+<p>3.第三方监控工具<br>在Nagios中配置使用MongoDB插件来监控MongoDB数据库</p>
+
+    </div>
+
+    
+    
+    
+
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color:white;font-size:14px;">-------------------本文结束 <i class="fa fa-heart"></i> 感谢阅读-------------------</div>
+    
+</div>
+	
+	</div>
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>云
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.mengyun.club/post/f20a5c88/" title="MongoDB基础">http://www.mengyun.club/post/f20a5c88/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/MongoDB/" rel="tag"><i class="fa fa-tag"></i> MongoDB</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/c7e46abc/" rel="prev" title="MySQL主从复制、读写分离、MMM高可用">
+                  <i class="fa fa-chevron-left"></i> MySQL主从复制、读写分离、MMM高可用
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/37db6981/" rel="next" title="MongoDB复制集">
+                  MongoDB复制集 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">云</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">250k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:47</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/post/f20a5c88/",
+    }, {"enable":true,"appId":"HKOdg6jtf8l5uFP2Ag6eDIIk-gzGzoHsz","appKey":"Gn11LWMBtG3eEkwpnpDhJUI3","placeholder":"请输入你的评论内容, 可编写Markdown语法.","avatar":"mm","meta":["nick","mail"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":true,"requiredFields":[]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+  
+</body>
+</html>

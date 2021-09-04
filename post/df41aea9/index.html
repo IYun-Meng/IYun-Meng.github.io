@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Grandstander:300,300italic,400,400italic,700,700italic|Noto+Serif+SC:300,300italic,400,400italic,700,700italic|Architects+Daughter:300,300italic,400,400italic,700,700italic|Dosis:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.mengyun.club","root":"/","scheme":"Mist","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="概述Linux是一个基于POSIX的多用户、多任务、支持多线程和多CPU的操作系统 可移植操作系统接口(英语:Portable Operating System Interface, 缩写为POSIX)是IEEE为要在各种UNIX操作系统上运行软件, 而定义API的一系列互相关联的标准的总称. 电气与电子工程师协会(英语: Institute of Electrical and Electron">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux基础知识">
+<meta property="og:url" content="http://www.mengyun.club/post/df41aea9/index.html">
+<meta property="og:site_name" content="爱梦的博客">
+<meta property="og:description" content="概述Linux是一个基于POSIX的多用户、多任务、支持多线程和多CPU的操作系统 可移植操作系统接口(英语:Portable Operating System Interface, 缩写为POSIX)是IEEE为要在各种UNIX操作系统上运行软件, 而定义API的一系列互相关联的标准的总称. 电气与电子工程师协会(英语: Institute of Electrical and Electron">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.mengyun.club/post/df41aea9/vim%E4%B8%8D%E5%90%8C%E6%A8%A1%E5%BC%8F%E9%97%B4%E7%9A%84%E5%88%87%E6%8D%A2.png">
+<meta property="og:image" content="http://www.mengyun.club/post/df41aea9/RAID0.png">
+<meta property="og:image" content="http://www.mengyun.club/post/df41aea9/RAID1.jpg">
+<meta property="og:image" content="http://www.mengyun.club/post/df41aea9/RAID5.gif">
+<meta property="og:image" content="http://www.mengyun.club/post/df41aea9/RAID10.png">
+<meta property="og:image" content="http://www.mengyun.club/post/df41aea9/firewall-config%E7%95%8C%E9%9D%A2.png">
+<meta property="og:image" content="http://www.mengyun.club/%E5%85%81%E8%AE%B8%E5%85%B6%E4%BB%96%E4%B8%BB%E6%9C%BA%E8%AE%BF%E9%97%AEhttp%E6%9C%8D%E5%8A%A1.png">
+<meta property="og:image" content="http://www.mengyun.club/post/df41aea9/%E5%85%81%E8%AE%B8%E5%85%B6%E4%BB%96%E4%B8%BB%E6%9C%BA%E8%AE%BF%E9%97%AE8080-8088%E7%AB%AF%E5%8F%A3.png">
+<meta property="og:image" content="http://www.mengyun.club/post/df41aea9/%E9%87%8D%E5%90%AF%E5%90%8E%E4%BE%9D%E7%84%B6%E6%9C%89%E6%95%88.png">
+<meta property="og:image" content="http://www.mengyun.club/post/df41aea9/%E5%BC%80%E5%90%AF%E4%BC%AA%E8%A3%85%E5%8A%9F%E8%83%BD.png">
+<meta property="og:image" content="http://www.mengyun.club/post/df41aea9/%E5%B0%86%E5%90%91%E6%9C%AC%E6%9C%BA888%E7%AB%AF%E5%8F%A3%E7%9A%84%E8%AF%B7%E6%B1%82%E8%BD%AC%E5%8F%91%E8%87%B3%E6%9C%AC%E6%9C%BA%E7%9A%8422%E7%AB%AF%E5%8F%A3.png">
+<meta property="og:image" content="http://www.mengyun.club/post/df41aea9/reload%E7%AB%8B%E5%8D%B3%E7%94%9F%E6%95%88.png">
+<meta property="og:image" content="http://www.mengyun.club/post/df41aea9/%E4%BB%85%E5%85%81%E8%AE%B8192.168.10.20%E4%B8%BB%E6%9C%BA%E8%AE%BF%E9%97%AE%E6%9C%AC%E6%9C%BA%E7%9A%841234%E7%AB%AF%E5%8F%A3.png">
+<meta property="og:image" content="http://www.mengyun.club/post/df41aea9/%E6%9F%A5%E7%9C%8B%E7%BD%91%E5%8D%A1%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF.png">
+<meta property="og:image" content="http://www.mengyun.club/post/df41aea9/%E6%9C%AA%E7%94%A8SNAT1.png">
+<meta property="og:image" content="http://www.mengyun.club/post/df41aea9/%E4%BD%BF%E7%94%A8SNAT1.png">
+<meta property="og:image" content="http://www.mengyun.club/post/df41aea9/%E4%BD%BF%E7%94%A8DNAT.png">
+<meta property="article:published_time" content="2020-06-18T01:47:31.000Z">
+<meta property="article:modified_time" content="2021-04-27T11:46:36.642Z">
+<meta property="article:author" content="云">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.mengyun.club/post/df41aea9/vim%E4%B8%8D%E5%90%8C%E6%A8%A1%E5%BC%8F%E9%97%B4%E7%9A%84%E5%88%87%E6%8D%A2.png">
+
+
+<link rel="canonical" href="http://www.mengyun.club/post/df41aea9/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux基础知识 | 爱梦的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="爱梦的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/src/clickLove.js"></script>
+
+<script type="text/javascript"
+color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+  
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">爱梦的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">常常与我陪伴的就是梦</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">38</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-playlist">
+
+    <a href="/playlist/" rel="section"><i class="fa fa-music fa-fw"></i>网易云歌单</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">	
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用户类型"><span class="nav-text">用户类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#终端类型"><span class="nav-text">终端类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#交互式接口"><span class="nav-text">交互式接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell"><span class="nav-text">Shell</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vim文本编辑器"><span class="nav-text">Vim文本编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置主机名称"><span class="nav-text">配置主机名称</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置网卡信息"><span class="nav-text">配置网卡信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Yum仓库"><span class="nav-text">配置Yum仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FTP提供方式"><span class="nav-text">FTP提供方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP提供方式"><span class="nav-text">HTTP提供方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地提供方式"><span class="nav-text">本地提供方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计划任务服务程序"><span class="nav-text">计划任务服务程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一次性计划任务"><span class="nav-text">一次性计划任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#周期性计划任务"><span class="nav-text">周期性计划任务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用户身份与能力"><span class="nav-text">用户身份与能力</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#id命令"><span class="nav-text">id命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useradd命令"><span class="nav-text">useradd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupadd命令"><span class="nav-text">groupadd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usermod命令"><span class="nav-text">usermod命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#passwd命令"><span class="nav-text">passwd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#userdel命令"><span class="nav-text">userdel命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件权限与归属"><span class="nav-text">文件权限与归属</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件的特殊权限"><span class="nav-text">文件的特殊权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件的隐藏属性"><span class="nav-text">文件的隐藏属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chattr命令"><span class="nav-text">chattr命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lsattr命令"><span class="nav-text">lsattr命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件访问控制列表"><span class="nav-text">文件访问控制列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setfacl命令"><span class="nav-text">setfacl命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getfacl命令"><span class="nav-text">getfacl命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#su命令和sudo服务"><span class="nav-text">su命令和sudo服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#su命令"><span class="nav-text">su命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sudo服务"><span class="nav-text">sudo服务</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储结构与磁盘划分"><span class="nav-text">存储结构与磁盘划分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一切从”-“开始"><span class="nav-text">一切从”&#x2F;“开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#物理设备的命令规则"><span class="nav-text">物理设备的命令规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统与数据资料"><span class="nav-text">文件系统与数据资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载硬件设备"><span class="nav-text">挂载硬件设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加硬盘设备"><span class="nav-text">添加硬盘设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加交换分区"><span class="nav-text">添加交换分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘容量配额"><span class="nav-text">磁盘容量配额</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xfs-quota命令"><span class="nav-text">xfs_quota命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#edquota命令"><span class="nav-text">edquota命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用RAID与LVM磁盘阵列技术"><span class="nav-text">使用RAID与LVM磁盘阵列技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RAID磁盘冗余阵列"><span class="nav-text">RAID磁盘冗余阵列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-0"><span class="nav-text">RAID 0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-1"><span class="nav-text">RAID 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-5"><span class="nav-text">RAID 5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-10"><span class="nav-text">RAID 10</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署磁盘阵列"><span class="nav-text">部署磁盘阵列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#损坏磁盘阵列及修复"><span class="nav-text">损坏磁盘阵列及修复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘阵列-备份盘"><span class="nav-text">磁盘阵列 + 备份盘</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LVM逻辑卷管理器"><span class="nav-text">LVM逻辑卷管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#部署逻辑卷"><span class="nav-text">部署逻辑卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩容逻辑卷"><span class="nav-text">扩容逻辑卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缩小逻辑卷"><span class="nav-text">缩小逻辑卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑卷快照"><span class="nav-text">逻辑卷快照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除逻辑卷"><span class="nav-text">删除逻辑卷</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Iptables与Firewalld防火墙"><span class="nav-text">Iptables与Firewalld防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#防火墙管理工具"><span class="nav-text">防火墙管理工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iptables"><span class="nav-text">Iptables</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#策略与规则链"><span class="nav-text">策略与规则链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本的命令参数"><span class="nav-text">基本的命令参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#规则的匹配条件"><span class="nav-text">规则的匹配条件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#通用匹配"><span class="nav-text">通用匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐含匹配"><span class="nav-text">隐含匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显式匹配"><span class="nav-text">显式匹配</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#规则的导出、导入"><span class="nav-text">规则的导出、导入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#规则的备份及还原"><span class="nav-text">规则的备份及还原</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用防火墙脚本"><span class="nav-text">使用防火墙脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义基本变量"><span class="nav-text">定义基本变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加载内核模块"><span class="nav-text">加载内核模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调整-proc参数"><span class="nav-text">调整&#x2F;proc参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置具体的iptables规则"><span class="nav-text">设置具体的iptables规则</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防火墙脚本示例"><span class="nav-text">防火墙脚本示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Firewalld"><span class="nav-text">Firewalld</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Firewalld数据处理流程"><span class="nav-text">Firewalld数据处理流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Firewalld防火墙的配置"><span class="nav-text">Firewalld防火墙的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#运行时配置"><span class="nav-text">运行时配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#永久配置"><span class="nav-text">永久配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#终端管理工具"><span class="nav-text">终端管理工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#防火墙进程操作"><span class="nav-text">防火墙进程操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防火墙管理操作"><span class="nav-text">防火墙管理操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防火墙状态查询"><span class="nav-text">防火墙状态查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防火墙重载配置"><span class="nav-text">防火墙重载配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#区域管理"><span class="nav-text">区域管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务管理"><span class="nav-text">服务管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#端口管理"><span class="nav-text">端口管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置实例"><span class="nav-text">配置实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图形管理工具"><span class="nav-text">图形管理工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务的访问控制列表"><span class="nav-text">服务的访问控制列表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux下的NAT技术"><span class="nav-text">Linux下的NAT技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SNAT策略及应用"><span class="nav-text">SNAT策略及应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SNAT策略概述"><span class="nav-text">SNAT策略概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SNAT策略应用"><span class="nav-text">SNAT策略应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#共享固定IP地址上网"><span class="nav-text">共享固定IP地址上网</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#共享动态IP地址上网"><span class="nav-text">共享动态IP地址上网</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNAT策略及应用"><span class="nav-text">DNAT策略及应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DNAT策略概述"><span class="nav-text">DNAT策略概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNAT策略应用"><span class="nav-text">DNAT策略应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#发布企业内部的Web服务器"><span class="nav-text">发布企业内部的Web服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发布企业内部的OpenSSH服务器"><span class="nav-text">发布企业内部的OpenSSH服务器</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="云"
+      src="/images/head_Picture/Yu_Me5.jpg">
+  <p class="site-author-name" itemprop="name">云</p>
+  <div class="site-description" itemprop="description">我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/IYun-Meng" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;IYun-Meng" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kili3kili1miyukeno4@foxmail.co" title="E-Mail → mailto:kili3kili1miyukeno4@foxmail.co" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/?hl=zh_CN" title="https:&#x2F;&#x2F;www.google.com&#x2F;?hl&#x3D;zh_CN" rel="noopener" target="_blank">谷歌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zhihu.com/" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;" rel="noopener" target="_blank">知乎</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.github.com/" title="https:&#x2F;&#x2F;www.github.com&#x2F;" rel="noopener" target="_blank">GitHub</a>
+        </li>
+    </ul>
+  </div>
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoFs/" rel="tag">AutoFs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bind/" rel="tag">Bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DHCP/" rel="tag">DHCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deepin/" rel="tag">Deepin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dovecot/" rel="tag">Dovecot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/" rel="tag">FTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KVM/" rel="tag">KVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keepalived/" rel="tag">Keepalived</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KickStart/" rel="tag">KickStart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/" rel="tag">NFS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTP/" rel="tag">NTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nagios/" rel="tag">Nagios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PXE/" rel="tag">PXE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Physics2D/" rel="tag">Physics2D</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postfix/" rel="tag">Postfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/" rel="tag">SELinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSLinux/" rel="tag">SYSLinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Samba/" rel="tag">Samba</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sprite/" rel="tag">Sprite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TFTP/" rel="tag">TFTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/" rel="tag">Unity</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zabbix/" rel="tag">Zabbix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/" rel="tag">root</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+      </section>
+	  
+	</div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.mengyun.club/post/df41aea9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_Picture/Yu_Me5.jpg">
+      <meta itemprop="name" content="云">
+      <meta itemprop="description" content="我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱梦的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux基础知识
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-06-18 09:47:31" itemprop="dateCreated datePublished" datetime="2020-06-18T09:47:31+08:00">2020-06-18</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-04-27 19:46:36" itemprop="dateModified" datetime="2021-04-27T19:46:36+08:00">2021-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/post/df41aea9/" class="post-meta-item leancloud_visitors" data-flag-title="Linux基础知识" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/post/df41aea9/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/post/df41aea9/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>29k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>27 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><code>Linux</code>是一个基于<code>POSIX</code>的<code>多用户</code>、<code>多任务</code>、支持<code>多线程</code>和多CPU的<code>操作系统</code></p>
+<p><code>可移植操作系统接口</code>(英语:<code>Portable Operating System Interface</code>, 缩写为<code>POSIX</code>)是<code>IEEE</code>为要在各种<code>UNIX操作系统</code>上运行软件, 而定义<code>API</code>的一系列互相关联的标准的总称.</p>
+<p><code>电气与电子工程师协会</code>(英语: <code>Institute of Electrical and Electronics Engineers</code>), 简称<code>IEEE</code>, 总部位于美国纽约, 是一个国际性的电子技术与信息科学工程师的协会, 也是目前全球最大的非营利性专业技术学会. <code>IEEE</code>大部分成员是<code>电子工程师</code>、<code>计算机工程师</code>和<code>计算机科学家</code></p>
+<p><code>Unix</code>是20世纪70年代初出现的一个<code>操作系统</code>, 除了作为<code>网络操作系统</code>之外, 还可以作为<code>单机操作系统</code>使用.</p>
+<p><code>API</code>(英语:<code>Application Programming Interface</code>, 应用程序接口)是一些<code>预先定义</code>的<code>接口</code>(如函数、HTTP接口), 或指软件系统不同组成部分衔接的<code>约定</code>. 用来提供应用程序与开发人员基于某软件或硬件得以访问的一组例程, 而又无需访问源码, 或理解内部工作机制的细节.</p>
+<h1 id="用户类型"><a href="#用户类型" class="headerlink" title="用户类型"></a>用户类型</h1><p><code>uid=0 gid=0 groups=0</code> <code>root</code>用户: 一个特殊的管理帐户, 也被称为超级用户; root已接近完整的系统控制, 对系统损害几乎有无限的能力, 除非必要, 不要登录为root.<br><code>999 &gt;= uid gid groups &gt;= 1</code> 系统用户: Linux系统为了避免因某个服务程序出现漏洞而被黑客提权至整台服务器, 默认服务程序会有独立的系统用户负责运行, 进而有效控制被破坏范围.<br><code>uid gid groups &gt;= 1000</code> 普通用户:  由<code>root</code>创建的用于日常工作的用户, 权限有限, 造成损害的能力比较有限.</p>
+<a id="more"></a>
+
+<h1 id="终端类型"><a href="#终端类型" class="headerlink" title="终端类型"></a>终端类型</h1><p>设备终端: 键盘、鼠标、显示器<br>控制台终端: <code>/dev/console</code><br>串行终端: <code>/dev/ttyS数字</code><br>虚拟终端: <code>tty</code>(<code>teletypewriters</code>), <code>/dev/tty数字</code>.<br>图形终端<br>伪终端: <code>/dev/pts/数字</code><br>查看终端的命令: <code>tty</code></p>
+<h1 id="交互式接口"><a href="#交互式接口" class="headerlink" title="交互式接口"></a>交互式接口</h1><p>图形用户界面(英语: <code>Graphical User Interface</code>, 简称: <code>GUI</code>, 又称图形用户接口）是指采用图形方式显示的计算机操作用户界面.<br>命令行界面（英语: <code>Command-Line Interface</code>, 简称: <code>CLI</code>）是在图形用户界面得到普及之前使用最为广泛的用户界面, 它通常不支持鼠标, 用户通过键盘输入指令, 计算机接收到指令后, 予以执行.</p>
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p><code>Shell</code>是Linux系统的用户界面(命令行), 提供了用户与内核进行交互操作的一种接口. 它接收用户输入的命令并把它送入内核去执行; <code>Shell</code>也被称为Linux的命令解释器(<code>Command Interpreter</code>); <code>Shell</code>是一种高级程序设计语言.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示当前使用的shell</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;SHELL&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前系统使用的所有shell</span></span><br><span class="line">cat /etc/shells</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="Vim文本编辑器"><a href="#Vim文本编辑器" class="headerlink" title="Vim文本编辑器"></a>Vim文本编辑器</h1><p>Vim编辑器中设置了三种模式:</p>
+<pre>
+ 命令模式: 控制光标移动, 可对文本进行复制、粘贴、删除和查找等工作.
+ 输入模式: 正常的文本录入.
+ 末行模式: 保存或退出文档, 以及设置编辑环境.
+</pre>
+<p><img src="/post/df41aea9/vim%E4%B8%8D%E5%90%8C%E6%A8%A1%E5%BC%8F%E9%97%B4%E7%9A%84%E5%88%87%E6%8D%A2.png" alt="vim不同模式间的切换"></p>
+<p>命令模式的常用命令</p>
+<table>
+<tr><td>命令</td><td>作用</td></tr>
+<tr><td>dd</td><td>删除(剪切)光标所在整行</td></tr>
+<tr><td>5dd</td><td>删除(剪切)从光标处开始的5行</td></tr>
+<tr><td>yy</td><td>复制光标所在整行</td></tr>
+<tr><td>5yy</td><td>复制从光标处开始的5行</td></tr>
+<tr><td>n</td><td>显示搜索命令定位到的下一个字符串</td></tr>
+<tr><td>N</td><td>显示搜索命令定位到的上一个字符串</td></tr>
+<tr><td>u</td><td>撤销上一步的操作</td></tr>
+<tr><td>p</td><td>将之前删除(dd)或复制(yy)过的数据粘贴到光标后面</td></tr>
+</table>
+
+<p>末行模式的常用命令</p>
+<table>
+<tr><td>命令</td><td>作用</td></tr>
+<tr><td>:w</td><td>保存</td></tr>
+<tr><td>:q</td><td>退出</td></tr>
+<tr><td>:q!</td><td>强制退出(放弃对文档的修改内容)</td></tr>
+<tr><td>:wq!</td><td>强制保存退出</td></tr>
+<tr><td>:set nu</td><td>显示行号</td></tr>
+<tr><td>:set nonu</td><td>不显示行号</td></tr>
+<tr><td>:命令</td><td>执行该命令</td></tr>
+<tr><td>:整数</td><td>跳转到该行</td></tr>
+<tr><td>:s/one/two</td><td>将当前光标所在行的第一个one替换成two</td></tr>
+<tr><td>:s/one/two/g</td><td>将当前光标所在行的所有one替换成two</td></tr>
+<tr><td>:%s/one/two/g</td><td>将全文中的所有one替换成two</td></tr>
+<tr><td>?字符串</td><td>在文本中从下至上搜索该字符串</td></tr>
+<tr><td>/字符串</td><td>在文本中从上至下搜索该字符串</td></tr>
+</table>
+
+<h2 id="配置主机名称"><a href="#配置主机名称" class="headerlink" title="配置主机名称"></a>配置主机名称</h2><p>在Linux系统中, 主机名大多保存在/etc/hostname文件中.</p>
+<p>第1步: 使用Vim编辑器修改”/etc/hostname”主机名称文件.<br><code>vim /etc/hostname</code></p>
+<p>第2步: 保存并退出文档, 然后使用hostname命令检查是否修改成功.<br><code>hostname</code></p>
+<h2 id="配置网卡信息"><a href="#配置网卡信息" class="headerlink" title="配置网卡信息"></a>配置网卡信息</h2><p>第1步: 切换到/etc/sysconfig/network-scripts目录中(存放着网卡的配置文件).<br><code>cd /etc/sysconfig/network-scripts/</code>&nbsp;&nbsp;<code>vim ifcfg-eno16777736</code></p>
+<p>第2步: 使用Vim编辑器修改网卡文件ifcfg-eno16777736,逐项写入下面的配置参数并保存退出.</p>
+<pre>
+设备类型: TYPE=Ethernet
+地址分配模式: BOOTPROTO=static
+网卡名称: NAME=eno16777736
+是否启动: ONBOOT=yes
+IP地址: IPADDR=192.168.10.10
+子网掩码: NETMASK=255.255.255.0
+网关地址: GATEWAY=192.168.10.1
+DNS地址: DNS1=192.168.10.1
+</pre>
+
+<p>第3步: 重启网络服务并测试网络是否联通<br><code>systemctl restart network</code></p>
+<h2 id="配置Yum仓库"><a href="#配置Yum仓库" class="headerlink" title="配置Yum仓库"></a>配置Yum仓库</h2><p>Yum软件仓库的作用是为了进一步简化RPM管理软件的难度以及自动分析所需软件包及其依赖关系的技术</p>
+<h3 id="FTP提供方式"><a href="#FTP提供方式" class="headerlink" title="FTP提供方式"></a>FTP提供方式</h3><p>客户端:<br>配置好FTP服务进行文件共享</p>
+<p>服务端:</p>
+<pre>
+vi repo_http.repo
+ [http]
+ name=http_centos7.2
+ baseurl=ftp://用户名:密码@ftp服务端ip/默认根目录下的指定目录
+ gpgcheck=0
+ enabled=1
+</pre>
+
+<h3 id="HTTP提供方式"><a href="#HTTP提供方式" class="headerlink" title="HTTP提供方式"></a>HTTP提供方式</h3><p>本地镜像:<br>安装httpd软件. 启动httpd服务并设置配置为开机启动.</p>
+<pre>
+ yum -y install httpd
+ systemctl enabled httpd
+ systemctl restart httpd
+</pre>
+
+<p>镜像资源目录拷贝至http的网站根目录(/var/www/html/)</p>
+<pre>
+ /var/www/html/centos7.2
+</pre>
+
+<p>使用该yum仓库</p>
+<pre>
+ vi /etc/yum.repo.d/centos.repo
+
+ [http]
+ name=http_centos7.2
+ baseurl=http://ip地址/centos7.2
+ gpgcheck=0
+ enabled=1
+</pre>
+
+<p>阿里源镜像:</p>
+<pre>wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+</pre>
+
+<p>查看yum源中是否有软件包<br><code>yum repolist</code></p>
+<h3 id="本地提供方式"><a href="#本地提供方式" class="headerlink" title="本地提供方式"></a>本地提供方式</h3><p>第1步: 进入到/etc/yum.repos.d/目录中(因为该目录存放着Yum软件仓库的配置文件).<br><code>cd /etc/yum.repos.d/</code></p>
+<p>第2步: 使用Vim编辑器创建一个名为rhel7.repo的新配置文件(文件名称可随意,但后缀必须为.repo), 逐项写入下面加粗的配置参数并保存退出.<br><code>vim rhel7.repo</code></p>
+<table>
+<tr><td>[rhel-media]</td><td>Yum软件仓库唯一标识符, 避免与其他仓库冲突.</td>
+</tr><tr><td>name=linuxprobe</td><td>Yum软件仓库的名称描述, 易于识别仓库用处.</td>
+</tr><tr><td>baseurl=file:///media/cdrom</td><td>提供的方式包括FTP(ftp://..)、HTTP(http://..)、本地(file:///..).</td>
+</tr><tr><td>enabled=1</td><td>设置此源是否可用; 1为可用, 0为禁用.</td>
+</tr><tr><td>gpgcheck=1</td><td>设置此源是否校验文件; 1为校验, 0为不校验.</td>
+</tr><tr><td>gpgkey=file</td><td>///media/cdrom/RPM-GPG-KEY-redhat-release: 若上面参数开启校验,那么请指定公钥文件地址.</td>
+</tr></table>
+
+<p>第3步: 按配置参数的路径挂载光盘, 并把光盘挂载信息写入到/etc/fstab文件中.</p>
+<pre>
+ mkdir -p /media/cdrom
+ mount /dev/cdrom /media/cdrom
+
+ vim /etc/fstab
+ /dev/cdrom /media/cdrom iso9660 defaults 0 0
+</pre>
+
+<p>第4步: 使用<code>yum install httpd -y</code>命令检查Yum软件仓库是否已经可用.<br>尝试使用Yum软件仓库来安装Web服务, 末尾出现Complete!则代表配置正确.</p>
+<h1 id="计划任务服务程序"><a href="#计划任务服务程序" class="headerlink" title="计划任务服务程序"></a>计划任务服务程序</h1><h2 id="一次性计划任务"><a href="#一次性计划任务" class="headerlink" title="一次性计划任务"></a>一次性计划任务</h2><table>
+<tr><td>at 时间</td><td>设置一次性计划任务</td></tr>
+<tr><td>atrm 任务序号</td><td>根据任务序号删除一次性计划任务</td></tr>
+<tr><td>at -l</td><td>查看已设置好但还未执行的一次性计划任务</td></tr>
+<tr><td>at -c 任务序号</td><td>查看指定一次性计划任务的执行命令</td></tr>
+</table>
+
+<h2 id="周期性计划任务"><a href="#周期性计划任务" class="headerlink" title="周期性计划任务"></a>周期性计划任务</h2><p>cronb:服务名称<br>crontab:配置工具</p>
+<table>
+<tr><td>crontab -e</td><td>编辑计划任务</td></tr>
+<tr><td>crontab -e -u 用户名</td><td>编辑指定用户的计划任务</td></tr>
+<tr><td>crontab -l</td><td>查看当前计划任务</td></tr>
+<tr><td>crontab -r 任务序号</td><td>删除某条计划任务</td></tr>
+</table>
+<pre>
+*  *  *  *  *  任务内容
+分 时 日 月 周  执行命令
+whereis 命令 --查询命令的所在路径
+</pre>
+注:用任务计划执行时, 命令必须使用绝对路径.
+
+<h1 id="用户身份与能力"><a href="#用户身份与能力" class="headerlink" title="用户身份与能力"></a>用户身份与能力</h1><table>
+<tr><td>管理员UID:0</td><td>系统的管理员用户</td></tr>
+<tr><td>系统用户UID:1-999</td><td>Linux系统为了避免因某个服务程序出现漏洞而被黑客提权至整台服务器, 默认服务程序会有独立的系统用户负责运行, 进而有效控制被破坏范围.</td></tr>
+<tr><td>普通用户UID:1000-</td><td>由管理员创建的用于日常工作的用户</td></tr>
+</table>
+
+<h2 id="id命令"><a href="#id命令" class="headerlink" title="id命令"></a>id命令</h2><p>id命令用于显示指定用户的用户ID和组ID, 其格式为:<code>id [选项] [用户名]</code>.</p>
+<h2 id="useradd命令"><a href="#useradd命令" class="headerlink" title="useradd命令"></a>useradd命令</h2><p>useradd命令用于创建新的用户, 格式为<code>useradd [选项] 用户名</code>.</p>
+<pre>
+使用该命令创建用户账户时, 默认的用户家目录会被存放在/home目录中, 默认的Shell解释器为/bin/bash.
+在Linux系统中创建每个用户时, 将自动创建一个与其同名的基本用户组, 而且这个基本用户组只有该用户一个人.
+</pre>
+
+<h2 id="groupadd命令"><a href="#groupadd命令" class="headerlink" title="groupadd命令"></a>groupadd命令</h2><p>groupadd命令用于创建用户组, 格式为<code>groupadd [选项] 群组名</code>.</p>
+<pre>
+如果该用户以后被归纳入其他用户组, 则这个其他用户组称之为扩展用户组.
+一个用户只有一个基本用户组, 但是可以有多个扩展用户组, 从而满足日常的工作需要.
+</pre>
+
+<h2 id="usermod命令"><a href="#usermod命令" class="headerlink" title="usermod命令"></a>usermod命令</h2><p>usermod命令用于修改用户的属性, 格式为<code>usermod [选项] 用户名</code>.</p>
+<pre>用户的信息保存在/etc/passwd文件中</pre>
+
+<h2 id="passwd命令"><a href="#passwd命令" class="headerlink" title="passwd命令"></a>passwd命令</h2><p>passwd命令用于修改用户密码、过期时间、认证信息等, 格式为<code>passwd [选项] [用户名]</code>.</p>
+<pre>
+普通用户只能使用passwd命令修改自身的系统密码, 而root管理员则有权限修改其他所有人的密码.
+root管理员在Linux系统中修改自己或他人的密码时不需要验证旧密码
+</pre>
+
+<h2 id="userdel命令"><a href="#userdel命令" class="headerlink" title="userdel命令"></a>userdel命令</h2><p>userdel命令用于删除用户, 格式为<code>userdel [选项] 用户名</code>.</p>
+<h1 id="文件权限与归属"><a href="#文件权限与归属" class="headerlink" title="文件权限与归属"></a>文件权限与归属</h1><table>
+<tr><td>-</td><td>普通文件</td></tr>
+<tr><td>d</td><td>目录文件</td></tr>
+<tr><td>l</td><td>链接文件</td></tr>
+<tr><td>b</td><td>块设备文件</td></tr>
+<tr><td>c</td><td>字符设备文件</td></tr>
+<tr><td>p</td><td>管道文件</td></tr>
+</table>
+
+<table style="text-align:center;">
+<tr><td>字符表示</td><td>r</td><td>w</td><td>x</td></tr>
+<tr><td>特殊字符表示</td><td>s</td><td>s</td><td>t</td></tr>
+<tr><td>数字表示</td><td>4</td><td>2</td><td>1</td></tr>
+<tr><td>权限分配</td><td>文件所有者</td><td>文件所属组</td><td>其他用户</td></tr>
+</table>
+
+<h2 id="文件的特殊权限"><a href="#文件的特殊权限" class="headerlink" title="文件的特殊权限"></a>文件的特殊权限</h2><table style="text-align:center;">
+<tr><td>SUID</td><td>执行者临时获取命令的所有者权限</td><td>??x/??s | ??-/??S</td><td>u+s</td></tr>
+<tr><td>SGID</td><td>在某个目录中创建的文件自动继承该目录的用户组(只可以对目录进行设置)</td><td>??x/??s | ??-/??S</td><td>g+s</td></tr>
+<tr><td>SBIT</td><td>确保用户只能删除自己的文件, 而不能删除其他用户的文件.</td><td>??x/??t | ??-/??T</td><td>o+t</td></tr>
+</table>
+
+<h2 id="文件的隐藏属性"><a href="#文件的隐藏属性" class="headerlink" title="文件的隐藏属性"></a>文件的隐藏属性</h2><h3 id="chattr命令"><a href="#chattr命令" class="headerlink" title="chattr命令"></a>chattr命令</h3><p>chattr命令用于设置文件的隐藏权限, 格式为<code>chattr [参数] 文件</code>.</p>
+<h3 id="lsattr命令"><a href="#lsattr命令" class="headerlink" title="lsattr命令"></a>lsattr命令</h3><p>lsattr命令用于显示文件的隐藏权限, 格式为<code>lsattr [参数] 文件</code>.</p>
+<h2 id="文件访问控制列表"><a href="#文件访问控制列表" class="headerlink" title="文件访问控制列表"></a>文件访问控制列表</h2><pre>
+对某个指定的用户进行单独的权限控制, 就需要用到文件的访问控制列表(ACL).
+通俗来讲, 基于普通文件或目录设置ACL其实就是针对指定的用户或用户组设置文件或目录的操作权限.
+另外, 如果针对某个目录设置了ACL, 则目录中的文件会继承其ACL; 若针对文件设置了ACL, 则文件不再继承其所在目录的ACL.
+</pre>
+
+<h3 id="setfacl命令"><a href="#setfacl命令" class="headerlink" title="setfacl命令"></a>setfacl命令</h3><p>setfacl命令用于管理文件的ACL规则</p>
+<pre>
+ setfacl 选项 用户:名:权限 文件名称/目录
+ |__ -m --更改文件的访问控制列表
+ |__ -M --从文件读取访问控制列表条目更改
+ |__ -x --根据文件中访问控制列表移除条目
+ |__ -X --从文件读取访问控制列表条目并删除
+ |__ -b --删除所有扩展访问控制列表条目
+ |__ -k --移除默认访问控制列表
+ |__ -d --应用到默认访问控制列表的操作
+ |__ -P --依照自然逻辑, 不跟随符号链接
+ |__ -v --显示版本并退出
+ |__ -R --递归操作子目录
+</pre>
+
+<h3 id="getfacl命令"><a href="#getfacl命令" class="headerlink" title="getfacl命令"></a>getfacl命令</h3><p>getfacl命令用于显示文件上设置的ACL信息, 格式为<code>getfacl 文件名称</code>.</p>
+<h2 id="su命令和sudo服务"><a href="#su命令和sudo服务" class="headerlink" title="su命令和sudo服务"></a>su命令和sudo服务</h2><h3 id="su命令"><a href="#su命令" class="headerlink" title="su命令"></a>su命令</h3><p>su命令可以解决切换用户身份的需求, 使得当前用户在不退出登录的情况下, 顺畅地切换到其他用户.<br>格式:<code>su - 用户名</code>, -:表示完全切换, 环境变量信息也变更为新用户的相应信息.</p>
+<h3 id="sudo服务"><a href="#sudo服务" class="headerlink" title="sudo服务"></a>sudo服务</h3><p>sudo命令用于给普通用户提供额外的权限来完成原本root管理员才能完成的任务</p>
+<table>
+sudo命令功能:
+<tr><td>限制用户执行指定的命令</td></tr>
+<tr><td>记录用户执行的每一条命令</td></tr>
+<tr><td>配置文件(/etc/sudoers)提供集中的用户管理、权限与主机等参数</td></tr>
+<tr><td>验证密码的后5分钟内(默认值)无须再让用户再次验证密码</td></tr>
+</table>
+
+<pre>
+ sudo [选项] 命令名称
+ |__ -h --列出帮助信息
+ |__ -l --列出当前用户可执行的命令
+ |__ -u 用户名/UID值 --以指定的用户身份执行命令
+ |__ -k --清空密码的有效时间, 下次执行sudo时需要再次进行密码验证.
+ |__ -b --在后台执行指定的命令
+ |__ -p --更改询问密码的提示语
+</pre>
+
+<pre>
+root管理员进行授权:
+ visudo
+ 谁可以使用 允许使用的主机=(以谁的身份) 可执行命令的列表
+ root ALL=(ALL) ALL
+ ...
+ #xxx ALL=(ALL) NOPASSWD: xxx//普通用户执行命令时无需输入密码
+
+普通用户获取权限:
+ sudo 命令名称
+ 输入当前用户的密码后执行命令
+</pre>
+
+<h1 id="存储结构与磁盘划分"><a href="#存储结构与磁盘划分" class="headerlink" title="存储结构与磁盘划分"></a>存储结构与磁盘划分</h1><h2 id="一切从”-“开始"><a href="#一切从”-“开始" class="headerlink" title="一切从”/“开始"></a>一切从”/“开始</h2><p>在Linux系统中, 目录、字符设备、块设备、套接字、打印机等都被抽象成了文件, 即Linux系统中一切都是文件.<br>Linux系统中的一切文件都是从”根(<code>/</code>)”目录开始的, 并按照文件系统层次化标准(FHS)采用树形结构来存放文件, 以及定义了常见目录的用途.</p>
+<table>
+Linux系统中常见的目录名称以及相应内容
+<tr><td>/boot</td><td>开机所需文件—内核、开机菜单以及所需配置文件等</td></tr>
+<tr><td>*/etc</td><td>配置文件</td></tr>
+<tr><td>*/home</td><td>用户主目录</td></tr>
+<tr><td>/media</td><td>用于挂载设备文件的目录</td></tr>
+<tr><td>/opt</td><td>放置第三方的软件</td></tr>
+<tr><td>*/root</td><td>系统管理员的家目录</td></tr>
+<tr><td>/srv</td><td>一些网络服务的数据文件目录</td></tr>
+<tr><td>/tmp</td><td>任何人均可使用的"共享"临时目录</td></tr>
+<tr><td>*/proc</td><td>虚拟文件系统, 例如系统内核、进程、外部设备及网络状态等.</td></tr>
+<tr><td>/usr/local</td><td>用户自行安装的软件</td></tr>
+<tr><td>/usr/share</td><td>帮助与说明文件, 也可放置共享文件.</td></tr>
+<tr><td>*/var</td><td>主要存放经常变化的文件, 如日志.</td></tr>
+</table>
+
+<p><a href="https://blog.csdn.net/u013239236/article/details/48845251" target="_blank" rel="noopener">详细介绍请看CSDN博主:Super-小志志的博客介绍</a></p>
+<pre>
+ 相对路径: 根据一个路径来定位
+ 绝对路径: 指定全路径
+</pre>
+
+<h2 id="物理设备的命令规则"><a href="#物理设备的命令规则" class="headerlink" title="物理设备的命令规则"></a>物理设备的命令规则</h2><table>
+<tr><td>IDE设备</td><td>/dev/hd[a-d]</td></tr>
+<tr><td>SCSI/SATA/U盘</td><td>/dev/sd[a-p]</td></tr>
+<tr><td>软驱</td><td>/dev/fd[0-1]</td></tr>
+<tr><td>打印机</td><td>/dev/lp[0-15]</td></tr>
+<tr><td>光驱</td><td>/dev/cdrom</td></tr>
+<tr><td>鼠标</td><td>/dev/mouse</td></tr>
+<tr><td>磁带机</td><td>/dev/st0或/dev/ht0</td></tr>
+</table>
+<code>主分区或扩展分区的编号从1开始, 到4结束; 逻辑分区从编号5开始.</code>
+
+<pre>
+ 硬盘设备是由大量的扇区组成的, 每个扇区的容量为512字节.
+
+ 第一个扇区最重要: 里面保存着主引导记录与分区表信息. 
+ 主引导记录需要占用446字节, 分区表为64字节, 结束符占用2字节.
+
+ 分区表中每记录一个分区信息就需要16字节
+ 最多只有4个分区信息可以写到第一个扇区中, 这4个分区就是4个主分区.
+
+ 为了解决分区个数不够的问题, 可以将第一个扇区的分区表中16字节的空间(称之为扩展分区)拿出来指向另外一个分区.
+ 扩展分区其实并不是一个真正的分区, 而更像是一个占用16字节分区表空间的指针, 一个指向另外一个分区的指针.
+</pre>
+
+<h2 id="文件系统与数据资料"><a href="#文件系统与数据资料" class="headerlink" title="文件系统与数据资料"></a>文件系统与数据资料</h2><p>用户在硬件存储设备中执行的文件建立、写入、读取、修改、转存与控制等操作都是依靠文件系统来完成的. 文件系统的作用是合理规划硬盘, 以保证用户正常的使用需求. </p>
+<p>计算机系统在发展过程中产生了众多的文件系统, 为了使用户在读取或写入文件时不用关心底层的硬盘结构, Linux内核中的软件层为用户程序提供了一个VFS(Virtual File System, 虚拟文件系统)接口, 这样用户实际上在操作文件时就是统一对这个虚拟文件系统进行操作了</p>
+<p>最常见的文件系统</p>
+<pre>
+ Ext3:是一款日志文件系统, 能够在系统异常宕机时避免文件系统资料丢失, 并能自动修复数据的不一致与错误. 然而, 当硬盘容量较大时, 所需的修复时间也会很长, 而且也不能百分之百地保证资料不会丢失.它会把整个磁盘的每个写入动作的细节都预先记录下来, 以便在发生异常宕机后能回溯追踪到被中断的部分, 然后尝试进行修复.
+
+ Ext4:Ext3的改进版本, 作为RHEL 6系统中的默认文件管理系统, 它支持的存储容量高达1EB(1EB=1,073,741,824GB), 且能够有无限多的子目录. 另外, Ext4文件系统能够批量分配block块, 从而极大地提高了读写效率.
+
+ XFS:是一种高性能的日志文件系统, 而且是RHEL 7中默认的文件管理系统, 它的优势在发生意外宕机后尤其明显, 即可以快速地恢复可能被破坏的文件, 而且强大的日志功能只用花费极低的计算和存储性能.并且它最大可支持的存储容量为18EB, 这几乎满足了所有需求.
+</pre>
+
+<pre>
+ Linux系统中有一个名为super block的"硬盘地图", 里面记录着整个文件系统的信息.
+ Linux只是把每个文件的权限与属性记录在inode中, 而且每个文件占用一个独立的inode表格, 该表格的大小默认为128字节.
+
+ 该文件的访问权限(read、write、execute)
+ 该文件的所有者与所属组(owner、group)
+ 该文件的大小(size)
+ 该文件的创建或内容修改时间(ctime)
+ 该文件的最后一次访问时间(atime)
+ 该文件的修改时间(mtime)
+ 文件的特殊权限(SUID、SGID、SBIT)
+ 该文件的真实数据地址(point)
+</pre>
+<pre>
+ 文件的实际内容则保存在block块中(大小可以是1KB、2KB或4KB), 一个inode的默认大小仅为128B(Ext3), 记录一个block则消耗4B.
+ 当文件的inode被写满后, Linux系统会自动分配出一个block块, 专门用于像inode那样记录其他block块的信息, 
+ 这样把各个block块的内容串到一起,就能够让用户读到完整的文件内容了.
+
+ 对于存储文件内容的block块,有下面两种常见情况(以4KB的block大小为例进行说明).
+ 情况1:文件很小(1KB), 但依然会占用一个block, 因此会潜在地浪费3KB.
+ 情况2:文件很大(5KB), 那么会占用两个block(5KB-4KB后剩下的1KB也要占用一个block).
+</pre>
+
+<h2 id="挂载硬件设备"><a href="#挂载硬件设备" class="headerlink" title="挂载硬件设备"></a>挂载硬件设备</h2><p>当用户需要使用硬盘设备或分区中的数据时, 需要先将其与一个已存在的目录文件进行关联, 而这个关联动作就是”挂载”.<br>挂载: <code>mount 存储设备 挂载点</code><br>卸载: <code>umount 存储设备/挂载点</code></p>
+<table style="font-size:12px;text-align:center;">
+永久挂载的各字段所表示的含义(写入到/etc/fstab文件)
+<tr><td>设备文件</td><td>挂载目录</td><td>格式类型</td><td>权限选项</td><td>是否备份</td><td>是否自检</td></tr>
+<tr><td>一般为设备的路径+设备名称,也可以写唯一识别码(UUID,Universally Unique Identifier).</td><td>指定要挂载到的目录, 需在挂载前创建好.</td><td>指定文件系统的格式</td><td>若设置为defaults, 则默认权限为:rw, suid, dev, exec, auto, nouser, async.</td><td>若为1则开机后使用dump进行磁盘备份, 为0则不备份.</td><td>若为1则开机后自动进行磁盘自检, 为0则不自检.</td></tr>
+</table>
+
+<h2 id="添加硬盘设备"><a href="#添加硬盘设备" class="headerlink" title="添加硬盘设备"></a>添加硬盘设备</h2><p>添加硬盘: 虚拟主机 -&gt; 设置 -&gt; 添加 -&gt; 硬盘 </p>
+<p>第一步: fdisk命令用于管理磁盘分区, 格式为<code>fdisk [磁盘名称]</code>;<br>使用file命令查看该文件的属性, 格式为<code>file 分区名称</code>.</p>
+<p>第二步: 输入partprobe命令手动将分区信息同步到内核, 格式为<code>partprobe</code>.<br>第三步: 使用mkfs命令对其分区进行格式化, 格式为<code>mkfs.文件类型名称 分区名称</code>.<br>第四步: 创建一个用于挂载设备的挂载点目录; 然后使用mount命令将存储设备与挂载点进行关联.<br>使用<code>df -h</code>命令来查看挂载状态和硬盘使用量信息</p>
+<p>用于查看文件数据占用量的du命令, 其格式为<code>du [选项] [文件]</code>.</p>
+<h2 id="添加交换分区"><a href="#添加交换分区" class="headerlink" title="添加交换分区"></a>添加交换分区</h2><p>SWAP(交换)分区是一种通过在硬盘中预先划分一定的空间, 然后将把内存中暂时不常用的数据临时存放到硬盘中, 以便腾出物理内存空间让更活跃的程序服务来使用的技术, 其设计目的是为了解决真实物理内存不足的问题. 但由于交换分区毕竟是通过硬盘设备读写数据的, 速度肯定要比物理内存慢, 所以只有当真实的物理内存耗尽后才会调用交换分区的资源.</p>
+<p>交换分区的划分建议: 在生产环境中, 交换分区的大小一般为真实物理内存的1.5～2倍.</p>
+<p>第一步: fdisk命令用于管理磁盘分区, 格式为<code>fdisk [磁盘名称]</code>;<br>第二步: 输入partprobe命令手动将分区信息同步到内核, 格式为<code>partprobe</code>.<br>第三步: 使用mkfs命令对其分区进行格式化, 格式为<code>mkswap 分区名称</code>.<br>第四步: 使用swapon命令把准备好的SWAP分区设备正式挂载到系统中, 格式为<code>swapon 分区名称</code>.<br>第五步: 进行永久挂载:<code>/dev/分区名称 swap swap defaults 0 0</code><br>使用<code>free -m</code>命令查看交换分区的大小变化</p>
+<h2 id="磁盘容量配额"><a href="#磁盘容量配额" class="headerlink" title="磁盘容量配额"></a>磁盘容量配额</h2><p>使用quota命令进行磁盘容量配额管理, 从而限制用户的硬盘可用容量或所能创建的最大文件个数.</p>
+<pre>
+ 软限制: 当达到软限制时会提示用户, 但仍允许用户在限定的额度内继续使用.
+ 硬限制: 当达到硬限制时会提示用户, 且强制终止用户的操作.
+</pre>
+
+<p>创建一个用于检查quota磁盘容量配额效果的用户tom, 并针对/boot目录增加其他人的写权限, 保证用户能够正常写入数据.</p>
+<pre>
+ useradd tom
+ chmod -Rf o+w /boot
+</pre>
+
+<h3 id="xfs-quota命令"><a href="#xfs-quota命令" class="headerlink" title="xfs_quota命令"></a>xfs_quota命令</h3><p>xfs_quota命令是一个专门针对XFS文件系统来管理quota磁盘容量配额服务而设计的命令,<br>格式为<code>xfs_quota [参数] 配额 文件目录</code>.</p>
+<pre>
+ xfs_quota [参数] 配额 文件目录
+ |__ -c --用于以参数的形式设置要执行的命令
+ |__ -x --专家模式
+
+硬盘使用量的软限制和硬限制分别为3MB和6MB; 创建文件数量的软限制和硬限制分别为3个和6个.
+xfs_quota -x -c 'limit bsoft=3m bhard=6m isoft=3 ihard=6 tom' /boot
+</pre>
+
+<h3 id="edquota命令"><a href="#edquota命令" class="headerlink" title="edquota命令"></a>edquota命令</h3><p>edquota命令用于编辑用户的quota配额限制, 格式为<code>edquota [参数] [用户]</code>.</p>
+<pre>
+ edquota [参数] [用户]
+ |__ -u --表示要针对哪个用户进行设置
+ |__ -g --表示要针对哪个用户组进行设置
+
+ edquota命令会调用Vi或Vim编辑器来让root管理员修改要限制的具体细节
+</pre>
+
+<h1 id="使用RAID与LVM磁盘阵列技术"><a href="#使用RAID与LVM磁盘阵列技术" class="headerlink" title="使用RAID与LVM磁盘阵列技术"></a>使用RAID与LVM磁盘阵列技术</h1><h2 id="RAID磁盘冗余阵列"><a href="#RAID磁盘冗余阵列" class="headerlink" title="RAID磁盘冗余阵列"></a>RAID磁盘冗余阵列</h2><p>RAID技术通过把多个硬盘设备组合成一个容量更大、安全性更好的磁盘阵列, 并把数据切割成多个区段后分别存放在各个不同的物理硬盘设备上, 然后利用分散读写技术来提升磁盘阵列整体的性能, 同时把多个重要数据的副本同步到不同的物理硬盘设备上, 从而起到了非常好的数据冗余备份效果.<br>也就是说, RAID不仅降低了硬盘设备损坏后丢失数据的几率, 还提升了硬盘设备的读写速度.</p>
+<h3 id="RAID-0"><a href="#RAID-0" class="headerlink" title="RAID 0"></a>RAID 0</h3><p>RAID0技术能够有效地提升硬盘数据的吞吐速度, 但是不具备数据备份和错误修复能力.<br><img src="/post/df41aea9/RAID0.png" alt="RAID0"></p>
+<h3 id="RAID-1"><a href="#RAID-1" class="headerlink" title="RAID 1"></a>RAID 1</h3><p>如果生产环境对硬盘设备的读写速度没有要求, 而是希望增加数据的安全性时, 就需要用到RAID1技术了.<br><img src="/post/df41aea9/RAID1.jpg" alt="RAID1"></p>
+<h3 id="RAID-5"><a href="#RAID-5" class="headerlink" title="RAID 5"></a>RAID 5</h3><p>RAID5技术是把硬盘设备的数据奇偶校验信息保存到其他硬盘设备中. RAID5磁盘阵列组中数据的奇偶校验信息并不是单独保存到某一块硬盘设备中, 而是存储到除自身以外的其他每一块硬盘设备上, 这样的好处是其中任何一设备损坏后不至于出现致命缺陷.<br><img src="/post/df41aea9/RAID5.gif" alt="RAID5"></p>
+<h3 id="RAID-10"><a href="#RAID-10" class="headerlink" title="RAID 10"></a>RAID 10</h3><p>大部分企业更在乎的是数据本身的价值而非硬盘价格, 因此生产环境中主要使用RAID10技术.<br>顾名思义, RAID10技术是RAID1+RAID0技术的一个”组合体”. RAID10技术需要至少4块硬盘来组建, 其中先分别两两制作成RAID1磁盘阵列, 以保证数据的安全性; 然后再对两个RAID1磁盘阵列实施RAID0技术, 进一步提高硬盘设备的读写速度.<br><img src="/post/df41aea9/RAID10.png" alt="RAID10"></p>
+<h2 id="部署磁盘阵列"><a href="#部署磁盘阵列" class="headerlink" title="部署磁盘阵列"></a>部署磁盘阵列</h2><p>mdadm命令用于管理Linux系统中的软件RAID硬盘阵列,<br>格式为<code>mdadm [模式] &lt;RAID设备名称&gt; [选项] [成员设备名称]</code>.</p>
+<pre>
+ mdadm [模式] &lt;RAID设备名称&gt; [选项] [成员设备名称]
+ |__ -a --向RAID设备中添加一个成员
+ |__ -n --指定设备数量
+ |__ -l --指定RAID级别
+ |__ -C --创建
+ |__ -v --显示过程
+ |__ -f --模拟设备损坏
+ |__ -r --移除设备
+ |__ -Q --查看摘要信息
+ |__ -D --查看详细信息
+ |__ -S --停止RAID磁盘阵列
+ |__ -x --指定初始RAID设备的备用成员的数量
+</pre>
+
+<p>在虚拟机中添加4块硬盘设备来制作一个RAID 10磁盘阵列<br>第一步: <code>mdadm -Cv /dev/md0 -a yes -n 4 -l 10 /dev/sdb /dev/sdc /dev/sdd /dev/sde</code><br>第二步: <code>mkfs.ext4 /dev/md0</code><br>第三步: <code>mkdir /RAID</code>&nbsp;&nbsp;<code>mount /dev/md0 /RAID</code><br>第四步: <code>echo "/dev/md0 /RAID ext4 defaults 0 0" >> /etc/fstab</code></p>
+<h2 id="损坏磁盘阵列及修复"><a href="#损坏磁盘阵列及修复" class="headerlink" title="损坏磁盘阵列及修复"></a>损坏磁盘阵列及修复</h2><p>在确认有一块物理硬盘设备出现损坏而不能继续正常使用后, 应该使用mdadm命令将其移除, 然后查看RAID磁盘阵列的状态, 可以发现状态已经改变.<br>在RAID 10级别的磁盘阵列中, 当RAID 1磁盘阵列中存在一个故障盘时并不影响RAID 10磁盘阵列的使用. 当购买了新的硬盘设备后再使用mdadm命令来予以替换即可, 在此期间我们可以在/RAID目录中正常地创建或删除文件.</p>
+<pre>
+ mdadm /dev/md0 -f /dev/sdb
+
+ umount /RAID
+ mdadm /dev/md0 -a /dev/sdb
+</pre>
+
+<h2 id="磁盘阵列-备份盘"><a href="#磁盘阵列-备份盘" class="headerlink" title="磁盘阵列 + 备份盘"></a>磁盘阵列 + 备份盘</h2><p>RAID备份盘技术核心理念就是准备一块足够大的硬盘, 这块硬盘平时处于闲置状态, 一旦RAID磁盘阵列中有硬盘出现故障后则会马上自动顶替上去.</p>
+<pre>
+ mdadm -Cv /dev/md0 -n 3 -l 5 -x 1 /dev/sdb /dev/sdc /dev/sdd /dev/sde
+ mkfs.ext4 /dev/md0
+ echo "/dev/md0 /RAID ext4 defaults 0 0" >> /etc/fstab
+ mkdir /RAID
+ mount -a
+</pre>
+
+<h1 id="LVM逻辑卷管理器"><a href="#LVM逻辑卷管理器" class="headerlink" title="LVM逻辑卷管理器"></a>LVM逻辑卷管理器</h1><p>逻辑卷管理器是Linux系统用于对硬盘分区进行管理的一种机制<br>LVM的核心理念:物理卷处于LVM中的最底层, 可以将其理解为物理硬盘、硬盘分区或者RAID磁盘阵列, 这都可以. 卷组建立在物理卷之上, 一个卷组可以包含多个物理卷, 而且在卷组创建之后也可以继续向其中添加新的物理卷. 逻辑卷是用卷组中空闲的资源建立的, 并且逻辑卷在建立后可以动态地扩展或缩小空间.</p>
+<h2 id="部署逻辑卷"><a href="#部署逻辑卷" class="headerlink" title="部署逻辑卷"></a>部署逻辑卷</h2><table style="text-align:center;">
+<tr><td>功能/命令</td><td>物理卷管理</td><td>卷组管理</td><td>逻辑卷管理</td></tr>
+<tr><td>扫描</td><td>pvscan</td><td>vgscan</td><td>lvscan</td></tr>
+<tr><td>建立</td><td>pvcreate</td><td>vgcreate</td><td>lvcreate</td></tr>
+<tr><td>显示</td><td>pvdisplay</td><td>vgdisplay</td><td>lvdisplay</td></tr>
+<tr><td>删除</td><td>pvremove</td><td>vgremove</td><td>lvremove</td></tr>
+<tr><td>扩展</td><td></td><td>vgextend</td><td>lvextend</td></tr>
+<tr><td>缩小</td><td></td><td>vgreduce</td><td>lvreduce</td></tr>
+</table>
+
+<p>让新添加的两块硬盘设备支持LVM技术<br>第一步:<code>pvcreate /dev/sdb /dev/sdc</code></p>
+<p>把两块硬盘设备加入到storage卷组中, 然后查看卷组的状态.<br>第二步:<code>vgcreate storage /dev/sdb /dev/sdc</code>&nbsp;&nbsp;<code>vgdisplay</code></p>
+<p>切割出一个约为150MB的逻辑卷设备, 以容量为单位, 所使用的参数为-l.<br>第三步:<code>lvcreate -n vo -l 37 storage</code>&nbsp;&nbsp;<code>lvdisplay</code></p>
+<p>把生成好的逻辑卷进行格式化, 然后挂载使用.<br>第四步:<code>mkfs.ext4 /dev/storage/vo</code>&nbsp;&nbsp;<code>mkdir /linuxprobe</code><br><code>mount /dev/storage/vo /linuxprobe</code></p>
+<p>查看挂载状态, 并写入到配置文件, 使其永久生效.<br>第五步:<code>df -h</code>&nbsp;&nbsp;<code>echo "/dev/storage/vo /linuxprobe ext4 defaults 0 0" >> /etc/fstab</code></p>
+<h2 id="扩容逻辑卷"><a href="#扩容逻辑卷" class="headerlink" title="扩容逻辑卷"></a>扩容逻辑卷</h2><p>扩展前要先卸载设备和挂载点的关联<br><code>umount /linuxprobe</code></p>
+<p>把逻辑卷vo扩展至290MB<br>第一步:<code>lvextend -L 290M /dev/storage/vo</code></p>
+<p>检查硬盘完整性, 并重置硬盘容量.<br>第二步:<code>e2fsck -f /dev/storage/vo</code>&nbsp;&nbsp;<code>resize2fs /dev/storage/vo</code></p>
+<p>重新挂载硬盘设备并查看挂载状态<br>第三步:<code>mount -a</code>&nbsp;&nbsp;<code>df -h</code></p>
+<h2 id="缩小逻辑卷"><a href="#缩小逻辑卷" class="headerlink" title="缩小逻辑卷"></a>缩小逻辑卷</h2><p>一定要提前备份好数据. 另外Linux系统规定, 在对LVM逻辑卷进行缩容操作之前, 要先检查文件系统的完整性. 在执行缩容操作前记得先把文件系统卸载掉.<br><code>umount /linuxprobe</code></p>
+<p>检查文件系统的完整性<br>第一步:<code>e2fsck -f /dev/storage/vo</code></p>
+<p>把逻辑卷vo的容量减小到120MB.<br>第二步:<code>resize2fs /dev/storage/vo 120M</code>&nbsp;&nbsp;<code>lvreduce -L 120M /dev/storage/vo</code></p>
+<p>重新挂载文件系统并查看系统状态<br>第三步:<code>mount -a</code>&nbsp;&nbsp;<code>df -h</code></p>
+<h2 id="逻辑卷快照"><a href="#逻辑卷快照" class="headerlink" title="逻辑卷快照"></a>逻辑卷快照</h2><p>LVM还具备有”快照卷”功能, 该功能类似于虚拟机软件的还原时间点功能.<br>LVM的快照卷功能有两个特点:</p>
+<pre>
+快照卷的容量必须等同于逻辑卷的容量
+快照卷仅一次有效, 一旦执行还原操作后则会被立即自动删除.
+</pre>
+
+<p>首先查看卷组的信息, 用重定向往逻辑卷设备所挂载的目录中写入一个文件.<br><code>vgdisplay</code><br><code>echo "Welcome to Linuxprobe.com" > /linuxprobe/readme.txt</code></p>
+<p>使用-s参数生成一个快照卷, 使用-L参数指定切割的大小.<br>第一步:<code>lvcreate -L 120M -s -n SNAP /dev/storage/vo</code>&nbsp;&nbsp;<code>lvdisplay</code></p>
+<p>在逻辑卷所挂载的目录中创建一个100MB的垃圾文件, 然后再查看快照卷的状态.<br>第二步:<code>dd if=/dev/zero of=/linuxprobe/files count=1 bs=100M</code>&nbsp;&nbsp;<code>lvdisplay</code></p>
+<p>对逻辑卷进行快照还原操作, 在此之前先卸载掉逻辑卷设备与目录的挂载.<br>第三步:<code>umount /linuxprobe</code>&nbsp;&nbsp;<code>lvconvert --merge /dev/storage/SNAP</code></p>
+<p>进行挂载和查看当前的状态<br>第四步:<code>mount -a</code>&nbsp;&nbsp;<code>ls /linuxprobe/</code></p>
+<h2 id="删除逻辑卷"><a href="#删除逻辑卷" class="headerlink" title="删除逻辑卷"></a>删除逻辑卷</h2><p>当生产环境中想要重新部署LVM或者不再需要使用LVM时, 则需要执行LVM的删除操作.<br>依次删除逻辑卷、卷组、物理卷设备, 这个顺序不可颠倒.</p>
+<p>取消逻辑卷与目录的挂载关联, 删除配置文件中永久生效的设备参数.<br>第一步:<code>umount /linuxprobe</code>&nbsp;&nbsp;<code>vim /etc/fstab</code></p>
+<p>删除逻辑卷设备, 需要输入y来确认操作.<br>第二步:<code>lvremove /dev/storage/vo</code></p>
+<p>删除卷组, 此处只写卷组名称即可, 不需要设备的绝对路径.<br>第三步:<code>vgremove storage</code></p>
+<p>删除物理卷设备<br>第四步:<code>pvremove /dev/sdb /dev/sdc</code></p>
+<h1 id="Iptables与Firewalld防火墙"><a href="#Iptables与Firewalld防火墙" class="headerlink" title="Iptables与Firewalld防火墙"></a>Iptables与Firewalld防火墙</h1><p>保障数据的安全性是继保障数据的可用性之后最为重要的一项工作. 防火墙作为公网与内网之间的保护屏障, 在保障数据的安全性方面起着至关重要的作用.</p>
+<p>Linux的防火墙体系主要工作在网络层, 针对TCP/IP数据包实施过滤和限制, 属于典型的包过滤防火墙(或称为网络层防火墙). Linux系统的防火墙体系基于内核编码实现, 具有非常稳定的性能和极高的效率.</p>
+<table>
+netfilter和iptables的主要区别
+<tr><td>netilter</td><td>指的是Linux内核中实现包过滤防火墙的内部结构, 不以程序或文件的形式存在, 属于"内核态"(Kernel Space, 又称为内核空间)的防火墙功能体系.</td></tr>
+<tr><td>iptables</td><td>指的是用来管理Linux防火墙的命令程序, 通常位于/sbin/iptables目录下, 属于"用户态(User Space, 又称为用户空间)的防火墙管理体系.</td></tr>
+</table>
+
+<h2 id="防火墙管理工具"><a href="#防火墙管理工具" class="headerlink" title="防火墙管理工具"></a>防火墙管理工具</h2><p>主要功能都是依据策略对穿越防火墙自身的流量进行过滤. 防火墙策略可以基于流量的源目地址、端口号、协议、应用等信息来定制, 然后防火墙使用预先定制的策略规则监控出入的流量, 若流量与某一条策略规则相匹配, 则执行相应的处理, 反之则丢弃.</p>
+<p>iptables与firewalld都不是真正的防火墙, 它们都只是用来定义防火墙策略的防火墙管理工具而已, 或者说, 它们只是一种服务. iptables服务会把配置好的防火墙策略交由内核层面的netfilter网络过滤器来处理, 而firewalld服务则是把配置好的防火墙策略交由内核层面的nftables包过滤框架来处理.</p>
+<h2 id="Iptables"><a href="#Iptables" class="headerlink" title="Iptables"></a>Iptables</h2><p>在早期的Linux系统中, 默认使用的是iptables防火墙管理服务来配置防火墙. 尽管新型的firewalld防火墙管理服务已经被投入使用多年, 但是大量的企业在生产环境中依然出于各种原因而继续使用iptables.</p>
+<h3 id="策略与规则链"><a href="#策略与规则链" class="headerlink" title="策略与规则链"></a>策略与规则链</h3><p>防火墙会从上至下的顺序来读取配置的策略规则, 在找到匹配项后就立即结束匹配工作并去执行匹配项中定义的行为(即放行或阻止). 如果在读取完所有的策略规则之后没有匹配项, 就去执行默认的策略.</p>
+<p>一般而言, 防火墙策略规则的设置有两种:一种是”通”(即放行), 一种是”堵”(即阻止).</p>
+<p>iptables服务把用于处理或过滤流量的策略条目称之为规则, 多条规则可以组成一个规则链, 而规则链则依据数据包处理位置的不同进行分类:</p>
+<pre>
+ 在进行路由选择前处理数据包(PREROUTING)
+ 处理流入的数据包(INPUT)
+ 处理转发的数据包(FORWARD)
+ 处理流出的数据包(OUTPUT)
+ 在进行路由选择后处理数据包(POSTROUTING)
+</pre>
+
+<table style="text-align:center">
+应用顺序为:raw -> mangle -> nat -> filter
+<tr><td>规则表名</td><td>作用</td><td>内核模块</td><td>规则链</td></tr>
+<tr><td>filter</td><td>对数据包进行过滤,根据具体的规则要求决定如何处理一个数据包.</td><td>iptable_filter</td><td>INPUT<br>FORWARD<br>OUTPUT</td></tr>
+<tr><td>nat</td><td>修改数据包的IP地址、端口号等信息.</td><td>iptable_nat</td><td>PREROUTING<br>POSTROUTING<br>OUTPUT</td></tr>
+<tr><td>mangle</td><td>修改数据包的TOS(Type Of Service, 服务类型)、TTL(Time To Live, 生存周期), 或者为数据包设置Mark标记, 以实现流量整形、策略路由等高级应用.</td><td>iptable_mangle</td><td>PREROUTING<br>POSTROUTING<br>INPUT<br>OUTPUT<br>FORWARD</td></tr>
+<tr><td>raw</td><td>决定是否对数据包进行状态跟踪</td><td>iptable_raw</td><td>OUTPUT<br>PREROUTING</td></tr>
+</table>
+
+<p>处理这些匹配流量的相应动作:</p>
+<pre>
+ ACCEPT(允许流量通过)
+ REJECT(拒绝流量通过并且响应)
+ LOG(记录日志文件)
+ DROP(拒绝流量通过, 但不会响应.)
+</pre>
+
+<h3 id="基本的命令参数"><a href="#基本的命令参数" class="headerlink" title="基本的命令参数"></a>基本的命令参数</h3><p>iptables是一款基于命令行的防火墙策略管理工具, iptables命令可以根据流量的源地址、目的地址、传输协议、服务类型等信息进行匹配, 一旦匹配成功, iptables就会根据策略规则所预设的动作来处理这些流量. 未指定表名时将默认使用filter表.</p>
+<pre>
+ iptables [-t 表名] 管理选项 [链名] [匹配条件] [-j 相应动作]
+ |__ -P --设置默认策略
+ |__ -F --清空规则链
+ |__ -L --查看规则链
+ |__ -A --在规则链的末尾加入新规则
+ |__ -I num --在规则链的头部加入新规则
+ |__ -R num --修改、替换指定链中的某一条规则, 可指定规则序号或具体内容.
+ |__ -D num --删除某一条规则
+ |__ -s --匹配来源地址IP/MASK, 加叹号"!"表示除这个IP外.
+ |__ -d --匹配目标地址
+ |__ -i 网卡名称 --匹配从这块网卡流入的数据
+ |__ -o 网卡名称 --匹配从这块网卡流出的数据
+ |__ -p --匹配协议, 如TCP、UDP、ICMP.
+ |__ -j --处理动作
+ |__ -n --使用数字形式显示输出结果
+ |__ -y --查看规则列表时显示详细的信息
+ |__ -h --查看命令帮助信息
+ |__ -line-numbers --查看规则列表时, 同时显示规则在链中的顺序号.
+ |__ --dport num --匹配目标端口号
+ |__ --sport num --匹配来源端口号
+</pre>
+
+<h3 id="规则的匹配条件"><a href="#规则的匹配条件" class="headerlink" title="规则的匹配条件"></a>规则的匹配条件</h3><p>在编写防火墙规则时, 匹配条件的设置起着决定性的作用.</p>
+<h4 id="通用匹配"><a href="#通用匹配" class="headerlink" title="通用匹配"></a>通用匹配</h4><p>通用匹配也称为常规匹配, 这种匹配方式可以独立使用, 不依赖于其他条件或扩展模块. 常见的通用匹配包括协议匹配、地址匹配、网络接口匹配.</p>
+<table>
+可用的协议类型存放于Linux系统的/etc/protocols文件中
+<tr><td>匹配名称</td><td>指定形式</td><td>作用</td></tr>
+<tr><td>协议匹配</td><td>-p 协议名</td><td>检查数据包所使用的网络协议</td></tr>
+<tr><td>地址匹配</td><td>-s 源地址<br>-d 目标地址</td><td>检查数据包的源地址或目标地址</td></tr>
+<tr><td>网络接口匹配</td><td>-i 接口名<br>-o 接口名</td><td>检查数据包从防火墙的哪一个接口进入或发出, 分别对应入站网卡、出站网卡.</td></tr>
+</table>
+
+<h4 id="隐含匹配"><a href="#隐含匹配" class="headerlink" title="隐含匹配"></a>隐含匹配</h4><p>这种匹配方式要求以指定的协议匹配作为前提条件, 相当于子条件, 因此无法独立使用, 其对应的功能由iptables在需要时自动(隐含)载入内核. 常见的隐含匹配包括端口匹配、TCP标记匹配、ICMP类型匹配.</p>
+<table>
+<tr><td>匹配名称</td><td>指定形式</td><td>作用</td></tr>
+<tr>
+<td>端口匹配</td><td>--sport 源端口
+<br>--dport 目标端口
+<br>针对协议:TCP或UDP
+<br>范围端口:起始端口:结束端口</td><td>检查数据包的源端口或目标端口</td></tr>
+
+<tr><td>ІСМР类型匹配</td><td>--icmp-type ICMP 类型(使用字符串或数字代码表示)
+<br>Echo-Request(代码为8)--------------请求
+<br>Echo-Reply(代码为0)-----------------回显
+<br>Destination-Unreachable(代码为3)--目标不可达
+<br>针对协议:ICMP</td><td>检查ICMP数据包的类型</td></tr>
+</table>
+<code>iptables -p icmp -h</code>命令, 列出所有支持的类型.
+
+<h4 id="显式匹配"><a href="#显式匹配" class="headerlink" title="显式匹配"></a>显式匹配</h4><p>这种匹配方式要求有额外的内核模块提供支持, 必须手动以”-m 模块名称”的形式调用相应的模块, 然后方可设置匹配条件. 添加了带显式匹配条件的规则以后, 可以执行”lsmod | grep xt_”命令查看到相关的内核扩展模块. 常见的显式匹配包括多端口匹配、IP范围匹配、MAC地址匹配、状态匹配.</p>
+<table>
+常见的连接状态:NEW(与任何连接无关的)、BI(响应请求或者已建立连接的)和RELATED(与已有连接有相关性的, 如FTP数据连接).
+<tr><td>匹配名称</td><td>指定形式</td><td>作用</td></tr>
+<tr><td>多端口匹配</td><td>-m multiport-sports 端口列表
+<br>-m multport-dports 端口列表</td><td>检查数据包的源端口、目标端口, 多个端口之间以逗号进行分隔</td></tr>
+
+<tr><td>IP范围匹配</td><td>-m iprange --src-range IP范围
+<br>-m iprange --dst-range IP范围</td><td>检查数据包的源地址、目标地址, 其中IP范围采用"起始地址 - 结束地址"的形式表示.</td></tr>
+
+<tr><td>МAC地址匹配</td><td>-m mac --mac-source MAC地址</td><td>检查数据包的源MAC地址(一般只适用于内部网络)</td></tr>
+<tr><td>状态匹配</td><td>-m state --state 连接状态</td><td>基于iptables的状态跟踪机制用来检查数据包的连接状态(State)</td></tr>
+</table>
+
+<blockquote>
+<p>iptables命令实例<br> 查看已有的防火墙规则链:<br> <code>iptables -L</code><br><br> 清空已有的防火墙规则链:<br> <code>iptables -F</code><br><br> 设置INPUT规则链的默认策略为拒绝:<br> <code>iptables -P INPUT DROP</code><br><br> 向INPUT规则链中添加允许ICMP流量进入的策略规则:<br> <code>iptables -I INPUT -p icmp -j ACCEPT</code><br><br> 向INPUT规则链中添加拒绝ICMP流量进入的策略规则:<br> <code>iptables -I INPUT -p icmp -j REJECT</code><br><br> 删除INPUT规则链中刚刚加入的那条策略, 并把默认策略设置为允许:<br> <code>iptables -D INPUT 1</code>&nbsp;&nbsp;<code>iptables -P INPUT ACCEPT</code><br><br> 将INPUT规则链设置为只允许指定网段的主机访问本机的22端口, 拒绝来自其他所有主机的流量:<br> <code>iptables -I INPUT -s 192.168.10.0/24 -p tcp --dport 22 -j ACCEPT</code><br> <code>iptables -A INPUT -p tcp --dport 22 -j REJECT</code><br><br> 向INPUT规则链中添加拒绝所有人访问本机12345端口的策略规则:<br> <code>iptables -I INPUT -p tcp --dport 12345 -j REJECT</code><br> <code>iptables -I INPUT -p udp --dport 12345 -j REJECT</code><br><br> 向INPUT规则链中添加拒绝192.168.10.5主机访问本机80端口(Web服务)的策略规则:<br> <code>iptables -I INPUT -p tcp -s 192.168.10.5 --dport 80 -j REJECT</code><br><br> 向INPUT规则链中添加拒绝所有主机访问本机1000～1024端口的策略规则:<br> <code>iptables -A INPUT -p tcp --dport 1000:1024 -j REJECT</code><br> <code>iptables -A INPUT -p udp --dport 1000:1024 -j REJECT</code><br><br> 注:使用iptables命令配置的防火墙规则默认会在系统下一次重启时失效, 如果想让配置的防火墙策略永久生效, 需要执行保存命令:<br> <code>service iptables save</code></p>
+</blockquote>
+<h3 id="规则的导出、导入"><a href="#规则的导出、导入" class="headerlink" title="规则的导出、导入"></a>规则的导出、导入</h3><p>在Linux系统中, iptables为我们提供了批量备份与恢复规则的命令, 也提供了标准的系统服务以便开启、关闭防火墙功能.</p>
+<h4 id="规则的备份及还原"><a href="#规则的备份及还原" class="headerlink" title="规则的备份及还原"></a>规则的备份及还原</h4><p>防火墙规则的批量备份、还原用到两个命令, 即iptables-save和iptables-restore, 分别用来保存(Save)和恢复(Restore).</p>
+<p>iptables-save命令用来批量导出Linux防火墙规则. 直接执行iptables-save命令时, 将显示出当前启用的所有规则.</p>
+<p>以”#”号开头的内容表示注释<br>“*表名”表示所在的表<br>“: 链名 默认策略”表示相应的链及默认策略<br>具体的规则部分省略了命令名”iptables”<br>后面的”COMMIT”表示提交前面的规则设置</p>
+<p>备份所有表的规则<br><code>iptables-save > /opt/iprules_all.txt</code></p>
+<p>iptables-retore命令用来批量导入Linux防火墙规则, 如果已经使用iptables-save命令导出备份文件, 则恢复规则的过程在一瞬间就能完成. 与iptables-save命令相对的iptables-restore命令应结合重定向输入来指定备份文件的位置.</p>
+<p>从备份文件恢复规则<br><code>iptables-restore < /opt/iprules_all.txt</code></p>
+<h3 id="使用防火墙脚本"><a href="#使用防火墙脚本" class="headerlink" title="使用防火墙脚本"></a>使用防火墙脚本</h3><p>防火墙脚本的构成:定义基本变量、加载内核模块、调整/proc参数</p>
+<h4 id="定义基本变量"><a href="#定义基本变量" class="headerlink" title="定义基本变量"></a>定义基本变量</h4><p>将防火墙的网卡、IP地址、局域网段、iptables命令的路径等定义为变量, 便于对脚本程序进行维护和移植使用.</p>
+<h4 id="加载内核模块"><a href="#加载内核模块" class="headerlink" title="加载内核模块"></a>加载内核模块</h4><p>iptables命令的大部分模块都可以根据需要动态载入内核, 只有个别模块需要手动进行加载. 但如果需要启用的规则数量较多, 为了提高规则设置的效率, 保持防火墙的稳定性, 建议将用到的各种模快提加载到内核中.</p>
+<h4 id="调整-proc参数"><a href="#调整-proc参数" class="headerlink" title="调整/proc参数"></a>调整/proc参数</h4><p>proc是Linux或UNIX系统中的一种伪文件系统机制, 提供了访问内核运行结构、改变内核设置的实时数据. 与EXT3, FAT32等本地文件系统不同, /proc中的数据存放在内存而不是硬盘上.<br>在文件夹/proc/sys下存放着与系统相关的一些可控参数, 可以直接用来改变内核的行为, 通常作为Linux内核调优的实时入口.<br>用echo, sysctl命令都可以修改相关参数, 当然也可以写到/etc/sysctl.conf文件(执行sysctl -p后生效).</p>
+<h4 id="设置具体的iptables规则"><a href="#设置具体的iptables规则" class="headerlink" title="设置具体的iptables规则"></a>设置具体的iptables规则</h4><p>1.清理已有的规则<br>为了避免已有的防火墙规则造成干扰, 通常会预先安排一个”清理”操作, 删除所有表中用户自定义的链, 清空所有链内的规则.</p>
+<pre>
+ 删除各表中自定义的链
+ $TPT -t filter -X
+ $IPT -t nat -X
+ $IPT -t mangle -x
+ $IPT -t raw -X
+ 清空各表中已有的规则
+ $IPT -t filter -F
+ $IPT  t nat -F
+ $IPT -t mangle -F
+ $IPT -t raw -F
+</pre>
+
+<p>2.设置规则链的默认策略<br>在实际生产环境中, 防火墙过滤规则建议采取”默认拒绝”的策略, 可以获得更好的安全性.</p>
+<pre>
+ $IPT -P INPUT DROP
+ $IPT -P FORWARD DROP
+ $IPT -P OUTPUT ACCEPT
+</pre>
+
+<p>3.设置nat表中的各种规则<br>iptables的nat表主要用在Linux网关服务器中, 一般的主机型防火墙方案很少会用到nat表. 根据实际情况编写相应的SNAT、DNAT规则(如局域网共享上网、发布内部Web服务器), 如果没有则跳过此部分.</p>
+<p>4.设置fiter表的各种规则<br>iptables的filter表主要用来过滤数据包, 无论是Linux网关还是一般的Linux服务器都可能用到. 主机型的防火墙主要使用INPUT, OUTPUT链, 而对于网络型的防火墙主要使用FORWARD链.</p>
+<h2 id="防火墙脚本示例"><a href="#防火墙脚本示例" class="headerlink" title="防火墙脚本示例"></a>防火墙脚本示例</h2><pre>
+ vim /opt/myipfw.hostonly
+ <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="comment">#1.定义基本变量</span></span><br><span class="line"><span class="attribute">IPT</span>=<span class="string">"/sbin/iptables"</span> # iptables命令的路径</span><br><span class="line"><span class="attribute">CTL</span>=<span class="string">"/sbin/sysctl"</span> # sysctl命令的路径</span><br><span class="line"></span><br><span class="line"><span class="comment">#2.调整/proc参数</span></span><br><span class="line"><span class="variable">$CTL</span> -w net.ipv4.<span class="attribute">tcp_syncookies</span>=1 # 启用SYN Cookie机制</span><br><span class="line"><span class="variable">$CTL</span> -w net.ipv4.<span class="attribute">tcp_syn_retries</span>=3 # 最大SYN请求重试次数</span><br><span class="line"><span class="variable">$CTL</span> -w net.ipv4.<span class="attribute">tcp_synack_retries</span>=3 # 最大ACK确认重试次数</span><br><span class="line"><span class="variable">$CTL</span> -w net.ipv4.<span class="attribute">tcp_fin_timeout</span>=60 # TCP连接等待超时</span><br><span class="line"><span class="variable">$CTL</span> -w net.ipv4.<span class="attribute">tcp_max_syn_backlog</span>=3200 # SYN请求的队列长度</span><br><span class="line"></span><br><span class="line"><span class="comment">#3.设置具体的防火墙规则</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#3.1 删除自定义链、清空已有规则</span></span><br><span class="line"><span class="variable">$IPT</span> -t<span class="built_in"> filter </span>-X </span><br><span class="line"><span class="variable">$IPT</span> -t<span class="built_in"> nat </span>-X </span><br><span class="line"><span class="variable">$IPT</span> -t<span class="built_in"> mangle </span>-X </span><br><span class="line"><span class="variable">$IPT</span> -t<span class="built_in"> raw </span>-X </span><br><span class="line"><span class="variable">$IPT</span> -t<span class="built_in"> filter </span>-F </span><br><span class="line"><span class="variable">$IPT</span> -t<span class="built_in"> nat </span>-F  </span><br><span class="line"><span class="variable">$IPT</span> -t<span class="built_in"> mangle </span>-F </span><br><span class="line"><span class="variable">$IPT</span> -t<span class="built_in"> raw </span>-F</span><br><span class="line"></span><br><span class="line"><span class="comment">#3.2 定义默认策略</span></span><br><span class="line"><span class="variable">$IPT</span> -P INPUT DROP</span><br><span class="line"><span class="variable">$IPT</span> -P FORWARD DROP</span><br><span class="line"><span class="variable">$IPT</span> -P OUTPUT ACCEPT</span><br><span class="line"></span><br><span class="line"><span class="comment">#3.3 设置filter表中的各种规则</span></span><br><span class="line"><span class="variable">$IPT</span> -A INPUT -p tcp --dport 80 -j ACCEPT</span><br><span class="line"><span class="variable">$IPT</span> -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</span><br></pre></td></tr></table></figure>
+ chmod +x /opt/myipfw.hostonly
+</pre>
+
+<h2 id="Firewalld"><a href="#Firewalld" class="headerlink" title="Firewalld"></a>Firewalld</h2><p>RHEL 7系统中集成了多款防火墙管理工具, 其中firewalld(Dynamic Firewall Manager of Linux systems, Linux系统的动态防火墙管理器)服务是默认的防火墙配置管理工具, 它拥有基于CLI(命令行界面)和基于GUI(图形用户界面)的两种管理方式.</p>
+<p>firewalld支持动态更新技术并加入了区域(zone)的概念. 简单来说, 区域就是firewalld预先准备了几套防火墙策略集合(策略模板), 用户可以根据生产场景的不同而选择合适的策略集合, 从而实现防火墙策略之间的快速切换.</p>
+<p>配置文件<br><code>/usr/lib/firewalld/</code><br>/usr/lib/firewalld/zones:被用于默认和备用配置</p>
+<p><code>/etc/firewalld/</code><br>/etc/firewalld/zones:被用于用户创建和自定义配置文件</p>
+<table style="text-align:center;">
+<tr><td>区域</td><td>默认规则策略</td></tr>
+<tr><td>*trusted</td><td>允许所有的数据包</td></tr>
+<tr><td>home</td><td>拒绝流入的流量, 除非与流出的流量相关; 而如果流量与ssh、mdns、ipp-client、amba-client与dhcpv6-client服务相关, 则允许流量.</td></tr>
+<tr><td>internal</td><td>等同于home区域</td></tr>
+<tr><td>work</td><td>拒绝流入的流量, 除非与流出的流量相关; 而如果流量与ssh、ipp-client与dhcpv6-client服务相关, 则允许流量.</td></tr>
+<tr><td>*public</td><td>拒绝流入的流量, 除非与流出的流量相关; 而如果流量与ssh、dhcpv6-client服务相关, 则允许流量.</td></tr>
+<tr><td>external</td><td>拒绝流入的流量, 除非与流出的流量相关; 而如果流量与ssh服务相关, 则允许流量. 默认将经过此区域转发的IPv4地址传出流量进行地址伪装.</td></tr>
+<tr><td>dmz</td><td>拒绝流入的流量, 除非与流出的流量相关; 而如果流量与ssh服务相关, 则允许流量.</td></tr>
+<tr><td>block</td><td>拒绝流入的流量, 除非与流出的流量相关.</td></tr>
+<tr><td>*drop</td><td>丢弃流入的流量, 除非与流出的流量相关.</td></tr>
+</table>
+
+<h3 id="Firewalld数据处理流程"><a href="#Firewalld数据处理流程" class="headerlink" title="Firewalld数据处理流程"></a>Firewalld数据处理流程</h3><p>检查数据来源的源地址<br>1.若源地址关联到特定的区域, 则执行该区域所指定的规则.<br>2.若源地址未关联到特定的区域, 则使用传入网络接口的区域并执行该区域所指定的规则.<br>3.若网络接口未关联到特定的区域, 则使用默认区域并执行该区域所指定的规则.</p>
+<h3 id="Firewalld防火墙的配置"><a href="#Firewalld防火墙的配置" class="headerlink" title="Firewalld防火墙的配置"></a>Firewalld防火墙的配置</h3><h4 id="运行时配置"><a href="#运行时配置" class="headerlink" title="运行时配置"></a>运行时配置</h4><p>实时生效, 并持续至Firewalld重新启动或重新加载配置.<br>不中断现有连接<br>不能修改服务配置</p>
+<h4 id="永久配置"><a href="#永久配置" class="headerlink" title="永久配置"></a>永久配置</h4><p>不立即生效, 除非Firewalld重新启动或重新加载配置.<br>中断现有连接<br>可以修改服务配置</p>
+<h3 id="终端管理工具"><a href="#终端管理工具" class="headerlink" title="终端管理工具"></a>终端管理工具</h3><h4 id="防火墙进程操作"><a href="#防火墙进程操作" class="headerlink" title="防火墙进程操作"></a>防火墙进程操作</h4><pre>
+ systemctl start firewalld
+ systemctl stop firewalld
+ systemctl restart firewalld
+ systemctl status firewalld
+</pre>
+
+<h4 id="防火墙管理操作"><a href="#防火墙管理操作" class="headerlink" title="防火墙管理操作"></a>防火墙管理操作</h4><p>firewall-cmd是firewalld防火墙配置管理工具的CLI(命令行界面)版本, 它的参数一般都是以”长格式”来提供的.</p>
+<table>
+<tr><td>参数</td><td>作用</td></tr>
+<tr><td>--zone=&lt;区域名称></td><td>指定区域</td></tr>
+<tr><td>--get-default-zone</td><td>查询默认的区域名称</td></tr>
+<tr><td>--set-default-zone=&lt;区域名称></td><td>设置默认的区域, 使其永久生效.</td></tr>
+<tr><td>--get-zones</td><td>显示预定义的区域</td></tr>
+<tr><td>--get-services</td><td>显示预定义的服务</td></tr>
+<tr><td>--get-active-zones</td><td>显示当前正在使用的区域与网卡名称</td></tr>
+<tr><td>--add-source=</td><td>将源自此IP或子网的流量导向指定的区域</td></tr>
+<tr><td>--remove-source=</td><td>不再将源自此IP或子网的流量导向某个指定区域</td></tr>
+<tr><td>--add-interface=&lt;网卡名称&gt;</td><td>将源自该网卡的所有流量都导向某个指定区域</td></tr>
+<tr><td>--change-interface=&lt;网卡名称&gt;</td><td>将某个网卡与区域进行关联</td></tr>
+<tr><td>--remove-interface=&lt;网卡名称&gt;</td><td>将某个网卡从指定区域中移除</td></tr>
+<tr><td>--query-interface=&lt;网卡名称&gt;</td><td>在默认区域中查询是否包含该网卡</td></tr>
+<tr><td>--get-zone-of-interface=&lt;网卡名称&gt;</td><td>显示指定网卡绑定的区域</td></tr>
+<tr><td>--list-all</td><td>显示当前区域的网卡配置参数、资源、端口以及服务等信息</td></tr>
+<tr><td>--list-all-zones</td><td>显示所有区域的网卡配置参数、资源、端口以及服务等信息</td></tr>
+<tr><td>--list-services</td><td>显示默认区域内允许访问的所有服务</td></tr>
+<tr><td>--add-service=&lt;服务名&gt;</td><td>设置默认区域允许该服务的流量</td></tr>
+<tr><td>--remove-service=&lt;服务名&gt;</td><td>设置默认区域不再允许该服务的流量</td></tr>
+<tr><td>--query-service=&lt;服务名&gt;</td><td>查询默认区域中是否启用了该服务</td></tr>
+<tr><td>--list-ports</td><td>显示默认区域内允许访问的所有端口号</td></tr>
+<tr><td>--add-port=&lt;端口号/协议&gt;</td><td>设置默认区域允许该端口的流量</td></tr>
+<tr><td>--remove-port=&lt;端口号/协议&gt;</td><td>设置默认区域不再允许该端口的流量</td></tr>
+<tr><td>--query-port=&lt;端口号/协议&gt;</td><td>查询默认区域中是否启用了该端口和协议</td></tr>
+<tr><td>--list-icmp-blocks</td><td>显示默认区域内阻塞的所有ICMP类型</td></tr>
+<tr><td>--add-icmp-block=echo-reply</td><td>为默认区域设置阻塞echo-reply类型的ICMP</td></tr>
+<tr><td>--remove-icmp-block=echo-reply</td><td>删除默认区域已阻塞的echo-reply类型的ICMP</td></tr>
+<tr><td>--query-icmp-block=echo-request</td><td>查询默认区域的echo-request类型的ICMP是否阻塞</td></tr>
+<tr><td>--query-icmp-block=echo-request</td><td>查询默认区域的echo-request类型的ICMP是否阻塞</td></tr>
+<tr><td>--get-icmptypes</td><td>显示预定义的icmp类型</td></tr>
+<tr><td>--reload</td><td>让"永久生效"的配置规则立即生效, 并覆盖当前的配置规则.</td></tr>
+<tr><td>--panic-on</td><td>开启应急状况模式</td></tr>
+<tr><td>--panic-off</td><td>关闭应急状况模式</td></tr>
+</table>
+<br>
+
+<h4 id="防火墙状态查询"><a href="#防火墙状态查询" class="headerlink" title="防火墙状态查询"></a>防火墙状态查询</h4><pre>
+ systemctl status firewalld
+ firewall-cmd --state
+</pre>
+
+<h4 id="防火墙重载配置"><a href="#防火墙重载配置" class="headerlink" title="防火墙重载配置"></a>防火墙重载配置</h4><pre>
+ firewall-cmd --reload
+ # 状态信息将会丢失, 多用于处理防火墙出现问题时.
+ firewall-cmd --complete-reload
+ systemctl restart firewalld
+</pre>
+
+
+<h4 id="区域管理"><a href="#区域管理" class="headerlink" title="区域管理"></a>区域管理</h4><p>查看默认区域<br><code>firewall-cmd --get-default-zone</code></p>
+<p>列出当前正在使用的区域及其所对应的网卡接口<br><code>firewall-cmd --get-active-zone</code></p>
+<p>列出所有可用的区域<br><code>firewall-cmd --get-zones</code></p>
+<p>设置默认区域<br><code>firewall-cmd --set-default-zone=home</code></p>
+<h4 id="服务管理"><a href="#服务管理" class="headerlink" title="服务管理"></a>服务管理</h4><p>查看预定义服务<br><code>firewall-cmd --get-service</code></p>
+<p>添加httpd服务到public区域<br><code>firewall-cmd --add-service=http --zone=public --permanent</code><br><code>firewall-cmd --reload</code></p>
+<p>查看public区域已配置规则<br><code>firewall-cmd --list-all --zone=public</code></p>
+<p>移除public区域的httpd服务, 不使用–zone指定区域时使用默认区域.<br><code>firewall-cmd --remove-service=http --permanent</code><br><code>firewall-cmd --reload</code></p>
+<p>也可以同时添加多个服务到某一区域, 如果不添加-permanent选项表示是即时生效的临时设置.<br><code>firewall-cmd --add-service=http --add-service=https</code></p>
+<h4 id="端口管理"><a href="#端口管理" class="headerlink" title="端口管理"></a>端口管理</h4><p>允许TCP的3306端口到public区域<br><code>firewall-cmd --add-port=3306/tcp --permanent</code><br><code>firewall-cmd --reload</code><br><code>firewall-cmd --list-all</code></p>
+<p>从public区域将TCP的3306端口移除<br><code>firewall-cmd --remove-port=3306/tcp --permanent</code><br><code>firewall-cmd --reload</code></p>
+<p>允许某一范围的端口<br><code>firewall-cmd --add-port=2048-2050/udp --permanent</code><br><code>firewall-cmd --reload</code></p>
+<p>使用–list-ports查看加入的端口操作是否成功<br><code>firewall-cmd --list-ports</code></p>
+<h4 id="配置实例"><a href="#配置实例" class="headerlink" title="配置实例"></a>配置实例</h4><p>将默认区域设置为dmz区域, 来自网络192.168.46.0/24的流量全部分配给internal区域, 并且打开internal区域的80端口供用户访问.<br><code>firewall-cmd --set-default-zone=dmz</code><br><code>firewall-cmd --add-source=192.168.46.0/24 --zone=internal --permanent</code><br><code>firewall-cmd --add-service=http --zone=internal --permanent</code><br><code>firewall-cmd --reload</code></p>
+<p>使用firewalld配置的防火墙策略默认为运行时(Runtime)模式, 又称为当前生效模式, 而且随着系统的重启会失效.<br>想让配置策略一直存在, 就需要使用永久(Permanent)模式, 方法就是在用firewall-cmd命令正常设置防火墙策略时添加–permanent参数, 但是使用永久生效模式设置的策略只有在系统重启之后才能自动生效. 如果想让配置的策略立即生效, 需要手动执行<code>firewall-cmd --reload</code>命令.</p>
+<blockquote>
+<p>firewalld命令实例<br> 查看firewalld服务当前所使用的区域:<br> <code>firewall-cmd --get-default-zone</code><br><br> 查询eno16777728网卡在firewalld服务中的区域:<br> <code>firewall-cmd --get-zone-of-interface=eno16777728</code><br><br> 把firewalld服务中eno16777728网卡的默认区域修改为external, 并在系统重启后生效. 分别查看当前与永久模式下的区域名称:<br> <code>firewall-cmd --permanent --zone=external --change-interface=eno16777728</code><br> <code>firewall-cmd --get-zone-of-interface=eno16777728</code><br> <code>firewall-cmd --permanent --get-zone-of-interface=eno16777728</code><br><br> 把firwalld服务的当前默认区域设置为public:<br> <code>firewall-cmd --set-default-zone=public</code><br><br> 启动/关闭firewalld防火墙服务的应急状况模式, 阻断一切网络连接(当远程控制服务器时请慎用):<br> <code>firewall-cmd --panic-on</code><br> <code>firewall-cmd --panic-off</code><br><br> 查询public区域是否允许请求SSH和HTTPS协议的流量:<br> <code>firewall-cmd --zone=public --query-service=ssh</code><br> <code>firewall-cmd --zone=public --query-service=https</code><br><br> 把firewalld服务中请求HTTPS协议的流量设置为永久允许, 并立即生效:<br> <code>firewall-cmd --zone=public --add-service=https</code><br> <code>firewall-cmd --permanent --zone=public --add-service=https</code><br> <code>firewall-cmd --reload</code><br><br> 把firewalld服务中请求HTTP协议的流量设置为永久拒绝, 并立即生效:<br> <code>firewall-cmd --permanent --zone=public --remove-service=http</code><br> <code>firewall-cmd --reload</code><br><br> 把在firewalld服务中访问8080和8081端口的流量策略设置为允许, 但仅限当前生效:<br> <code>firewall-cmd --zone=public --add-port=8080-8081/tcp</code><br><br> 把原本访问本机888端口的流量转发到22端口, 要且求当前和长期均有效:<br> <pre>firewall-cmd --permanent --zone=public --add-forward-port=port=888:proto=tcp:toport=22:toaddr=192.168.10.10<br> 流量转发命令格式:<br>  firewall-cmd --permanent --zone=<区域><br>  --add-forward-port=<br>                     port=<源端口号>:<br>                     proto=<协议>:<br>                     toport=<目标端口号>:<br>                     toaddr=<目标IP地址><br> </目标IP地址></目标端口号></协议></源端口号></区域></pre><br> 在客户端使用ssh命令尝试访问192.168.10.10主机的888端口:<br> <code>ssh -p 888 192.168.10.10</code></p>
+</blockquote>
+<p>irewalld中的富规则表示更细致、更详细的防火墙策略配置, 它可以针对系统服务、端口号、源地址和目标地址等诸多信息进行更有针对性的策略配置. 它的优先级在所有的防火墙策略中也是最高的.<br>例:拒绝192.168.10.0/24网段的所有用户访问本机的ssh服务(22端口)</p>
+<pre>
+ firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4" source address="192.168.10.0/24" service name="ssh" reject"
+ firewall-cmd --reload
+ ssh 192.168.10.10
+</pre>
+
+<h3 id="图形管理工具"><a href="#图形管理工具" class="headerlink" title="图形管理工具"></a>图形管理工具</h3><p>firewall-config是firewalld防火墙配置管理工具的GUI(图形用户界面)版本, 几乎可以实现所有以命令行来执行的操作. 打开firewall-config的命令:<code>firewall-config</code><br><img src="/post/df41aea9/firewall-config%E7%95%8C%E9%9D%A2.png" alt="firewall-config界面"></p>
+<table>
+<tr><td>1</td><td>选择运行时(Runtime)模式或永久(Permanent)模式的配置</td></tr>
+<tr><td>2</td><td>可选的策略集合区域列表</td></tr>
+<tr><td>3</td><td>常用的系统服务列表</td></tr>
+<tr><td>4</td><td>当前正在使用的区域</td></tr>
+<tr><td>5</td><td>管理当前被选中区域中的服务</td></tr>
+<tr><td>6</td><td>管理当前被选中区域中的端口</td></tr>
+<tr><td>7</td><td>开启或关闭SNAT(源地址转换协议)技术</td></tr>
+<tr><td>8</td><td>设置端口转发策略</td></tr>
+<tr><td>9</td><td>控制请求icmp服务的流量</td></tr>
+<tr><td>10</td><td>管理防火墙的富规则</td></tr>
+<tr><td>11</td><td>管理网卡设备</td></tr>
+<tr><td>12</td><td>被选中区域的服务, 若勾选了相应服务前面的复选框, 则表示允许与之相关的流量.</td></tr>
+<tr><td>13</td><td>firewall-config工具的运行状态</td></tr>
+</table>
+
+<p>将当前区域中请求http服务的流量设置为允许, 但仅限当前生效.<br><img src="/%E5%85%81%E8%AE%B8%E5%85%B6%E4%BB%96%E4%B8%BB%E6%9C%BA%E8%AE%BF%E9%97%AEhttp%E6%9C%8D%E5%8A%A1.png" alt="允许其他主机访问http服务"></p>
+<p>添加一条防火墙策略规则, 使其放行访问8080～8088端口(TCP协议)的流量, 并将其设置为永久生效, 以达到系统重启后防火墙策略依然生效的目的.<br><img src="/post/df41aea9/%E5%85%81%E8%AE%B8%E5%85%B6%E4%BB%96%E4%B8%BB%E6%9C%BA%E8%AE%BF%E9%97%AE8080-8088%E7%AB%AF%E5%8F%A3.png" alt="允许其他主机访问8080-8088端口"></p>
+<p>在Options菜单中单击Reload Firewalld命令, 让配置的防火墙策略立即生效. 这与在命令行中执行–reload参数的效果一样.<br><img src="/post/df41aea9/%E9%87%8D%E5%90%AF%E5%90%8E%E4%BE%9D%E7%84%B6%E6%9C%89%E6%95%88.png" alt="重启后依然有效"></p>
+<p>选中Masquerade zone复选框, 就自动开启了SNAT技术.<br><img src="/post/df41aea9/%E5%BC%80%E5%90%AF%E4%BC%AA%E8%A3%85%E5%8A%9F%E8%83%BD.png" alt="开启伪装功能"></p>
+<p>使用firewall-cmd来配置防火墙策略规则, 将本机888端口的流量转发到22端口, 且要求当前和长期均有效.<br><img src="/post/df41aea9/%E5%B0%86%E5%90%91%E6%9C%AC%E6%9C%BA888%E7%AB%AF%E5%8F%A3%E7%9A%84%E8%AF%B7%E6%B1%82%E8%BD%AC%E5%8F%91%E8%87%B3%E6%9C%AC%E6%9C%BA%E7%9A%8422%E7%AB%AF%E5%8F%A3.png" alt="将向本机888端口的请求转发至本机的22端口"><br><img src="/post/df41aea9/reload%E7%AB%8B%E5%8D%B3%E7%94%9F%E6%95%88.png" alt="reload立即生效"></p>
+<p>配置富规则, 让192.168.10.20主机访问到本机的1234端口号.<br><img src="/post/df41aea9/%E4%BB%85%E5%85%81%E8%AE%B8192.168.10.20%E4%B8%BB%E6%9C%BA%E8%AE%BF%E9%97%AE%E6%9C%AC%E6%9C%BA%E7%9A%841234%E7%AB%AF%E5%8F%A3.png" alt="仅允许192.168.10.20主机访问本机的1234端口"></p>
+<p>如果生产环境中的服务器有多块网卡在同时提供服务(这种情况很常见), 则对内网和对外网提供服务的网卡要选择的防火墙策略区域也是不一样的. 也就是说, 可以把网卡与防火墙策略区域进行绑定. 配置防火墙策略的原则—只要能实现所需的功能, 用什么工具请随君便.<br><img src="/post/df41aea9/%E6%9F%A5%E7%9C%8B%E7%BD%91%E5%8D%A1%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF.png" alt="查看网卡设备信息"></p>
+<h2 id="服务的访问控制列表"><a href="#服务的访问控制列表" class="headerlink" title="服务的访问控制列表"></a>服务的访问控制列表</h2><p>TCP Wrappers是RHEL 7系统中默认启用的一款流量监控程序, 它能够根据来访主机的地址与本机的目标服务程序作出允许或拒绝的操作. 换句话说, Linux系统中其实有两个层面的防火墙:</p>
+<pre>
+ 第一种是前面讲到的基于TCP/IP协议的流量过滤工具;
+ 而TCP Wrappers服务则是能允许或禁止Linux系统提供服务的防火墙, 从而在更高层面保护了Linux系统的安全运行.
+</pre>
+
+<p>TCP Wrappers服务的防火墙策略由两个控制列表文件所控制, 用户可以编辑允许控制列表文件来放行对服务的请求流量, 也可以编辑拒绝控制列表文件来阻止对服务的请求流量. 控制列表文件修改后会立即生效:</p>
+<pre>
+ 系统将会先检查允许控制列表文件(/etc/hosts.allow), 如果匹配到相应的允许策略则放行流量; 
+ 如果没有匹配, 则去进一步匹配拒绝控制列表文件(/etc/hosts.deny), 若找到匹配项则拒绝该流量. 
+ 如果这两个文件全都没有匹配到, 则默认放行流量.
+</pre>
+<table>
+ <tr><td>客户端类型</td><td>示例</td><td>满足示例的客户端列表</td></tr>
+ <tr><td>单一主机</td><td>192.168.10.10</td><td>IP地址为192.168.10.10的主机</td></tr>
+ <tr><td>指定网段</td><td>192.168.10.</td><td>IP段为192.168.10.0/24的主机</td></tr>
+ <tr><td>指定网段</td><td>192.168.10.0/255.255.255.0</td><td>IP段为192.168.10.0/24的主机</td></tr>
+ <tr><td>指定DNS后缀</td><td>.linuxprobe.com</td><td>所有DNS后缀为.linuxprobe.com的主机</td></tr>
+ <tr><td>指定主机名称</td><td>www.linuxprobe.com</td><td>主机名称为www.linuxprobe.com的主机</td></tr>
+ <tr><td>指定所有客户端</td><td>ALL</td><td>所有主机全部包括在内</td></tr>
+</table>
+
+<p>在配置TCP Wrappers服务时需要遵循两个原则:</p>
+<pre>
+ 编写拒绝策略规则时, 填写的是服务名称, 而非协议名称;
+ 建议先编写拒绝策略规则, 再编写允许策略规则, 以便直观地看到相应的效果.
+</pre>
+
+<p>编写拒绝策略规则文件, 禁止访问本机sshd服务的所有流量:</p>
+<pre>
+ vim /etc/hosts.deny
+ sshd:*
+</pre>
+
+<p>在允许策略规则文件中添加一条规则, 使其放行源自192.168.10.0/24网段, 访问本机sshd服务的所有流量:</p>
+<pre>
+ vim /etc/hosts.allow
+ sshd:192.168.10.
+</pre>
+
+<h1 id="Linux下的NAT技术"><a href="#Linux下的NAT技术" class="headerlink" title="Linux下的NAT技术"></a>Linux下的NAT技术</h1><h2 id="SNAT策略及应用"><a href="#SNAT策略及应用" class="headerlink" title="SNAT策略及应用"></a>SNAT策略及应用</h2><p>SNAT(Source Network Address Translation, 源网络地址转换)是Linux防火墙的一种地址转换操作, 也是iptables命令中的一种数据包控制类型, 其作用是根据指定条件修改数据包的源IP地址.</p>
+<h3 id="SNAT策略概述"><a href="#SNAT策略概述" class="headerlink" title="SNAT策略概述"></a>SNAT策略概述</h3><p>随着Internet网络在全世界范围内的快速发展, IPv4协议支持的可用IP地址资源逐渐变少. 通过在网关中应用SNAT策略, 可以解决局域网共享上网的问题.</p>
+<p>SNAT技术是一种为了解决IP地址匮乏而设计的技术, 它可以使得多个内网中的用户通过同一个外网IP接入Internet.</p>
+<p>1.只开启路由转发, 未设置地址转换的情况.<br>如果网关服务器没有应用SNAT技术, 则互联网中的网站服务器在收到PC的请求数据包, 并回送响应数据包时, 将无法在网络中找到这个私有网络的IP地址, 所以PC也就收不到响应数据包了.<br><img src="/post/df41aea9/%E6%9C%AA%E7%94%A8SNAT1.png" alt="未用SNAT1"></p>
+<p>2.开启路由转发, 并设置SNAT转换的情况.<br>由于网关服务器应用了SNAT技术, 所以互联网中的网站服务器会将响应数据包发给网关服务器, 再由后者转发给局域网中的PC.<br><img src="/post/df41aea9/%E4%BD%BF%E7%94%A8SNAT1.png" alt="使用SNAT1"></p>
+<h3 id="SNAT策略应用"><a href="#SNAT策略应用" class="headerlink" title="SNAT策略应用"></a>SNAT策略应用</h3><p>SNAT的典型应用是为局域网共享上网提供接入策略, 处理数据包的切入时机是在路由选择之后(POSTROUTING)进行. 关键操作是将局域网外发数据包的源IP地址(私有地址)修改为网关服务器的外网口IP地址(公有地址)</p>
+<p>SNAT策略只能用在nat表的POSTROUTING链, 使用iptables命令编写SNA策略时, 需要结合”–to-source IP地址”选项来指定修改后的源IP地址.<br>例:<code>-j SNAT --to-source 公有ip地址</code></p>
+<h4 id="共享固定IP地址上网"><a href="#共享固定IP地址上网" class="headerlink" title="共享固定IP地址上网"></a>共享固定IP地址上网</h4><table>
+环境:
+<tr><td>Linux网关服务器</td><td>eth0</td><td>eth1</td></tr>
+<tr><td>网卡分别接入网</td><td>Internet</td><td>局域网</td></tr>
+<tr><td>网卡ip地址</td><td>218.29.30.31</td><td>192.168.1.1</td></tr>
+</table>
+
+<p>第1步:Linux主机作为网关设备时, 打开网关的路由转发.<br>修改sysctl.conf配置文件, 永久打开路由转发功能.</p>
+<pre>
+ vim /etc/sysctl.conf
+ <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">net.ipv4.ip_forward</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+ sysctl -p # 读取修改后的配置
+</pre>
+
+<p>临时开启路由转发<br>①<code>echo 1 > /proc/sys/net/ipv4/ip_forward</code><br>②<code>sysctl -w net.ipv4.ip_forward=1</code></p>
+<p>第2步:正确设置SNAT策略<br>将源地址更改为网关的公网IP地址, 若要保持SNAT策略长期有效, 应将相关命令写入到rc.local配置文件, 以便开机后自动设置.<br><code>iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o eth0 -j SNAT --to-source 218.29.30.31</code></p>
+<p>第3步:测试SNAT共享接入结果<br><code>ping ip地址</code></p>
+<h4 id="共享动态IP地址上网"><a href="#共享动态IP地址上网" class="headerlink" title="共享动态IP地址上网"></a>共享动态IP地址上网</h4><p>在某些情况下, 网关的外网IP地址可能并不是固定的. 针对这种需求, iptables命令提供了一个名为MASQUERADE(伪装)的数据包控制类型, MASQUERADE相当于SNAT的一个特例, 同样用来修改(伪装)数据包源IP地址, 且能够自动获取外网接口的IP地址.<br><code>iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o 接口名 -j MASQUERADE</code></p>
+<h2 id="DNAT策略及应用"><a href="#DNAT策略及应用" class="headerlink" title="DNAT策略及应用"></a>DNAT策略及应用</h2><p>DNAT(Destination Network Address Translation, 目标地址转换)是Linux防火墙的另一种地址转换操作, 同样也是iptables命令中的一种数据包控制类型, 其作用是根据指定条件修改数据包的目标IP地址和目标端口.</p>
+<h3 id="DNAT策略概述"><a href="#DNAT策略概述" class="headerlink" title="DNAT策略概述"></a>DNAT策略概述</h3><p>DNAT用来修改目标IP地址和目标端口, DNAT只能用在nat表的PREROUTING链和OUTPUT链(或被其调用的链)中.<br><img src="/post/df41aea9/%E4%BD%BF%E7%94%A8DNAT.png" alt="使用DNAT"></p>
+<h3 id="DNAT策略应用"><a href="#DNAT策略应用" class="headerlink" title="DNAT策略应用"></a>DNAT策略应用</h3><p>DNAT的典型应用是在Internet中发布企业内部的服务器, 处理数据包的切入时机是在路由选择之前(PREROUTING)进行. 关键操作是将访问网关外网接口IP地址(公有地址)的数据包的目标地址修改为实际提供服务的内部服务器的IP地址(私有地址).</p>
+<p>使用iptables命令设置DNAT策略时, 需要结合”–to-destination IP地址”选项来指定内部服务器的IP地址</p>
+<h4 id="发布企业内部的Web服务器"><a href="#发布企业内部的Web服务器" class="headerlink" title="发布企业内部的Web服务器"></a>发布企业内部的Web服务器</h4><p>环境:<br>网站域名:<a href="http://www.Iyun.com" target="_blank" rel="noopener">www.Iyun.com</a>, IP地址:218.29.30.31.<br>网站服务器:局域网内, IP地址:192.168.1.6.</p>
+<p>第1步:打开网关的路由转发</p>
+<pre>
+ vim /etc/sysctl.conf
+ <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">net.ipv4.ip_forward</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+ sysctl -p
+</pre>
+
+<p>第2步:正确设置DNAT策略<br>需要针对Internet中的任意主机访问网关80端口的数据包, 将目标地址修改为位于内网的网站服务器的IP地址.<br><code>iptables -t nat -A PREROUTING -i eth0 -d 218.29.30.31 -p tcp --dport 80 -j DNAT --to-destination 192.168.1.6<br></code></p>
+<p>第3步:测试DNAT发布结果<br><code>网址中输入域名或IP地址</code></p>
+<h4 id="发布企业内部的OpenSSH服务器"><a href="#发布企业内部的OpenSSH服务器" class="headerlink" title="发布企业内部的OpenSSH服务器"></a>发布企业内部的OpenSSH服务器</h4><p>大多数情况下, DNAT策略只是用来修改数据包的目标IP地址, 但在需要时也可以修改目标端口号.</p>
+<p>网关公网IP地址:218.29.30.31, 在2345端口启用OpenSSH服务.<br>网站服务器位于局域网内IP地址:192.168.1.6, 在22端口启用OpensSH服务.</p>
+<p>第1步:配置OpenSSH服务<br>在网关、网站服务器中均开启OpenSSH服务, 分别使用2345、22端口. 其中网关的sshd服务因直接面向Internet, 因此不使用默认端口.</p>
+<p>第2步:打开网关的路由转发</p>
+<pre>
+ vim /etc/sysctl.conf
+ <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">net.ipv4.ip_forward</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+ sysctl -p
+</pre>
+
+
+<p>第3步:正确设置DNAT策略<br>在网关中设置防火墙规则, 修改访问外网IP地址2346端口的数据包, 将目标地址改为192.168.1.6, 将目标端口改为22, 以便转发给网站服务器。<br><code>iptables -t nat -A PREROUTING -i eth0 -d 218.29.30.31 -p tcp --dport 2346<br>-j DNAT --to-destination 192.168.1.622<br></code></p>
+<p>第4步:测试DNAT发布结果<br>在Internet中进行SSH登录测试</p>
+<pre>
+ ssh -p 2345 iyun@218.29.30.31
+ 输入用户名密码
+ /sbin/ifconfig eth0 | grep "inet addr" # 确认连接结果
+
+ ssh -p 2346 iyun@218.29.30.31
+ 输入用户名密码
+ /sbin/ifconfig eth0 | grep "inet addr" # 确认连接结果
+</pre>
+
+<table style="text-align:center;"><tr><td>部分转载(原文链接):</td><td><a href="https://www.linuxprobe.com/chapter-00.html" target="_blank" rel="noopener">https://www.linuxprobe.com/chapter-00.html</a></td></tr></table>>
+    </div>
+
+    
+    
+    
+
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color:white;font-size:14px;">-------------------本文结束 <i class="fa fa-heart"></i> 感谢阅读-------------------</div>
+    
+</div>
+	
+	</div>
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>云
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.mengyun.club/post/df41aea9/" title="Linux基础知识">http://www.mengyun.club/post/df41aea9/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/563a1179/" rel="prev" title="Shell脚本">
+                  <i class="fa fa-chevron-left"></i> Shell脚本
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/cea46563/" rel="next" title="使用各种服务和部署">
+                  使用各种服务和部署 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">云</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">250k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:47</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/post/df41aea9/",
+    }, {"enable":true,"appId":"HKOdg6jtf8l5uFP2Ag6eDIIk-gzGzoHsz","appKey":"Gn11LWMBtG3eEkwpnpDhJUI3","placeholder":"请输入你的评论内容, 可编写Markdown语法.","avatar":"mm","meta":["nick","mail"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":true,"requiredFields":[]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+  
+</body>
+</html>

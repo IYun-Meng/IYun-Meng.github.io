@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Grandstander:300,300italic,400,400italic,700,700italic|Noto+Serif+SC:300,300italic,400,400italic,700,700italic|Architects+Daughter:300,300italic,400,400italic,700,700italic|Dosis:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.mengyun.club","root":"/","scheme":"Mist","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="Nagios简介Nagios是一款开源的计算机系统和网络监视工具, 能有效监控Windows、Linux和UNIX的主机和各种服务状态. 状态异常时会发出电子邮件或短信报警, 以便在第一时间通知网站运维人员. 在状态恢复后会发出正常的电子邮件或短信通知. 主要功能  网络服务监控: SMTP、POP3、HTTP、NNTP、ICMP、SNMP、FTP、SSH  主机资源监控: CPU load(C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nagios监控系统">
+<meta property="og:url" content="http://www.mengyun.club/post/25c16f2d/index.html">
+<meta property="og:site_name" content="爱梦的博客">
+<meta property="og:description" content="Nagios简介Nagios是一款开源的计算机系统和网络监视工具, 能有效监控Windows、Linux和UNIX的主机和各种服务状态. 状态异常时会发出电子邮件或短信报警, 以便在第一时间通知网站运维人员. 在状态恢复后会发出正常的电子邮件或短信通知. 主要功能  网络服务监控: SMTP、POP3、HTTP、NNTP、ICMP、SNMP、FTP、SSH  主机资源监控: CPU load(C">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-19T02:26:11.000Z">
+<meta property="article:modified_time" content="2020-09-19T14:54:44.034Z">
+<meta property="article:author" content="云">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Nagios">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://www.mengyun.club/post/25c16f2d/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Nagios监控系统 | 爱梦的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="爱梦的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/src/clickLove.js"></script>
+
+<script type="text/javascript"
+color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+  
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">爱梦的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">常常与我陪伴的就是梦</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">38</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-playlist">
+
+    <a href="/playlist/" rel="section"><i class="fa fa-music fa-fw"></i>网易云歌单</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">	
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Nagios简介"><span class="nav-text">Nagios简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要功能"><span class="nav-text">主要功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nagios监控系统的搭建与配置"><span class="nav-text">Nagios监控系统的搭建与配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建Nagios监控环境"><span class="nav-text">搭建Nagios监控环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Nagios"><span class="nav-text">安装Nagios</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Nagios插件"><span class="nav-text">安装Nagios插件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#192-168-100-11"><span class="nav-text">192.168.100.11</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#192-168-100-12"><span class="nav-text">192.168.100.12</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Nagios监控系统"><span class="nav-text">配置Nagios监控系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#192-168-100-11-1"><span class="nav-text">192.168.100.11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#192-168-100-12-1"><span class="nav-text">192.168.100.12</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义文件的关联性说明"><span class="nav-text">定义文件的关联性说明</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="云"
+      src="/images/head_Picture/Yu_Me5.jpg">
+  <p class="site-author-name" itemprop="name">云</p>
+  <div class="site-description" itemprop="description">我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/IYun-Meng" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;IYun-Meng" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kili3kili1miyukeno4@foxmail.co" title="E-Mail → mailto:kili3kili1miyukeno4@foxmail.co" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/?hl=zh_CN" title="https:&#x2F;&#x2F;www.google.com&#x2F;?hl&#x3D;zh_CN" rel="noopener" target="_blank">谷歌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zhihu.com/" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;" rel="noopener" target="_blank">知乎</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.github.com/" title="https:&#x2F;&#x2F;www.github.com&#x2F;" rel="noopener" target="_blank">GitHub</a>
+        </li>
+    </ul>
+  </div>
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoFs/" rel="tag">AutoFs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bind/" rel="tag">Bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DHCP/" rel="tag">DHCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deepin/" rel="tag">Deepin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dovecot/" rel="tag">Dovecot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/" rel="tag">FTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KVM/" rel="tag">KVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keepalived/" rel="tag">Keepalived</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KickStart/" rel="tag">KickStart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/" rel="tag">NFS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTP/" rel="tag">NTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nagios/" rel="tag">Nagios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PXE/" rel="tag">PXE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Physics2D/" rel="tag">Physics2D</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postfix/" rel="tag">Postfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/" rel="tag">SELinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSLinux/" rel="tag">SYSLinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Samba/" rel="tag">Samba</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sprite/" rel="tag">Sprite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TFTP/" rel="tag">TFTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/" rel="tag">Unity</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zabbix/" rel="tag">Zabbix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/" rel="tag">root</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+      </section>
+	  
+	</div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.mengyun.club/post/25c16f2d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_Picture/Yu_Me5.jpg">
+      <meta itemprop="name" content="云">
+      <meta itemprop="description" content="我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱梦的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Nagios监控系统
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-19 10:26:11 / 修改时间：22:54:44" itemprop="dateCreated datePublished" datetime="2020-09-19T10:26:11+08:00">2020-09-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/post/25c16f2d/" class="post-meta-item leancloud_visitors" data-flag-title="Nagios监控系统" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/post/25c16f2d/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/post/25c16f2d/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<h1 id="Nagios简介"><a href="#Nagios简介" class="headerlink" title="Nagios简介"></a>Nagios简介</h1><p><a href="https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/toc.html" target="_blank" rel="noopener">Nagios</a>是一款开源的计算机系统和网络监视工具, 能有效监控Windows、Linux和UNIX的主机和各种服务状态. 状态异常时会发出电子邮件或短信报警, 以便在第一时间通知网站运维人员. 在状态恢复后会发出正常的电子邮件或短信通知.</p>
+<h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><pre>
+ 网络服务监控: SMTP、POP3、HTTP、NNTP、ICMP、SNMP、FTP、SSH
+ 主机资源监控: CPU load(CPU负载)、Disk usage(磁盘使用情况)、System logs(系统日志)
+ <font color="green">--Windows主机使用NSClient++ plugin进行监控</font>
+</pre>
+
+<a id="more"></a>
+
+<h1 id="Nagios监控系统的搭建与配置"><a href="#Nagios监控系统的搭建与配置" class="headerlink" title="Nagios监控系统的搭建与配置"></a>Nagios监控系统的搭建与配置</h1><p>搭建环境</p>
+<table>
+<tr><td>主机</td><td>操作系统</td><td>ip地址</td></tr>
+<tr><td>Nagios</td><td>CentOS 7.3</td><td>192.168.100.11</td></tr>
+<tr><td>MySQL</td><td>CentOS 7.3</td><td>192.168.100.12</td></tr>
+</table>
+
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>两台主机进行时间同步(暂时性)</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -y ntp</span><br><span class="line">ntpdate ntp1.aliyun.com</span><br></pre></td></tr></table></figure>
+
+<p>Nagios主机配置好邮箱</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install -y mailx</span><br><span class="line">vi /etc/mail.rc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 发送邮件进行测试</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"--------test---------"</span> | mail -s <span class="string">"mailx-test"</span>  xxx@qq.com</span><br></pre></td></tr></table></figure>
+<details blue><summary> <p>mail.rc-QQ邮箱为例</p> </summary>
+              <div class="content">
+              <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">set</span> <span class="attribute">from</span>=xxx@qq.com <span class="attribute">smtp</span>=<span class="string">"smtp.qq.com"</span></span><br><span class="line"><span class="builtin-name">set</span> <span class="attribute">smtp-auth-user</span>=<span class="string">"xxx@qq.com"</span> <span class="attribute">smtp-auth-password</span>=<span class="string">"授权码"</span></span><br><span class="line"><span class="builtin-name">set</span> <span class="attribute">smtp-auth</span>=login</span><br></pre></td></tr></table></figure>
+              </div>
+            </details>
+
+<h2 id="搭建Nagios监控环境"><a href="#搭建Nagios监控环境" class="headerlink" title="搭建Nagios监控环境"></a>搭建Nagios监控环境</h2><h3 id="安装Nagios"><a href="#安装Nagios" class="headerlink" title="安装Nagios"></a>安装Nagios</h3><ol>
+<li><p>关闭SeLinux</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">'s/SELINUX=.*/SELINUX=disabled/g'</span> /etc/selinux/config</span><br><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装所需软件包</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y gcc glibc glibc-common wget unzip httpd php <span class="built_in">gd</span> <span class="built_in">gd</span>-devel perl <span class="built_in">postfix</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载Nagios软件包</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="regexp">/usr/</span>local<span class="regexp">/src/</span></span><br><span class="line">wget -O nagioscore.tar.gz https:<span class="regexp">//gi</span>thub.com<span class="regexp">/NagiosEnterprises/</span>nagioscore<span class="regexp">/archive/</span>nagios-<span class="number">4.4</span>.<span class="number">5</span>.tar.gz</span><br><span class="line">tar xzf nagioscore.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译Nagios</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> nagioscore-nagios-<span class="number">4.4</span>.<span class="number">5</span>/</span><br><span class="line">./configure</span><br><span class="line"><span class="keyword">make</span> <span class="keyword">all</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建用户并添加组</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make <span class="keyword">install</span>-<span class="keyword">groups</span>-<span class="keyword">users</span></span><br><span class="line">usermod -a -G nagios apache</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>二进制安装Nagios, 并安装服务(守护程序)、配置文件.</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">make</span> install</span><br><span class="line"><span class="built_in">make</span> install-daemoninit</span><br><span class="line">systemctl <span class="keyword">enable</span> httpd.service</span><br><span class="line"></span><br><span class="line"><span class="built_in">make</span> install-commandmode</span><br><span class="line"><span class="built_in">make</span> install-config</span><br><span class="line"><span class="built_in">make</span> install-webconf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置防火墙开启80端口</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd <span class="attribute">--zone</span>=public <span class="attribute">--add-port</span>=80/tcp</span><br><span class="line">firewall-cmd <span class="attribute">--zone</span>=public <span class="attribute">--add-port</span>=80/tcp --permanent</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建Nagios用户认证文件</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">htpasswd -c <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/nagios/</span>etc/htpasswd.users nagiosadmin</span><br><span class="line"><span class="meta"># 输入密码: </span></span><br><span class="line"><span class="meta"># 再次输入密码:</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开启服务</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="literal">start</span> httpd.service</span><br><span class="line">systemctl <span class="literal">start</span> nagios.service</span><br><span class="line"><span class="comment"># url: http://192.168.100.11/nagios/</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="安装Nagios插件"><a href="#安装Nagios插件" class="headerlink" title="安装Nagios插件"></a>安装Nagios插件</h3><h4 id="192-168-100-11"><a href="#192-168-100-11" class="headerlink" title="192.168.100.11"></a>192.168.100.11</h4><ol>
+<li><p>安装所需软件包</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -y gcc glibc glibc-common make gettext automake autoconf wget openssl-devel <span class="built_in">net</span>-snmp <span class="built_in">net</span>-snmp-utils epel-release </span><br><span class="line">yum install -y perl-<span class="built_in">Net</span>-SNMP</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载Nagios插件</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="regexp">/usr/</span>local<span class="regexp">/src/</span></span><br><span class="line">wget --no-check-certificate -O nagios-plugins.tar.gz https:<span class="regexp">//gi</span>thub.com<span class="regexp">/nagios-plugins/</span>nagios-plugins<span class="regexp">/archive/</span>release-<span class="number">2.2</span>.<span class="number">1</span>.tar.gz</span><br><span class="line">tar zxf nagios-plugins.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译并安装</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> <span class="string">/nagios-plugins-release-2.2.1/</span></span><br><span class="line"><span class="string">./tools/setup</span></span><br><span class="line"><span class="string">./configure</span></span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载nrpe软件, 并上传解压.</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src/</span><br><span class="line">tar zxf nrpe<span class="number">-3.2</span><span class="number">.1</span>.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译并安装</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> nrpe-<span class="number">3.2</span>.<span class="number">1</span></span><br><span class="line">./configure</span><br><span class="line"><span class="keyword">make</span> <span class="keyword">all</span> &amp;&amp; <span class="keyword">make</span> install-plugin &amp;&amp; <span class="keyword">make</span> install-config &amp;&amp; <span class="keyword">make</span> install-daemon</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="192-168-100-12"><a href="#192-168-100-12" class="headerlink" title="192.168.100.12"></a>192.168.100.12</h4><ol>
+<li><p>安装所需软件包</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> -y openssl-devel gcc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载Nagios插件</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="regexp">/usr/</span>local<span class="regexp">/src/</span></span><br><span class="line">wget --no-check-certificate -O nagios-plugins.tar.gz https:<span class="regexp">//gi</span>thub.com<span class="regexp">/nagios-plugins/</span>nagios-plugins<span class="regexp">/archive/</span>release-<span class="number">2.2</span>.<span class="number">1</span>.tar.gz</span><br><span class="line">tar zxf nagios-plugins.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译并安装</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd nagios-plugins-release-2.2.1</span><br><span class="line">libtoolize --force <span class="variable">&amp;&amp;</span> aclocal <span class="variable">&amp;&amp;</span> autoheader <span class="variable">&amp;&amp;</span> automake --force-<span class="meta">missing</span> --<span class="meta">add</span>-<span class="meta">missing</span> <span class="variable">&amp;&amp;</span> autoconf</span><br><span class="line">./tools/setup</span><br><span class="line">./configure</span><br><span class="line">make <span class="variable">&amp;&amp;</span> make install</span><br><span class="line">chown -R nagios:nagios /usr/local/nagios/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载nrpe软件, 并上传解压.</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src/</span><br><span class="line">tar zxf nrpe<span class="number">-3.2</span><span class="number">.1</span>.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译并安装</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> nrpe-<span class="number">3.2</span>.<span class="number">1</span></span><br><span class="line">./configure</span><br><span class="line"><span class="keyword">make</span> <span class="keyword">all</span> &amp;&amp; <span class="keyword">make</span> install-plugin &amp;&amp; <span class="keyword">make</span> install-config &amp;&amp; <span class="keyword">make</span> install-daemon</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="配置Nagios监控系统"><a href="#配置Nagios监控系统" class="headerlink" title="配置Nagios监控系统"></a>配置Nagios监控系统</h2><p>配置顺序说明:</p>
+<ol>
+<li>创建conf目录来存放hosts.cfg定义文件</li>
+<li>使用默认自带的commands.cfg文件来定义命令</li>
+<li>创建hosts.cfg文件来定义主机和主机组</li>
+<li>使用默认自带的contacts.cfg文件来定义联系人和联系人组</li>
+<li>使用默认自带的timeperiods.cfg文件来定义监控时间段</li>
+</ol>
+<h3 id="192-168-100-11-1"><a href="#192-168-100-11-1" class="headerlink" title="192.168.100.11"></a>192.168.100.11</h3><ol>
+<li><p>添加引用, 并创建存放目录.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nagios/etc/</span><br><span class="line">vi nagios.cfg</span><br><span class="line"><span class="comment"># 第55行</span></span><br><span class="line">cfg_dir=/usr/<span class="built_in">local</span>/nagios/etc/conf</span><br><span class="line">mkdir /usr/<span class="built_in">local</span>/nagios/etc/conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在默认自带的commands.cfg文件末尾中新增监控命令</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">vi</span> objects/commands.cfg</span><br></pre></td></tr></table></figure>
+<details blue><summary> <p>commands.cfg-copy</p> </summary>
+              <div class="content">
+              <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">define command&#123;</span><br><span class="line">    command_name            check_nrpe</span><br><span class="line">    command_line            <span class="variable">$USER1</span><span class="variable">$/</span>check_nrpe -H <span class="variable">$HOSTADDRESS</span><span class="variable">$ </span>-c<span class="variable">$ARG1</span>$</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+              </div>
+            </details>
+</li>
+<li><p>编辑hosts.cfg文件定义主机和主机组</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vi</span> <span class="keyword">conf</span>/hosts.cfg</span><br></pre></td></tr></table></figure>
+<details blue><summary> <p>hosts.cfg-copy</p> </summary>
+              <div class="content">
+              <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">define host&#123;</span><br><span class="line"></span><br><span class="line">    use                     linux-server</span><br><span class="line">    host_name               192.168.100.12</span><br><span class="line">    alias                   192.168.100.12</span><br><span class="line">   <span class="built_in"> address </span>                192.168.100.12</span><br><span class="line">    hostgroups              slaves</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">define hostgroup&#123;</span><br><span class="line"></span><br><span class="line">    hostgroup_name          slaves</span><br><span class="line">    alias                   Linux Servers</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">define service&#123;</span><br><span class="line"></span><br><span class="line">    use                     generic-service </span><br><span class="line">    host_name               192.168.100.12</span><br><span class="line">    service_description     check-load </span><br><span class="line">    check_command           check_nrpe!check_load</span><br><span class="line">    contact_groups          system</span><br><span class="line">    notifications_enabled   1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">define service&#123;</span><br><span class="line"></span><br><span class="line">    use                     generic-service </span><br><span class="line">    host_name               192.168.100.12</span><br><span class="line">    service_description     check-users</span><br><span class="line">    check_command           check_nrpe!check_users</span><br><span class="line">    contact_groups          system</span><br><span class="line">    notifications_enabled   1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">define service&#123;</span><br><span class="line"></span><br><span class="line">    use                     generic-service </span><br><span class="line">    host_name               192.168.100.12</span><br><span class="line">    service_description     otal_procs</span><br><span class="line">    check_command           check_nrpe!check_total_procs</span><br><span class="line">    contact_groups          system</span><br><span class="line">    notifications_enabled   1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">define service&#123;</span><br><span class="line"></span><br><span class="line">    use                     generic-service </span><br><span class="line">    host_name               192.168.100.12</span><br><span class="line">    service_description     check-mariadb</span><br><span class="line">    check_command           check_tcp!3306</span><br><span class="line">    contact_groups          system</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+              </div>
+            </details>
+</li>
+<li><p>在默认自带的contacts.cfg文件末尾中新增联系人和联系人组</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">vi</span> objects/contacts.cfg</span><br></pre></td></tr></table></figure>
+<details blue><summary> <p>contacts.cfg-copy</p> </summary>
+              <div class="content">
+              <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">define contact &#123;</span><br><span class="line"></span><br><span class="line">    contact_name            zl</span><br><span class="line">    use                     generic-contact</span><br><span class="line">    alias                   zl</span><br><span class="line">    email                   邮箱地址1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">define contact &#123;</span><br><span class="line"></span><br><span class="line">    contact_name            zl2</span><br><span class="line">    use                     generic-contact</span><br><span class="line">    alias                   zl2</span><br><span class="line">    email                   邮箱地址2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">define contactgroup &#123;</span><br><span class="line"></span><br><span class="line">    contactgroup_name       system</span><br><span class="line">    alias                   system</span><br><span class="line">    members                 zl,zl2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+              </div>
+            </details>
+</li>
+<li><p>编辑默认自带的timeperiods.cfg文件里的监控时间段, 以便查看监控效果.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi objects/templates.cfg</span><br><span class="line"><span class="comment"># 第72行</span></span><br><span class="line">check_interval                  1</span><br><span class="line"><span class="comment"># 第74行</span></span><br><span class="line">max_check_attempts              2</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>检查文件语法的正确性</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>local<span class="regexp">/nagios/</span>bin<span class="regexp">/nagios -v /u</span>sr<span class="regexp">/local/</span>nagios<span class="regexp">/etc/</span>nagios.cfg</span><br></pre></td></tr></table></figure>
+<pre>
+Total Warnings: <font color="red">0</font>
+Total Errors:   <font color="red">0</font>
+
+Things look okay - No serious problems were detected during the pre-flight check
+</pre>
+
+<p>语法无误后重启Nagios服务</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nagios.service</span><br><span class="line"><span class="meta"># url: http:<span class="comment">//192.168.100.11/nagios/</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="192-168-100-12-1"><a href="#192-168-100-12-1" class="headerlink" title="192.168.100.12"></a>192.168.100.12</h3><p>被监控的主机配置允许监控端监控的ip地址</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/local/nagios/etc/nrpe.cfg</span><br><span class="line">allowed_hosts=<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>,<span class="number">192.168</span><span class="number">.100</span><span class="number">.11</span></span><br></pre></td></tr></table></figure>
+
+<p>编辑nrpe.cfg文件, 开启监控插件.</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">egrep -v <span class="string">"^#|^$"</span> <span class="regexp">/usr/</span>local<span class="regexp">/nagios/</span>etc<span class="regexp">/nrpe.cfg</span></span><br></pre></td></tr></table></figure>
+
+<p>安装MySQL, 启动服务.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> -y mariadb-<span class="keyword">server</span></span><br><span class="line">systemctl <span class="keyword">start</span> mariadb</span><br></pre></td></tr></table></figure>
+
+<h2 id="定义文件的关联性说明"><a href="#定义文件的关联性说明" class="headerlink" title="定义文件的关联性说明"></a>定义文件的关联性说明</h2><p>监控命令的定义文件</p>
+<pre>
+define command{
+    command_name            <font color="Cyan">check_nrpe</font>
+    command_line            $USER1$/check_nrpe -H $HOSTADDRESS$ -c$ARG1$
+}
+</pre>
+
+<p>联系人和联系人组的定义文件</p>
+<pre>
+define contact {
+
+    contact_name            zl
+    use                     generic-contact
+    alias                   zl
+    email                   邮箱地址1
+}
+
+define contact {
+
+    contact_name            zl2
+    use                     generic-contact
+    alias                   zl2
+    email                   邮箱地址2
+}
+
+define contactgroup {
+
+    contactgroup_name       <font color="yellow">system</font>
+    alias                   <font color="yellow">system</font>
+    members                 zl,zl2
+}
+</pre>
+
+<p>主机和主机组的定义文件</p>
+<pre>
+define host{
+
+    use                     linux-server
+    host_name               <font color="red">192.168.100.12</font>
+    alias                   <font color="red">192.168.100.12</font>
+    address                 <font color="red">192.168.100.12</font>
+    hostgroups              <font color="green">slaves</font>
+}
+
+define hostgroup{
+
+    hostgroup_name          <font color="green">slaves</font>
+    alias                   Linux Servers
+}
+
+define service{
+
+    use                     generic-service 
+    host_name               <font color="red">192.168.100.12</font>
+    service_description     check-load 
+    check_command           <font color="Cyan">check_nrpe</font>!check_load
+    contact_groups          <font color="yellow">system</font>
+    notifications_enabled   1
+}
+
+define service{
+
+    use                     generic-service 
+    host_name               <font color="red">192.168.100.12</font>
+    service_description     check-users
+    check_command           <font color="Cyan">check_nrpe</font>!check_users
+    contact_groups          <font color="yellow">system</font>
+    notifications_enabled   1
+}
+
+define service{
+
+    use                     generic-service 
+    host_name               <font color="red">192.168.100.12</font>
+    service_description     otal_procs
+    check_command           <font color="Cyan">check_nrpe</font>!check_total_procs
+    contact_groups          <font color="yellow">system</font>
+    notifications_enabled   1
+}
+
+define service{
+
+    use                     generic-service 
+    host_name               <font color="red">192.168.100.12</font>
+    service_description     check-mariadb
+    check_command           check_tcp!3306
+    contact_groups          <font color="yellow">system</font>
+}
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color:white;font-size:14px;">-------------------本文结束 <i class="fa fa-heart"></i> 感谢阅读-------------------</div>
+    
+</div>
+	
+	</div>
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>云
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.mengyun.club/post/25c16f2d/" title="Nagios监控系统">http://www.mengyun.club/post/25c16f2d/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+              <a href="/tags/Nagios/" rel="tag"><i class="fa fa-tag"></i> Nagios</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/6b6ee287/" rel="prev" title="Docker数据管理与网络通信">
+                  <i class="fa fa-chevron-left"></i> Docker数据管理与网络通信
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/bb6c6bce/" rel="next" title="Zabbix监控系统">
+                  Zabbix监控系统 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">云</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">250k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:47</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/post/25c16f2d/",
+    }, {"enable":true,"appId":"HKOdg6jtf8l5uFP2Ag6eDIIk-gzGzoHsz","appKey":"Gn11LWMBtG3eEkwpnpDhJUI3","placeholder":"请输入你的评论内容, 可编写Markdown语法.","avatar":"mm","meta":["nick","mail"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":true,"requiredFields":[]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+  
+</body>
+</html>

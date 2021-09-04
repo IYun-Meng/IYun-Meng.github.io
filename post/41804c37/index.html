@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Grandstander:300,300italic,400,400italic,700,700italic|Noto+Serif+SC:300,300italic,400,400italic,700,700italic|Architects+Daughter:300,300italic,400,400italic,700,700italic|Dosis:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.mengyun.club","root":"/","scheme":"Mist","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="Docker概述Docker官方文档Docker的Logo设计为蓝色鲸鱼, 拖着许多集装箱. 鲸鱼可以看作为宿主机, 而集装箱可以理解为相互隔离的容器, 每个集装箱中都包含自己的应用程序. 正如Docker的设计宗旨一样: Build, Ship and RunAny App, Anywhere, 即通过对应用组件的封装、发布、部署、运行等生命周期的管理, 达到应用组件级别的”一次封装, 到处运">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker架构、镜像及容器">
+<meta property="og:url" content="http://www.mengyun.club/post/41804c37/index.html">
+<meta property="og:site_name" content="爱梦的博客">
+<meta property="og:description" content="Docker概述Docker官方文档Docker的Logo设计为蓝色鲸鱼, 拖着许多集装箱. 鲸鱼可以看作为宿主机, 而集装箱可以理解为相互隔离的容器, 每个集装箱中都包含自己的应用程序. 正如Docker的设计宗旨一样: Build, Ship and RunAny App, Anywhere, 即通过对应用组件的封装、发布、部署、运行等生命周期的管理, 达到应用组件级别的”一次封装, 到处运">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.mengyun.club/post/41804c37/docker_log.jpg">
+<meta property="og:image" content="http://www.mengyun.club/post/41804c37/Docker%E4%B8%8E%E4%BC%A0%E7%BB%9F%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%9E%B6%E6%9E%84.png">
+<meta property="og:image" content="http://www.mengyun.club/post/41804c37/%E9%85%8D%E7%BD%AE%E5%8A%A0%E9%80%9F%E4%BB%93%E5%BA%931.png">
+<meta property="og:image" content="http://www.mengyun.club/post/41804c37/%E9%85%8D%E7%BD%AE%E5%8A%A0%E9%80%9F%E4%BB%93%E5%BA%932.png">
+<meta property="og:image" content="http://www.mengyun.club/post/41804c37/%E9%85%8D%E7%BD%AE%E5%8A%A0%E9%80%9F%E4%BB%93%E5%BA%933.png">
+<meta property="og:image" content="http://www.mengyun.club/post/41804c37/%E4%B8%8A%E4%BC%A0%E9%95%9C%E5%83%8F.png">
+<meta property="article:published_time" content="2020-09-02T10:40:47.000Z">
+<meta property="article:modified_time" content="2020-09-18T09:23:29.890Z">
+<meta property="article:author" content="云">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.mengyun.club/post/41804c37/docker_log.jpg">
+
+
+<link rel="canonical" href="http://www.mengyun.club/post/41804c37/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Docker架构、镜像及容器 | 爱梦的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="爱梦的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/src/clickLove.js"></script>
+
+<script type="text/javascript"
+color="0,187,255" opacity='0.7' zIndex="-2" count="180" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+  
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">爱梦的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">常常与我陪伴的就是梦</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">38</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-playlist">
+
+    <a href="/playlist/" rel="section"><i class="fa fa-music fa-fw"></i>网易云歌单</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">	
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker概述"><span class="nav-text">Docker概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker的核心概念及安装"><span class="nav-text">Docker的核心概念及安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#镜像-Image"><span class="nav-text">镜像(Image)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器-Container"><span class="nav-text">容器(Container)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#仓库-Repository"><span class="nav-text">仓库(Repository)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Docker"><span class="nav-text">安装Docker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker镜像操作"><span class="nav-text">Docker镜像操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索镜像"><span class="nav-text">搜索镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取镜像"><span class="nav-text">获取镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看镜像信息"><span class="nav-text">查看镜像信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除镜像"><span class="nav-text">删除镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导出镜像"><span class="nav-text">导出镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#载入镜像"><span class="nav-text">载入镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传镜像"><span class="nav-text">上传镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker容器操作"><span class="nav-text">Docker容器操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#容器创建与启动"><span class="nav-text">容器创建与启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器的运行与终止"><span class="nav-text">容器的运行与终止</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器的进入"><span class="nav-text">容器的进入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器的导出与导入"><span class="nav-text">容器的导出与导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器的删除"><span class="nav-text">容器的删除</span></a></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="云"
+      src="/images/head_Picture/Yu_Me5.jpg">
+  <p class="site-author-name" itemprop="name">云</p>
+  <div class="site-description" itemprop="description">我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/IYun-Meng" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;IYun-Meng" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kili3kili1miyukeno4@foxmail.co" title="E-Mail → mailto:kili3kili1miyukeno4@foxmail.co" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com&#x2F;" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/?hl=zh_CN" title="https:&#x2F;&#x2F;www.google.com&#x2F;?hl&#x3D;zh_CN" rel="noopener" target="_blank">谷歌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zhihu.com/" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;" rel="noopener" target="_blank">知乎</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.github.com/" title="https:&#x2F;&#x2F;www.github.com&#x2F;" rel="noopener" target="_blank">GitHub</a>
+        </li>
+    </ul>
+  </div>
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoFs/" rel="tag">AutoFs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bind/" rel="tag">Bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DHCP/" rel="tag">DHCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deepin/" rel="tag">Deepin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dovecot/" rel="tag">Dovecot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/" rel="tag">FTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KVM/" rel="tag">KVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keepalived/" rel="tag">Keepalived</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KickStart/" rel="tag">KickStart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/" rel="tag">NFS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTP/" rel="tag">NTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nagios/" rel="tag">Nagios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PXE/" rel="tag">PXE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Physics2D/" rel="tag">Physics2D</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postfix/" rel="tag">Postfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/" rel="tag">SELinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSLinux/" rel="tag">SYSLinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Samba/" rel="tag">Samba</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sprite/" rel="tag">Sprite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TFTP/" rel="tag">TFTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/" rel="tag">Unity</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zabbix/" rel="tag">Zabbix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/" rel="tag">root</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+      </section>
+	  
+	</div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.mengyun.club/post/41804c37/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head_Picture/Yu_Me5.jpg">
+      <meta itemprop="name" content="云">
+      <meta itemprop="description" content="我一直一直往前走, 从未回过头. 也不记得有多少人从我身边经过, 也不记得我走了多久. 就这样一直走... 一直走...">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱梦的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Docker架构、镜像及容器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-02 18:40:47" itemprop="dateCreated datePublished" datetime="2020-09-02T18:40:47+08:00">2020-09-02</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-18 17:23:29" itemprop="dateModified" datetime="2020-09-18T17:23:29+08:00">2020-09-18</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/post/41804c37/" class="post-meta-item leancloud_visitors" data-flag-title="Docker架构、镜像及容器" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/post/41804c37/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/post/41804c37/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<h1 id="Docker概述"><a href="#Docker概述" class="headerlink" title="Docker概述"></a>Docker概述</h1><p><a href="https://docs.docker.com/get-started/overview/" target="_blank" rel="noopener">Docker官方文档</a><br>Docker的Logo设计为蓝色鲸鱼, 拖着许多集装箱. 鲸鱼可以看作为宿主机, 而集装箱可以理解为相互隔离的容器, 每个集装箱中都包含自己的应用程序. 正如Docker的设计宗旨一样: Build, Ship and RunAny App, Anywhere, 即通过对应用组件的封装、发布、部署、运行等生命周期的管理, 达到应用组件级别的”一次封装, 到处运行”的目的. 这里的组件, 既可以是一个应用, 也可以是一套服务, 甚至是一个完整的操作系统.</p>
+<p>Docker的容器技术可以在一台主机上轻松地为任何应用创建一个轻量级的、可移植的、自给自足的容器. 通过这种容器打包应用程序, 意味着简化了重新部署、调试这些琐碎的重复工作, 极大地提高了工作效率.</p>
+<table>
+<tr><td><img src="/post/41804c37/docker_log.jpg" title="Docker的log标志"></td></tr>
+</table>
+
+<table>
+Docker容器与传统虚拟化的比较
+<tr><td>特性</td><td>Docker容器</td><td>虚拟机</td></tr>
+<tr><td>启动速度</td><td>秒级</td><td>分钟级</td></tr>
+<tr><td>计算能力损耗</td><td>几乎无</td><td>损耗50%左右</td></tr>
+<tr><td>性能</td><td>接近原生</td><td>弱于</td></tr>
+<tr><td>系统支持量(单机)</td><td>上千个</td><td>几十个</td></tr>
+<tr><td>隔离性</td><td>资源限制</td><td>完全隔离</td></tr>
+</table>
+
+<table>
+<tr><td><img src="/post/41804c37/Docker与传统虚拟机架构.png" title="Docker与传统虚拟机架构"></td></tr>
+</table>
+
+<div class="note warning"><p>Docker的三大核心概念: 镜像、容器、仓库</p>
+</div>
+
+<a id="more"></a>
+
+<h2 id="Docker的核心概念及安装"><a href="#Docker的核心概念及安装" class="headerlink" title="Docker的核心概念及安装"></a>Docker的核心概念及安装</h2><h3 id="镜像-Image"><a href="#镜像-Image" class="headerlink" title="镜像(Image)"></a>镜像(Image)</h3><p>Docker的镜像是创建容器的基础, 类似虚拟机的快照, 可以理解为是一个面向Docker容器引擎的只读模板.<br> Docker提供了简单的机制来创建和更新现有的镜像, 用户也可以从网上下载已经做好的应用镜像来直接使用.</p>
+<h3 id="容器-Container"><a href="#容器-Container" class="headerlink" title="容器(Container)"></a>容器(Container)</h3><p>Docker的容器是从镜像创建的运行实例, 它可以被启动、停止和删除. 所创建的每一个容器都是相互隔离、互不可见的, 可以保证平台的安全性. 还可以把容器看作是一个简易版的Linux环境, Docker利用容器来运行和隔离应用.</p>
+<h3 id="仓库-Repository"><a href="#仓库-Repository" class="headerlink" title="仓库(Repository)"></a>仓库(Repository)</h3><p>Docker仓库是用来集中保存镜像的地方, 当创建了自己的镜像之后, 可以使用push命令将它上传到公共仓库(Public)或者私有仓库(Private), 这样一来当下次要在另一台机器上使用这个镜像的时候, 只需要从仓库上pull下来就可以了.</p>
+<p>仓库注册服务器(Registry)是存放仓库的地方, 其中包含了多个仓库, 每个仓库集中存放某一类镜像, 并且使用不同的标签(tag)来区分它们. 目前最大的公共仓库是Docker Hub, 其中存放了数量庞大的镜像供用户下载使用.</p>
+<h3 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h3><p><a href="https://docs.docker.com/engine/install/centos/" target="_blank" rel="noopener">Docker官方文档</a></p>
+<p>1.如果存在旧版本, 则卸载旧版本.</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker docker-<span class="keyword">client</span> docker-<span class="keyword">client</span>-latest docker-<span class="keyword">common</span> docker-latest docker-latest-logrotate docker-logrotate docker-engine</span><br></pre></td></tr></table></figure>
+
+<p>2.使用yum进行安装</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -<span class="keyword">y</span> yum-utils device-mapper-persistent-data lvm2</span><br><span class="line">yum-config-manager --<span class="built_in">add</span>-repo http<span class="variable">s:</span>//mirrors.aliyun.<span class="keyword">com</span>/docker-<span class="keyword">ce</span>/linux/centos/docker-<span class="keyword">ce</span>.repo</span><br></pre></td></tr></table></figure>
+
+<p>3.安装Docker引擎, 启动服务并设置为开机自启动.</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将软件包信息进行本地缓存, 用于提高搜索安装软件的速度.</span></span><br><span class="line"><span class="attr">yum</span> <span class="string">makecache fast</span></span><br><span class="line"><span class="attr">yum</span> <span class="string">install -y docker-ce</span></span><br><span class="line"></span><br><span class="line"><span class="attr">systemctl</span> <span class="string">start docker</span></span><br><span class="line"><span class="attr">systemctl</span> <span class="string">enable docker</span></span><br></pre></td></tr></table></figure>
+
+<p>4.检查是否安装成功</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker</span> version</span><br><span class="line">docker <span class="literal">info</span></span><br></pre></td></tr></table></figure>
+
+<p>5.配置Docker加速仓库</p>
+<table>
+<tr><td><img src="/post/41804c37/配置加速仓库1.png" title="配置Docker加速仓库"></td></tr>
+<tr><td><img src="/post/41804c37/配置加速仓库2.png" title="配置Docker加速仓库"></td></tr>
+<tr><td><img src="/post/41804c37/配置加速仓库3.png" title="配置Docker加速仓库"></td></tr>
+</table>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p <span class="regexp">/etc/</span>docker</span><br><span class="line">tee <span class="regexp">/etc/</span>docker/daemon.json &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://gr0jon39.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<p>6.验证安装是否正确</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="bash"> hello-world</span></span><br></pre></td></tr></table></figure>
+<pre>
+首先运行容器的时候, 在本地搜索可用的镜像, 如果找不到, 则再去远端官方仓库拉取(这里指定了为阿里云).
+Unable to find image 'hello-world:latest' locally
+<details blue><summary> <p>latest: Pulling from library/hello-world</p> </summary>
+              <div class="content">
+              <p>0e03bdcc26d7: Pull complete<br>Digest: sha256:7f0a9f93b4aa3022c3a4c147a449bf11e0941a1fd0bf4a8e6c9408b2600777c5<br>Status: Downloaded newer image for hello-world:latest</p><p>Hello from Docker!<br>This message shows that your installation appears to be working correctly.</p><p>To generate this message, Docker took the following steps:</p><ol><li>The Docker client contacted the Docker daemon.</li><li>The Docker daemon pulled the “hello-world” image from the Docker Hub.<br>(amd64)</li><li>The Docker daemon created a new container from that image which runs the<br>executable that produces the output you are currently reading.</li><li>The Docker daemon streamed that output to the Docker client, which sent it<br>to your terminal.</li></ol><p>To try something more ambitious, you can run an Ubuntu container with:<br> $ docker run -it ubuntu bash</p><p>Share images, automate workflows, and more with a free Docker ID:<br> <a href="https://hub.docker.com/" target="_blank" rel="noopener">https://hub.docker.com/</a></p><p>For more examples and ideas, visit:<br> <a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener">https://docs.docker.com/get-started/</a></p>
+              </div>
+            </details>
+</pre>
+
+<h2 id="Docker镜像操作"><a href="#Docker镜像操作" class="headerlink" title="Docker镜像操作"></a>Docker镜像操作</h2><p><a href="https://docs.docker.com/engine/reference/run/" target="_blank" rel="noopener">Docker官方文档</a></p>
+<h3 id="搜索镜像"><a href="#搜索镜像" class="headerlink" title="搜索镜像"></a>搜索镜像</h3><pre>
+搜索仓库中的共享镜像:
+docker search 关键字 [-s 星级值]
+
+NAME: 镜像名称
+DESCRIPTION: 描述
+STARS: 星级
+OFFICIAL: 是否官方创建
+AUTOMATED: 是否主动创建
+</pre>
+
+<h3 id="获取镜像"><a href="#获取镜像" class="headerlink" title="获取镜像"></a>获取镜像</h3><pre>
+从网络下载镜像到本地, 不指定标签时会默认从仓库中下载最新版本的镜像:
+docker pull 仓库名称[:标签]
+</pre>
+<div class="note info"><p>镜像文件由若干层(Layer)组成, 称为AUFS(联合文件系统), 是实现增量保存与更新的基础, 下载过程中会输出镜像的各层信息.</p>
+</div>
+
+<h3 id="查看镜像信息"><a href="#查看镜像信息" class="headerlink" title="查看镜像信息"></a>查看镜像信息</h3><pre>
+查看下载到本地的所有镜像: 
+docker images 仓库名称[:标签]
+
+获取镜像详细信息: 
+docker inspect 镜像ID号
+
+为本地的镜像添加新的标签:
+docker tag 仓库名称[:标签] 新仓库名称[:新标签]
+
+REPOSITORY: 镜像归属的仓库
+TAG: 镜像的标签信息
+IMAGE ID: 镜像的唯一ID号
+CREATED: 镜像创建时间
+SIZE: 镜像大小
+
+REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+</pre>
+
+<h3 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h3><pre>
+删除指定镜像: docker rmi 仓库名称[:标签]
+删除所有镜像: docker rmi $(docker images -q)
+</pre>
+
+<h3 id="导出镜像"><a href="#导出镜像" class="headerlink" title="导出镜像"></a>导出镜像</h3><pre>
+docker save -o 存储文件名 存储的镜像
+</pre>
+
+<h3 id="载入镜像"><a href="#载入镜像" class="headerlink" title="载入镜像"></a>载入镜像</h3><pre>
+docker load < 存出的文件
+docker --intput 存出的文件
+</pre>
+
+<h3 id="上传镜像"><a href="#上传镜像" class="headerlink" title="上传镜像"></a>上传镜像</h3><pre>
+在Docker Hub官方里创建账号后上传镜像到新建的公共仓库中:
+docker tag 仓库名称[:标签] 用户名/仓库名称:标签
+docker login
+
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: <font color="red">dcyun</font>
+Password: <font color="red">输入密码</font>
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+<font color="green">Login Succeeded</font>
+</pre>
+
+<pre>
+docker push 仓库名称 [:标签]
+
+<table><tr><td><img src="/post/41804c37/上传镜像.png"></td></tr></table></pre>
+
+<h2 id="Docker容器操作"><a href="#Docker容器操作" class="headerlink" title="Docker容器操作"></a>Docker容器操作</h2><h3 id="容器创建与启动"><a href="#容器创建与启动" class="headerlink" title="容器创建与启动"></a>容器创建与启动</h3><pre>
+新键一个容器:
+docker create [选项] 仓库名称[:标签] 运行程序
+  |__ -i --让容器的输入保持打开
+  |__ -t --让Docer分配一个伪终端
+
+启动停止状态的容器:
+docker start 容器的ID/名称
+
+查看所有容器的运行状态:
+docker ps [选项]
+  |__ -a --列出系统中全部的容器(默认只列出当前运行的容器)
+  |__ -q --只列出ID号
+
+CONTAINER ID: 容器的ID号
+IMAGE: 加载的镜像
+COMMAND: 运行程序
+CREATED: 创建时间
+STATUS: 目前所处状态: 
+<font color="green"> created(已创建) 
+ restarting(重启中) 
+ running(运行中) 
+ removing(迁移中) 
+ paused(暂停) 
+ exited(停止) 
+ dead(不可用)</font>
+PORTS: 端口映射
+NAMES: 镜像自动为容器创建的名字(唯一)
+
+CONTAINER ID        IMAGE                   COMMAND             CREATED             STATUS              PORTS               NAMES
+</pre>
+<pre>
+创建并启动容器:
+docker run [选项] 镜像 运行程序
+ |__ -d --让docker容器以守护状态在后台运行
+</pre>
+
+<div class="note info"><p>效果等同于先执行create再执行start命令</p>
+</div>
+
+<pre>
+Unable to find image 'centos:latest' locally
+latest: Pulling from library/centos
+3c72a8ed6814: Pull complete 
+Digest: sha256:76d24f3ba3317fa945743bb3746fbaf3a0b752f10b10376960de01da70685fbd
+Status: Downloaded newer image for centos:latest
+WARNING: IPv4 forwarding is disabled. Networking will not work.
+
+<details blue><summary> <p>ls -l</p> </summary>
+              <div class="content">
+              <p>total 0<br>lrwxrwxrwx.   1 root root   7 May 11  2019 bin -&gt; usr/bin<br>drwxr-xr-x.   5 root root 340 Sep  4 02:27 dev<br>drwxr-xr-x.   1 root root  66 Sep  4 02:27 etc<br>drwxr-xr-x.   2 root root   6 May 11  2019 home<br>lrwxrwxrwx.   1 root root   7 May 11  2019 lib -&gt; usr/lib<br>lrwxrwxrwx.   1 root root   9 May 11  2019 lib64 -&gt; usr/lib64<br>drwx——.   2 root root   6 Aug  9 21:40 lost+found<br>drwxr-xr-x.   2 root root   6 May 11  2019 media<br>drwxr-xr-x.   2 root root   6 May 11  2019 mnt<br>drwxr-xr-x.   2 root root   6 May 11  2019 opt<br>dr-xr-xr-x. 149 root root   0 Sep  4 02:27 proc<br>dr-xr-x—.   2 root root 162 Aug  9 21:40 root<br>drwxr-xr-x.  11 root root 163 Aug  9 21:40 run<br>lrwxrwxrwx.   1 root root   8 May 11  2019 sbin -&gt; usr/sbin<br>drwxr-xr-x.   2 root root   6 May 11  2019 srv<br>dr-xr-xr-x.  13 root root   0 Sep  3 06:01 sys<br>drwxrwxrwt.   7 root root 145 Aug  9 21:40 tmp<br>drwxr-xr-x.  12 root root 144 Aug  9 21:40 usr<br>drwxr-xr-x.  20 root root 262 Aug  9 21:40 var</p>
+              </div>
+            </details></pre>
+
+<h3 id="容器的运行与终止"><a href="#容器的运行与终止" class="headerlink" title="容器的运行与终止"></a>容器的运行与终止</h3><pre>
+终止运行的容器:
+docker stop 容器的ID/名称
+
+创建一个容器并运行, 如果本地镜像不存在会从仓库中拉取镜像后进行创建:
+docker run 仓库名称[:标签] 
+</pre>
+
+<h3 id="容器的进入"><a href="#容器的进入" class="headerlink" title="容器的进入"></a>容器的进入</h3><pre>
+进入运行着的容器:
+docker exec -it 容器的ID/名称 /bin/bash
+
+[root@容器ID号 /]
+exit
+</pre>
+
+<h3 id="容器的导出与导入"><a href="#容器的导出与导入" class="headerlink" title="容器的导出与导入"></a>容器的导出与导入</h3><pre>
+将创建好的容器导出为文件:
+docker export 容器的ID/名称 > 文件名
+
+导入文件成为本地镜像:
+cat 文件名 | docker import - 生成的镜像名称:标签
+</pre>
+
+<h3 id="容器的删除"><a href="#容器的删除" class="headerlink" title="容器的删除"></a>容器的删除</h3><pre>
+ docker rm [选项] 容器的ID/名称
+ |__ -f --强制删除
+
+删除所有容器: docker rm $(docker ps -aq)
+</pre>
+
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color:white;font-size:14px;">-------------------本文结束 <i class="fa fa-heart"></i> 感谢阅读-------------------</div>
+    
+</div>
+	
+	</div>
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>云
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.mengyun.club/post/41804c37/" title="Docker架构、镜像及容器">http://www.mengyun.club/post/41804c37/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"><i class="fa fa-tag"></i> Docker</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/37db6981/" rel="prev" title="MongoDB复制集">
+                  <i class="fa fa-chevron-left"></i> MongoDB复制集
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/6b6ee287/" rel="next" title="Docker数据管理与网络通信">
+                  Docker数据管理与网络通信 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">云</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">250k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:47</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/post/41804c37/",
+    }, {"enable":true,"appId":"HKOdg6jtf8l5uFP2Ag6eDIIk-gzGzoHsz","appKey":"Gn11LWMBtG3eEkwpnpDhJUI3","placeholder":"请输入你的评论内容, 可编写Markdown语法.","avatar":"mm","meta":["nick","mail"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":true,"requiredFields":[]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+  
+</body>
+</html>
